@@ -1,0 +1,84 @@
+{"hookResponse":{}}
+
+Tres metros sobre el cielo
+
+
+xmlns:core="http://www.mulesoft.org/schema/mule/core"
+
+
+The most difficult aspect of moving on is accepting that the other person already did
+
+{"message": "No results"}
+{"message": "No results"}
+
+
+{message=No results}
+{message=No Result Found} for GD
+{message= No Result Found} for box stream point
+=========================================================================================
+
+==========================================
+select * from CLIENT_TOKENS where expires < now()user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2RhOGI1MTYxLWNmZTgtNGNmOS1iNGI3LTQwOGNiN2E3NjYyNA'
+select * from INTEGRATIONS_SETTINGS
+alter table INTEGRATION_INSTANCES modify created_date DATETIME
+update INTEGRATION_INSTANCES set status='ACTIVE' where instance_id=2029
+
+select * from INTEGRATION_INSTANCES where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'
+update INTEGRATION_INSTANCES set status='DISABLED' where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'
+and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'
+select * from CLIENT_APP_SETTINGS order by application_id
+delete from INTEGRATION_APP_TOKENS where 
+user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xOTVhNDE4Ni0xMTc2LTQxZDAtODcxNC1jNjk3ZDE4YWFiYTk'
+and application_id='10'
+delete from INTEGRATION_APP_TOKENS where app_token_id=515
+select * from INTEGRATION_APP_TOKENS where application_id='10'
+ALTER TABLE INTEGRATION_APP_TOKENS AUTO_INCREMENT = 1
+select * from INTEGRATION_APP_TOKENS
+select * from CLIENT_TOKENS WHERE integration_id='integrationids'
+update CLIENT_TOKENS set user_id='userIds' WHERE integration_id='integrationids'
+select * from INTEGRATION_APP_TOKENS where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzAyM2RmYmMwLTQ5MjUtNDc1NC05ZDJiLTdkMjE0NmY4ZDllMg'
+update APPLICATIONS set client_id='ciscospark' where application_name='Zendesk'
+
+delete from GOOGLEDRIVE_CURSOR_SETTINGS where 
+user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM'
+
+select * from INTEGRATION_APP_TOKENS where application_id='10' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q'
+UPDATE INTEGRATION_APP_TOKENS set refresh_token='1/CLJvDt8EqWbpibJhjgPEmkfbqDYlcskJw1R354UcBj0' where application_id='10' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+select * from INTEGRATION_INSTANCES WHERE instance_id=1993
+select * from INTEGRATION_INSTANCES WHERE user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2RhOGI1MTYxLWNmZTgtNGNmOS1iNGI3LTQwOGNiN2E3NjYyNA'
+select * from INTEGRATION_APP_TOKENS where app_token_id=374
+select * from INTEGRATION_APP_TOKENS where application_id='10'
+update INTEGRATION_APP_TOKENS set refresh_token='' where app_token_id=429
+user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'
+select * from APPLICATIONS
+select * from INTEGRATIONS_SETTINGS
+update APPLICATIONS set clie
+update GOOGLEDRIVE_CURSOR_SETTINGS set page_token='4166' where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q' 
+ select * from INTEGRATION_INSTANCES WHERE instance_uuid='42c47f00-5fd7-11e6-b45d-12df6fca8957'
+and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I'
+
+select * from GOOGLEDRIVE_CURSOR_SETTINGS
+delete from GOOGLEDRIVE_CURSOR_SETTINGS where token_id=489
+select * from INTEGRATION_INSTANCES where instance_uuid='33caa130-5fac-11e6-be51-1281a51226af'
+select * from INTEGRATION_INSTANCES where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzAyM2RmYmMwLTQ5MjUtNDc1NC05ZDJiLTdkMjE0NmY4ZDllMg'
+select * from INTEGRATION_APP_TOKENS where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'
+update INTEGRATION_INSTANCES set status='DISABLE' where instance_id=5132
+
+insert into INTEGRATION_APP_TOKENS(user_id,integration_id,access_token)
+select * from INTEGRATION_APP_TOKENS where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y4NWZlZDI2LWM4YjUtNGRkNy1iYzA2LTM1MjhhNmQwZGM2Ng' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+select * from INTEGRATIONS
+select * from INTEGRATION_APP_TOKENS where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y4NWZlZDI2LWM4YjUtNGRkNy1iYzA2LTM1MjhhNmQwZGM2Ng' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+select * from INTEGRATION_APP_TOKENS where integration_id='121' and user_id='121'
+select * from INTEGRATION_APP_TOKENS where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg'where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzAyM2RmYmMwLTQ5MjUtNDc1NC05ZDJiLTdkMjE0NmY4ZDllMg' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+
+select * from INTEGRATION_APP_TOKENS  where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y4NWZlZDI2LWM4YjUtNGRkNy1iYzA2LTM1MjhhNmQwZGM2Ng'
+update INTEGRATION_APP_TOKENS set access_token='5424a0bd0744a21c504e46080f8e94f8' where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y4NWZlZDI2LWM4YjUtNGRkNy1iYzA2LTM1MjhhNmQwZGM2Ng'
+select * from INTEGRATION_APP_TOKENS where integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Y4NWZlZDI2LWM4YjUtNGRkNy1iYzA2LTM1MjhhNmQwZGM2Ng' and user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI'
+select * from INTEGRATION_APP_TOKENS where user_id='123' and integration_id='123'
+delete from  INTEGRATION_APP_TOKENS where user_id='123' and integration_id='123'
+insert into INTEGRATION_APP_TOKENS(user_id,application_id,integration_id) values('asanauid','24','asanaiid')
+update INTEGRATION_APP_TOKENS set refresh_token='0/433e0f053e26a7a4d6d48322ed97158b' where app_token_id=568
+DELETE FROM INTEGRATION_APP_TOKENS where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI' and integration_id='Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzAyM2RmYmMwLTQ5MjUtNDc1NC05ZDJiLTdkMjE0NmY4ZDllMg';
+
+update INTEGRATION_INSTANCES set status='ACTIVE' where user_id='Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI' and integration_id='y2lzy29zcgfyazovl3vzl0fquexjq0fusu9olzkxywzhn2rilwyymtmtndg5ns1imzi3lwviztzhmzawzmflmw'

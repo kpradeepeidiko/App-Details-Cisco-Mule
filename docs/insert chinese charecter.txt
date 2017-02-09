@@ -1,0 +1,27 @@
+"displayName":"嗨"
+
+<base64-decoder-transformer encoding="UTF-16LE" returnClass="java.lang.String" />
+Workaround config:
+<message-properties-transformer>
+<add-message-property key="MULE_ENCODING" value="UTF-16LE"/>
+</message-properties-transformer>
+<base64-decoder-transformer returnClass="java.lang.String" />
+<message-properties-transformer>
+<add-message-property key="MULE_ENCODING" value="UTF-8"/>
+</message-properties-transformer>
+
+
+article url
+-----------------
+https://coderwall.com/p/rvduyw/jdbc-inserting-unicode-utf-8-characters-into-mysql
+
+
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname?useUnicode=yes&characterEncoding=UTF-8","username", "password");
+
+
+jdbc:mysql://${db.integrations.host}:${db.integrations.port}/${db.integrations.database}?password=${db.integrations.password}&user=${db.integrations.user}&useSSL=true&requireSSL=true&trustCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/cacerts&trustCertificateKeyStorePassword=changeit&clientCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/us_east_cert_keystore.jks&clientCertificateKeyStorePassword=changeit
+
+after
+-----------
+jdbc:mysql://${db.integrations.host}:${db.integrations.port}/${db.integrations.database}?password=${db.integrations.password}&user=${db.integrations.user}&useUnicode=yes&characterEncoding=UTF-8&useSSL=true&requireSSL=true&trustCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/cacerts&trustCertificateKeyStorePassword=changeit&clientCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/us_east_cert_keystore.jks&clientCertificateKeyStorePassword=changeit
+
