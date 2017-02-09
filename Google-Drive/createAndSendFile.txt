@@ -1,0 +1,16 @@
+https://developer.google.com/apps-script/your_first_script
+
+function createAndSendDoc() {
+  var doc = DocumentApp.create('Eidiko_Doc');
+  
+  doc.appendParagraph('Hi All to Eidiko Fmily');
+  
+  doc.saveAndClose();
+  
+  var url = doc.getUrl();
+  
+  var emailAdrs = Session.getActiveUser().getEmail();
+  
+  GmailApp.sendEmail(emailAdrs, 'hi my first script','here is my first link : ' + url );
+  
+}

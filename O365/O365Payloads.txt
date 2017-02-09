@@ -1,0 +1,377 @@
+{
+	"@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AQMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5AGExNWU3YjQARgAAA67orP6Pt9tEow33y4ozrW8HABQCAUBU_FRMpOIHf125cNAAAAIBBgAAABQCAUBU_FRMpOIHf125cNAAAAINJwAAAA%3D%3D')/Events",
+	"value": [{
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwOAAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyALA==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwOAAA=",
+		"CreatedDateTime": "2016-12-02T06:15:31.3397234Z",
+		"LastModifiedDateTime": "2016-12-02T06:15:31.3717496Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyALA==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E008000000002328067C634CD20100000000000000001000000065B608A100663A46A7F6510C7EFEE50B",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "testCalendar@3PM",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>testing</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "testing",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T09:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T10:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Hyderabad",
+			"Address": {
+				"Street": "",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.366,
+				"Longitude": 78.476
+			}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwOAAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AQMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5AGExNWU3YjQARgAAA67orP6Pt9tEow33y4ozrW8HABQCAUBU_FRMpOIHf125cNAAAAIBBgAAABQCAUBU_FRMpOIHf125cNAAAAINJwAAAA==')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AQMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5AGExNWU3YjQARgAAA67orP6Pt9tEow33y4ozrW8HABQCAUBU_FRMpOIHf125cNAAAAIBBgAAABQCAUBU_FRMpOIHf125cNAAAAINJwAAAA==')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwNAAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyAKw==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwNAAA=",
+		"CreatedDateTime": "2016-12-02T06:14:56.6605423Z",
+		"LastModifiedDateTime": "2016-12-02T06:14:56.6785572Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyAKw==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E008000000009F885A67634CD2010000000000000000100000007906C37B828AD542A612A29E53CA5F39",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "TestCalendar@2PM",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>testing</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "testing",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T08:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T09:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Hyderabad",
+			"Address": {
+				"Street": "",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.366,
+				"Longitude": 78.476
+			}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAFUAAAUAgFAVPhUTKTiB39duXDQAAAArFwNAAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AQMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5AGExNWU3YjQARgAAA67orP6Pt9tEow33y4ozrW8HABQCAUBU_FRMpOIHf125cNAAAAIBBgAAABQCAUBU_FRMpOIHf125cNAAAAINJwAAAA==')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AQMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5AGExNWU3YjQARgAAA67orP6Pt9tEow33y4ozrW8HABQCAUBU_FRMpOIHf125cNAAAAIBBgAAABQCAUBU_FRMpOIHf125cNAAAAINJwAAAA==')"
+	}]
+}
+==================================================================================================
+4 events at-a-time
+-------------------------
+{
+	"@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA%3D')/Events",
+	"value": [{
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb8AAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyusw==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb8AAA=",
+		"CreatedDateTime": "2016-12-02T07:18:18.4019258Z",
+		"LastModifiedDateTime": "2016-12-02T07:18:18.4149374Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyusw==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E008000000006A3B5E416C4CD2010000000000000000100000002CD95083C2FE56438A95489207236326",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "demoEvent@5-30PM",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "test",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T12:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T12:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "",
+			"Address": {},
+			"Coordinates": {}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb8AAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb7AAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyusg==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb7AAA=",
+		"CreatedDateTime": "2016-12-02T07:17:59.3724624Z",
+		"LastModifiedDateTime": "2016-12-02T07:17:59.3874744Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyusg==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000FD9006366C4CD201000000000000000010000000291A2CE7A08BDE4BBC1475334C55871E",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "demoEvent@5",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "test",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T11:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T12:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "",
+			"Address": {},
+			"Coordinates": {}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb7AAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb6AAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyusQ==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb6AAA=",
+		"CreatedDateTime": "2016-12-02T07:17:43.9609387Z",
+		"LastModifiedDateTime": "2016-12-02T07:17:44.0139814Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyusQ==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E008000000005BF4D62C6C4CD2010000000000000000100000000E4A07A19F1C6B45860104B3ECF7758A",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "demoEvemt@4-30PM",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "test",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T11:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T11:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "",
+			"Address": {},
+			"Coordinates": {}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb6AAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Events('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb5AAA=')",
+		"@odata.etag": "W/\"FAIBQFT4VEyk4gd/Xblw0AAAAKyusA==\"",
+		"Id": "AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb5AAA=",
+		"CreatedDateTime": "2016-12-02T07:17:25.1386428Z",
+		"LastModifiedDateTime": "2016-12-02T07:17:25.1676664Z",
+		"ChangeKey": "FAIBQFT4VEyk4gd/Xblw0AAAAKyusA==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000890D9F216C4CD20100000000000000001000000093E3C0F50B2D7B45A7F0D2159AF71C07",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "demoEvent@4PM",
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"BodyPreview": "test",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"Start": {
+			"DateTime": "2016-12-02T10:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2016-12-02T11:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "",
+			"Address": {},
+			"Coordinates": {}
+		},
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"Recurrence": null,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "chennakesavulu cherukuri",
+				"Address": "cherukuru.chennakesavulu@eidiko.com"
+			}
+		},
+		"WebLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz%2Bj7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAArGe4AAAUAgFAVPhUTKTiB39duXDQAAAArIb5AAA%3D&exvsurl=1&viewModel=ICalendarItemDetailsViewModelFactory",
+		"OnlineMeetingUrl": null,
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('14b55f93-bfc7-43a6-b9d7-8342768c3bde@f473d164-84cf-40be-bc5d-6a8b11964036')/Calendars('AAMkAGM1NzY0YmE3LTI5ZmMtNDIxOC04NWQzLTgwYzk5YTE1ZTdiNABGAAAAAACu6Kz_j7fbRKMN98uKM61vBwAUAgFAVPhUTKTiB39duXDQAAAAAAEGAAAUAgFAVPhUTKTiB39duXDQAAAArGugAAA=')"
+	}]
+}

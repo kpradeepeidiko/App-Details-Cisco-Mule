@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+  	
+  	<http:request-config name="HTTP_Access_Token_Request_Configuration" protocol="HTTPS" host="${asana.api.access.token.host}" port="${asana.api.access.token.port}"  doc:name="HTTP Request Configuration" basePath="${asana.api.access.token.base.path}"/>
+  	
+ 	<http:request-config name="HTTP_Operations_Request_Configuration" protocol="HTTPS" host="${asana.api.operations.host}" port="${asana.api.operations.port}" basePath="${asana.api.operations.base.path}" doc:name="HTTP Request Configuration" connectionIdleTimeout="100000" responseTimeout="4000000"/>
+    <vm:connector name="VM1" validateConnections="true" doc:name="VM"/>
+     
+    <flow name="postasanaTokenFlow">
+        <expression-component doc:name="replace '%2F'"><![CDATA[flowVars.code = flowVars.tokenRequest.authSettings.code.toString().replace('%2F','/')]]></expression-component>
+        <set-payload value="#[{&quot;code&quot;:flowVars['code'],&quot;client_id&quot;:&quot;${asana.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${asana.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${asana.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${asana.integration.access.grantType}&quot;}]" doc:name="Set Payload" />
+        <http:request config-ref="HTTP_Access_Token_Request_Configuration" path="${asana.api.access.token.path}" method="POST" doc:name="Access Token Request"  >
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Json">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJson.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="postasanaRefreshTokenFlow">
+        <set-payload value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${asana.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${asana.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${asana.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${asana.integration.refresh.grantType}&quot;}]" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Access_Token_Request_Configuration" path="${asana.api.access.token.path}" method="POST" doc:name="Refresh Token Request">
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message To Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="getAsanaUserFlow">
+        <http:request config-ref="HTTP_Operations_Request_Configuration" path="/users/me" method="GET" doc:name="Get User Flow">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="Bearer #[flowVars['asanaToken']]"/>
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    <flow name="getAsanaOrganizationsFlow">
+        <http:request config-ref="HTTP_Operations_Request_Configuration" path="/workspaces" method="GET" doc:name="Get Asana Workspace">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="Bearer #[flowVars['asanaToken']]"/>
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="getAsanaTeamsInOrganizationsFlow">
+    <http:request config-ref="HTTP_Operations_Request_Configuration" path="/users/#[flowVars.asanaUserId]/teams" method="GET" doc:name="Get Asana Teams In Workspace">
+        <http:request-builder>
+                <http:query-param paramName="organization" value="#[flowVars['workspaceId']]"/>
+                <http:header headerName="Authorization" value="Bearer #[flowVars['asanaToken']]"/>
+	    </http:request-builder>
+    </http:request>
+    <dw:transform-message doc:name="Transform Response to Java">
+        <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+    </dw:transform-message>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+        	<catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="Catch Exception Strategy" logException="false">
+     			<set-property propertyName="http.status" value="#[400]" doc:name="400" />
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"data": []
+}]]></dw:set-payload>
+                </dw:transform-message>
+ 			</catch-exception-strategy>
+ 		</choice-exception-strategy>
+</flow>
+
+<flow name="getAsanaProjectsFlow">
+    <http:request config-ref="HTTP_Operations_Request_Configuration" path="/teams/#[flowVars.team_id]/projects" method="GET" doc:name="Get Asana Projects">
+        <http:request-builder>
+                <http:header headerName="Authorization" value="Bearer #[flowVars['asanaToken']]"/>
+	    </http:request-builder>
+    </http:request>
+    <dw:transform-message doc:name="Transform Response to Java">
+        <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+    </dw:transform-message>
+        <choice-exception-strategy doc:name="Choice Exception Strategy">
+        	<catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="Catch Exception Strategy" logException="false">
+     			<set-property propertyName="http.status" value="#[403]" doc:name="403" />
+		     	<set-payload value="{&quot;error&quot;: &quot;You are not a member of that team.&quot;}" mimeType="application/json" doc:name="errorMessage" />
+ 			</catch-exception-strategy>
+ 		</choice-exception-strategy>
+</flow>
+    <flow name="statusDisableForAnInstance">
+        <dw:transform-message doc:name="Transform Message">
+                                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+  "status": "DISABLED"
+}]]></dw:set-payload>
+                                        </dw:transform-message>
+                                        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="Disable The Status for the instance">
+                                            <http:request-builder>
+                <http:uri-param paramName="instanceId" value="#[flowVars['instanceId']]"/>
+                                            </http:request-builder>
+                                        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-payload value="#[{&quot;message&quot;:&quot;Operation Successfully Executed&quot;}]" doc:name="Set Payload"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getTokenByChoiceCondition">
+    <choice doc:name="Choice">
+            <when expression="#[flowVars.integrationId != null &amp;&amp; flowVars.userId != null]">
+                <enricher target="#[flowVars['integrationTokenResponse']]" doc:name="Message Enricher">
+                    <flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow"/>
+                </enricher>
+                <choice doc:name="Check Token Result">
+                    <when expression="#[flowVars.integrationTokenResponse.toString() != '{message=No results}']">
+                        <choice doc:name="Check Refresh Empty">
+                            <when expression="#[flowVars['integrationTokenResponse'][0]['refreshToken'] != null]">
+                                <set-variable variableName="refreshToken" value="#[flowVars['integrationTokenResponse'][0]['refreshToken']]" doc:name="Set Refresh Token"/>
+                                <enricher target="#[flowVars['refreshTokenResponse']]" doc:name="Message Enricher">
+                                    <flow-ref name="postasanaRefreshTokenFlow" doc:name="postasanaRefreshTokenFlow"/>
+                                </enricher>
+                                <choice doc:name="Choice">
+                                    <when expression="#[flowVars.refreshTokenResponse.containsKey('access_token')]">
+                                        <set-variable variableName="token" value="#[flowVars['refreshTokenResponse']['access_token']]" doc:name="Set Token"/>
+                                        <dw:transform-message doc:name="Build Tear Down Integration Response">
+                                            <dw:set-payload resource="classpath:dwScripts/buildTokenFlowReponse.dwl"/>
+                                        </dw:transform-message>
+                                    </when>
+                                    <otherwise>
+                                        <dw:transform-message doc:name="Transform Message">
+                                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"message":"Generate Token By Refresh Token Failed",
+	"errorIs" : flowVars['refreshTokenResponse']
+}]]></dw:set-payload>
+                                        </dw:transform-message>
+                                    </otherwise>
+                                </choice>
+                            </when>
+                            <otherwise>
+                                <dw:transform-message doc:name="Transform Message">
+                                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"message":"Found Refresh Token Empty in DB",
+	"dbResult":flowVars.integrationTokenResponse[0]
+}]]></dw:set-payload>
+                                </dw:transform-message>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <otherwise>
+                        <dw:transform-message doc:name="Transform Message">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"message":"Found Get Token Result Empty in DB",
+	"resultFromDB":flowVars['integrationTokenResponse']
+}]]></dw:set-payload>
+                        </dw:transform-message>
+                    </otherwise>
+                </choice>
+            </when>
+            <otherwise>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"message": "Found UserId or IntegrationId Null",
+	"userId":flowVars['userId'],
+	"integrationId":flowVars['integrationId']
+}]]></dw:set-payload>
+                </dw:transform-message>
+            </otherwise>
+        </choice>
+    </flow>
+
+
+    <flow name="updateIntegration">
+        <logger level="INFO" doc:name="Logger" message="Update flow      Token=#[flowVars['token']]++++++Old_W_id=#[flowVars['updateRequest']['repo_id_old']] +++++ Request=#[flowVars['updateRequest']]"/>
+        <set-variable variableName="webhook_id" value="#[flowVars['updateRequest']['repo_id_old']]" doc:name="Set Old Project Id"/>
+
+        <enricher target="#[flowVars['deleteChannelResponse']]" doc:name="Message Enricher">
+            <flow-ref name="deleteasanaHookFlow" doc:name="deleteasanaHookFlow"/>
+        </enricher>
+        <logger message="in update Delete Old_project response = #[flowVars['deleteChannelResponse']]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Check Project Id ">
+            <when expression="#[flowVars['updateRequest']['configJson']['project_id'] != null]">
+                <set-variable variableName="project_id" value="#[flowVars['updateRequest']['configJson']['project_id']]" doc:name="Set New Project Id"/>
+                <set-variable variableName="webhookUrl" value="https://${asana.webhook.domain}/api/asana/#[flowVars['updateRequest']['instanceUuid']]" doc:name="Generate Webhook_Url"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"data":{
+		"resource":flowVars.project_id,
+    	"target": flowVars.webhookUrl
+	}
+}]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="update new webhook Request = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <http:request config-ref="HTTP_Operations_Request_Configuration" path="/webhooks" method="POST" doc:name="Generating webhook">
+                    <http:request-builder>
+                        <http:header headerName="Authorization" value="Bearer #[flowVars['token']]"/>
+
+
+
+                    </http:request-builder>
+                </http:request>
+                <logger message="update new webhook Response #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-variable variableName="updateWebhookResponse"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+
+                </dw:transform-message>
+                <choice doc:name="Choice">
+                    <when expression="#[flowVars.updateWebhookResponse.toString().contains('data')]">
+
+                        <dw:transform-message doc:name="Prepare Update Instance Request">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"configJson":{
+		"project_id" : flowVars['project_id'],
+		"organization_id" : flowVars['updateRequest']['configJson']['organization_id'],
+		"team_id" : flowVars['updateRequest']['configJson']['team_id'],
+		"displayName" : flowVars['updateRequest']['configJson']['displayName'],
+		"webhook_id" : flowVars['updateWebhookResponse']['data']['id'],
+		"notifications": flowVars['updateRequest']['configJson']['notifications'],
+		"asana_user_id": flowVars['updateRequest']['configJson']['asana_user_id']
+	}
+}]]></dw:set-payload>
+                        </dw:transform-message>
+                        <logger message="update flow(repo_mod = true) runtime update = #[message.payloadAs(java.lang.String)] ++++++++++ inst_id = #[flowVars['updateRequest']['instance_id']]" level="INFO" doc:name="Logger"/>
+                        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="Update Instance">
+                            <http:request-builder>
+                                <http:uri-param paramName="instanceId" value="#[flowVars['updateRequest']['instance_id']]"/>
+
+
+
+                            </http:request-builder>
+                        </http:request>
+
+                        <set-payload value="#[{&quot;webhookResponseInUpdate&quot;:flowVars['updateWebhookResponse']}]" doc:name="Set Payload"/>
+                    </when>
+                    <otherwise>
+                        <set-payload value="#[{&quot;message&quot;:&quot;Create webhook API Failed in&quot;}]" doc:name="Set Payload"/>
+                    </otherwise>
+                </choice>
+            </when>
+
+            <otherwise>
+                <logger level="INFO" doc:name="Logger" message="update Default project_id null"/>
+            </otherwise>
+        </choice>
+        <dw:transform-message doc:name="Transform Update Response">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <choice-exception-strategy doc:name="Choice Exception Strategy">
+        <catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="401">
+     		<set-property propertyName="http.status" value="#[401]" doc:name="401" />
+		   	<set-payload value="{&quot;error&quot;: &quot;Web_hook Already Deleted.&quot;}" mimeType="application/json" doc:name="errorMessage" />
+ 		</catch-exception-strategy>
+ 		<catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="403">
+     		<set-property propertyName="http.status" value="#[403]" doc:name="403" />
+		   	<set-payload value="{&quot;error&quot;: &quot;Update Failed.&quot;}" mimeType="application/json" doc:name="errorMessage" />
+ 		</catch-exception-strategy>
+ </choice-exception-strategy>
+    </flow>
+    
+    <flow name="deleteasanaHookFlow">
+        <logger message="In update before delete API choice ++++#[flowVars['webhook_id']]  #[flowVars['token']]" level="INFO" doc:name="Logger"/>
+
+        <choice doc:name="Choice">
+            <when expression="#[flowVars['webhook_id'] != null &amp;&amp; flowVars['token'] != null]">
+
+                <http:request config-ref="HTTP_Operations_Request_Configuration" path="/webhooks/#[flowVars.webhook_id]" method="DELETE" doc:name="Call Asana API">
+                    <http:request-builder>
+                        <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+
+
+
+                    </http:request-builder>
+                    <http:failure-status-code-validator values="400..599"/>
+                </http:request>
+                <logger message="delete webhook payload from http #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-variable variableName="deleteApiResponse"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+                </dw:transform-message>
+                <choice doc:name="Check Error Condition">
+                    <when expression="#[flowVars.deleteApiResponse.containsKey('data')]">
+                        <set-payload value="#[{&quot;deleteApiResponse&quot;:flowVars['deleteApiResponse']}]" doc:name="Set Delete Message"/>
+                        <dw:transform-message doc:name="Transform Response to Java">
+                            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+                        </dw:transform-message>
+                    </when>
+                    <otherwise>
+                        <set-property propertyName="http.status" value="#[500]" doc:name="Set Http Status"/>
+                        <set-payload value="#[{&quot;deleteApiResponse&quot;:&quot;Delete Webhook Api Operation Failed&quot;}]" doc:name="Set Payload"/>
+                        <dw:transform-message doc:name="Transform Message">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+                        </dw:transform-message>
+                    </otherwise>
+                </choice>
+
+            </when>
+            <otherwise>
+                <set-payload value="#[{&quot;message&quot;:&quot;tearDown Integration Failed&quot;}]" doc:name="Set Payload"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+                </dw:transform-message>
+            </otherwise>
+        </choice>
+        <choice-exception-strategy doc:name="Choice Exception Strategy">
+        	<catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="Catch Exception Strategy" logException="false">
+     			<set-property propertyName="http.status" value="#[400]" doc:name="Status 400" />
+		   		<set-payload value="{&quot;error&quot;: &quot;Webhook Id Incorrect.&quot;}" mimeType="application/json" doc:name="errorMessage" />
+ 			</catch-exception-strategy>
+ 		</choice-exception-strategy>
+
+
+    </flow>
+	<flow name="generateWebhookFlow">
+        <set-variable variableName="instanceId" value="#[flowVars['request2']['instanceId']]" doc:name="Set Instance Id"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars['project_id'] != null &amp;&amp; flowVars['webhook_url'] != null &amp;&amp; flowVars['token'] != null]">
+                <dw:transform-message doc:name="Prepare Request Body">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"data":{
+		"resource": flowVars['project_id'],
+    	"target": flowVars['webhook_url']
+	}
+}]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="Setup generate webhook body = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <http:request config-ref="HTTP_Operations_Request_Configuration" path="/webhooks" method="POST" doc:name="Hit Asana Api">
+                    <http:request-builder>
+                        <http:header headerName="Authorization" value="Bearer #[flowVars['token']]"/>
+
+                    </http:request-builder>
+                </http:request>
+                <logger message="Setup gWebhook response from http = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-variable variableName="successWebhookResponse"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+                </dw:transform-message>
+                <choice doc:name="Choice">
+                    <when expression="#[flowVars.successWebhookResponse.containsKey('data')]">
+                        <dw:transform-message doc:name="Prepare Put Instance Request">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"configJson":{
+		"project_id" : flowVars['project_id'],
+		"organization_id" : flowVars['request2']['configJson']['organization_id'],
+		"team_id" : flowVars['request2']['configJson']['team_id'],
+		"displayName" : flowVars['request2']['configJson']['displayName'],
+		"webhook_id" : flowVars['successWebhookResponse']['data']['id'],
+		"notifications": flowVars['request2']['configJson']['notifications'],
+		"asana_user_id": flowVars['request2']['configJson']['asana_user_id']
+	}
+}]]></dw:set-payload>
+                        </dw:transform-message>
+                        <logger level="INFO" doc:name="Logger" message="setup = update runtime  #[message.payloadAs(java.lang.String)]++++++++inst_id = #[flowVars['instanceId']] from input = #[flowVars['request2']['instanceId']]"/>
+                        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="Update Instance">
+                            <http:request-builder>
+                                <http:uri-param paramName="instanceId" value="#[flowVars['instanceId']]"/>
+
+
+                            </http:request-builder>
+                        </http:request>
+                        <dw:transform-message doc:name="Transform Message">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+flowVars['successWebhookResponse']]]></dw:set-payload>
+                        </dw:transform-message>
+                    </when>
+                    <otherwise>
+                        <logger message="in Set Up = status disabled" level="INFO" doc:name="Logger"/>
+                        <enricher target="#[flowVars['statusDisableResponse']]" doc:name="Status Disable">
+                            <flow-ref name="setupIntegrationFlow" doc:name="setupIntegrationFlow"/>
+                        </enricher>
+                        <dw:transform-message doc:name="Transform Message">
+                            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+flowVars['statusDisableResponse']]]></dw:set-payload>
+                        </dw:transform-message>
+                    </otherwise>
+                </choice>
+            </when>
+            <otherwise>
+                <set-payload value="#[{&quot;message&quot;:&quot;project_id or token or webhook url&quot;}]" doc:name="Set Payload"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+                </dw:transform-message>
+            </otherwise>
+        </choice>
+    
+	</flow>
+
+
+    
+</mule>

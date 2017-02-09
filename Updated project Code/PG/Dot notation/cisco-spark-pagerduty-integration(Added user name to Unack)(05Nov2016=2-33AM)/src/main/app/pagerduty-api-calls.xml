@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+  	
+  	<http:request-config name="HTTP_Access_Token_Request_Configuration" protocol="HTTPS" host="${pagerduty.api.access.token.host}" port="${pagerduty.api.access.token.port}"  doc:name="HTTP Request Configuration"/>
+  	
+ 	<http:request-config name="HTTP_Operations_Request_Configuration" protocol="HTTPS" host="${pagerduty.api.operations.host}" port="${pagerduty.api.operations.port}" basePath="${pagerduty.api.operations.base.path}" doc:name="HTTP Request Configuration"/>
+     
+    <flow name="postPagerdutyTokenFlow">
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/buildPostPagerdutyTokenResponseExample.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getPagerdutyUserFlow">
+    	 <http:request config-ref="HTTP_Operations_Request_Configuration" path="/user" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+            </http:request-builder>
+        </http:request>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+	<flow name="getPagerdutyRepositoriesFlow">
+    	 <http:request config-ref="HTTP_Operations_Request_Configuration" path="/repositories/{user}" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="user" value="#[flowVars.user]"/>
+                <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+            </http:request-builder>
+        </http:request>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="postPagerdutyHookFlow">
+        <dw:transform-message doc:name="Build Post Pagerduty Hook Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPostPagerdutyHookRequest.dwl"/>
+        </dw:transform-message>
+    	 <http:request config-ref="HTTP_Operations_Request_Configuration" path="/repositories/{user}/{repository}/hooks" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="user" value="#[flowVars.user]"/>
+                <http:uri-param paramName="user" value="#[flowVars.repository]"/>
+                <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+            </http:request-builder>
+        </http:request>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="putPagerdutyHookFlow">
+        <dw:transform-message doc:name="Build Put Pagerduty Hook Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPutPagerdutyHookRequest.dwl"/>
+        </dw:transform-message>
+    	 <http:request config-ref="HTTP_Operations_Request_Configuration" path="/repositories/{user}/{repository}/hooks/{hookId}" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="user" value="#[flowVars.user]"/>
+                <http:uri-param paramName="repository" value="#[flowVars.repository]"/>
+                <http:uri-param paramName="hook" value="#[flowVars.hook]"/>
+                <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+            </http:request-builder>
+        </http:request>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="deletePagerdutyHookFlow">
+    	 <http:request config-ref="HTTP_Operations_Request_Configuration" path="/repositories/{user}/{repository}/hooks/{hookId}" method="DELETE" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="user" value="#[flowVars.user]"/>
+                <http:uri-param paramName="repository" value="#[flowVars.repository]"/>
+                <http:uri-param paramName="hook" value="#[flowVars.hook]"/>
+                <http:header headerName="Authorization" value="Bearer #[flowVars.token]"/>
+            </http:request-builder>
+        </http:request>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="generateWebhookUrlFlow">
+        <set-variable variableName="instanceUuid" value="#[function:uuid]" doc:name="Generating Instance Uuid"/>
+        <set-variable variableName="webhookUrl" value="https://${pagerduty.webhook.domain}/api/hooks/#[flowVars.instanceUuid]" doc:name="Generating Webhook Url"/>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/buildGenerateWebhookResopnse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="updatePagerdutyIntegrationFlow">
+        <dw:transform-message doc:name="Transform Update Response">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+</mule>

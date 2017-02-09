@@ -1,0 +1,57 @@
+{% extends "subscribe.html" %}
+
+{% block title %}
+Google Drive Push Notifications Playground - Monitor specific files
+{% endblock %}
+
+{% block sheader %}
+<script type="text/javascript">
+  // User interface messages
+  var messages = {
+    "unsubscribedTitle": "Subscribe to changes in a specific file",
+    "unsubscribedContent": "This is a demo application to receive push notifications for changes to a specific file. Select a file to begin.",
+    "subscribedTitle": "Subscribing",
+    "subscribedContent": "You are now subscribed to changes for the chosen file. Make changes to that file to receive push notifications.",
+    "subscribeButton": "Select a file",
+    "waitMessage": "Please wait...",
+    "buttonUnsubscribe": "Unsubscribe"
+  }
+  // Use the Google Loader script to load the google.picker script.
+  google.load('picker', '1');
+
+  // Create and render a Picker object for searching images.
+  function subscribe() {
+    var view = new google.picker.DocsView();
+    view.setSelectFolderEnabled(true);
+    view.setIncludeFolders(true);
+    var picker = new google.picker.PickerBuilder()
+        .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        .addView(view)
+        .setCallback(pickerCallback)
+        .build();
+     picker.setVisible(true);
+  }
+  // Make AJAX call to subscribe
+  var subscribeRequest = function(fileId, retryCount) {
+    var request = $.ajax({
+      type: "POST",
+      url: "/subscribe",
+      data: { file_id: fileId, state: "{{ state }}" },
+    })
+    request.done(function(msg){
+      updateSubscribed($.parseJSON(msg).notification_id);
+    });
+    request.fail(function(jqXHR){
+      retry(subscribeRequest, subscribeFailUpdate, jqXHR, retryCount)(fileId, ++retryCount);
+    });
+  }
+
+  // A simple callback implementation.
+  function pickerCallback(data) {
+    if (data.action == google.picker.Action.PICKED) {
+      updateWait($("#subscribeButton"), messages['waitMessage'], true);
+      subscribeRequest(data.docs[0].id, 0);
+    }
+  }
+</script>
+{% endblock %}

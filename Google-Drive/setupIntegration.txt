@@ -1,0 +1,110 @@
+request
+=====================
+{
+	"instanceId":"fhvbvjhfvkdfvjkdfjkvd",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vYjY3ZmJmMDMtZmRmMy0zZjRjLWJiM2MtZjZmY2U5Yzc5ODcy",
+	"integrationId": "10",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"messageFormat": "GoogleDrive Bot :Hello...User",
+	"settings": {
+		"room_name": "pradeep kanukuntla",
+		"user_name": "ravi",
+		"displayName": "Google Drive 356"
+	},
+	"instanceUuid":"kp455375"
+}
+
+
+response
+-----------------
+{
+  "SuccessfulHookCreation": {
+    "kind": "api#channel",
+    "id": "4b56b830-57f4-11e6-90e1-6cba20524153",
+    "resourceId": "Kf5djiwFLXfeJNyAHNpErvhHijY",
+    "resourceUri": "https://www.googleapis.com/drive/v3/changes?includeRemoved=true&pageSize=100&pageToken=2&restrictToMyDrive=false&spaces=drive&alt=json",
+    "expiration": "1470065413000"
+  }
+}
+======================================
+pani
+-----------------
+{
+  "googleDriveFolders": {
+    "kind": "drive#fileList",
+    "files": [
+      {
+        "kind": "drive#file",
+        "id": "0B1j9nHI7iBxJTEZDZU14d1g2RzhZdmRnNFBKQjd3LVU5Vkd3",
+        "name": "LDAP Files.zip",
+        "mimeType": "application/zip"
+      },
+      {
+        "kind": "drive#file",
+        "id": "0B274k5SCPgI-WWd3a18tRlNyUUU",
+        "name": "db2 commands.pdf",
+        "mimeType": "application/pdf"
+      },
+      {
+        "kind": "drive#file",
+        "id": "0B96nsEg4sg5Bc3RhcnRlcl9maWxl",
+        "name": "Getting started",
+        "mimeType": "application/pdf"
+      },
+      {
+        "kind": "drive#file",
+        "id": "0B_mrqPTrlu-2NVFRaVY4cXVoVjA",
+        "name": "Mac OS 10.11 El Capitan.rar",
+        "mimeType": "application/rar"
+      }
+    ]
+  }
+}
+=======================================
+req
+---------
+{
+	"instanceId":"fhvbvjhfvkdfvjkdfjkvd",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vYjY3ZmJmMDMtZmRmMy0zZjRjLWJiM2MtZjZmY2U5Yzc5ODcy",
+	"integrationId": "10",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"messageFormat": "GoogleDrive Bot :Hello...User",
+	"settings": {
+		"room_name": "pradeep kanukuntla",
+		"file_id":"0B274k5SCPgI-WWd3a18tRlNyUUU",
+		"user_name": "ravi",
+		"displayName": "Github 356"
+	},
+	"instanceUuid":"kp455375"
+}
+resp
+-------
+{
+  "SuccessfulHookCreation": {
+    "kind": "api#channel",
+    "id": "f79cef00-57f5-11e6-90e1-6cba20524153",
+    "resourceId": "wiTqYb2MzVSfaN65Hp0HMP1iB68",
+    "resourceUri": "https://www.googleapis.com/drive/v3/files/0B274k5SCPgI-WWd3a18tRlNyUUU?acknowledgeAbuse=false&alt=json",
+    "expiration": "1470066123000"
+  }
+}
+=====================================
+pk455375
+------------
+request
+{
+    "id":"cloudhub1",
+    "type":"web_hook",
+    "address":"https://cisco-spark-integration-management-ext-dev.cloudhub.io/api/hooks/123456"
+}
+
+response
+{
+  "kind": "api#channel",
+  "id": "cloudhub1",
+  "resourceId": "QL1_KnsPYlNelMUb-dQIr7n2enM",
+  "resourceUri": "https://www.googleapis.com/drive/v3/changes?includeRemoved=true&pageSize=100&pageToken=2&restrictToMyDrive=false&spaces=drive&alt=json",
+  "expiration": "1470068162000"
+}

@@ -1,0 +1,120 @@
+#%RAML 0.8
+title: cisco-spark-integration-xMatters
+version: 1.0
+
+baseUri: https://${xMatters.mule.env.raml.baseuri}/api
+
+traits:
+  - controllerMethod:
+      responses:
+        400:
+          description: Bad Request
+          
+  - client-id-required:
+      queryParameters:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+
+/settings:
+  post:
+    description: Post and returns the specific integration settings
+#    is: [client-id-required]
+    body:
+      application/json:
+        example: !include examples/postSettingsRequestExample.json
+    responses:
+      200:
+        description: Accepted
+        body:
+          application/json:
+            example: !include examples/postSettingsResponseExample.json
+
+/authDetails:
+  post:
+    description: Post and returns the specific authentication details
+#    is: [client-id-required]
+    body:
+      application/json:
+        example: !include examples/postAuthDetailsRequestExample.json
+    responses:
+      200:
+        description: Ok
+        body:
+          application/json:
+            example: !include examples/postAuthDetailsResponseExample.json
+
+/formatMessage:
+  post:
+    description: Post and returns the formatted message
+#    is: [client-id-required]
+    body:
+      application/json:
+        example: !include examples/postFormatMessageRequestExample.json
+    responses:
+      200:
+        description: OK 
+        body:
+          application/json:
+            example: !include examples/postFormatMessageResponseExample.json
+            
+        
+/setupIntegration:
+  post:
+    description: Controller method to run the setup lifecycle of a new integration instance. This API call is designed for, among other things, perform any setup required on the spoke systems. This call should not update information of the integration instance on the database.
+    is: [controllerMethod]
+    body:
+      application/json:
+        example: !include examples/postSetupIntegrationRequestExample.json
+    responses:
+      200:
+        description: OK 
+        body:
+          application/json:
+            example: !include examples/postSetupIntegrationResponseExample.json     
+
+/updateIntegration:
+  post:
+    description: Updates integration instance. 
+    is: [controllerMethod]
+    body:
+      application/json:
+        example: !include examples/postUpdateIntegrationRequestExample.json
+    responses:
+      200:
+        description: OK
+        body:
+          application/json:
+            example: !include examples/postUpdateIntegrationResponseExample.json    
+        
+/tearDownIntegration:
+  post:
+    description: Controller method to run the tear-down lifecycle of a given integration instance. This API call is designed for, among other things, deactivate any setup required on the spoke systems. This call should not update information of the integration instance on the database.
+    is: [controllerMethod]
+    body:
+      application/json:
+        example: !include examples/postTearDownIntegrationRequestExample.json
+    responses:
+      200:
+        description: OK
+        body:
+          application/json:
+            example: !include examples/postTearDownIntegrationResponseExample.json        
+/healthCheck:
+  post:
+    description: Checks wether this integration is running correctly or not.
+    #is: [client-id-required]
+    is: [controllerMethod]
+    body:
+      application/json:
+        example: !include examples/postHealthCheckRequestExample.json
+    responses:
+      200:
+        description: Integration is working correctly.
+        body:
+          application/json:
+            example: !include examples/postHealthCheckResponseExample.json
+      500:
+        description: Integration presents some problem running.
+        

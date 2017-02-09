@@ -1,0 +1,184 @@
+JSON Sample : 
+-------------------------------------
+[  
+   {  
+      "Spark_Token":"Bearer ODZjMDFjMWQtZGViOS00YTMxLTgwMzctMjA4ZTFmY2YyZjU2OGQyNzM",
+      "IntegrationId":"A1",
+      "Stripe_Access_Key":"sk_test_cEOA8zs7zr32KRywD1DH1kaZ"
+   }
+]
+
+db-->in variable(#[message.payload[0].Spark_Token])
+============================================================================================
+components
+-------------------
+<expression-component doc:name="Expression"><![CDATA[flowVars.tu = flowVars.req.myUrl.split('duplicated task from ')[1]]]></expression-component>
+<logger message="#[flowVars.tt]" level="INFO" doc:name="Logger"/>
+<set-variable variableName="v1" value="12:52 AM" doc:name="v1"/>
+
+====================================================================
+using tranformations on db value
+-------------------------------------
+obj-to-json-->trafrm Msg(input payload-json = output define Map)--> boj-to-json
+====================================================================================================
+input : http://192.168.1.200:8089/integrations/1001
+output : 1001
+use Expression as : #[message.inboundProperties.'http.request.uri'.split("/")[2]]
+
+
+
+http://localhost:8089/pradeep/{id}/schema/{print}
+
+#[message.inboundProperties.'http.uri.params'.id]
+#[message.inboundProperties.'http.uri.params'.print]
+
+===========================================================================================================================
+
+#[message.inboundProperties.'http.method' == 'GET']
+#[message.inboundProperties.'http.method' == 'POST']
+
+
+#[payload != []]
+
+==========================================================================================================================
+
+#[flowVars.name = flowVars.name.toString().split("\\?")[0]]
+
+input: http://localhost:8089/pradeep/bitbucket?id=454554
+output : bitbucket
+===============================================================================================================================
+TO GENERATE UNIQUE ID FOR EACH REQUEST :  #[java.util.UUID.randomUUID().toString()](52b1fd86-6e23-4379-862b-75d60ae5ee3f) (place it in session variable)
+
+<logger message="Variable set with #[sessionVars.messageID]" level="INFO"/>
+ 
+====================================================================================================================================
+ DATE TIME IN MULE   :   #[new org.mule.el.datetime.DateTime(new Date());] (or)  #[server.dateTime.format('yyyy-MM-ddHH:mm:ss')]
+ 
+ DATE RELATED IN DB     :   select CURRENT_TIMESTAMP (OUTPUT = 2016-07-11 03:36:04.0)  
+							& 
+							select now() (OUTPUT = 2016-07-11 03:38:42.0) 
+							
+							&
+							select CURDATE() (output =  2016-07-28)
+							
+
+	getTimestame from database in mule  :: select DATE_FORMAT(created_date,'%m-%d-%YT%h:%i %p') as created_date from integration_instances 
+	-----------------------------------------
+	 06-27-2016 T04:32 PM
+
+	in Transformation--->MAP(createdDate = string,updatedDate = string)
+========================================================================================================================================
+POST IN MULE
+----------------------------------------------------------------------------
+1)HTTP
+2)SET_PAYLOAD = #[{'client_id':'9UbNuqV9BuVnMDWBam','client_secret':'NyhNCyLWqwddR7j2feHzpJBzfePZx3wJ','grant_type':'authorization_code','code':'3fBQWgXCuvV7EG7QxE'}]
+				(OR)
+#[{'client_id':flowVars.client_id,'client_secret':flowVars.client_secret,'grant_type':flowVars.grant_type,'code':flowVars.code}]
+
+3)HTTP :  <http:success-status-code-validator values="0..599"/>
+
+==========================================================================================================
+
+output as json using 'set payload'
+-----------------------------------------
+{"HookResponse":"#[flowVars.webhookResponse]","userEvents":"#[flowVars.integrationsInstanceResponse.configJson]"}
+
+
+
+
+===================================================
+increment flowVars value
+--------------------------------
+pageToken=Integer.parseInt(pageToken)+1;
+=================================================
+${app.home}/classes/googlea43f71d48e2cce70.html
+
+
+ALTER TABLE tablename AUTO_INCREMENT = 1
+=============================================
+Add Array
+-------------
+#[new java.util.ArrayList()]
+postMessageArray.add(flowVars.postMessage1)
+
+flowVars.postMessageArray = flowVars.postMessageArray.toString().replace(',','')
+flowVars.postMessageArray = flowVars.postMessageArray.toString().replace('[','')
+flowVars.postMessageArray = flowVars.postMessageArray.toString().replace(']','')
+
+in exp
+--------
+flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)
+(to remove '[' and ']' from array)
+
+flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)
+(to place and at las index of ',')
+
+
+
+Buffer Stream
+---------------------
+#[new java.lang.StringBuffer()]
+
+bufferStreamMessage.append(payload) 
+postMessage.append('\n\n\n\n\n')
+
+
+
+======================================================
+catch 403 error
+---------------------
+<choice-exception-strategy doc:name="Choice Exception Strategy">
+        <catch-exception-strategy when="exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)" doc:name="Catch Exception Strategy">
+     		<set-property propertyName="http.status" value="#[403]" doc:name="403" />
+		   	<set-payload value="{&quot;error&quot;: &quot;You are not a member of that team.&quot;}" mimeType="application/json" doc:name="errorMessage" />
+ 		</catch-exception-strategy>
+ </choice-exception-strategy>
+===========================================================================================================
+
+#[server.dateTime.changeTimeZone('UTC')] (Gives 2016-11-03T10:59:44.607Z)
+
+#[server.dateTime.format('yyyy-MM-dd HH:mm:ss')] (Gives 2106-10-14 1:24:23)
+
+#[server.dateTime.plusSeconds(-150).changeTimeZone('UTC')]
+
+===========================================
+if ==> et = 2016-10-10T14:00:00+05:30
+-------------------------------------
+#[(new org.mule.el.datetime.DateTime(flowVars.et)).format("hh:mm a")] gives 02:00 PM
+
+#[(new org.mule.el.datetime.DateTime(flowVars.et)).plusMinutes(10).format("hh:mm a")] gives 02:10 PM
+
+#[(new org.mule.el.datetime.DateTime(flowVars.et)).plusHours(1).format("hh:mm a")]  gives 03:00 PM
+
+
+
+if ==> tt = 2016-10-10 (yyyy-MM-dd format)
+-----------------------------------------
+#[(new org.mule.el.datetime.DateTime(flowVars.tt)).format("MMM dd")] gives Oct 10
+#[(new org.mule.el.datetime.DateTime(flowVars.tt)).plusDays(-1).format("MMM dd")] gives Oct 9
+
+===========================================================================================================
+health _check flow
+-----------------------
+token_response = message=No results
+		
+[
+  {
+    "instanceId": 6468,
+    "integrationId": "21",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+    "updatedDate": "2016-10-18T03:32:25",
+    "messageFormat": null,
+    "createdDate": "2016-10-17T02:13:05",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+    "configJson": "{\"time_base\":\"30 minute before\",\"day_base\":\"The day of\",\"day_time_base\":\"10:00 PM\",\"utcTime\":\"4:30 PM\",\"timezone\":\"5.5\",\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"]}",
+    "instanceUuid": "d2a2e6e0-9473-11e6-ac06-0a8a9e489412"
+  }
+]
+
+{
+  "message": "No results"
+}
+
+message=No results

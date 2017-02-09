@@ -1,0 +1,10 @@
+{
+    "clientId" :1,
+    "application_id": 1,
+  	"access_client_id": "32ergejwrenfwfwjr3or3j-fskjnegkeglnr-2315245",
+  	"access_client_secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  	"username": "david",
+  	"password": "xxx",
+  	"grantType": "client_credentials",
+  	"scope": "AUTH"
+}

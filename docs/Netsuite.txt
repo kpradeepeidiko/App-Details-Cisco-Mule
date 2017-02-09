@@ -1,0 +1,264 @@
+NETSUITE   
+-----------------------------------------
+
+selling eponymoue software
+
+100% cloud
+role-based
+---------------------
+in any organisation you have diff roles-sales,warehouse,finance,management_reporting
+each role has diff functions
+
+ACCOUNT ID : TSTDRV1512015
+Alex Wolfe : Administrator :3
+
+Connector Credentials
+====================================================================================
+netsuiteAccount=TSTDRV1512015
+netsuiteEmail=pradeep.kanukuntla@eidiko.com	
+netsuitePassword=Kpmahija12
+netsuiteRoleId=3
+netsuiteApplicationId=6EBA066B-B22A-4248-A035-FB3CCFE14582
+
+
+https://docs.mulesoft.com/mule-user-guide/v/3.6/netsuite-connector
+
+
+getCustomerRecord :
+----------------------------------------------------------------------
+localhost:8089/customer/record/340
+340 is  {internalId}
+
+RESPONSE
+-----------------------------------------------------------
+{
+  "creditHoldOverride": "AUTO",
+  "phone": "(949) 790-0611",
+  "leadSource": {
+    "name": "Electronics Retail Trade Show",
+    "internalId": "100003",
+    "externalId": null,
+    "type": null
+  },
+  "billPay": false,
+  "overdueBalance": 0,
+  "consolUnbilledOrders": 350.95,
+  "creditLimit": 500,
+  "giveAccess": false,
+  "aging4": 0,
+  "balance": 0,
+  "customFieldList": {
+    "customField": [
+      {
+        "BooleanCustomFieldRef__custentity_2663_direct_debit": "false",
+        "LongCustomFieldRef__custentity_cust_priority": "50",
+        "BooleanCustomFieldRef__custentity_fmt_customer_credit_on_hold": "false",
+        "StringCustomFieldRef__null": "<script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['orgchart'], callback:drawChart});function drawChart() {var data = new google.visualization.DataTable();data.addColumn('string', 'Name');data.addColumn('string', 'Manager');data.addColumn('string', 'ToolTip');data.addRows([[{v:'',f:'<div style=\"color:red; font-style:italic\"></div>'}, '', '']]);var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));chart.draw(data, {allowHtml:true});}</script><body><div id='chart_div'></div></body>",
+        "SelectCustomFieldRef__custentity_fmt_cur_sales_order": {
+          "internalId": "2549",
+          "name": "Sales Order #SLS00000449",
+          "typeId": "-30",
+          "externalId": null
+        },
+        "BooleanCustomFieldRef__custentity_fmt_cust_credit_on_hold": "false"
+      }
+    ]
+  },
+  "isInactive": false,
+  "consolDepositBalance": 0,
+  "receivablesAccount": {
+    "name": "Use System Preference",
+    "internalId": "-10",
+    "externalId": null,
+    "type": null
+  },
+  "aging1": 0,
+  "aging2": 0,
+  "aging3": 0,
+  "currencyList": {
+    "currency": [
+      {
+        "currency": {
+          "name": "USA",
+          "internalId": "1",
+          "externalId": null,
+          "type": null
+        },
+        "balance": 0,
+        "consolBalance": 0,
+        "depositBalance": 0,
+        "consolDepositBalance": 0,
+        "overdueBalance": 0,
+        "consolOverdueBalance": 0,
+        "unbilledOrders": 350.95,
+        "consolUnbilledOrders": 350.95,
+        "overrideCurrencyFormat": false,
+        "displaySymbol": "$",
+        "symbolPlacement": "BEFORE_NUMBER"
+      }
+    ],
+    "replaceAll": true
+  },
+  "taxable": false,
+  "shipComplete": false,
+  "depositBalance": 0,
+  "companyName": "Altamirano Apartments Services",
+  "salesRep": {
+    "name": "Clark Koozer",
+    "internalId": "23",
+    "externalId": null,
+    "type": null
+  },
+  "consolAging": 0,
+  "email": "NSturrock@rlr.net",
+  "sendEmail": false,
+  "customForm": {
+    "name": "Ramsey Default Customer Form",
+    "internalId": "16",
+    "externalId": null,
+    "type": null
+  },
+  "subsidiary": {
+    "name": "Honeycomb Mfg.",
+    "internalId": "1",
+    "externalId": null,
+    "type": null
+  },
+  "consolOverdueBalance": 0,
+  "entityId": "Altamirano Apartments Services",
+  "externalId": "305680",
+  "stage": "CUSTOMER",
+  "unbilledOrders": 350.95,
+  "isPerson": false,
+  "currency": {
+    "name": "USA",
+    "internalId": "1",
+    "externalId": null,
+    "type": null
+  },
+  "consolAging4": 0,
+  "consolAging2": 0,
+  "consolAging3": 0,
+  "consolAging1": 0,
+  "addressbookList": {
+    "addressbook": [
+      {
+        "defaultShipping": true,
+        "defaultBilling": true,
+        "isResidential": false,
+        "label": "default bill address",
+        "addressbookAddress": {
+          "nullFieldList": null,
+          "internalId": null,
+          "country": "UNITED_STATES",
+          "attention": null,
+          "addressee": "Altamirano Apartments Services",
+          "addrPhone": null,
+          "addr1": "184 Livermore  St.",
+          "addr2": null,
+          "addr3": null,
+          "city": "Warwick",
+          "state": "RI",
+          "zip": "02886",
+          "addrText": "Altamirano Apartments Services\n184 Livermore  St.\nWarwick, RI 02886",
+          "override": false,
+          "customFieldList": null
+        },
+        "internalId": "244120"
+      }
+    ],
+    "replaceAll": true
+  },
+  "entityStatus": {
+    "name": "CUSTOMER-Closed Won",
+    "internalId": "13",
+    "externalId": null,
+    "type": null
+  },
+  "aging": 0,
+  "internalId": "340",
+  "thirdPartyCountry": "UNITED_STATES",
+  "subscriptionsList": {
+    "subscriptions": [
+      {
+        "subscribed": true,
+        "subscription": {
+          "name": "Billing Communication",
+          "internalId": "2",
+          "externalId": null,
+          "type": null
+        },
+        "lastModifiedDate": 1467328060000
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "name": "Marketing",
+          "internalId": "1",
+          "externalId": null,
+          "type": null
+        },
+        "lastModifiedDate": 1467328060000
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "name": "Newsletters",
+          "internalId": "4",
+          "externalId": null,
+          "type": null
+        },
+        "lastModifiedDate": 1467328060000
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "name": "Product Updates",
+          "internalId": "5",
+          "externalId": null,
+          "type": null
+        },
+        "lastModifiedDate": 1467328060000
+      },
+      {
+        "subscribed": true,
+        "subscription": {
+          "name": "Surveys",
+          "internalId": "3",
+          "externalId": null,
+          "type": null
+        },
+        "lastModifiedDate": 1467328060000
+      }
+    ],
+    "replaceAll": true
+  },
+  "consolBalance": 0,
+  "defaultAddress": "Altamirano Apartments Services\n184 Livermore  St.\nWarwick, RI 02886",
+  "lastModifiedDate": 1465451605000,
+  "dateCreated": 1465714800000,
+  "accessRole": {
+    "name": "Customer Center",
+    "internalId": "14",
+    "externalId": null,
+    "type": null
+  }
+}
+===================================================================================================================================================
+ADDING EMPLOYEE: 
+-----------------------------------------------------------------
+OPERATION : Add Record
+RECORD TYPE : Employee
+
+http--->set_payload--->netsuite--->
+
+in set_payload put value as below :
+-------------------------------------------
+#[
+	[
+		'name':message.inboundProperties['name'],
+		'lastname':message.inboundProperties['lastname'],
+		'e-mail':message.inboundProperties['email'],
+		'externalId':message.inboundProperties['externalId']
+	]	
+]

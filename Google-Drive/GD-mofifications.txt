@@ -1,0 +1,71 @@
+
+<dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>1.5.15</version>
+       </dependency>
+	   
+<exclusions>
+                <exclusion>
+                    <groupId>org.threeten</groupId>
+                    <artifactId>threetenbp</artifactId>
+                </exclusion>
+</exclusions>
+
+
+#[(new org.mule.el.datetime.DateTime(flowVars.timeZ)).format('yyyy.MM.dd HH:mm:ss')]
+#[(new org.mule.el.datetime.DateTime(flowVars.timeZ)).plusSeconds(2).format('yyyy.MM.dd HH:mm:ss')]
+
+2016-09-16T18:55:01.827Z
+2016-09-16T18:55:01.827Z
+
+2016.09.16 18:55:03
+
+<variable-transformer doc:name="Variable"/>
+
+#[(new org.mule.el.datetime.DateTime(payload.file.modifiedDate)).plusSeconds(-1).format('yyyy.MM.dd HH:mm:ss')]
+
+
+<set-variable doc:name="Convert Comment Modified Time" value="#[(new org.mule.el.datetime.DateTime(flowVars.md)).format('yyyy.MM.dd HH:mm:ss')]" variableName="ccmt"/>
+
+
+2016.09.16 18:55:01+++++++++2016.09.16 18:55:03
+
+&& (flowVars.ccmt==flowVars.convertModifiedTime || flowVars.convertModifiedTime == flowVars.plusOneCcmt)
+
+largeChanges
+======================"modificationDate": "2016-09-19T05:20:38.782Z",
+
+"modifiedDate": "2016-09-19T05:20:38.284Z",
+"modifiedByMeDate": "2016-09-19T05:20:38.284Z",
+"lastViewedByMeDate": "2016-09-19T05:20:38.284Z",
+====================================================
+flowVars.convertModifiedTime==flowVars.cmd
+
+#[flowVars.req.containsKey('error')]
+#[flowVars.req.containsKey('kind')]
+
+((new org.mule.el.datetime.DateTime(flowVars.cmd)).plusSeconds(1).format('yyyy.MM.dd HH:mm:ss')==flowVars.convertModifiedTime)
+
+flowVars.convertModifiedTime==flowVars.cmd
+
+flowVars.convertModifiedTime==flowVars.cmd || flowVars.convertModifiedTime==flowVars.mdmo
+
+=================
+#[flowVars.reqPayload.file.labels.trashed=='false' && (flowVars.convertModifiedTime==flowVars.cmd 
+|| flowVars.mdpo==flowVars.convertModifiedTime || flowVars.mdpt==flowVars.convertModifiedTime)]
+=======================
+flowVars.minusOneMFD
+
+
+#[payload.replies==[] && (flowVars.ccmt<=flowVars.convertModifiedTime && flowVars.ccmt>=flowVars.minusFiveMFD)]
+====================================================
+ "mimeType": "image/jpeg",
+ "text/xml"
+ "mimeType": "image/png",
+ "mimeType": "image/gif",
+ "mimeType": "application/x-zip-compressed",
+ ===========================
+ body: 
+        application/json:
+          example: !include examples/googleCalendarWebhookResponse.json

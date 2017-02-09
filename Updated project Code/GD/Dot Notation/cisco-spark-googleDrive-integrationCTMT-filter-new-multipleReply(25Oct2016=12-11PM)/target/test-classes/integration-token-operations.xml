@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+	<flow name="getIntegrationTokenFlow" >
+        <logger message="intgr token inId=#[flowVars.integrationId]        userId=#[flowVars.userId]" level="INFO" doc:name="Logger"/>
+    	<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}/appTokens" method="GET" doc:name="HTTP">
+        	<http:request-builder>
+        		
+				<http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="client_id" value="${googleDrive.integration.client.id}"/>
+                <http:query-param paramName="client_secret" value="${googleDrive.integration.client.secret}"/>
+                <http:query-param paramName="userId" value="#[flowVars.userId]"/>
+                <http:uri-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="getGoogleDriveSettingsFlow">
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/googleDrive/settings/{userId}" method="GET" doc:name="HTTP">
+            <http:request-builder>
+            	
+				<http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="userId" value="#[flowVars.userId]"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <dw:transform-message doc:name="Transform Message To Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="PostGoogleDrivePageTokenFlow">
+        <set-variable variableName="userId" value="#[flowVars.request.userId]" doc:name="Set User Id"/>
+        <set-variable variableName="tokenId" value="#[function:uuid]" doc:name="Set Token Id"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload resource="classpath:dwScripts/buildPostGoogleDriveSettingsExample.dwl"/>
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/googleDrive/settings/{userId}" method="POST" doc:name="HTTP">
+            <http:request-builder>
+            	
+				<http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="userId" value="#[flowVars.userId]"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <dw:transform-message doc:name="Transform Message To Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="putGoogleDriveSettingsFlow">
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/googleDrive/settings/{userId}" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+            	
+				<http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="userId" value="#[flowVars.userId]"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <dw:transform-message doc:name="Transform Message To Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    
+
+</mule>

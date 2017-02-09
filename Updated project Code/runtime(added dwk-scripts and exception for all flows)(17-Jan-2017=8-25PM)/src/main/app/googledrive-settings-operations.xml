@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+	<flow name="getGoogleDriveSettingsFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[SELECT * FROM GOOGLEDRIVE_CURSOR_SETTINGS WHERE user_id=#[flowVars['userId']]]]></db:parameterized-query>
+		</db:select>
+		<logger message="get GD Settings= #[payload]" level="INFO"
+			doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when expression="#[payload != []]">
+				<dw:transform-message doc:name="Transform Message">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGoogleDriveGetSettings.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGoogleDriveGetSettings.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="No Results">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGoogleDriveNoResultExample.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGoogleDriveNoResultExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getGoogleDriveSettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="PostGoogleDriveSettingsFlow">
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<db:insert config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[INSERT INTO GOOGLEDRIVE_CURSOR_SETTINGS(token_id,webhook_id,resource_id,user_id,page_token,cursor_timestamp) VALUES(#[payload['tokenId']],#[payload['webhookId']],#[payload['resourceId']],#[flowVars['userId']],#[payload['pageToken']],#[payload['cursorTime']])]]></db:parameterized-query>
+		</db:insert>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildGoogleDriveOperationExample.dwl"
+				mimeType="application/java" />
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGoogleDriveOperationExample.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in PostGoogleDriveSettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="PutGoogleDriveSettingsFlow">
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[UPDATE GOOGLEDRIVE_CURSOR_SETTINGS SET
+page_token = IF (#[payload['pageToken'] != empty], #[payload['pageToken']], page_token), cursor_timestamp = IF (#[payload['cursorTime'] != empty], #[payload['cursorTime']], cursor_timestamp)
+WHERE user_id = #[flowVars['userId']]]]></db:parameterized-query>
+		</db:update>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildGoogleDriveOperationExample.dwl"
+				mimeType="application/java" />
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGoogleDriveOperationExample.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in PutGoogleDriveSettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+</mule>

@@ -1,0 +1,264 @@
+https://cb56e357.ngrok.io/test/example 
+
+
+test account url
+------------------
+https://www.xmatters.com/p1/xmatters-trial-it-standard?utm_campaign=70138000000yIUaAAM&gclid=CjwKEAiAyanCBRDkiO6M_rDroH0SJAAfZ4KL_R9SXMUWpcMrYEBtv8h_nQMlY20Vpb3ieBlk5FF-PhoC6Czw_wcB
+
+
+===============================================================================================
+inbound
+--------
+https://help.xmatters.com/OnDemand/xmodwelcome/integrationbuilder/create-inbound-updates.htm
+
+
+==================================================
+current account details
+-------------------------
+Domain url : https://esiintegrations.xmatters.com/xmatters/signOn.do?
+username : surendra.eidiko@gmail.com
+password : Sarasu@10
+
+
+username : srisatya.gmr@gmail.com
+password : sarasu10
+
+kpradeep.eidiko@gmail.com
+Sarasu@10
+============================================================================
+support : username : eidiko mail 
+		  Password : Sarasu@10
+==========================================================================
+custom responses
+-----------------
+https://help.xmatters.com/OnDemand/xmodwelcome/communicationplanbuilder/formdetailsresponses.htm
+
+
+
+
+=================================================================
+Device delivery
+--------------------
+{
+	"recipient": "pradeep.kanukuntla",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 225419,
+	"eventType": "LIVE_NOTIFICATION_PROVIDER_DELIVERED",
+	"message": "Notification delivered",
+	"eventIdentifier": 1690150,
+	"date": "16-11-09 16:40:46.347",
+	"eventProperties": []
+}
+
+{
+	"recipient": "ravindra.eidiko",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 226206,
+	"eventType": null,
+	"message": null,
+	"eventIdentifier": 1711335,
+	"date": "16-12-06 09:04:34.062",
+	"eventProperties": []
+}
+
+event active 
+-----------------
+{
+	"status": "active",
+	"username": "ravivarma.gottumukkala",
+	"eventIdentifier": 1690150,
+	"date": "16-11-09 16:40:41.927",
+	"eventProperties": []
+}
+====================================
+event suspend
+---------------------
+{
+	"status": "suspended",
+	"username": "ravivarma.gottumukkala",
+	"eventIdentifier": 1690150,
+	"date": "16-11-09 16:51:45.267",
+	"eventProperties": []
+}
+=====================================
+event tenminate
+-------------------
+{
+	"status": "terminated_external",
+	"username": "ravivarma.gottumukkala",
+	"eventIdentifier": 1690151,
+	"date": "16-11-09 16:56:45.309",
+	"eventProperties": []
+}
+===================================
+send message to multiple users eidiko-group(contains 3 members)
+-------------------------------
+{
+	"status": "active",
+	"username": "ravivarma.gottumukkala",
+	"eventIdentifier": 1690152,
+	"date": "16-11-09 16:58:08.000",
+	"eventProperties": []
+}
+{
+	"recipient": "pradeep.kannukuntla",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 225419,
+	"eventType": "LIVE_NOTIFICATION_PROVIDER_DELIVERED",
+	"message": "Notification delivered",
+	"eventIdentifier": 1690152,
+	"date": "16-11-09 16:58:14.332",
+	"eventProperties": []
+}
+{
+	"recipient": "ravindra.jagannadula",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 225421,
+	"eventType": "LIVE_NOTIFICATION_PROVIDER_DELIVERED",
+	"message": "Notification delivered",
+	"eventIdentifier": 1690152,
+	"date": "16-11-09 16:58:13.334",
+	"eventProperties": []
+}
+{
+	"recipient": "harish.guntha",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 225417,
+	"eventType": "LIVE_NOTIFICATION_PROVIDER_DELIVERED",
+	"message": "Notification delivered",
+	"eventIdentifier": 1690152,
+	"date": "16-11-09 16:58:13.329",
+	"eventProperties": []
+}
+======================================================
+notifiactions responses
+----------------------------
+{
+	"recipient": "kpradeep455375",
+	"device": "Browser",
+	"response": "escalate",
+	"annotation": "null",
+	"eventIdentifier": 1690163,
+	"date": "16-11-09 19:48:06.100",
+	"eventProperties": []
+}
+======================================
+notification response
+------------------------
+{
+	"recipient": "kpradeep.eidiko",
+	"device": "Browser",
+	"response": "escalate",
+	"annotation": "null",
+	"eventIdentifier": 1734172,
+	"date": "16-11-09 19:48:06.100",
+	"eventProperties": [{
+		"event details": "IT communications Plan"
+	}, {
+		"Details": "The problem is being worked on and we will send additional updates shortly."
+	}, {
+		"Severity": "Critical"
+	}, {
+		"Service": "Email Server"
+	}, {
+		"Status": "Under Maintenance"
+	}]
+}
+
+============================
+event trigger
+--------------
+{
+	"status": "active",
+	"username": "harish.eidiko",
+	"eventIdentifier": 1734172,
+	"date": "17-01-24 07:10:24.597",
+	"eventProperties": [{
+		"event details": "IT communications Plan"
+	}, {
+		"Details": "The problem is being worked on and we will send additional updates shortly."
+	}, {
+		"Severity": "Critical"
+	}, {
+		"Service": "Email Server"
+	}, {
+		"Status": "Under Maintenance"
+	}]
+}
+
+==================================
+delivery
+----------
+{
+	"recipient": "kpradeep.eidiko",
+	"device": "Work Email",
+	"deliveryStatus": "Delivered",
+	"deviceId": 228801,
+	"eventType": null,
+	"message": null,
+	"eventIdentifier": 1734172,
+	"date": "17-01-24 07:10:29.976",
+	"eventProperties": [{
+		"event details": "IT communications Plan"
+	}, {
+		"Details": "The problem is being worked on and we will send additional updates shortly."
+	}, {
+		"Severity": "Critical"
+	}, {
+		"Service": "Email Server"
+	}, {
+		"Status": "Under Maintenance"
+	}]
+}
+
+======================
+rajshekar created
+------------------
+https://eidiko123.xmatters.com/xmatters/app.do?
+
+unm : eidiko mail
+pwd : Sarasu@10
+
+
+==========================================================================
+channel_name = csc-titans
+user_id = U0VFG8GKB
+user_name = pradeep.eidiko
+team_domain = eidiko
+team_id = T0HEG0FD3
+text = csc-titans
+channel_id = C3R67D67L
+command = /xmatters
+response_url = https://hooks.slack.com/commands/T0HEG0FD3/136505618755/CXPctE3ivOUpXxIZ0hXgsfh1
+token = B7KKCmBkiQtZ0EgSVIpCVY6g
+
+
+GET https://esiintegrations.xmatters.com/api/xm/1/groups/csc-titans HTTP/1.1
+> Accept: text/plain, application/json, application/*+json, */*
+> Authorization: Bearer ********
+> X-Trace: 120a7858-293d-4d68-a5a9-ffda402f9174,4bda0c00-a5c8-4933-8eb7-508cdf5174ba
+> User-Agent: Xerus (EndpointClient)
+> Content-Type: application/json; charset=utf-8
+> Content-Length: 0
+
+
+
+{
+  "id": "e42168dc-2345-4cbe-8568-d5c46495cbf3",
+  "targetName": "csc-titans",
+  "recipientType": "GROUP",
+  "status": "ACTIVE",
+  "externallyOwned": false,
+  "allowDuplicates": true,
+  "useDefaultDevices": true,
+  "observedByAll": true,
+  "description": "sample group",
+  "links": {
+    "self": "/api/xm/1/groups/e42168dc-2345-4cbe-8568-d5c46495cbf3"
+  }
+}

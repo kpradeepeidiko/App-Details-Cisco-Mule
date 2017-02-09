@@ -1,0 +1,10 @@
+{
+  "result": "Integration is working correctly.",
+  "generateWebhookUrlResponse": {
+    "webhookUrl": "https://cisco-spark-integration-management-webhook.cloudhub.io/api/hooks/74c37de0-7e49-11e6-9ece-6a8520524153",
+    "instanceUuid": "74c37de0-7e49-11e6-9ece-6a8520524153"
+  },
+  "instanceWebhookUrl": {
+    "message": "https://cisco-spark-integration-management-webhook.cloudhub.io/api/hooks/87hyyde0-7e49-11e6-9ece-6a8520524153"
+  }
+}

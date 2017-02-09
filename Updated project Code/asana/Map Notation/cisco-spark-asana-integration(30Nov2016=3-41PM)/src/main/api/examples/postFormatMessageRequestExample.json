@@ -1,0 +1,36 @@
+{
+  "hookResponse": {
+    "events": [
+      {
+        "resource": 196759377495676,
+        "user": 187152065370189,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2016-10-14T22:29:13.866Z",
+        "parent": null
+      },
+      {
+        "resource": 196759377495698,
+        "user": 187152065370189,
+        "type": "story",
+        "action": "added",
+        "created_at": "2016-10-14T22:29:13.857Z",
+        "parent": 196759377495676
+      }
+    ]
+  },
+  "userEvents": "{\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"project_id\":\"192182889868438\",\"team_id\":\"187156701640407\",\"organization_id\":\"9433177677643\",\"displayName\":\"asana test\"}",
+  "instanceDetails": {
+    "instanceId": 6392,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+    "updatedDate": "2016-10-14T10:03:28",
+    "messageFormat": "Asana Bot",
+    "createdDate": "2016-10-14T02:57:53",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+    "configJson": "{\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"project_id\":\"192182889868438\",\"team_id\":\"187156701640407\",\"organization_id\":\"9433177677643\",\"displayName\":\"asana test\"}",
+    "instanceUuid": "954f3890-921e-11e6-ac06-0a8a9e489412"
+  }
+}
+ 

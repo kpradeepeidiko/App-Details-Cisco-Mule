@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd 
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:core-services-invocations.xml"/>
+        <spring:import resource="classpath:pagerduty-api-calls.xml"/>
+        <spring:import resource="classpath:pagerduty-integration.xml"/>
+    </spring:beans>
+    <munit:test name="core-services-invocations-test-suite-coreServicesAlertsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${pagerduty.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${pagerduty.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="core-services-invocations-test-suite-coreServicesLoggingFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${pagerduty.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${pagerduty.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesLoggingFlow" doc:name="Flow-ref to coreServicesLoggingFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="core-services-invocations-test-suite-coreServicesTrackingFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${pagerduty.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${pagerduty.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesTrackingFlow" doc:name="Flow-ref to coreServicesTrackingFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="overAll-test-siute-postAuthDetailsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-payload value="#[{&quot;grantType&quot;: &quot;authorization_code&quot;,&quot;clientId&quot;: &quot;8FS9UXeMT2pj7t6JSg&quot;,&quot;clientSecret&quot;: &quot;raShXP96VvHtz3nqBktFHutNJz4tduG9&quot;,&quot;code&quot;:&quot;Q7MV4uvPUNbWGu2EPC&quot;}]" doc:name="Set Payload"/>
+        <flow-ref name="postAuthDetailsFlow" doc:name="Flow-ref to postAuthDetailsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="overAll-test-siute-postFormatMessageFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"hookResponse": {
+		"messages": [{
+			"type": "incident.trigger",
+			"data": {
+				"incident": {
+					"id": "PEUPYR7",
+					"incident_number": 8,
+					"created_on": "2016-06-22T06:35:18Z",
+					"status": "triggered",
+					"pending_actions": [{
+						"type": "escalate",
+						"at": "2016-06-22T12:35:18+05:30"
+					}, {
+						"type": "resolve",
+						"at": "2016-06-22T16:05:18+05:30"
+					}],
+					"html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/PEUPYR7",
+					"incident_key": "1ad41f288ecd459d8b0dc16ae5f6c1b3",
+					"service": {
+						"id": "PRMTONU",
+						"name": "SparkIntegration",
+						"html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU",
+						"deleted_at": null,
+						"description": ""
+					},
+					"assigned_to_user": {
+						"id": "P9Z1EVW",
+						"name": "ravivarma",
+						"email": "ravivarma2.eidiko@gmail.com",
+						"html_url": "https://eidiko-systems-integrators.pagerduty.com/users/P9Z1EVW"
+					},
+					"trigger_summary_data": {
+						"subject": "varma webhooks"
+					}
+				}
+			}
+		}]
+	},
+	"userEvents": "{\"room_name\":\"Harish\",\"user_name\":\"pradeep kanukuntla\",\"incidents\":[\"acknowledge\",\"trigger\",\"escalated\"],\"webhook_url\":\"http://183.82.99.100:8099/hooks/spark/pagerduty/b0a5bf5b-cdc0-40cb-84d6-2df220c7a70a\"}"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="postFormatMessageFlow" doc:name="Flow-ref to postFormatMessageFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="overAll-test-siute-postIntegrationSettingsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-payload value="#[{&quot;message&quot; : &quot;Generate webhook&quot;}]" doc:name="Set Payload"/>
+        <flow-ref name="postIntegrationSettingsFlow" doc:name="Flow-ref to postIntegrationSettingsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    
+    <munit:test name="overAll-test-siute-updateIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-payload value="#[{&quot;integrationId&quot;: 4,&quot;userId&quot;: &quot;Y2lzY29zcGFyazovL3VzLMRS8zZ1M2Y2NWY5M2I&quot;,&quot;configJson&quot;: {&quot;room_name&quot;: &quot;Mule_Team&quot;,&quot;user_name&quot;: &quot;Mike&quot;,&quot;displayName&quot;:&quot;PagerDuty&quot;,&quot;incidents&quot;: [&quot;trigger&quot;,&quot;unacknowledge-timeout&quot;,&quot;resolve&quot;,&quot;assign&quot;,&quot;escalated&quot;]},&quot;messageFormat&quot;:&quot;PagerDuty :BotHello&quot;,&quot;status&quot;:&quot;ACTIVE&quot;,&quot;channelId&quot;: &quot;Y2lzY29zcGFyazovL3VzZGQtZmRiZmEwMjA4&quot;}]" doc:name="Set Payload"/>
+        <flow-ref name="updateIntegrationFlow" doc:name="Flow-ref to updateIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="overAll-test-siute-setupIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-payload value="#[{&quot;integrationId&quot;: 4,&quot;userId&quot;: &quot;Y2lzY29zcGFyazovL3VzLMRS8zZ1M2Y2NWY5M2I&quot;,&quot;configJson&quot;: {&quot;room_name&quot;: &quot;Mule_Team&quot;,&quot;user_name&quot;: &quot;Mike&quot;,&quot;displayName&quot;:&quot;PagerDuty&quot;,&quot;incidents&quot;: [&quot;trigger&quot;,&quot;unacknowledge-timeout&quot;,&quot;resolve&quot;,&quot;assign&quot;,&quot;escalated&quot;]},&quot;messageFormat&quot;:&quot;PagerDuty :BotHello&quot;,&quot;status&quot;:&quot;ACTIVE&quot;,&quot;channelId&quot;: &quot;Y2lzY29zcGFyazovL3VzZGQtZmRiZmEwMjA4&quot;}]" doc:name="Set Payload"/>
+        <flow-ref name="setupIntegrationFlow" doc:name="setupIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="overAll-test-siute-tearDownIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-payload value="#[{&quot;integrationId&quot;: 4,&quot;userId&quot;: &quot;Y2lzY29zcGFyazovL3VzLMRS8zZ1M2Y2NWY5M2I&quot;,&quot;configJson&quot;: {&quot;room_name&quot;: &quot;Mule_Team&quot;,&quot;user_name&quot;: &quot;Mike&quot;,&quot;displayName&quot;:&quot;PagerDuty&quot;,&quot;incidents&quot;: [&quot;trigger&quot;,&quot;unacknowledge-timeout&quot;,&quot;resolve&quot;,&quot;assign&quot;,&quot;escalated&quot;]},&quot;messageFormat&quot;:&quot;PagerDuty :BotHello&quot;,&quot;status&quot;:&quot;ACTIVE&quot;,&quot;channelId&quot;: &quot;Y2lzY29zcGFyazovL3VzZGQtZmRiZmEwMjA4&quot;}]" doc:name="Set Payload"/>
+        <flow-ref name="tearDownIntegrationFlow" doc:name="tearDownIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    
+    <munit:test name="overAll-test-siute-healthCheckFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <flow-ref name="healthCheckFlow" doc:name="Flow-ref to healthCheckFlow"/>
+    </munit:test>
+</mule>

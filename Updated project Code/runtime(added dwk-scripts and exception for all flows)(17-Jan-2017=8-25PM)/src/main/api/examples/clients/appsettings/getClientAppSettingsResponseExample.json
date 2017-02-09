@@ -1,0 +1,10 @@
+  {
+    "applicationId": 6,
+    "accessClientId": "C0a37152afc62d56a7d82cfc4766925579eed2",
+    "name": "Box",
+    "logo": "http://www.eidiko.com/spark/images/box.png",
+    "contactEmail": "surender.molugu@eidiko.com",
+    "scopes": "[\"spark:people_read\",\"spark:rooms_read\",\"spark:messages_read\"]",
+    "integrationId": "Y2lzY29zcGFyazovL3VzLWZjMmUtNDBhMi1hNjE5LTY2ZGFmZjY5MTc5Zg",
+    "redirectUrls": null
+  }

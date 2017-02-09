@@ -1,0 +1,239 @@
+Task unassign
+-------------
+{
+  "hookResponse": {
+    "events": [
+      {
+        "resource": 247043416461626,
+        "user": 211495747884480,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2017-01-16T06:14:14.794Z",
+        "parent": null
+      },
+      {
+        "resource": 247050153473856,
+        "user": 211495747884480,
+        "type": "story",
+        "action": "added",
+        "created_at": "2017-01-16T06:14:14.801Z",
+        "parent": 247043416461626
+      }
+    ]
+  },
+  "userEvents": "{\"project_id\":\"230482042958138\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682161\",\"displayName\":\"11-03PM\",\"webhook_id\":247045435621469,\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"asana_user_id\":211495747884480}",
+  "instanceDetails": {
+    "instanceId": 11098,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ZDE3OTViNC02MWE0LTQ2ZTQtYTZjOC04YTBkMDUwYmRkYTQ",
+    "updatedDate": "2017-01-16T05:33:45",
+    "messageFormat": "Asana Bot",
+    "createdDate": "2017-01-16T05:33:43",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMGFiNTMyMDAtYWMxMC0xMWU2LWEyY2EtZjU5YzNmNDM3NTIy",
+    "configJson": "{\"project_id\":\"230482042958138\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682161\",\"displayName\":\"11-03PM\",\"webhook_id\":247045435621469,\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"asana_user_id\":211495747884480}",
+    "instanceUuid": "5851cd80-dbad-11e6-aaa1-0e06e9f37324"
+  }
+}
+============================================================
+subTask unassign
+-------------------
+{
+  "hookResponse": {
+    "events": [
+      {
+        "resource": 247043416461630,
+        "user": 211495747884480,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2017-01-16T06:16:36.527Z",
+        "parent": null
+      },
+      {
+        "resource": 247052219069343,
+        "user": 211495747884480,
+        "type": "story",
+        "action": "added",
+        "created_at": "2017-01-16T06:16:36.535Z",
+        "parent": 247043416461630
+      }
+    ]
+  },
+  "userEvents": "{\"project_id\":\"230482042958138\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682161\",\"displayName\":\"11-03PM\",\"webhook_id\":247045435621469,\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"asana_user_id\":211495747884480}",
+  "instanceDetails": {
+    "instanceId": 11098,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ZDE3OTViNC02MWE0LTQ2ZTQtYTZjOC04YTBkMDUwYmRkYTQ",
+    "updatedDate": "2017-01-16T05:33:45",
+    "messageFormat": "Asana Bot",
+    "createdDate": "2017-01-16T05:33:43",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMGFiNTMyMDAtYWMxMC0xMWU2LWEyY2EtZjU5YzNmNDM3NTIy",
+    "configJson": "{\"project_id\":\"230482042958138\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682161\",\"displayName\":\"11-03PM\",\"webhook_id\":247045435621469,\"notifications\":[\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"asana_user_id\":211495747884480}",
+    "instanceUuid": "5851cd80-dbad-11e6-aaa1-0e06e9f37324"
+  }
+}
+===================
+subTask unassign
+----------------
+{
+	"data": {
+		"id": 247052219069343,
+		"created_at": "2017-01-16T06:16:36.376Z",
+		"target": {
+			"id": 247043416461630,
+			"name": "SUB-Task"
+		},
+		"source": "web",
+		"type": "system",
+		"created_by": {
+			"id": 211495747884480,
+			"name": "surendra"
+		},
+		"text": "unassigned from pradeep kanukuntla"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=================================================
+payload changes
+-----------------
+{
+	"id": 188938379032351,
+	"created_at": "2016-09-29T21:19:12.798Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "system",
+	"text": "marked this task complete"
+}
+================================
+{
+	"data": {
+		"id": 247048789333727,
+		"created_at": "2017-01-16T05:57:53.303Z",
+		"target": {
+			"id": 230482042958137,
+			"name": "Getting information"
+		},
+		"source": "web",
+		"type": "system",
+		"text": "completed this task",
+		"num_hearts": 0,
+		"created_by": {
+			"id": 211495747884480,
+			"name": "surendra"
+		},
+		"hearts": [],
+		"hearted": false
+	}
+}
+-------------------
+{
+	"data": {
+		"id": 247125985800320,
+		"created_at": "2017-01-16T09:16:54.843Z",
+		"target": {
+			"id": 247070263093203,
+			"name": "Copy of Task1"
+		},
+		"source": "web",
+		"type": "system",
+		"text": "marked this task complete",
+		"num_hearts": 0,
+		"created_by": {
+			"id": 211495747884480,
+			"name": "surendra"
+		},
+		"hearts": [],
+		"hearted": false
+	}
+}
+
+
+========================================================================================
+folder uploaded from BOX
+-------------------------
+{
+	"data": {
+		"id": 247125985800377,
+		"created_at": "2017-01-16T10:47:54.862Z",
+		"name": "TestBoxFolderone",
+		"permanent_url": "https://app.asana.com/app/asana/-/download_asset?asset_id=247125985800377",
+		"host": "box",
+		"download_url": null,
+		"view_url": "https://app.box.com/s/a47rype2mmcdtntujlzsi40k3g30tzo0",
+		"parent": {
+			"id": 230482042958145,
+			"name": "Webhook"
+		}
+	}
+}
+
+-----------------------------
+file upload from BOX
+---------------------
+{
+	"data": {
+		"id": 247125985800381,
+		"created_at": "2017-01-16T11:01:39.054Z",
+		"name": "AsanaSampleTestDoc.docx",
+		"permanent_url": "https://app.asana.com/app/asana/-/download_asset?asset_id=247125985800381",
+		"host": "box",
+		"download_url": null,
+		"view_url": "https://app.box.com/s/p6h1i06ralgn2w8pyryx8l12u7twvfd8",
+		"parent": {
+			"id": 230482042958145,
+			"name": "Webhook"
+		}
+	}
+}
+
+================================================================================================
+due date remove
+-------------------
+{
+	"data": {
+		"id": 249420429263046,
+		"created_at": "2017-01-18T18:20:27.438Z",
+		"target": {
+			"id": 242200534777040,
+			"name": "TestTask2211"
+		},
+		"source": "web",
+		"type": "system",
+		"text": "removed the due date",
+		"created_by": {
+			"id": 187152065370189,
+			"name": "pradeep kanukuntla"
+		}
+	}
+}
+

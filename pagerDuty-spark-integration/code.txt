@@ -1,0 +1,76 @@
+GET ROOMS,SPARK_USER_DETAILS,WEBHOOK_DETAILS
+-------------------------------------------------------------------
+<scatter-gather doc:name="Scatter-Gather">
+   <processor-chain>
+     <CiscoSpark:get-rooms config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="getRooms"/>
+                        <set-payload value="#[payload]" doc:name="Set Payload"/>
+    </processor-chain>
+    <processor-chain>
+		<CiscoSpark:get-people-detail config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="getSparkUserId"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-payload value="{ &quot;profile&quot; : #[payload] }" doc:name="Set Payload"/>
+    </processor-chain>
+    <processor-chain>
+        <db:select config-ref="MySQL_Configuration" doc:name="uniqueInstanceID">
+            <db:parameterized-query><![CDATA[select uuid() as uuid]]></db:parameterized-query>
+        </db:select>
+        <set-variable variableName="instanceId" value="#[message.payload[0].uuid]" doc:name="instanceId"/>
+        <set-variable variableName="webhookURL" value="#['http://183.82.99.100:8090/hooks/spark/pagerduty/']#[flowVars.instanceId]" doc:name="webhookURL"/>
+        <logger message="instanceId : #[flowVars.instanceId] :::::::::::::::::::::::::::: webhook_url  :  #[flowVars.webhookURL]" level="INFO" doc:name="Logger"/>
+        <set-payload value="{&quot;webhookurl&quot;:&quot;#[flowVars.webhookURL]&quot;,&quot;instance_id&quot;:&quot;#[flowVars.instanceId]&quot;}" doc:name="Set Payload"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+    </processor-chain>
+</scatter-gather>
+<set-payload value="#[payload]" doc:name="Set Payload"/>
+<json:object-to-json-transformer mimeType="application/json" doc:name="Object to JSON"/>
+
+
+=================================================================================================================================================
+CHECK USER NOTIFICATIONS
+--------------------------------------------------------
+
+
+<db:select config-ref="MySQL_Configuration" doc:name="selectingNotifications">
+            <db:parameterized-query><![CDATA[select config_json from integration_instances where integration_id='1006' and instance_id=#[flowVars.instance_id]]]></db:parameterized-query>
+</db:select>
+<logger message="config_json : #[message.payload[0].config_json]" level="INFO" doc:name="Logger"/>
+<set-payload value="#[message.payload[0].config_json]" doc:name="getConfigJson"/>
+<json:object-to-json-transformer doc:name="Object to JSON"/>
+<foreach collection="#[json:notifications]" doc:name="checkUserSelectedNotificationAlerts">
+        	<set-variable variableName="event" value="#[payload]" doc:name="UserNotification"/>
+        	<choice doc:name="basedOnUserNotifications">
+            <when expression="#[flowVars.incident_type =='incident.acknowledge' &amp;&amp; flowVars.incident_status =='acknowledged' &amp;&amp; flowVars.event =='acknowledged']">
+                <logger message="entered into incident Acknowledged" level="INFO" doc:name="Acknowledged"/>
+                <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="incidentAcknowledgedMessageToSpark">
+                    <CiscoSpark:messages-post-request roomId="#[flowVars.sparkRoom]" text="PagerDuty   Triggered ##[flowVars.incident_number] : Subject = #[flowVars.triggered_subject]   from   Service : #[flowVars.service_name]   assigned to : #[flowVars.assigned_to_user]  has  #[flowVars.incident_status]"/>
+                </CiscoSpark:post-messages>
+                <logger message="Posted Acknowledged Message To spark Room" level="INFO" doc:name="Logger"/>
+            </when>
+            <when expression="#[flowVars.incident_type =='incident.trigger' &amp;&amp; flowVars.incident_status =='triggered' &amp;&amp; flowVars.event =='newly-created']">
+                <logger message="entered into incident Trigger" level="INFO" doc:name="Trigger"/>
+                <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="incidentTriggeredMessageToSaprk">
+                    <CiscoSpark:messages-post-request roomId="#[flowVars.sparkRoom]" text="PagerDuty    Triggered ##[flowVars.incident_number] : Subject = #[flowVars.triggered_subject]  from    Service : #[flowVars.service_name]   assigned to : #[flowVars.assigned_to_user]  has  #[flowVars.incident_status]"/>
+                </CiscoSpark:post-messages>
+                <logger message="Posted Triggered Message To spark Room" level="INFO" doc:name="Logger"/>
+            </when>
+            <when expression="#[flowVars.incident_type =='incident.resolve' &amp;&amp; flowVars.incident_status =='resolved' &amp;&amp; flowVars.event=='resolved']">
+                <logger message="entered into incident Resolved" level="INFO" doc:name="Resolved"/>
+                <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="incidentResolvedMessageToSpark">
+                    <CiscoSpark:messages-post-request roomId="#[flowVars.sparkRoom]" text="PagerDuty    Triggered ##[flowVars.incident_number] : Subject = #[flowVars.triggered_subject]  from   Service : #[flowVars.service_name]  has  #[flowVars.incident_status]  by  #[flowVars.resolved_by_user]"/>
+                </CiscoSpark:post-messages>
+                <logger message="Posted Resolved Message To spark Room" level="INFO" doc:name="Logger"/>
+            </when>
+            <when expression="#[flowVars.incident_type =='incident.assign' &amp;&amp; flowVars.incident_status =='triggered' &amp;&amp; flowVars.event=='manually-reassigned']">
+                <logger message="entered into incident Reassigned" level="INFO" doc:name="Reassigned"/>
+                <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkAccessToken]" doc:name="incidentReassignedMessageToSpark">
+                    <CiscoSpark:messages-post-request roomId="#[flowVars.sparkRoom]" text="PagerDuty    Triggered ##[flowVars.incident_number] :  Subject = #[flowVars.triggered_subject]   from   Service : #[flowVars.service_name]   Reassigned to : #[flowVars.assigned_to_user] "/>
+                </CiscoSpark:post-messages>
+                <logger message="Posted Reassigned Message To spark Room" level="INFO" doc:name="Logger"/>
+            </when>
+            <otherwise>
+                <logger message="entered into default" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+        
+</foreach>
+===================================================================================================================================================

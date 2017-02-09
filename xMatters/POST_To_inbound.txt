@@ -1,0 +1,58 @@
+POST https://csc.xmatters.com/api/integration/1/functions/967c8939-bed5-4bf6-b6a7-2ddd5c9cd0fc/triggers
+
+Request :
+----------------
+{
+  "properties": {
+    "Building":["Building A", "Building B"], 
+    "City":"Victoria",
+    "State":"BC",
+    "Street Number": 2453, 
+    "Is PO Box?": true,   
+    "Disaster Category":["Mass Movement", "Earthquake"] 
+  },
+  "recipients": 
+  [
+    {"targetName": "bsmith"},
+    {"targetName": "Operations"},
+    {"targetName": "tsanderson",
+     "devices": ["Email", "Voice Phone"]}
+  ],
+  "conferences": 
+  [
+    {"name":"P1M1"}
+  ],
+  "responses":
+  [
+    "a1b73279-465f-4f18-a44b-47993c3f75b9",
+    "75f789c2-87b2-4c63-91de-ea6e5834e91d"
+  ],
+  "priority": "high",
+  "callbacks": 
+  [
+    {
+      "url":"https://mydomain.com/path/to/my/service/event/status",
+      "type":"status",
+      "authType":"basic",
+      "authUserName":"mmcbride",
+      "authPassword":"password123"
+    },
+    {                  
+      "url":"http://mydomain.com/path/to/my/service/event/deliveryStatus",
+      "type":"deliveryStatus"
+    },
+    {        
+      "url":"ia://myagentID", 
+      "iaid":"lugh-ia-512", 
+      "type":"response"
+   
+    }
+  ]
+}
+
+
+Response :
+-------------
+{
+  "requestId": "8e1a0a83-05be-4f2e-af38-21e0b3a912f7"
+}

@@ -1,0 +1,17 @@
+{
+  "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg",
+  "configJson": {
+    "room": "webhookTestingRoom",
+    "file_id":"0B8Frq-z2gVGEaC14eFE2OXBIYUU",
+    "user_name":"pradeep",
+    "displayName":"GoogleDrive",
+    "id": "sarasu10",
+    "resourceId": "QL1_KnsPYlNelMUb-dQIr7n2enM",
+    "authenticated_to":"pradeep kanukuntla"
+  },
+  "messageFormat": "GoogleDrive Bot :Hello...User",
+  "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+  "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vZjY0OWQ2MTAtMmZiYy0xMWU2LTkyODQtZmI2ZDExOTlmZTM3",
+  "status": "ACTIVE",
+  "instanceUuid": "gd12345678910"
+}

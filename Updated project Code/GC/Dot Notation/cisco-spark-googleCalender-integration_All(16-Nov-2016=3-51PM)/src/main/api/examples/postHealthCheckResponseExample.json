@@ -1,0 +1,163 @@
+{
+  "result": "Integration is working correctly.",
+  "TokenResponse": [
+    {
+      "tokenId": 1489,
+      "applicationId": 21,
+      "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwNWY1MWQ2MTFiYzFkOTU0MjY3NWY1ZmQ3N2RkMWI0YTRhZDI5ZTEyZTc1YTc0ZGVhNjQ2ZDcwOTgzY2ZkZjcz",
+      "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+      "accessToken": "ya29.CjCRA1CTUYYKP8sfG7lJ-lcvPO4jGUIDjpe74Prgyc6airxS12FWNFYyGTRBvtD06QE",
+      "expires": "2016-11-09T12:05:52",
+      "refreshExpires": null,
+      "refreshToken": "1/slE0urPvpDIZgOr_wYXoB0LAqt9OmFLl0nO_mxNkx-Y",
+      "subDomain": null
+    }
+  ],
+  "GoogleCalenderSettingsResponse": {
+    "time_base": "15 minute before",
+    "day_time_base": "09:00 AM",
+    "utcTime": "03:30 AM",
+    "offset": "5.30",
+    "timezone": "UTC+5:30(India Standard Time)",
+    "calendar_id": "oqnh86st16o3ipccg0nn0idn00@group.calendar.google.com",
+    "resources": "Meetings calendar",
+    "displayName": "gc2",
+    "notifications": [
+      "eventCreation",
+      "eventUpdate"
+    ]
+  },
+  "CalendarsList": {
+  "kind": "calendar#calendarList",
+  "etag": "\"p32cbjfflsm2d00g\"",
+  "nextSyncToken": "CJi5vfXlhNACEhdjYWxlbmRlcmNpc2NvQGdtYWlsLmNvbQ==",
+  "items": [
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com",
+      "summary": "varmacalendar",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "22",
+      "backgroundColor": "#f691b2",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "calendercisco@gmail.com",
+      "summary": "calendercisco@gmail.com",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "15",
+      "backgroundColor": "#9fc6e7",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": [
+        {
+          "method": "popup",
+          "minutes": 30
+        }
+      ],
+      "notificationSettings": {
+        "notifications": [
+          {
+            "type": "eventCreation",
+            "method": "email"
+          },
+          {
+            "type": "eventChange",
+            "method": "email"
+          },
+          {
+            "type": "eventCancellation",
+            "method": "email"
+          },
+          {
+            "type": "eventResponse",
+            "method": "email"
+          }
+        ]
+      },
+      "primary": true
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477908424926000\"",
+      "id": "l28fvtbr9vd9ce83vjn83dd25o@group.calendar.google.com",
+      "summary": "MyMeetingsCalendar",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "9",
+      "backgroundColor": "#7bd148",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477774583996000\"",
+      "id": "i0cmj6vtk6jcvkaito3ios4g44@group.calendar.google.com",
+      "summary": "Eidiko Calender",
+      "description": "All Eidiko Timings",
+      "location": "hyderabad",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "11",
+      "backgroundColor": "#fbe983",
+      "foregroundColor": "#000000",
+      "selected": true,
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477569382939000\"",
+      "id": "#contacts@group.v.calendar.google.com",
+      "summary": "Contacts",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "13",
+      "backgroundColor": "#92e1c0",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "en.christian#holiday@group.v.calendar.google.com",
+      "summary": "Christian Holidays",
+      "timeZone": "Asia/Calcutta",
+      "summaryOverride": "Christian Holidays Subscribed for Watch",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1474282952045000\"",
+      "id": "en.indian#holiday@group.v.calendar.google.com",
+      "summary": "Holidays in India",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1474369520745000\"",
+      "id": "en.islamic#holiday@group.v.calendar.google.com",
+      "summary": "Muslim Holidays",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    }
+  ]
+}
+}

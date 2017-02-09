@@ -1,0 +1,19 @@
+{
+  "result": "Integration is working correctly.",
+  "TokenResponse": [
+    {
+      "tokenId": 729,
+      "applicationId": 25,
+      "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q5ZDUxMjgzLWUzMzktNDM1Mi05MzIyLTdkNzZjOTkyY2U4Mw",
+      "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+      "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpemF0aW9uIjoxODcxNjIyMjI2NTU0NjYsInNjb3BlIjoiIiwiaWF0IjoxNDc3NDYwNjE4LCJleHAiOjE0Nzc0NjQyMTh9.X_Npkt1kCa8Yhlg1DujLPjlVXRYfWU9Qa0NdE_KhDDI",
+      "expires": "2016-10-26T06:43:39",
+      "refreshExpires": null,
+      "refreshToken": "0/643fa74b98ce9a898dfb89ccf1a37e02",
+      "subDomain": null
+    }
+  ],
+  "webhookId": [
+    202535348860953
+  ]
+}

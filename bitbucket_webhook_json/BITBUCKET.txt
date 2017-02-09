@@ -1,0 +1,40 @@
+https://bitbucket.org/site/oauth2/authorize?client_id={client_id}&response_type=code
+
+
+https://www.getpostman.com/oauth2/callback
+
+
+bitbucket
+--------------------------------------------------------------------------------------
+key : 9UbNuqV9BuVnMDWBam
+secret : NyhNCyLWqwddR7j2feHzpJBzfePZx3wJ
+Add token to : Header
+access_token : 3jRGK4-3Z1Lm9tgFR0ZnM0APVFhcXibIlLVSHaSaFbfPLCgrFpyiOJBC2eOvNzzW5dX6pfa1k9Hce4lj3s8=
+name : pbitbucket
+id : 7d211cb2-84f9-ddfc-186e-8f56d60334ce
+
+=============================================================================================
+IN POSTMAN
+------------------------------------------------------------------
+https://bitbucket.org/site/oauth2/access_token (POST)
+IN BODY : FORM-DATA
+client_id,
+client_secret
+grant_type : authorization_code
+code : muErEyCmJDu4zNdgvB
+
+RESPONSE : 
+-----------------------------------------
+{
+  "access_token": "SGU4sBbzOB1mITCrOsD_jWALoi3-QhnEaiA_RFDruSShJNNqmw0MjAmaiTiTrfPgwrETWzW9ExPyQzK4EoM=",
+  "scopes": "webhook snippet:write wiki issue:write pullrequest:write repository:admin project:write team:write account:write",
+  "expires_in": 3600,
+  "refresh_token": "mMpQLN9vCyzM5GZr6J",
+  "token_type": "bearer"
+}
+========================================================================================================
+POST IN MULE
+----------------------------------------------------------------------------
+1)HTTP
+2)SET_PAYLOAD = #[{'client_id':'9UbNuqV9BuVnMDWBam','client_secret':'NyhNCyLWqwddR7j2feHzpJBzfePZx3wJ','grant_type':'authorization_code','code':'3fBQWgXCuvV7EG7QxE'}]
+3)HTTP

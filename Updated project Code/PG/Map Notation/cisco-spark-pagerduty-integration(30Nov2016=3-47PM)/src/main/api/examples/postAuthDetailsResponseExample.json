@@ -1,0 +1,7 @@
+{
+  "accessToken": "6948KTwMYOig0zrXoydE2VMJSzqvPyCsS4IIJZ7k9e7fgti0BPIXBshNQBg3n7ucLm3kRSMyc3teFbdxVhg=",
+  "scopes": "webhook snippet wiki issue pullrequest project team account",
+  "expiresIn": 3600,
+  "refreshToken": "Uv6uAgb3vavrDZvbLW",
+  "tokenType": "bearer"
+}

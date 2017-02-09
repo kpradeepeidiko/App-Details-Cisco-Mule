@@ -1,0 +1,56 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/api" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/app" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes"/>
+  <classpathentry kind="src" path="src/test/munit" output="target/test-classes" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="MULE_RUNTIME"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/ant/ant/1.9.6/ant-1.9.6.jar" sourcepath="M2_REPO/org/apache/ant/ant/1.9.6/ant-1.9.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/ant/ant-launcher/1.9.6/ant-launcher-1.9.6.jar" sourcepath="M2_REPO/org/apache/ant/ant-launcher/1.9.6/ant-launcher-1.9.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar" sourcepath="M2_REPO/org/ow2/asm/asm/5.0.4/asm-5.0.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/cglib/cglib/3.2.2/cglib-3.2.2.jar" sourcepath="M2_REPO/cglib/cglib/3.2.2/cglib-3.2.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar" sourcepath="M2_REPO/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/weave/core_2.11/1.1.0/core_2.11-1.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mule/edi/edi-parser/1.2.0/edi-parser-1.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/weave/flatfile_2.11/1.1.0/flatfile_2.11-1.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/ftpserver/ftplet-api/1.0.6/ftplet-api-1.0.6.jar" sourcepath="M2_REPO/org/apache/ftpserver/ftplet-api/1.0.6/ftplet-api-1.0.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/ftpserver/ftpserver-core/1.0.6/ftpserver-core-1.0.6.jar" sourcepath="M2_REPO/org/apache/ftpserver/ftpserver-core/1.0.6/ftpserver-core-1.0.6-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/jdom/jdom/1.0/jdom-1.0.jar" sourcepath="M2_REPO/jdom/jdom/1.0/jdom-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar" sourcepath="M2_REPO/junit/junit/4.10/junit-4.10-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar" sourcepath="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mule/edi/ltm-datamodel/1.2.0/ltm-datamodel-1.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/typelevel/machinist_2.11/0.3.0/machinist_2.11-0.3.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/mina/mina-core/2.0.4/mina-core-2.0.4.jar" sourcepath="M2_REPO/org/apache/mina/mina-core/2.0.4/mina-core-2.0.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-all/1.8.2/mockito-all-1.8.2.jar" sourcepath="M2_REPO/org/mockito/mockito-all/1.8.2/mockito-all-1.8.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5.jar" sourcepath="M2_REPO/org/mockito/mockito-core/1.9.5/mockito-core-1.9.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/modules/mule-interceptor-module/3.8.0/mule-interceptor-module-3.8.0.jar" sourcepath="M2_REPO/com/mulesoft/modules/mule-interceptor-module/3.8.0/mule-interceptor-module-3.8.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/munit/mule-munit-support/3.8.0/mule-munit-support-3.8.0.jar" sourcepath="M2_REPO/com/mulesoft/munit/mule-munit-support/3.8.0/mule-munit-support-3.8.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/weave/mule-plugin-weave_2.11/3.8.0/mule-plugin-weave_2.11-3.8.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/munit/munit-assert/1.2.1/munit-assert-1.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/munit/munit-common/1.2.1/munit-common-1.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/munit/munit-mock/1.2.1/munit-mock-1.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/munit/munit-runner/1.2.1/munit-runner-1.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0.jar" sourcepath="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/parboiled/parboiled_2.11/2.1.0/parboiled_2.11-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/github/japgolly/fork/parboiled/parboiled_sjs0.6_2.11/2.1.0/parboiled_sjs0.6_2.11-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mulesoft/weave/parser_sjs0.6_2.11/1.1.0/parser_sjs0.6_2.11-1.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.11.7/scala-library-2.11.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-reflect/2.11.4/scala-reflect-2.11.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/scala-js/scalajs-library_2.11/0.6.5/scalajs-library_2.11-0.6.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/chuusai/shapeless_2.11/2.1.0/shapeless_2.11-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/github/japgolly/fork/shapeless/shapeless_sjs0.6_2.11/2.1.0-2/shapeless_sjs0.6_2.11-2.1.0-2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/spire-math/spire-macros_2.11/0.9.0/spire-macros_2.11-0.9.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/spire-math/spire_2.11/0.9.0/spire_2.11-0.9.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/spray/spray-json_2.11/1.3.1/spray-json_2.11-1.3.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/sshd/sshd-core/1.0.0/sshd-core-1.0.0.jar" sourcepath="M2_REPO/org/apache/sshd/sshd-core/1.0.0/sshd-core-1.0.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/woodstox/woodstox-core/5.0.1/woodstox-core-5.0.1.jar"/>
+</classpath>

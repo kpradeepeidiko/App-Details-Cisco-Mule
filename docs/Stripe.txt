@@ -1,0 +1,189 @@
+Stripe
+------------------------------------------
+unm : harish.guntha@eidiko.com
+pwd : harish@eidiko
+
+Test : sk_test_cEOA8zs7zr32KRywD1DH1kaZ
+
+
+WORKING METHODS
+=============================================================
+CREATE CUSTOMER
+RETRIVE COUPON
+CREATE COUPON
+LIST ALL EVENTS
+RETRIEVE CUSTOMER
+CREATE PLAN
+
+
+
+
+CREATE CUSTOMER
+======================================================================================================================================
+EMAIL : kpradeep@gmail.com
+
+Response :  
+-----------------------------------------------------
+{
+  "created": 1465208366,
+  "id": "cus_8aVrsHRjxXegK3",
+  "livemode": false,
+  "deleted": null,
+  "description": null,
+  "default_card": null,
+  "default_source": null,
+  "email": "varma5@gmail.com",
+  "trial_end": null,
+  "discount": null,
+  "next_recurring_charge": null,
+  "subscriptions": {
+    "data": [],
+    "total_count": 0,
+    "has_more": false,
+    "url": "/v1/customers/cus_8aVrsHRjxXegK3/subscriptions",
+    "count": null
+  },
+  "subscription": null,
+  "delinquent": false,
+  "account_balance": 0,
+  "currency": null,
+  "cards": null,
+  "sources": {
+    "data": [],
+    "total_count": 0,
+    "has_more": false,
+    "url": "/v1/customers/cus_8aVrsHRjxXegK3/sources",
+    "count": null
+  },
+  "metadata": {}
+}
+
+
+
+
+webhook output:
+------------------------------------------
+{
+  "created": 1465208222,
+  "id": "cus_8aVoUxOa0tPrJy",
+  "livemode": false,
+  "deleted": null,
+  "description": null,
+  "default_card": null,
+  "default_source": null,
+  "email": "pk4565@gmail.com",
+  "trial_end": null,
+  "discount": null,
+  "next_recurring_charge": null,
+  "subscriptions": {
+    "data": [],
+    "total_count": 0,
+    "has_more": false,
+    "url": "/v1/customers/cus_8aVoUxOa0tPrJy/subscriptions",
+    "count": null
+  },
+  "subscription": null,
+  "delinquent": false,
+  "account_balance": 0,
+  "currency": null,
+  "cards": null,
+  "sources": {
+    "data": [],
+    "total_count": 0,
+    "has_more": false,
+    "url": "/v1/customers/cus_8aVoUxOa0tPrJy/sources",
+    "count": null
+  },
+  "metadata": {}
+}
+
+
+===========================================================================================================================================================
+COUPON CREATION
+--------------------------------------------------
+Currency : USD(AED,AFN,BSD,ALL,AMD,ANG,AOA,ARS,AWG,AZN,BBD etc)
+Duration : once(once,Multi-month,forever)
+id : pradeep100
+amount off : 10 (here use either amount off or percent off but dont use both)
+
+response:
+---------------------------------
+{
+  "percentOff": null,
+  "amountOff": 10,
+  "currency": "usd",
+  "duration": "once",
+  "id": "pradeep100",
+  "livemode": false,
+  "durationInMonths": null,
+  "maxRedemptions": null,
+  "redeemBy": null,
+  "timesRedeemed": 0,
+  "valid": true,
+  "metadata": {}
+}
+
+=========================================================================================================================================================
+CREATE PAYMENT
+----------------------------
+CURRENCY : USD(AED,AFN,BSD,ALL,AMD,ANG,AOA,ARS,AWG,AZN,BBD etc)
+AMOUNT : $6.55($9.99)
+CARD NUMBER : look at this url (https://stripe.com/docs/testing)
+CVC : 
+Exp.Month : 06
+Exp.year : 2017
+
+
+
+===================================================================================================================================================
+PAY INVOICE
+-----------------------------------------------
+ID : evt_18KqG2Lt2Nri3dQfrbTYWnFF
+
+=======================================================================================================================================================
+RETRIVE COUPONS : 
+-------------------------------
+ID : pradeep100
+
+
+RESPONSE
+-----------------------------------
+{
+  "percentOff": null,
+  "amountOff": 10,
+  "currency": "usd",
+  "duration": "once",
+  "id": "pradeep100",
+  "livemode": false,
+  "durationInMonths": null,
+  "maxRedemptions": null,
+  "redeemBy": null,
+  "timesRedeemed": 0,
+  "valid": true,
+  "metadata": {}
+}
+==============================================================================================================================================================
+CREATE PLAN
+------------------------------------------------------
+ID : pradeep6324
+AMOUNT : 152
+CURRENCY : USD
+INTERVAL : MONTH(day,month,year,weakly,custom,every 3 months,every 6 months)
+PLAN NAME : pradeep_king
+
+response
+--------------------------------------------------------
+{
+  "amount": 152,
+  "currency": "usd",
+  "id": "pradeep6324",
+  "interval": "month",
+  "intervalCount": 1,
+  "name": "pradeep_king",
+  "livemode": false,
+  "trialPeriodDays": null,
+  "metadata": {},
+  "statementDescriptor": null,
+  "statementDescription": null
+}
+================================================================================================================================================================

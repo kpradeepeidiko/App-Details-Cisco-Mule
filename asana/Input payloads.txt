@@ -1,0 +1,49 @@
+{
+	"integrationId" : "asanaiid",
+	"userId":"asanauid"
+}
+
+{
+	"integrationId": "25",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"organizationId": "9433177677643",
+	"responseType": "teams",
+	"asana_user_id": 187152065370189
+}
+
+
+======================================
+{
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vZTMwNDFjNTAtNjgzZC0xMWU2LTgxYmYtYjEzZjcwZDM3N2Ri",
+	"integrationId": "25",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"configJson": {
+		"notifications": "created",
+		"project_id": "187165222232966",
+		"team_id": "187156701640407",
+		"organization_id": "9433177677643",
+		"displayName": "Asana1",
+		"asana_user_id": 187152065370189
+	},
+	"messageToSpark": "Asana added to this Room ",
+	"messageFormat ": "Asana Bot "
+}
+
+After Save
+--------------------
+{
+	"instanceId": 6550,
+	"integrationId": "25",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"updatedDate": "2016-10-19T03:48:52",
+	"messageFormat": "Asana Bot",
+	"createdDate": "2016-10-19T03:48:50",
+	"status": "ACTIVE",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+	"configJson": "{\"project_id\":\"192182889868438\",\"organization_id\":\"9433177677643\",\"team_id\": \"187156701640407\",\"displayName\":\"asana-test\",\"webhook_id\":199131360466486,\"notifications\": [\"created\",\"completed\",\"assigned\",\"subtask\",\"comment\",\"attachment\",\"duedate\",\"incomplete\",\"markfavorite\",\"markduplicate\",\"taskcopied\"],\"asana_user_id\":187152065370189}",
+	"instanceUuid": "87a91910-9613-11e6-add8-069bf42d9ad8"
+}
+=====================
+asana_user_id
+"asana_user_id": flowVars.updateRequest.configJson.asana_user_id

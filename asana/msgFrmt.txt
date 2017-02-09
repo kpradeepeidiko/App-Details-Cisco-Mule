@@ -1,0 +1,861 @@
+task create
+-----------------
+{
+	"events": [{
+		"resource": 187165222232966,
+		"user": 187152065370189,
+		"type": "project",
+		"action": "changed",
+		"created_at": "2016-10-01T11:34:29.916Z",
+		"parent": null
+	}, {
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "added",
+		"created_at": "2016-10-01T11:34:29.835Z",
+		"parent": 187165222232966
+	}, {
+		"resource": 189701453189794,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T11:34:29.910Z",
+		"parent": 189701453189793
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189793,
+    "created_at": "2016-10-01T11:34:29.614Z",
+    "modified_at": "2016-10-01T11:34:29.614Z",
+    "name": "",
+    "notes": "",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 187165222232966,
+        "name": "Cisco Project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "parent": null,
+    "hearted": false,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 187165222232966,
+          "name": "Cisco Project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+
+title update
+------------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:36:52.248Z",
+		"parent": null
+	}, {
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:36:52.363Z",
+		"parent": null
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189793,
+    "created_at": "2016-10-01T11:36:47.323Z",
+    "modified_at": "2016-10-01T11:36:52.362Z",
+    "name": "pradeep task1",
+    "notes": "nvxfkjvnkdfjvn",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 187165222232966,
+        "name": "Cisco Project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "parent": null,
+    "hearted": false,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 187165222232966,
+          "name": "Cisco Project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+=============================================
+sub_task
+---------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:48:10.563Z",
+		"parent": null
+	}, {
+		"resource": 189701453189795,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "added",
+		"created_at": "2016-10-01T11:48:10.510Z",
+		"parent": 189701453189793
+	}, {
+		"resource": 189701453189796,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T11:48:10.558Z",
+		"parent": 189701453189795
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189795,
+    "created_at": "2016-10-01T11:48:22.108Z",
+    "modified_at": "2016-10-01T11:48:35.218Z",
+    "name": "sub_pradeeptask1",
+    "notes": "",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [],
+    "memberships": [],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "hearted": false,
+    "parent": {
+      "id": 189701453189793,
+      "name": "pradeep task1"
+    }
+  }
+}
+
+========================
+updated sub task note
+-----------------------
+{
+	"events": [{
+		"resource": 189701453189795,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:58:50.393Z",
+		"parent": null
+	}, {
+		"resource": 189701453189795,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:58:50.523Z",
+		"parent": null
+	}, {
+		"resource": 189701453189795,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T11:58:50.622Z",
+		"parent": null
+	}]
+}
+
+=========================
+sub task assign
+------------------
+{
+	"events": [{
+		"resource": 189701453189795,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T12:02:42.366Z",
+		"parent": null
+	}, {
+		"resource": 189701453189797,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T12:02:42.374Z",
+		"parent": 189701453189795
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189795,
+    "created_at": "2016-10-01T11:48:22.108Z",
+    "modified_at": "2016-10-01T12:02:42.364Z",
+    "name": "sub_pradeeptask1",
+    "notes": "sub task note",
+    "completed": false,
+    "assignee_status": "inbox",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [],
+    "memberships": [],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "hearts": [],
+    "hearted": false,
+    "assignee": {
+      "id": 189237882168554,
+      "name": "harish guntha"
+    },
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      },
+      {
+        "id": 189237882168554,
+        "name": "harish guntha"
+      }
+    ],
+    "parent": {
+      "id": 189701453189793,
+      "name": "pradeep task1"
+    }
+  }
+}
+
+task stories
+-------------
+{
+      "id": 189701453189797,
+      "created_at": "2016-10-01T12:02:40.390Z",
+      "created_by": {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      },
+      "type": "system",
+      "text": "assigned to harish guntha"
+}
+
+================================================================
+1comment on task
+----------------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T12:10:31.363Z",
+		"parent": null
+	}, {
+		"resource": 189701453189799,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T12:10:31.353Z",
+		"parent": 189701453189793
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189793,
+    "created_at": "2016-10-01T11:36:47.323Z",
+    "modified_at": "2016-10-01T12:11:02.122Z",
+    "name": "pradeep task1",
+    "notes": "nvxfkjvnkdfjvn",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 187165222232966,
+        "name": "Cisco Project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "parent": null,
+    "hearted": false,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 187165222232966,
+          "name": "Cisco Project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+
+{
+      "id": 189701453189799,
+      "created_at": "2016-10-01T12:10:32.102Z",
+      "created_by": {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      },
+      "type": "comment",
+      "text": "hi"
+    }
+====================
+2comment on task
+------------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T12:17:35.352Z",
+		"parent": null
+	}, {
+		"resource": 189701453189801,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T12:17:35.344Z",
+		"parent": 189701453189793
+	}]
+}
+
+{
+  "data": {
+    "id": 189701453189793,
+    "created_at": "2016-10-01T11:36:47.323Z",
+    "modified_at": "2016-10-01T12:18:06.049Z",
+    "name": "pradeep task1",
+    "notes": "nvxfkjvnkdfjvn",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 187165222232966,
+        "name": "Cisco Project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "parent": null,
+    "hearted": false,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 187165222232966,
+          "name": "Cisco Project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+
+stories
+-----------
+
+{
+	"id": 189701453189801,
+	"created_at": "2016-10-01T12:17:34.072Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "comment",
+	"text": "hello"
+}
+
+====================
+3 comment on task
+-------------------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T12:27:27.622Z",
+		"parent": null
+	}, {
+		"resource": 189701453189803,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T12:27:27.615Z",
+		"parent": 189701453189793
+	}]
+}
+
+
+{
+  "data": {
+    "id": 189701453189793,
+    "created_at": "2016-10-01T11:36:47.323Z",
+    "modified_at": "2016-10-01T12:27:27.621Z",
+    "name": "pradeep task1",
+    "notes": "nvxfkjvnkdfjvn",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 187165222232966,
+        "name": "Cisco Project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 0,
+    "parent": null,
+    "hearted": false,
+    "hearts": [],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 187165222232966,
+          "name": "Cisco Project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+
+stories
+---------------
+{
+	"id": 189701453189803,
+	"created_at": "2016-10-01T12:27:24.931Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "comment",
+	"text": "ok"
+}
+=================================================
+attac
+------------
+{
+	"events": [{
+		"resource": 189701453189793,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-01T17:06:49.612Z",
+		"parent": null
+	}, {
+		"resource": 189753649873001,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-01T17:06:49.621Z",
+		"parent": 189701453189793
+	}]
+}
+
+
+stories
+---------
+{
+	"id": 189753649873001,
+	"created_at": "2016-10-01T17:06:49.552Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "system",
+	"text": "attached https://app.asana.com/app/asana/-/download_asset?asset_id=189701453189805"
+}
+======================
+Task Hearted
+--------------------
+{
+	"events": [{
+		"resource": 190785318341699,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T17:32:45.598Z",
+		"parent": null
+	}, {
+		"resource": 190785318341702,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-04T17:32:45.592Z",
+		"parent": 190785318341699
+	}]
+}
+
+
+{
+  "data": {
+    "id": 190785318341699,
+    "created_at": "2016-10-04T17:30:25.159Z",
+    "modified_at": "2016-10-04T17:33:16.720Z",
+    "name": "mytask",
+    "notes": "",
+    "assignee": null,
+    "completed": false,
+    "assignee_status": "upcoming",
+    "completed_at": null,
+    "due_on": null,
+    "due_at": null,
+    "projects": [
+      {
+        "id": 189188881910357,
+        "name": "Eidiko project"
+      }
+    ],
+    "tags": [],
+    "workspace": {
+      "id": 9433177677643,
+      "name": "eidiko.com"
+    },
+    "num_hearts": 1,
+    "parent": null,
+    "hearted": true,
+    "hearts": [
+      {
+        "id": 190785318341701,
+        "user": {
+          "id": 187152065370189,
+          "name": "pradeep kanukuntla"
+        }
+      }
+    ],
+    "followers": [
+      {
+        "id": 187152065370189,
+        "name": "pradeep kanukuntla"
+      }
+    ],
+    "memberships": [
+      {
+        "project": {
+          "id": 189188881910357,
+          "name": "Eidiko project"
+        },
+        "section": null
+      }
+    ]
+  }
+}
+
+stories
+-------------
+{
+	"id": 190785318341702,
+	"created_at": "2016-10-04T17:32:46.503Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "system",
+	"text": "? this task"
+}
+
+=====================
+\n comments
+---------------
+{
+	"events": [{
+		"resource": 190785318341699,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-09-29T21:19:14.917Z",
+		"parent": null
+	}, {
+		"resource": 190785318341708,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-09-29T21:19:14.924Z",
+		"parent": 190785318341699
+	}]
+}
+
+{
+	"id": 190785318341708,
+	"created_at": "2016-10-04T18:29:55.764Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "comment",
+	"text": "hi\nhello\nw"
+}
+
+===================
+task Add
+-----------------
+{
+	"events": [{
+		"resource": 189188881910357,
+		"user": 187152065370189,
+		"type": "project",
+		"action": "changed",
+		"created_at": "2016-10-04T14:50:37.198Z",
+		"parent": null
+	}, {
+		"resource": 190785318341676,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "added",
+		"created_at": "2016-10-04T14:50:37.142Z",
+		"parent": 189188881910357
+	}, {
+		"resource": 190785318341676,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:50:43.231Z",
+		"parent": null
+	}, {
+		"resource": 190785318341676,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:50:43.491Z",
+		"parent": null
+	}, {
+		"resource": 190785318341677,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-04T14:50:37.192Z",
+		"parent": 190785318341676
+	}, {
+		"resource": 190785318341677,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "removed",
+		"created_at": "2016-10-04T14:50:43.109Z",
+		"parent": 190785318341676
+	}]
+}
+========================
+{
+	"events": [{
+		"resource": 190785318341678,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:57:30.858Z",
+		"parent": null
+	}, {
+		"resource": 190785318341678,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:57:37.910Z",
+		"parent": null
+	}, {
+		"resource": 190785318341680,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "added",
+		"created_at": "2016-10-04T14:57:30.781Z",
+		"parent": 190785318341678
+	}, {
+		"resource": 190785318341680,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:57:37.183Z",
+		"parent": null
+	}, {
+		"resource": 190785318341680,
+		"user": 187152065370189,
+		"type": "task",
+		"action": "changed",
+		"created_at": "2016-10-04T14:57:37.401Z",
+		"parent": null
+	}, {
+		"resource": 190785318341681,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "added",
+		"created_at": "2016-10-04T14:57:30.853Z",
+		"parent": 190785318341680
+	}, {
+		"resource": 190785318341681,
+		"user": 187152065370189,
+		"type": "story",
+		"action": "removed",
+		"created_at": "2016-10-04T14:57:37.092Z",
+		"parent": 190785318341680
+	}]
+}
+==========================================
+marked incomplete
+--------------------
+{
+    "events": [
+      {
+        "resource": 191155472532654,
+        "user": 187152065370189,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2016-10-04T23:33:30.511Z",
+        "parent": null
+      },
+      {
+        "resource": 191155472532654,
+        "user": 187152065370189,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2016-10-04T23:33:38.512Z",
+        "parent": null
+      },
+      {
+        "resource": 191155472532654,
+        "user": 187152065370189,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2016-10-04T23:33:40.490Z",
+        "parent": null
+      },
+      {
+        "resource": 191155472532654,
+        "user": 187152065370189,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2016-10-04T23:33:40.677Z",
+        "parent": null
+      },
+      {
+        "resource": 191155472532674,
+        "user": 187152065370189,
+        "type": "story",
+        "action": "added",
+        "created_at": "2016-10-04T23:33:30.518Z",
+        "parent": 191155472532654
+      }
+    ]
+  }
+  
+{
+	"id": 191155472532674,
+	"created_at": "2016-10-04T23:33:30.238Z",
+	"created_by": {
+		"id": 187152065370189,
+		"name": "pradeep kanukuntla"
+	},
+	"type": "system",
+	"text": "marked incomplete"
+}
+
+=======================================================================

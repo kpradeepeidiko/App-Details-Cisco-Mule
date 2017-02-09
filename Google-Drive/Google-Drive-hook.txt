@@ -1,0 +1,287 @@
+{
+	"hookResponse": {
+		"value": "reply",
+		"googleDriveMessage": "msg"
+	},
+	"userEvents": "{\"room_name\":\"Harish\",\"user_name\":\"pradeep kanukuntla\",\"notifications\":[\"file_added\",\"folder_added\",\"comment_create\",\"comment_resolve\",\"comment_reopen\"],\"webhook_url\":\"http://183.82.99.100:8099/hooks/spark/pagerduty/b0a5bf5b-cdc0-40cb-84d6-2df220c7a70a\"}"
+}
+
+
+
+
+#[flowVars.request.hookResponse.value=='add' && flowVars.dbEvent=='file_added' || flowVars.dbEvent=='folder_added']
+=================================================================================
+expl-paylaod
+---------------------
+request={hookResponse={googleDriveMessage=\n **pradeep kanukuntla** reopened the comment on **[from_hipchat](https://docs.google.com/document/d/1ZY4LSe3bjnfLzrHmOJTA4kxaLnJjXxiXdgco-wAW01I)** \n        commented "ok" by pradeep kanukuntla, value=reopen}, userEvents={"room_name":"CISCO Spark Integration","file_id":"all","resources":"All Folders & Files ","user_name":"Chennakesavulu","owner_name":"pradeep kanukuntla","authenticated_to":"pk455375@gmail.com","displayName":"pradeepGD","notifications":["file_added","folder_added","comment_create","comment_resolve","comment_reopen"]},
+
+
+"\n **pradeep kanukuntla** reopened the comment on **[from_hipchat](https://docs.google.com/document/d/1ZY4LSe3bjnfLzrHmOJI)** \n        comment"
+
+
+"\n**pradeep kanukuntla** reopened the comment on **[from_hipchat](https://docs.google.com/document/d/1ZY4LSe3bjnfLzrHmOJTA4kxaLnJjXxiXdgco-wAW01I)** \n        commented "ok" by pradeep kanukuntla"
+==========================================================================
+
+
+=======================================================
+content with '\n'
+---------------------
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAzX8L9Y",
+      "createdTime": "2016-08-26T09:21:32.418Z",
+      "modifiedTime": "2016-08-26T09:21:32.418Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "pradeep kanukuntla",
+        "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+        "me": true
+      },
+      "htmlContent": "hi<br>how<br>r u<br>fine",
+      "content": "hi\nhow\nr u\nfine",
+      "deleted": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Dfsdfnbsdfjbfnndf"
+      },
+      "anchor": "kix.mimc0mdrxvo7",
+      "replies": []
+    }
+  ]
+}
+==========================
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAzZVHTQ",
+      "createdTime": "2016-08-26T03:14:02.679Z",
+      "modifiedTime": "2016-08-26T05:45:56.653Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "pradeep kanukuntla",
+        "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+        "me": true
+      },
+      "htmlContent": "hi hello<br>dfjhdf<br>jfnbjdfb",
+      "content": "hi hello\ndfjhdf\njfnbjdfb",
+      "deleted": false,
+      "resolved": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Hbdfhkhsdf"
+      },
+      "anchor": "kix.olwdep438lww",
+      "replies": [
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAzZMAI8",
+          "createdTime": "2016-08-26T04:27:53.019Z",
+          "modifiedTime": "2016-08-26T04:27:53.019Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+            "me": true
+          },
+          "htmlContent": "ok",
+          "content": "ok",
+          "deleted": false
+        },
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAzYAmZ4",
+          "createdTime": "2016-08-26T04:51:36.149Z",
+          "modifiedTime": "2016-08-26T05:45:20.460Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+            "me": true
+          },
+          "htmlContent": "who r u<br>jfnjdfn<br>dfjndfjkb<br>sdjfnbjsdfb<br>sdjkfnbjk",
+          "content": "who r u\njfnjdfn\ndfjndfjkb\nsdjfnbjsdfb\nsdjkfnbjk",
+          "deleted": false
+        }
+      ]
+    }
+  ]
+}
+
+===========================
+
+
+
+
+
+user events = [file_added, folder_added, comment_create, comment_resolve, comment_reopen]
+https://183.82.99.100:8443/CiscoWebcontent/spark.htmlhttps://183.82.99.100:8443/CiscoWebcontent/spark.html
+=====================================================================================
+all folders and files
+------------------------------
+"file_id":"all","resources":"All Folders & Files"
+
+
+all root folders
+----------------------
+"file_id":"rootfolders","resources":"All Root Folders"
+
+all root files
+--------------------
+"file_id":"rootfiles","resources":"All Root Files"
+
+
+"resources":"All Root Folders"
+
+folders
+-----------------
+"file_id":"0B67R--HNWuQaclRuMW52MHpMTGM","resources":"Drive Webhook Test"
+
+
+======================================
+filter
+------------
+val
+----------
+comment
+resol
+reply
+reopen
+add
+shared
+trashed
+
+
+flowVars.commentResponse.comments==[]
+flowVars.largeChanges.fileId
+flowVars.largeChanges.file.parents[0].id
+flowVars.largeChanges.file.parents[0].isRoot
+flowVars.largeChanges.file.title
+flowVars.largeChanges.file.labels.trashed=='true'
+flowVars.largeChanges.file.shared=='true'
+flowVars.largeChanges.file.lastModifyingUserName
+flowVars.largeChanges.file.owners[0].displayName
+<variable-transformer doc:name="Variable"/>
+
+
+
+#[flowVars.request.hookResponse.value=='trashed' && flowVars.dbEvent=='trash']
+{
+	"googleDriveMessage": "flowVars.postMessage",
+	"value": "flowVars.value",
+	"pid": "flowVars.parentId",
+	"checkRoot": "flowVars.checkRoot",
+	"fileName":""
+}
+
+
+<foreach collection="#[flowVars.events.notifications]" doc:name="all">
+            <set-variable variableName="dbEvent" value="#[payload]" doc:name="event"/>
+            <choice doc:name="Choice">
+                <when expression="#[flowVars.request.hookResponse.value=='add' &amp;&amp; flowVars.dbEvent=='file_added']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="File added Message"/>
+                </when>
+                <when expression="#[flowVars.request.hookResponse.value=='comment' &amp;&amp; flowVars.dbEvent=='comment_create']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="comment_create"/>
+                </when>
+                <when expression="#[flowVars.request.hookResponse.value=='reply' &amp;&amp; flowVars.dbEvent=='comment_reply']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="comment_reply"/>
+                </when>
+                <when expression="#[flowVars.request.hookResponse.value=='resol' &amp;&amp; flowVars.dbEvent=='comment_resolve']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="comment_resolve"/>
+                </when>
+                <when expression="#[flowVars.request.hookResponse.value=='reopen' &amp;&amp; flowVars.dbEvent=='comment_reopen']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="comment_reopen"/>
+                </when>
+                <when expression="#[flowVars.request.hookResponse.value=='add' &amp;&amp; flowVars.dbEvent=='folder_added']">
+                    <set-variable variableName="postMessage" value="#[flowVars.request.hookResponse.googleDriveMessage]" doc:name="folder added Message"/>
+                </when>
+                <otherwise>
+                    <logger level="INFO" doc:name="Logger"/>
+                </otherwise>
+            </choice>
+        </foreach>
+
+
+{
+  "hookResponse": {
+    "value": "reply",
+    "checkRoot": "false",
+    "fileName": "pradeep Docx",
+    "googleDriveMessage": "**pradeep kanukuntla** replied to the comment on [pradeep Docx](https://docs.google.com/document/d/1SZ2RBBErbavdRMtSvBYoepQQtLOWLFYUgW7PX4SQmfA)** \n        pradeep kanukuntla commented  \"hi ia am pradeep\"  \n        pradeep kanukuntla replied  \"iwil check\"",
+    "pid": "0B67R--HNWuQaclRuMW52MHpMTGM"
+  },
+  "userEvents": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"rootfiles\",\"resources\":\"All Root Files\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"folder_added\",\"comment_create\",\"comment_reply\",\"comment_resolve\",\"comment_reopen\"]}",
+  "instanceDetails": {
+    "instanceId": 4723,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
+    "updatedDate": "2016-08-26T02:17:31",
+    "messageFormat": "Google Drive Bot :Hello...User",
+    "createdDate": "2016-08-22T05:52:33",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMzUxZTg3MjAtMzg0OS0xMWU2LWFlYTEtZDcxYTIzNWEzNTll",
+    "configJson": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"rootfiles\",\"resources\":\"All Root Files\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"folder_added\",\"comment_create\",\"comment_reply\",\"comment_resolve\",\"comment_reopen\"]}",
+    "instanceUuid": "9eebc4c0-682c-11e6-9375-0e0ffbd54461"
+  }
+}
+
+
+
+
+{
+  "hookResponse": {
+    "value": "reply",
+    "checkRoot": "false",
+    "fileName": "pradeep Docx",
+    "googleDriveMessage": "**pradeep kanukuntla** replied to the comment on [pradeep Docx](https://docs.google.com/document/d/1SZ2RBBErbavdRMtSvBYoepQQtLOWLFYUgW7PX4SQmfA)** \n        pradeep kanukuntla commented  \"hi ia am pradeep\"  \n        pradeep kanukuntla replied  \"iwil check\"",
+    "pid": "0B67R--HNWuQaclRuMW52MHpMTGM"
+  },
+  "userEvents": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"0B67R--HNWuQaclRuMW52MHpMTGM\",\"resources\":\"All Root Files\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"folder_added\",\"comment_create\",\"comment_reply\",\"comment_resolve\",\"comment_reopen\"]}",
+  "instanceDetails": {
+    "instanceId": 4723,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
+    "updatedDate": "2016-08-26T02:17:31",
+    "messageFormat": "Google Drive Bot :Hello...User",
+    "createdDate": "2016-08-22T05:52:33",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMzUxZTg3MjAtMzg0OS0xMWU2LWFlYTEtZDcxYTIzNWEzNTll",
+    "configJson": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"rootfiles\",\"resources\":\"All Root Files\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"folder_added\",\"comment_create\",\"comment_reply\",\"comment_resolve\",\"comment_reopen\"]}",
+    "instanceUuid": "9eebc4c0-682c-11e6-9375-0e0ffbd54461"
+  }
+}
+
+flowVars.largeChanges.file.parents[0].id
+flowVars.largeChanges.file.parents[0].isRoot
+
+
+
+{
+  "hookResponse": {
+    "pid": "0AK7R--HNWuQaUk9PVA",
+    "fileName": "pradeep prep",
+    "googleDriveMessage": "**pradeep kanukuntla** resolved comment on **[pradeep prep](https://docs.google.com/presentation/d/19CnfYXYc1Jqm4BVMNUK4C9Op0H8SQ1jBk8DZ4zaa9Rw/edit#slide=id.p)** \n        commented \"hi\" by pradeep kanukuntla",
+    "checkRoot": "true",
+    "value": "resol"
+  },
+  "userEvents": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"0B67R--HNWuQaclRuMW52MHpMTGM\",\"resources\":\"Drive Webhook Test\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"comment_create\",\"comment_resolve\",\"comment_reopen\"]}",
+  "instanceDetails": {
+    "instanceId": 4723,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzY4MzI2OGQzLTI2YjAtNDQ1OC1iMzViLWFmODcwYjU2MTYyNg",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
+    "updatedDate": "2016-08-26T07:40:33",
+    "messageFormat": "Google Drive Bot :Hello...User",
+    "createdDate": "2016-08-22T05:52:33",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMzUxZTg3MjAtMzg0OS0xMWU2LWFlYTEtZDcxYTIzNWEzNTll",
+    "configJson": "{\"room_name\":\"CISCO Spark Integration\",\"file_id\":\"0B67R--HNWuQaclRuMW52MHpMTGM\",\"resources\":\"Drive Webhook Test\",\"user_name\":\"Chennakesavulu\",\"owner_name\":\"pradeep kanukuntla\",\"authenticated_to\":\"pk455375@gmail.com\",\"displayName\":\"pradeepGD\",\"notifications\":[\"file_added\",\"comment_create\",\"comment_resolve\",\"comment_reopen\"]}",
+    "instanceUuid": "9eebc4c0-682c-11e6-9375-0e0ffbd54461"
+  }
+}
+
+

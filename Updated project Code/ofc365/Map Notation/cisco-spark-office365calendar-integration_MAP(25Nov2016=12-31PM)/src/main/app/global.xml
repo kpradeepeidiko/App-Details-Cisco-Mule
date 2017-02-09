@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+    
+    <context:property-placeholder location="office365Calendar.integration.${mule.env}.properties"/>
+    
+    <http:listener-config name="api-httpListenerConfig" host="${http.host}" port="${https.port}" doc:name="HTTP Listener Configuration" protocol="HTTPS" tlsContext-ref="tls.context"/>
+    
+    <tls:context name="tls.context" doc:name="TLS Context">
+        <tls:key-store type="jks" 
+        	path="${key.store.path}" 
+        	keyPassword="${key.store.key.password}" 
+        	password="${key.store.password}"
+        	alias="${key.store.alias}"/>
+    </tls:context>
+    
+    <http:request-config name="HTTP_Integrations_Runtime_Request_Configuration" protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}" basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Integrations_Management_Request_Configuration" protocol="HTTPS" host="${integrations.management.host}" port="${integrations.management.port}" basePath="${integrations.management.path}" doc:name="HTTP Request Configuration"/>
+  
+</mule>

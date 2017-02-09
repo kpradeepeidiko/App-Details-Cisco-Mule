@@ -1,0 +1,12 @@
+ 
+SVN URL : https://192.168.1.72/svn/cisco-spark-project/
+ 
+I created users for the below listed people as I didn’t found them in the SVN Server users list. Password is sarasu10 for all the listed users.
+ 
+harihara.a
+sudeep
+vikas
+harish.g
+pradeep.k
+ravivarma.g
+ravindra.j

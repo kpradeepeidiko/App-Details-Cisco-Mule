@@ -1,0 +1,104 @@
+{
+  "kind": "drive#changeList",
+  "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/Hsizq99jPBhBMODWpk498wawdFY\"",
+  "selfLink": "https://www.googleapis.com/drive/v2/changes?pageToken=6088",
+  "largestChangeId": "6092",
+  "items": [
+    {
+      "kind": "drive#change",
+      "id": "6092",
+      "fileId": "188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6092",
+      "deleted": false,
+      "modificationDate": "2016-12-30T05:44:37.433Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s",
+        "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/MTQ4MzA3NjY3NzQwNQ\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s",
+        "alternateLink": "https://docs.google.com/document/d/188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s/edit?usp=drivesdk",
+        "embedLink": "https://docs.google.com/document/d/188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s/preview",
+        "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_document_list.png",
+        "thumbnailLink": "https://docs.google.com/feeds/vt?gd=true&id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&v=2&s=AMedNnoAAAAAWGYQio_1G4NenXE77cL1Yh6yBsu8M-44&sz=s220",
+        "title": "SampleDoc123",
+        "mimeType": "application/vnd.google-apps.document",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2016-12-30T05:44:25.945Z",
+        "modifiedDate": "2016-12-30T05:44:37.405Z",
+        "modifiedByMeDate": "2016-12-30T05:44:37.405Z",
+        "lastViewedByMeDate": "2016-12-30T05:44:37.405Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6091",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0B67R--HNWuQacTNROFJuWlpBaGc",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s/parents/0B67R--HNWuQacTNROFJuWlpBaGc",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQacTNROFJuWlpBaGc",
+            "isRoot": false
+          }
+        ],
+        "exportLinks": {
+          "application/rtf": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=rtf",
+          "application/vnd.oasis.opendocument.text": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=odt",
+          "text/html": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=html",
+          "application/pdf": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=pdf",
+          "application/epub+zip": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=epub",
+          "application/zip": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=zip",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=docx",
+          "text/plain": "https://docs.google.com/feeds/download/documents/export/Export?id=188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s&exportFormat=txt"
+        },
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/ckquo4KOYMsNIyXMCC62K0RDC1g\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/188MR8m0kxp3WfdYAI8Quw6XmMcBlVdIr6Upu3T_LW4s/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": true,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "spaces": [
+          "drive"
+        ]
+      }
+    }
+  ]
+}

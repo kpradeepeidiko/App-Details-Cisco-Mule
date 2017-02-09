@@ -1,0 +1,9 @@
+<flow name="asanaFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/hhh" doc:name="HTTP"/>
+        <logger message="content-type=#[message.inboundProperties.'content-type']++ paylaod = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="x-hook" value="#[message.inboundProperties.'x-hook-secret']" doc:name="Set x-hook"/>
+        <logger message="x-hook-secret=#[flowVars.'x-hook']" level="INFO" doc:name="Logger"/>
+        <set-property propertyName="x-hook-secret" value="#[flowVars.'x-hook']" doc:name="set Header"/>
+        <set-property propertyName="http.status" value="#[200]" doc:name="Set Status"/>
+        <logger message="outbound headers = #[message.outboundProperties]" level="INFO" doc:name="Logger"/>
+    </flow>

@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "deleteRequestJson"
+        }
+    },
+    "outputMessageMetadata": {},
+    "id": "f8674598-30e1-4f7e-9e3d-ee2e727b6372",
+    "version": "5.2.0.0"
+}

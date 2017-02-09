@@ -1,0 +1,124 @@
+To Check pageToken value
+-----------------------------------
+https://www.googleapis.com/drive/v2/changes
+
+
+get by pageToken
+--------------------
+GET https://www.googleapis.com/drive/v2/changes?pageToken=5535
+
+
+comments
+-------------
+https://www.googleapis.com/drive/v3/files/1HempTQ6kYz0i-Od897uUL5XiCMeL15e7vMUNTfiX6Io/comments?fields=comments,kind,nextPageToken
+
+
+===============================
+file create
+------------
+"modificationDate": "2016-11-29T07:13:37.377Z",
+
+"createdDate": "2016-11-29T07:13:23.391Z",
+"modifiedDate": "2016-11-29T07:13:37.343Z",
+
+
+
+
+
+
+======================
+comment
+------------
+"modificationDate": "2016-11-29T09:21:47.803Z",
+"createdDate": "2016-11-29T07:13:23.391Z",
+"modifiedDate": "2016-11-29T09:21:47.774Z",
+
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAA4PdPvY",
+      "createdTime": "2016-11-29T09:21:47.756Z",
+      "modifiedTime": "2016-11-29T09:21:47.756Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "pradeep kanukuntla",
+        "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+        "me": true
+      },
+      "htmlContent": "hi",
+      "content": "hi",
+      "deleted": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "cnh"
+      },
+      "anchor": "kix.cf6vcoz78xi6",
+      "replies": []
+    }
+  ]
+}
+
+
+reply
+--------------
+"modificationDate": "2016-11-29T09:23:37.223Z",
+"createdDate": "2016-11-29T07:13:23.391Z",
+"modifiedDate": "2016-11-29T09:23:37.189Z",
+
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAA4PdPvY",
+      "createdTime": "2016-11-29T09:21:47.756Z",
+      "modifiedTime": "2016-11-29T09:23:37.175Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "pradeep kanukuntla",
+        "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+        "me": true
+      },
+      "htmlContent": "hi",
+      "content": "hi",
+      "deleted": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "cnh"
+      },
+      "anchor": "kix.cf6vcoz78xi6",
+      "replies": [
+        {
+          "kind": "drive#reply",
+          "id": "AAAAA4PdPvg",
+          "createdTime": "2016-11-29T09:23:37.175Z",
+          "modifiedTime": "2016-11-29T09:23:37.175Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "photoLink": "//lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s96-k-no/photo.jpg",
+            "me": true
+          },
+          "htmlContent": "ok",
+          "content": "ok",
+          "deleted": false
+        }
+      ]
+    }
+  ]
+}
+==============================
+comment & reply at same time
+-------------------
+"modificationDate": "2016-11-29T14:21:59.706Z",
+"createdDate": "2016-11-29T07:13:23.391Z",
+"modifiedDate": "2016-11-29T14:21:59.426Z",
+
+comment  "createdTime": "2016-11-29T14:21:59.419Z",
+         "modifiedTime": "2016-11-29T14:22:09.296Z",
+		 
+reply   "createdTime": "2016-11-29T14:22:09.296Z",
+        "modifiedTime": "2016-11-29T14:22:09.296Z",
+

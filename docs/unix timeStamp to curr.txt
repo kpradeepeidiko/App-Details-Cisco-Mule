@@ -1,0 +1,52 @@
+import java.util.*;
+import java.util.TimeZone;
+import java.util.Date;
+import java.text.*;
+public class HelloWorld
+{
+
+     public static void main(String []args)
+	 {
+        long unixSeconds =1475034340000L;
+        Date date = new Date(unixSeconds); 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS"); 
+        sdf.setTimeZone(TimeZone.getTimeZone("utc")); 
+        String formattedDate = sdf.format(date);
+        System.out.println(formattedDate);
+     }
+}
+
+output
+--------------
+2016-09-28T03:45:40.000
+
+
+=========================
+in mule(in exp)
+---------
+java.util.Date  d=new java.util.Date(Long.parseLong(flowVars.generateWebhookResponse.expiration));
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+sdf.setTimeZone(java.util.TimeZone.getTimeZone("utc")); 
+flowVars.expire = sdf.format(d);
+
+========================================================================
+convert timeStamp to UTC
+------------------------------
+package com.convertToUtc.sample;
+import java.util.*;
+import java.text.*;
+
+public class ConvertToUTC
+{
+	public static void main(String[] args) throws Exception
+	{
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		String dateInString = "2016-10-17T21:30:00+5:30";
+		Date date = formatter.parse(dateInString);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC")); 
+		String formattedDate = sdf.format(date);
+		System.out.println(formattedDate);
+	}
+}
+

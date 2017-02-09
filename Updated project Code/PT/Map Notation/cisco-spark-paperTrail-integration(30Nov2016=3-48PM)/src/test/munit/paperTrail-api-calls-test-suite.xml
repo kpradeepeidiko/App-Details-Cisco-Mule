@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <munit:config doc:name="Munit configuration" mock-connectors="false" mock-inbounds="false"/>
+    <spring:beans>
+        <spring:import resource="classpath:paperTrail-api-calls.xml"/>
+        <spring:import resource="classpath:global.xml"/>
+        <spring:import resource="classpath:paperTrail-integration.xml"/>
+    </spring:beans>
+    <munit:test name="paperTrail-api-calls-test-suite-postPaperTrailTokenFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"client_id":"hkfjrrf5456",
+	"client_secret":"hjmfcjfkffio",
+	"code":"ghtecvbgfdswet2364"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="postPaperTrailTokenFlow" doc:name="Flow-ref to postPaperTrailTokenFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="paperTrail-api-calls-test-suite-generateWebhookUrlFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <flow-ref name="generateWebhookUrlFlow" doc:name="Flow-ref to generateWebhookUrlFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="paperTrail-api-calls-test-suite-updatePaperTrailIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+  "integrationId":"hfdvjhdfvdfuvhdfjkvdf",
+  "userId":"fjvjfvvjkvsdosdvjnsdjkvnnsdj",
+  "channelId": "fsdfsdfsffghnnfgn",
+  "configJson": {
+    "room": "aaabbc",
+    "username": "aaabbc",
+    "webhook_url": "https://cisco-spark-integration-management-dev.cloudhub.io/api/hooks/hta5bf5b-cdc0-40cb-84d6-2df220c7a70a",
+    "password": "aaxcbbb"
+  },
+  "status":"ACTIVE",
+  "createdDate":"2016-08-03T00:00:00",
+  "updatedDate":"2016-08-03T00:00:00",
+  "instanceUuid": "c691ccac-5484-44b7-bec2-f553d66c3114"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="updatePaperTrailIntegrationFlow" doc:name="updatePaperTrailIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+</mule>

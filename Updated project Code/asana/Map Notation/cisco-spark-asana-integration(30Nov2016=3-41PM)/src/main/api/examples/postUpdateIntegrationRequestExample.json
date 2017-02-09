@@ -1,0 +1,19 @@
+{
+	"instance_id":"1992",
+	"channelId": "Y2lzY2ZmRmMy0zZjRjLWJiM2MtZjZmY2U5Yzc5ODcy",
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2Q5ZDUxMjgzLWUzMzktNDM1Mi05MzIyLTdkNzZjOTkyY2U4Mw",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"messageFormat": "asana Bot :Hello...User",
+	"configJson": {
+		"project_id":"453684454412",
+		"displayName": "asana DisplayName",
+		"organization_id":"4563256695",
+		"team_id":"5523698",
+		"notifications":["eventCreation","eventChange","eventCancellation","eventResponse"]
+	},
+	"repo_modified":true,
+	"repo_id_old" :"45234875356",
+	"instanceUuid":"jhbfgjhk455375"
+	
+}

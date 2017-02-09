@@ -1,0 +1,203 @@
+unm : pradeep.kanukuntla@eidiko.com
+pwd : Ravi$123
+
+instance 
+-------------------
+unm : admin
+pwd : sarasu10
+
+
+
+
+serviceNow REST POST
+-----------------------------------------------------------------------------------
+GET URL :  https://dev22128.service-now.com/api/now/table/incident?sysparam_query=sys_created_by=employee  
+
+
+
+POST URL : https://dev22128.service-now.com/api/now/v1/table/incident
+==============================================================
+RAW Headers 
+--------------------------------------------------
+Accept: application/json
+authorization: Basic YWRtaW46c2FyYXN1MTA=
+
+
+Raw Payload
+-------------------------------------------------
+{
+	'short_description':'Created Through REST POST',
+    'category':'software'
+}
+
+RESPONSE : 201 created
+----------------------------------
+{
+"result": {
+"upon_approval": "proceed"
+"location": ""
+"expected_start": ""
+"reopen_count": "0"
+"close_notes": ""
+"impact": "3"
+"urgency": "3"
+"correlation_id": ""
+"sys_tags": ""
+"sys_domain": {
+"link": "https://dev22128.service-now.com/api/now/v1/table/sys_user_group/global"
+"value": "global"
+}-
+"description": ""
+"group_list": ""
+"priority": "5"
+"delivery_plan": ""
+"sys_mod_count": "0"
+"work_notes_list": ""
+"follow_up": ""
+"closed_at": ""
+"sla_due": ""
+"delivery_task": ""
+"sys_updated_on": "2016-06-20 11:23:49"
+"parent": ""
+"work_end": ""
+"number": "INC0010046"
+"closed_by": ""
+"work_start": ""
+"calendar_stc": ""
+"business_duration": ""
+"category": "software"
+"incident_state": "1"
+"activity_due": ""
+"correlation_display": ""
+"company": ""
+"active": "true"
+"due_date": ""
+"assignment_group": ""
+"caller_id": ""
+"knowledge": "false"
+"made_sla": "true"
+"comments_and_work_notes": ""
+"parent_incident": ""
+"state": "1"
+"user_input": ""
+"sys_created_on": "2016-06-20 11:23:49"
+"approval_set": ""
+"reassignment_count": "0"
+"rfc": ""
+"child_incidents": "0"
+"opened_at": "2016-06-20 11:23:49"
+"short_description": "Created Through REST POST"
+"order": ""
+"sys_updated_by": "admin"
+"resolved_by": ""
+"notify": "1"
+"upon_reject": "cancel"
+"approval_history": ""
+"problem_id": ""
+"work_notes": ""
+"calendar_duration": ""
+"close_code": ""
+"sys_id": "2f6ba632db0022002288bc50cf9619c2"
+"approval": "not requested"
+"caused_by": ""
+"severity": "3"
+"sys_created_by": "admin"
+"resolved_at": ""
+"assigned_to": ""
+"business_stc": ""
+"sys_domain_path": "/"
+"cmdb_ci": ""
+"opened_by": {
+"link": "https://dev22128.service-now.com/api/now/v1/table/sys_user/6816f79cc0a8016401c5a33be04be441"
+"value": "6816f79cc0a8016401c5a33be04be441"
+}-
+"subcategory": ""
+"sys_class_name": "incident"
+"watch_list": ""
+"time_worked": ""
+"contact_type": "phone"
+"escalation": "0"
+"comments": ""
+}-
+}
+
+==================================================================================================================================
+
+PUT url : https://dev22128.service-now.com/api/now/v1/table/incident/2f6ba632db0022002288bc50cf9619c2
+
+
+RAW Headers
+-----------------------------------
+Accept: application/json
+authorization: Basic YWRtaW46c2FyYXN1MTA=
+
+
+RAW Payload
+---------------------------------------------
+{
+	'description':'created using and API POST'
+}
+
+
+
+=============================================================================================================================================================
+DELETE url : https://dev22128.service-now.com/api/now/v1/table/incident/4533c248db3312002288bc50cf961999
+
+RAW Headers 
+----------------------------------------------
+Accept: application/json
+authorization: Basic YWRtaW46c2FyYXN1MTA=
+
+RESPONSE ==> 204: No Content
+
+
+
+===================================================================================================================
+serviceNow : processors
+------------------------------------------
+https://dev22128.service-now.com/pradeep.do?pradeep=pradeep1
+ 
+====================================================================================================================
+Authenticating  application in serviceNow
+---------------------------------------------------------------------------
+Name 			: third-party_integration        
+client_id 		: 5d33dbba1400220078bd25210b1a70bb
+client_secret 	: sarasu10
+
+
+
+
+BASIC AUTHENTICATION
+-----------------------------------------------------------------
+GET URL : https://dev22128.service-now.com/api/now/table/incident?sysparam_limit=1
+
+HEADERS --> Accept application/json
+
+Authorization-->Basic Auth --> unm = admin and password = sarasu10 
+
+than "Authorization : Basic YWRtaW46c2FyYXN1MTA=  "   wil be generated
+
+
+
+
+
+OAuth
+-------------------------------------------------------------------------------------------------
+POST URL	:	https://dev22128.service-now.com/oauth_token.do
+
+IN (body--> under x-www-form-urlencoded)
+grant_type		: 	password
+client_id		:
+client_secret 	:
+username		:	admin
+password		:	sarasu10
+
+RESPONSE
+-------------------------------------------------
+{
+  "scope": "useraccount",
+  "token_type": "Bearer",
+  "expires_in": 1799,
+  "refresh_token": "Z-K4GafSNMsJzWCjKVgDkYqvbSTydvLK_e0v_hS-asOJf2awlZPB4ioLaJJymbvlERQMYyfTKazTUDE58TPAVQ",
+  "access_token": "MKb3cjl0Lg5uFOlVv_RU0ckEsnXvKgSJfXTSUkywT0Nv968mHCn5g6RoTtDr-mSg-26fzd8hViANOYN2_-lPDw"
+}

@@ -1,0 +1,77 @@
+GCalender for dev
+---------------------
+UserMail:       ciscoeidikodev@outlook.com
+password:       CiscoEidiko@10
+AppName:        Cisco Spark Calender Dev
+ClientId:       115073480405-qopk4jee450f35sjirovbo69c1130ka8.apps.googleusercontent.com
+ClientSecret:   HsXgrmcB9Lpj87JaRZkYJsfk
+Redirecturl:    https://cisco-spark-integration-management-new-dev.cloudhub.io/
+
+
+
+googleb693b518348bed77
+
+
+=======================================
+<flow name="api-paperTrail-GCalenderVerificationCode">
+    <http:listener config-ref="api-paperTrail-httpListenerConfig" path="googleb693b518348bed77.html" doc:name="HTTP"/>
+    <http:static-resource-handler resourceBase="${app.home}/classes/googleb693b518348bed77.html" doc:name="HTTP Static Resource Handler"/>
+</flow>
+
+<flow name="head:/googleCalendarWebhooks/{instanceUuid}:api-paperTrail-config">
+    <logger message="head Request google Calender = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+</flow>
+
+
+==============================
+{formatMessage=[{markDown=New Event [have dinner](https://www.google.com/calendar/event?eid=MWJodWlvYmNkaWE1bG5nNDVrM25tNGcyZ2sgbDI4ZnZ0YnI5dmQ5Y2U4M3ZqbjgzZGQyNW9AZw) created in [MyMeetingsCalendar](https://calendar.google.com/calendar/render#main_7) 
+ - Oct 20 from 09:30 PM  to 10:30 PM, text=null, html=null}]}
+ 
+{
+	"gcMessage": "fjbvndfuvbjnfdjkbf",
+	"value":"eventUpdate"
+},
+ 
+ 
+{
+	"formatMessage":[{
+		"markDown":flowVars.postMessage,
+		"text":null,
+		"html":null
+		}]
+}
+
+{
+	"formatMessage":[{
+		"markDown":"New Event [have dinner](https://www.google.com/calendar/event?eid=MWJodWlvYmNkaWE1bG5nNDVrM25tNGcyZ2sgbDI4ZnZ0YnI5dmQ5Y2U4M3ZqbjgzZGQyNW9AZw) created in [MyMeetingsCalendar](https://calendar.google.com/calendar/render#main_7) \n - Oct 20 from 09:30 PM  to 10:30 PM",
+		"text":null,
+		"html":null
+		}]
+}
+ 
+ <foreach collection="#[flowVars.formattedMessage.formatMessage]" doc:name="Loop Formatted Message">
+                            <logger message="#['Looping message markDown: ' + payload.markDown]==&gt; #[payload] HTML_value=#[payload.html]" level="INFO" doc:name="Logger"/>
+                            <choice doc:name="Choice">
+                                <when expression="#[(payload.html == empty)]">
+                                    <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkToken]" doc:name="CiscoSpark">
+                                        <CiscoSpark:messages-post-request roomId="#[flowVars.roomId]" text="#[payload.text]" markdown="#[payload.markDown]" html="#[payload.html]"/>
+                                    </CiscoSpark:post-messages>
+                                    <logger message="NON_TWITTER" level="INFO" doc:name="Logger"/>
+                                </when>
+                                <otherwise>
+                                    <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkToken]" doc:name="CiscoSparkMedia">
+                                        <CiscoSpark:messages-post-request roomId="#[flowVars.roomId]" text="#[payload.text]" markdown="#[payload.markDown]" files="#[payload.html]"/>
+                                    </CiscoSpark:post-messages>
+                                    <logger message="TWITTER_TWITTER" level="INFO" doc:name="Logger"/>
+                                </otherwise>
+                            </choice>
+
+                            <logger message="#['Spark response: ' + message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+	        </foreach>
+			
+			
+httpListenerConfig.worker.14     INFO
+Spark Token: NTk2M2JmOTctNGMwOS00ZWIyLThkOWQtMTQxMjMxYjk0MjQwMzA1NDgxZDctNzc3 
+room: Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh 
+ANDTIRAPA
+[{markDown=null, text=null, html=null}]

@@ -1,0 +1,869 @@
+pagerDuty
+============================================================
+pagerduty API KEY   :  YNR83AqzAtufQgaqzkY8
+
+=====================================================
+For pagetduty use these credentials
+--------------------------------------
+domain url : https://eidikosystemsintgrators.pagerduty.com/sign_in
+username : pradeep.kanukuntla@eidiko.com
+pwd : pagerduty@10
+
+
+
+======================================================================================================================================
+GET ALL INCIDENTS
+----------------------------------------
+HTTP_method : GET
+
+url : https://api.pagerduty.com/incidents
+
+Headers
+------------------------------------------------------------
+Content-type : application/json
+Authorization  :  Token token=YNR83AqzAtufQgaqzkY8
+Accept  :  application/vnd.pagerduty+json
+
+RESPONSE
+-------------------------------------------------
+{
+  "incidents": [
+    {
+      "incident_number": 1,
+      "created_at": "2016-06-20T13:32:43Z",
+      "status": "resolved",
+      "pending_actions": [],
+      "incident_key": "618ebd85499e405284d4829babc3935e",
+      "service": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "assignments": [],
+      "acknowledgements": [],
+      "last_status_change_at": "2016-06-20T17:32:43Z",
+      "last_status_change_by": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "first_trigger_log_entry": {
+        "id": "Q3IUKYBGAR1II3",
+        "type": "trigger_log_entry_reference",
+        "summary": "Triggered through the website",
+        "self": "https://api.pagerduty.com/log_entries/Q3IUKYBGAR1II3",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/P0SEZ7P/log_entries/Q3IUKYBGAR1II3"
+      },
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "teams": [],
+      "urgency": "high",
+      "id": "P0SEZ7P",
+      "type": "incident",
+      "summary": "[#1] integration",
+      "self": "https://api.pagerduty.com/incidents/P0SEZ7P",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/P0SEZ7P"
+    },
+    {
+      "incident_number": 2,
+      "created_at": "2016-06-21T11:30:10Z",
+      "status": "resolved",
+      "pending_actions": [],
+      "incident_key": "1dcd4b6b8d2e41368e4264b75be5fc0c",
+      "service": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "assignments": [],
+      "acknowledgements": [],
+      "last_status_change_at": "2016-06-21T15:30:10Z",
+      "last_status_change_by": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "first_trigger_log_entry": {
+        "id": "Q0DBUASFBW599R",
+        "type": "trigger_log_entry_reference",
+        "summary": "Triggered through the website",
+        "self": "https://api.pagerduty.com/log_entries/Q0DBUASFBW599R",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/PBLBVVU/log_entries/Q0DBUASFBW599R"
+      },
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "teams": [],
+      "urgency": "high",
+      "id": "PBLBVVU",
+      "type": "incident",
+      "summary": "[#2] integration",
+      "self": "https://api.pagerduty.com/incidents/PBLBVVU",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/PBLBVVU"
+    },
+    {
+      "incident_number": 3,
+      "created_at": "2016-06-21T14:51:42Z",
+      "status": "resolved",
+      "pending_actions": [],
+      "incident_key": "2c8059eeb7cf45c097f9f96837efc049",
+      "service": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "assignments": [],
+      "acknowledgements": [],
+      "last_status_change_at": "2016-06-21T18:51:42Z",
+      "last_status_change_by": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "first_trigger_log_entry": {
+        "id": "Q3RO1BXVRDWEAC",
+        "type": "trigger_log_entry_reference",
+        "summary": "Triggered through the website",
+        "self": "https://api.pagerduty.com/log_entries/Q3RO1BXVRDWEAC",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/PP40IK5/log_entries/Q3RO1BXVRDWEAC"
+      },
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "teams": [],
+      "urgency": "high",
+      "id": "PP40IK5",
+      "type": "incident",
+      "summary": "[#3] test webhook",
+      "self": "https://api.pagerduty.com/incidents/PP40IK5",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/PP40IK5"
+    },
+    {
+      "incident_number": 4,
+      "created_at": "2016-06-22T03:52:46Z",
+      "status": "resolved",
+      "pending_actions": [],
+      "incident_key": "01c5f5cc88784dd2836c29e6006813be",
+      "service": {
+        "id": "PRMTONU",
+        "type": "service_reference",
+        "summary": "SparkIntegration",
+        "self": "https://api.pagerduty.com/services/PRMTONU",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+      },
+      "assignments": [],
+      "acknowledgements": [],
+      "last_status_change_at": "2016-06-22T04:09:18Z",
+      "last_status_change_by": {
+        "id": "P9Z1EVW",
+        "type": "user_reference",
+        "summary": "ravivarma",
+        "self": "https://api.pagerduty.com/users/P9Z1EVW",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/users/P9Z1EVW"
+      },
+      "first_trigger_log_entry": {
+        "id": "Q1XE0JI5LOF4LA",
+        "type": "trigger_log_entry_reference",
+        "summary": "Triggered through the website",
+        "self": "https://api.pagerduty.com/log_entries/Q1XE0JI5LOF4LA",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/P6BBV4D/log_entries/Q1XE0JI5LOF4LA"
+      },
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "teams": [],
+      "urgency": "high",
+      "id": "P6BBV4D",
+      "type": "incident",
+      "summary": "[#4] spark_pagerduty",
+      "self": "https://api.pagerduty.com/incidents/P6BBV4D",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/incidents/P6BBV4D"
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "total": null,
+  "more": false
+}
+===================================================================================================================================================
+GET ALL SERVICES
+----------------------------------
+HTTP_method : GET
+
+url : https://api.pagerduty.com/services
+
+Headers
+----------------------------------------
+Content-type : application/json
+Authorization : Token token=YNR83AqzAtufQgaqzkY8
+Accept  : application/vnd.pagerduty+json
+
+
+RESPONSE
+--------------------------------------------------------
+{
+  "services": [
+    {
+      "id": "P661EPX",
+      "name": "API Service",
+      "description": "This service was created during onboarding on June 20, 2016.",
+      "auto_resolve_timeout": 14400,
+      "acknowledgement_timeout": 1800,
+      "created_at": "2016-06-20T16:28:33+05:30",
+      "status": "active",
+      "last_incident_timestamp": null,
+      "teams": [],
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "scheduled_actions": [],
+      "support_hours": null,
+      "integrations": [
+        {
+          "id": "PLIYRZI",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "API",
+          "self": "https://api.pagerduty.com/services/P661EPX/integrations/PLIYRZI",
+          "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/P661EPX/integrations/PLIYRZI"
+        }
+      ],
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "addons": [],
+      "type": "service",
+      "summary": "API Service",
+      "self": "https://api.pagerduty.com/services/P661EPX",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/P661EPX"
+    },
+    {
+      "id": "PRMTONU",
+      "name": "SparkIntegration",
+      "description": null,
+      "auto_resolve_timeout": 14400,
+      "acknowledgement_timeout": 1800,
+      "created_at": "2016-06-20T16:35:12+05:30",
+      "status": "active",
+      "last_incident_timestamp": "2016-06-22T09:22:46+05:30",
+      "teams": [],
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "scheduled_actions": [],
+      "support_hours": null,
+      "integrations": [
+        {
+          "id": "P86SKY8",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "pagerduty API",
+          "self": "https://api.pagerduty.com/services/PRMTONU/integrations/P86SKY8",
+          "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU/integrations/P86SKY8"
+        }
+      ],
+      "escalation_policy": {
+        "id": "PYDO5Y4",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PYDO5Y4",
+        "html_url": "https://eidiko-systems-integrators.pagerduty.com/escalation_policies/PYDO5Y4"
+      },
+      "addons": [],
+      "type": "service",
+      "summary": "SparkIntegration",
+      "self": "https://api.pagerduty.com/services/PRMTONU",
+      "html_url": "https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU"
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "total": null,
+  "more": false
+}
+======================================================================================================================================================
+
+
+
+
+
+configuring webhooks in 
+------------------------------------
+https://support.pagerduty.com/hc/en-us/articles/202830320-Webhooks-
+
+example for webhooks in pagerduty
+-------------------------------------
+https://support.pagerduty.com/hc/en-us/articles/202829320-Using-webhooks-to-email-notifications-when-incidents-trigger-acknowledge-resolve
+ 	
+
+RequestBin :  http://requestb.in/pvtoflpv
+
+RESPONSE: (new incident)
+---------------------------------------------
+{  
+   "messages":[  
+      {  
+         "type":"incident.trigger",
+         "data":{  
+            "incident":{  
+               "id":"PP40IK5",
+               "incident_number":3,
+               "created_on":"2016-06-21T14:51:42Z",
+               "status":"triggered",
+               "pending_actions":[  
+                  {  
+                     "type":"escalate",
+                     "at":"2016-06-21T20:51:42+05:30"
+                  },
+                  {  
+                     "type":"resolve",
+                     "at":"2016-06-22T00:21:42+05:30"
+                  }
+               ],
+               "html_url":"https://eidiko-systems-integrators.pagerduty.com/incidents/PP40IK5",
+               "incident_key":"2c8059eeb7cf45c097f9f96837efc049",
+               "service":{  
+                  "id":"PRMTONU",
+                  "name":"SparkIntegration",
+                  "html_url":"https://eidiko-systems-integrators.pagerduty.com/services/PRMTONU",
+                  "deleted_at":null,
+                  "description":""
+               },
+               "escalation_policy":{  
+                  "id":"PYDO5Y4",
+                  "name":"Default",
+                  "deleted_at":null
+               },
+               "assigned_to_user":{  
+                  "id":"P9Z1EVW",
+                  "name":"ravivarma",
+                  "email":"ravivarma2.eidiko@gmail.com",
+                  "html_url":"https://eidiko-systems-integrators.pagerduty.com/users/P9Z1EVW"
+               },
+               "trigger_summary_data":{  
+                  "subject":"test webhook"
+               },
+               "trigger_details_html_url":"https://eidiko-systems-integrators.pagerduty.com/incidents/PP40IK5/log_entries/Q3RO1BXVRDWEAC",
+               "trigger_type":"web_trigger",
+               "last_status_change_on":"2016-06-21T14:51:43Z",
+               "last_status_change_by":null,
+               "number_of_escalations":0,
+               "assigned_to":[  
+                  {  
+                     "at":"2016-06-21T14:51:42Z",
+                     "object":{  
+                        "id":"P9Z1EVW",
+                        "name":"ravivarma",
+                        "email":"ravivarma2.eidiko@gmail.com",
+                        "html_url":"https://eidiko-systems-integrators.pagerduty.com/users/P9Z1EVW",
+                        "type":"user"
+                     }
+                  }
+               ],
+               "urgency":"high"
+            }
+         },
+         "id":"ab95eef0-37bf-11e6-a547-22000ad5aec9",
+         "created_on":"2016-06-21T14:51:42Z"
+      }
+   ]
+} 
+=================================================================================
+slack to pagerduty
+-------------------------------------------------------
+integration type : 	a8bec6943d814cc2a19d7a470e9c56b6
+integration url : 	Configure your service to send webhooks to this endpoint:
+					https://events.pagerduty.com/integration/a8bec6943d814cc2a19d7a470e9c56b6/enqueue
+					
+=====================================
+new
+--------
+{
+	"messages": [{
+		"type": "incident.trigger",
+		"data": {
+			"incident": {
+				"id": "PHHLHWT",
+				"incident_number": 6,
+				"created_on": "2016-12-23T05:46:56Z",
+				"status": "triggered",
+				"pending_actions": [{
+					"type": "resolve",
+					"at": "2016-12-23T15:16:56+05:30"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT",
+				"incident_key": "48b828f440af47ecb668af161b2cd851",
+				"service": {
+					"id": "P0XI76J",
+					"name": "mule",
+					"html_url": "https://ctsoffice.pagerduty.com/services/P0XI76J",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PPY8FMX",
+					"name": "Default",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"trigger_summary_data": {
+					"subject": "NAseer"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT/log_entries/RO0S2FSMA6HGUKHNMD86HR8BD4",
+				"trigger_type": "web_trigger",
+				"last_status_change_on": "2016-12-23T05:46:56Z",
+				"last_status_change_by": null,
+				"number_of_escalations": null,
+				"assigned_to": [{
+					"at": "2016-12-23T05:46:56Z",
+					"object": {
+						"id": "PTE0R6O",
+						"name": "Naseer",
+						"email": "naseer.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "3740b120-c8d3-11e6-aeb9-22000a15839c",
+		"created_on": "2016-12-23T05:46:56Z"
+	}]
+}
+------------------
+{
+	"messages": [{
+		"type": "incident.escalate",
+		"data": {
+			"incident": {
+				"id": "PTHCRTG",
+				"incident_number": 3,
+				"created_on": "2016-12-21T06:00:49Z",
+				"status": "triggered",
+				"pending_actions": [{
+					"type": "resolve",
+					"at": "2016-12-21T10:00:49Z"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/PTHCRTG",
+				"incident_key": "ff7ba92d76a442519f165552c4e1cd34",
+				"service": {
+					"id": "P0XI76J",
+					"name": "mule",
+					"html_url": "https://ctsoffice.pagerduty.com/services/P0XI76J",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PPY8FMX",
+					"name": "Default",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"trigger_summary_data": {
+					"subject": "testIncident"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/PTHCRTG/log_entries/R3G781DHQ9H29USBGBT8QWDIMP",
+				"trigger_type": "web_trigger",
+				"last_status_change_on": "2016-12-21T06:04:38Z",
+				"last_status_change_by": null,
+				"number_of_escalations": 1,
+				"assigned_to": [{
+					"at": "2016-12-21T06:00:49Z",
+					"object": {
+						"id": "PTE0R6O",
+						"name": "Naseer",
+						"email": "naseer.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "5bde2440-c743-11e6-a834-22000a1798ef",
+		"created_on": "2016-12-21T06:04:38Z"
+	}]
+}
+============
+{
+	"messages": [{
+		"type": "incident.acknowledge",
+		"data": {
+			"incident": {
+				"id": "PTHCRTG",
+				"incident_number": 3,
+				"created_on": "2016-12-21T06:00:49Z",
+				"status": "acknowledged",
+				"pending_actions": [{
+					"type": "unacknowledge",
+					"at": "2016-12-21T06:34:57Z"
+				}, {
+					"type": "resolve",
+					"at": "2016-12-21T10:00:49Z"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/PTHCRTG",
+				"incident_key": "ff7ba92d76a442519f165552c4e1cd34",
+				"service": {
+					"id": "P0XI76J",
+					"name": "mule",
+					"html_url": "https://ctsoffice.pagerduty.com/services/P0XI76J",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PPY8FMX",
+					"name": "Default",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"trigger_summary_data": {
+					"subject": "null"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/PTHCRTG/log_entries/R3G781DHQ9H29USBGBT8QWDIMP",
+				"trigger_type": "web_trigger",
+				"last_status_change_on": "2016-12-21T06:04:57Z",
+				"last_status_change_by": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"number_of_escalations": 1,
+				"assigned_to": [{
+					"at": "2016-12-21T06:00:49Z",
+					"object": {
+						"id": "PTE0R6O",
+						"name": "Naseer",
+						"email": "naseer.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O",
+						"type": "user"
+					}
+				}],
+				"acknowledgers": [{
+					"at": "2016-12-21T06:04:57Z",
+					"object": {
+						"id": "PTE0R6O",
+						"name": "Naseer",
+						"email": "naseer.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "6704c180-c743-11e6-a834-22000a1798ef",
+		"created_on": "2016-12-21T06:04:57Z"
+	}]
+}
+==========
+{
+	"messages": [{
+		"type": "incident.assign",
+		"data": {
+			"incident": {
+				"id": "PHHLHWT",
+				"incident_number": 6,
+				"created_on": "2016-12-23T05:46:56Z",
+				"status": "triggered",
+				"pending_actions": [{
+					"type": "resolve",
+					"at": "2016-12-23T09:46:56Z"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT",
+				"incident_key": "48b828f440af47ecb668af161b2cd851",
+				"service": {
+					"id": "P0XI76J",
+					"name": "mule",
+					"html_url": "https://ctsoffice.pagerduty.com/services/P0XI76J",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PPY8FMX",
+					"name": "Default",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PC8AH9P",
+					"name": "pradeep_k",
+					"email": "kpradeep.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P"
+				},
+				"trigger_summary_data": {
+					"subject": "testIncident"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT/log_entries/RO0S2FSMA6HGUKHNMD86HR8BD4",
+				"trigger_type": "web_trigger",
+				"last_status_change_on": "2016-12-23T05:50:04Z",
+				"last_status_change_by": null,
+				"number_of_escalations": null,
+				"assigned_to": [{
+					"at": "2016-12-23T05:50:04Z",
+					"object": {
+						"id": "PC8AH9P",
+						"name": "pradeep_k",
+						"email": "kpradeep.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "a7328760-c8d3-11e6-9d87-22000a1798ef",
+		"created_on": "2016-12-23T05:50:04Z"
+	}]
+}
+==============================
+{
+	"messages": [{
+		"type": "incident.resolve",
+		"data": {
+			"incident": {
+				"id": "PHHLHWT",
+				"incident_number": 6,
+				"created_on": "2016-12-23T05:46:56Z",
+				"status": "resolved",
+				"pending_actions": [],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT",
+				"incident_key": "48b828f440af47ecb668af161b2cd851",
+				"service": {
+					"id": "P0XI76J",
+					"name": "mule",
+					"html_url": "https://ctsoffice.pagerduty.com/services/P0XI76J",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PPY8FMX",
+					"name": "Default",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PC8AH9P",
+					"name": "pradeep_k",
+					"email": "kpradeep.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P"
+				},
+				"trigger_summary_data": {
+					"subject": "NAseer"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/PHHLHWT/log_entries/RO0S2FSMA6HGUKHNMD86HR8BD4",
+				"trigger_type": "web_trigger",
+				"last_status_change_on": "2016-12-23T05:51:27Z",
+				"last_status_change_by": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"number_of_escalations": null,
+				"resolved_by_user": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"assigned_to": [{
+					"at": "2016-12-23T05:50:04Z",
+					"object": {
+						"id": "PC8AH9P",
+						"name": "pradeep_k",
+						"email": "kpradeep.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P",
+						"type": "user"
+					}
+				}],
+				"urgency": "high",
+				"resolve_reason": null
+			}
+		},
+		"id": "d9688860-c8d3-11e6-bf25-000d3a31cb72",
+		"created_on": "2016-12-23T05:51:27Z"
+	}]
+}
+========================================
+new account
+-------------
+API_Key : CBzrLLfwhBpQc9kjJbnM
+
+
+
+{
+  "services": [
+    {
+      "id": "PC1MYEW",
+      "name": "API Service",
+      "description": "This service was created during onboarding on February 6, 2017.",
+      "auto_resolve_timeout": 14400,
+      "acknowledgement_timeout": 1800,
+      "created_at": "2017-02-06T15:08:06+05:30",
+      "status": "active",
+      "last_incident_timestamp": null,
+      "teams": [],
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "scheduled_actions": [],
+      "support_hours": null,
+      "escalation_policy": {
+        "id": "PFWIMKG",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PFWIMKG",
+        "html_url": "https://eidikosystemsintgrators.pagerduty.com/escalation_policies/PFWIMKG"
+      },
+      "addons": [],
+      "privilege": null,
+      "alert_creation": "create_alerts_and_incidents",
+      "integrations": [
+        {
+          "id": "PUEHUXH",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "API",
+          "self": "https://api.pagerduty.com/services/PC1MYEW/integrations/PUEHUXH",
+          "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PC1MYEW/integrations/PUEHUXH"
+        }
+      ],
+      "type": "service",
+      "summary": "API Service",
+      "self": "https://api.pagerduty.com/services/PC1MYEW",
+      "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PC1MYEW"
+    },
+    {
+      "id": "PIMPXPE",
+      "name": "new_with_API",
+      "description": null,
+      "auto_resolve_timeout": 1800,
+      "acknowledgement_timeout": 1200,
+      "created_at": "2017-02-06T15:24:46+05:30",
+      "status": "critical",
+      "last_incident_timestamp": "2017-02-06T15:25:50+05:30",
+      "teams": [],
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "scheduled_actions": [],
+      "support_hours": null,
+      "escalation_policy": {
+        "id": "PFWIMKG",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PFWIMKG",
+        "html_url": "https://eidikosystemsintgrators.pagerduty.com/escalation_policies/PFWIMKG"
+      },
+      "addons": [],
+      "privilege": null,
+      "alert_creation": "create_alerts_and_incidents",
+      "integrations": [
+        {
+          "id": "PBC7T62",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "Datadog",
+          "self": "https://api.pagerduty.com/services/PIMPXPE/integrations/PBC7T62",
+          "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PIMPXPE/integrations/PBC7T62"
+        }
+      ],
+      "type": "service",
+      "summary": "new_with_API",
+      "self": "https://api.pagerduty.com/services/PIMPXPE",
+      "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PIMPXPE"
+    },
+    {
+      "id": "PVBVN15",
+      "name": "Test_New_API_Service",
+      "description": "for API testing",
+      "auto_resolve_timeout": 1800,
+      "acknowledgement_timeout": 1200,
+      "created_at": "2017-02-06T15:14:10+05:30",
+      "status": "critical",
+      "last_incident_timestamp": "2017-02-06T15:18:10+05:30",
+      "teams": [],
+      "incident_urgency_rule": {
+        "type": "constant",
+        "urgency": "high"
+      },
+      "scheduled_actions": [],
+      "support_hours": null,
+      "escalation_policy": {
+        "id": "PFWIMKG",
+        "type": "escalation_policy_reference",
+        "summary": "Default",
+        "self": "https://api.pagerduty.com/escalation_policies/PFWIMKG",
+        "html_url": "https://eidikosystemsintgrators.pagerduty.com/escalation_policies/PFWIMKG"
+      },
+      "addons": [],
+      "privilege": null,
+      "alert_creation": "create_alerts_and_incidents",
+      "integrations": [
+        {
+          "id": "PORQ5HT",
+          "type": "generic_events_api_inbound_integration_reference",
+          "summary": "API",
+          "self": "https://api.pagerduty.com/services/PVBVN15/integrations/PORQ5HT",
+          "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PVBVN15/integrations/PORQ5HT"
+        }
+      ],
+      "type": "service",
+      "summary": "Test_New_API_Service",
+      "self": "https://api.pagerduty.com/services/PVBVN15",
+      "html_url": "https://eidikosystemsintgrators.pagerduty.com/services/PVBVN15"
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "total": null,
+  "more": false
+}

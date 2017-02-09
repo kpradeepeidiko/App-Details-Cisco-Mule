@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd">
+
+    
+    <http:listener-config name="api-httpListenerConfig" host="${http.host}" port="${https.port}" doc:name="HTTP Listener Configuration" protocol="HTTPS" tlsContext-ref="tls.context"/>
+    
+    <tls:context name="tls.context" doc:name="TLS Context">
+        <tls:key-store type="jks" 
+        	path="${key.store.path}" 
+        	keyPassword="${key.store.key.password}" 
+        	password="${key.store.password}"
+        	alias="${key.store.alias}"/>
+    </tls:context>
+  
+  	<db:mysql-config name="MySQL_Configuration"
+url="jdbc:mysql://${db.integrations.host}:${db.integrations.port}/${db.integrations.database}?password=${db.integrations.password}&amp;user=${db.integrations.user}&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;useSSL=true&amp;requireSSL=true&amp;trustCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/cacerts&amp;trustCertificateKeyStorePassword=changeit&amp;clientCertificateKeyStoreUrl=file://${mule.home}/apps/${app.name}/us_east_cert_keystore.jks&amp;clientCertificateKeyStorePassword=changeit"
+doc:name="MySQL Configuration" />
+
+    <secure-property-placeholder:config name="Secure_Property_Placeholder" encryptionAlgorithm="Blowfish" key="EidikoCisco" location="integrations.runtime.${mule.env}.properties" doc:name="Secure Property Placeholder"/>
+
+    
+
+</mule>

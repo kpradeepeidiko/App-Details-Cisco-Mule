@@ -1,0 +1,17 @@
+https://account.box.com/api/oauth2/authorize?response_type=code&client_id=gl0jwl7gmhca2tuo431i69khgc4prxek&redirect_uri=http://localhost:8088/afterAuthorize&state=security_token 
+
+
+
+#[{'client_id':flowVars.client_id,'client_secret':flowVars.client_secret,'grant_type':flowVars.grant_type,'code':flowVars.code}]
+
+https://login.mailchimp.com/oauth2/token?client_id=356715380679&client_secret=62e761662ea9b6063ccf6eef3d1475f0&redirect_uri=http://192.168.1.35/oauth/&grant_type=authorization_code&code=3373688756c067f5944490b82b8d34e8
+
+
+
+
+		<set-variable variableName="client_id" value="356715380679" doc:name="client_id"/>
+        <set-variable variableName="client_secret" value="62e761662ea9b6063ccf6eef3d1475f0" doc:name="client_secret"/>
+        <set-variable variableName="redirect_uri" value="http://192.168.1.35/oauth/" doc:name="redirect_uri"/>
+        <set-variable variableName="grant_type" value="authorization_code" doc:name="grant_type"/>
+        <set-variable variableName="code" value="28e5d7655ac459cd2302f1bb44e83b0b" doc:name="code"/>
+        <set-payload value="#[{'client_id':flowVars.client_id,'client_secret':flowVars.client_secret,'redirect_uri':flowVars.redirect_uri,'grant_type':flowVars.grant_type,'code':flowVars.code}]" doc:name="Set Payload"/>

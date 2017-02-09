@@ -1,0 +1,393 @@
+folder
+---------
+{
+  "kind": "drive#changeList",
+  "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/LEh9ByBkFXfq0eOzFAJq1VQpsyE\"",
+  "selfLink": "https://www.googleapis.com/drive/v2/changes?pageToken=6620",
+  "largestChangeId": "6622",
+  "items": [
+    {
+      "kind": "drive#change",
+      "id": "6622",
+      "fileId": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6622",
+      "deleted": false,
+      "modificationDate": "2017-01-27T09:48:00.860Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/MTQ3NDI2NDgzMDg1MQ\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "alternateLink": "https://drive.google.com/drive/folders/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "embedLink": "https://drive.google.com/embeddedfolderview?id=0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_collection_list_1.png",
+        "title": "pradeep Test2",
+        "mimeType": "application/vnd.google-apps.folder",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2016-08-29T09:33:00.252Z",
+        "modifiedDate": "2016-09-19T06:00:30.851Z",
+        "modifiedByMeDate": "2016-09-19T06:00:30.851Z",
+        "lastViewedByMeDate": "2017-01-27T09:48:00.800Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6621",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0AK7R--HNWuQaUk9PVA",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc/parents/0AK7R--HNWuQaUk9PVA",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0AK7R--HNWuQaUk9PVA",
+            "isRoot": true
+          }
+        ],
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/xh92dmoDfubixQSqkbM1Wp3Ysmk\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": false,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "spaces": [
+          "drive"
+        ]
+      }
+    }
+  ]
+}
+=========================
+doc file
+---------
+{
+  "kind": "drive#changeList",
+  "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/IITkb3TmVFeSeMCp5RpQiw59mcw\"",
+  "selfLink": "https://www.googleapis.com/drive/v2/changes?pageToken=6623",
+  "largestChangeId": "6628",
+  "items": [
+    {
+      "kind": "drive#change",
+      "id": "6627",
+      "fileId": "1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6627",
+      "deleted": false,
+      "modificationDate": "2017-01-27T09:49:12.652Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw",
+        "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/MTQ4NTUxMDU1MjYwOA\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw",
+        "alternateLink": "https://docs.google.com/document/d/1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw/edit?usp=drivesdk",
+        "embedLink": "https://docs.google.com/document/d/1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw/preview",
+        "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_document_list.png",
+        "thumbnailLink": "https://docs.google.com/feeds/vt?gd=true&id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&v=2&s=AMedNnoAAAAAWIsz05qA6CfQxWL_g7dvC8lGIG_6a1Kp&sz=s220",
+        "title": "Doc123",
+        "mimeType": "application/vnd.google-apps.document",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2017-01-27T09:48:43.301Z",
+        "modifiedDate": "2017-01-27T09:49:12.608Z",
+        "modifiedByMeDate": "2017-01-27T09:49:12.608Z",
+        "lastViewedByMeDate": "2017-01-27T09:49:12.608Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6626",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw/parents/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "isRoot": false
+          }
+        ],
+        "exportLinks": {
+          "application/rtf": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=rtf",
+          "application/vnd.oasis.opendocument.text": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=odt",
+          "text/html": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=html",
+          "application/pdf": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=pdf",
+          "application/epub+zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=epub",
+          "application/zip": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=zip",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=docx",
+          "text/plain": "https://docs.google.com/feeds/download/documents/export/Export?id=1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw&exportFormat=txt"
+        },
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/1Y7tQl5OlHyxOERVM7pm4-_CHkU\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/1bPe5PTvo7b9bJVyRdrYaow6lzKJI1pWqr_H6X6s09bw/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": true,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "spaces": [
+          "drive"
+        ]
+      }
+    },
+    {
+      "kind": "drive#change",
+      "id": "6628",
+      "fileId": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6628",
+      "deleted": false,
+      "modificationDate": "2017-01-27T09:49:13.231Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/MTQ3NDI2NDgzMDg1MQ\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "alternateLink": "https://drive.google.com/drive/folders/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "embedLink": "https://drive.google.com/embeddedfolderview?id=0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+        "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_collection_list_1.png",
+        "title": "pradeep Test2",
+        "mimeType": "application/vnd.google-apps.folder",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2016-08-29T09:33:00.252Z",
+        "modifiedDate": "2016-09-19T06:00:30.851Z",
+        "modifiedByMeDate": "2016-09-19T06:00:30.851Z",
+        "lastViewedByMeDate": "2017-01-27T09:49:13.141Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6627",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0AK7R--HNWuQaUk9PVA",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc/parents/0AK7R--HNWuQaUk9PVA",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0AK7R--HNWuQaUk9PVA",
+            "isRoot": true
+          }
+        ],
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/xh92dmoDfubixQSqkbM1Wp3Ysmk\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": false,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "spaces": [
+          "drive"
+        ]
+      }
+    }
+  ]
+}
+=======================
+spread sheet
+------------
+{
+  "kind": "drive#changeList",
+  "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/A5n-wNF03pISU9Doe9od0rvL-kA\"",
+  "selfLink": "https://www.googleapis.com/drive/v2/changes?pageToken=6634",
+  "largestChangeId": "6639",
+  "items": [
+    {
+      "kind": "drive#change",
+      "id": "6639",
+      "fileId": "1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6639",
+      "deleted": false,
+      "modificationDate": "2017-01-27T10:00:58.122Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758",
+        "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/MTQ4NTUxMTEwOTMzMw\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758",
+        "alternateLink": "https://docs.google.com/spreadsheets/d/1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758/edit?usp=drivesdk",
+        "embedLink": "https://docs.google.com/spreadsheets/d/1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758/htmlembed",
+        "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_spreadsheet_list.png",
+        "thumbnailLink": "https://docs.google.com/feeds/vt?gd=true&id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&v=1&s=AMedNnoAAAAAWIs2i2RkzjN62T2DbUwrWmKIHzdCumEX&sz=s220",
+        "title": "TestSheet",
+        "mimeType": "application/vnd.google-apps.spreadsheet",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2017-01-27T09:57:45.254Z",
+        "modifiedDate": "2017-01-27T09:58:29.333Z",
+        "modifiedByMeDate": "2017-01-27T09:58:29.333Z",
+        "lastViewedByMeDate": "2017-01-27T10:00:58.061Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6638",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758/parents/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaWTYyYVN0ZzZNNHc",
+            "isRoot": false
+          }
+        ],
+        "exportLinks": {
+          "application/x-vnd.oasis.opendocument.spreadsheet": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=ods",
+          "text/tab-separated-values": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=tsv",
+          "application/pdf": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=pdf",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=xlsx",
+          "text/csv": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=csv",
+          "application/zip": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=zip",
+          "application/vnd.oasis.opendocument.spreadsheet": "https://docs.google.com/spreadsheets/export?id=1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758&exportFormat=ods"
+        },
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"LbWe7Ybz7gmJtEmo4LFBfsRw3MM/VsgFa05HC7nKyQB6-1vlcfOOCfk\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/1sNRh537ismP5OnuIDq8t-5Uv6qMoXeca6DWYlI96758/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": true,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "spaces": [
+          "drive"
+        ]
+      }
+    }
+  ]
+}

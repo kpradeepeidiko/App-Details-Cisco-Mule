@@ -1,0 +1,32 @@
+{
+  "usersDetails": {
+    "data": {
+      "id": 187152065370189,
+      "name": "pradeep kanukuntla",
+      "email": "pradeep.kanukuntla@eidiko.com",
+      "photo": null,
+      "workspaces": [
+        {
+          "id": 9433177677643,
+          "name": "eidiko.com"
+        },
+        {
+          "id": 498346170860,
+          "name": "Personal Projects"
+        }
+      ]
+    }
+  },
+  "organizations": {
+    "data": [
+      {
+        "id": 9433177677643,
+        "name": "eidiko.com"
+      },
+      {
+        "id": 498346170860,
+        "name": "Personal Projects"
+      }
+    ]
+  }
+}

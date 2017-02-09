@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd 
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:googleCalendar-integration.xml"/>
+        <spring:import resource="classpath:core-services-invocations.xml"/>
+        <spring:import resource="classpath:googleCalendar-api-calls.xml"/>
+        <spring:import resource="classpath:global.xml"/>
+        <spring:import resource="classpath:integration-token-operations.xml"/>
+    </spring:beans>
+    <munit:test name="Over-All-test-suite-coreServicesAlertsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${googleCalender.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${googleCalender.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-coreServicesLoggingFlowTest" description="Test">
+    	<mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${googleCalender.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${googleCalender.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesLoggingFlow" doc:name="Flow-ref to coreServicesLoggingFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-coreServicesTrackingFlowTest" description="Test">
+    	<mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="client_id" value="${googleCalender.integration.client.id}" doc:name="Set Client Id"/>
+        <set-variable variableName="client_secret" value="${googleCalender.integration.client.secret}" doc:name="Set Client Secret"/>
+        <flow-ref name="coreServicesTrackingFlow" doc:name="Flow-ref to coreServicesTrackingFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-postgoogleCalenderTokenFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+    "integrationId": 21,
+    "authSettings": {
+        "code": "4/QRRhKp-MUZ0YnoV4wwtEuA-iWHUOw_VTCw2xSfkdEA4"
+    }
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <dw:transform-message doc:name="To Java">
+            <dw:set-variable variableName="tokenRequest"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+        </dw:transform-message>
+        <flow-ref name="postgoogleCalenderTokenFlow" doc:name="Flow-ref to postgoogleCalenderTokenFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-postgoogleCalenderRefreshTokenFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="refreshToken" value="#['1/tOxBPAJ_-68dwOzjA8cCLEmfxkoFFIk-o2H9-EvNbNw']" doc:name="Set Refresh Token"/>
+        <flow-ref name="postgoogleCalenderRefreshTokenFlow" doc:name="Flow-ref to postgoogleCalenderRefreshTokenFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-statusDisableForAnInstanceTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="instanceId" value="1992" doc:name="Set instance Id"/>
+        <flow-ref name="statusDisableForAnInstance" doc:name="Flow-ref to statusDisableForAnInstance"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-getgoogleCalendersListFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="token" value="#['ya29.CjB7A8E5NubulnEF1Y6kZDCuyjdOGNGRRPrMtwlVvZnR9XF-F2odYz7jOUgYU7KRviA']" doc:name="Set Google Calendar Token"/>
+        <flow-ref name="getgoogleCalendersListFlow" doc:name="Flow-ref to getgoogleCalendersListFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-getTokenByChoiceConditionTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <set-variable variableName="integrationId" value="21" doc:name="Set Integration Id"/>
+        <set-variable variableName="userId" value="Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI" doc:name="Set User Id"/>
+        <flow-ref name="getTokenByChoiceCondition" doc:name="Flow-ref to getTokenByChoiceCondition"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-postAuthDetailsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Input Request">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+    "integrationId": 21,
+    "authSettings": {
+        "code": "4/QRRhKp-MUZ0YnoV4wwtEuA-iWHUOw_VTCw2xSfkdEA4"
+    }
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="postAuthDetailsFlow" doc:name="Flow-ref to postAuthDetailsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-postFormatMessageFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+  "hookResponse": {
+	"gcMessage": "fjbvndfuvbjnfdjkbf",
+	"value":"eventUpdate"
+  },
+  "userEvents": "{\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"GC-Test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"],\"time_base\":\"1 hour before\"}",
+  "instanceDetails": {
+    "instanceId": 1992,
+    "integrationId": "21",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+    "updatedDate": "2016-09-27T02:18:13",
+    "messageFormat": "Google Calendar Bot: Hello",
+    "createdDate": "2016-09-27T02:18:12",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMTg4YTY3NDktZWQzOS0zYTQ5LWIyZmUtZjIxNGY0ZTZjYmFl",
+    "configJson": "{\"calendar_id\":\"1c1nsrpaoek2tam03dc77f5ht8@group.calendar.google.com\",\"displayName\":\"test\",\"notifications\":\"task-modified\",\"webhook_id\":2286256}",
+    "instanceUuid": "392b6750-84bd-11e6-b241-0e4b6da19b11"
+  }
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="postFormatMessageFlow" doc:name="Flow-ref to postFormatMessageFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-postIntegrationSettingsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integrationId" : "21",
+	"userId":"Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="postIntegrationSettingsFlow" doc:name="Flow-ref to postIntegrationSettingsFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-setupIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"instanceId": 5753,
+	"integrationId": "21",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"updatedDate": "2016-10-13T06:40:00",
+	"messageFormat": null,
+	"createdDate": "2016-09-30T03:13:15",
+	"status": "ACTIVE",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+	"configJson": "{\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"GC-Test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"], \"time_base\":\"1 hour before\",\"day_base\":\"The day of\",\"day_time_base\":\"2:00am\",\"timezone\":\"5.5\"}",
+	"instanceUuid": "690446d0-8720-11e6-b241-0e4b6da19b11"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="setupIntegrationFlow" doc:name="Flow-ref to setupIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-tearDownIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"instanceId": 5753,
+	"integrationId": "21",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"updatedDate": "2016-10-13T06:40:00",
+	"messageFormat": null,
+	"createdDate": "2016-09-30T03:13:15",
+	"status": "ACTIVE",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+	"configJson": "{\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"GC-Test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"], \"time_base\":\"1 hour before\",\"day_base\":\"The day of\",\"day_time_base\":\"2:00am\",\"timezone\":\"5.5\"}",
+	"instanceUuid": "690446d0-8720-11e6-b241-0e4b6da19b11"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="tearDownIntegrationFlow" doc:name="Flow-ref to tearDownIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-updateIntegrationFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"instanceId": 5753,
+	"integrationId": "21",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"updatedDate": "2016-10-13T06:40:00",
+	"messageFormat": null,
+	"createdDate": "2016-09-30T03:13:15",
+	"status": "ACTIVE",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
+	"configJson": "{\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"GC-Test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"], \"time_base\":\"1 hour before\",\"day_base\":\"The day of\",\"day_time_base\":\"2:00am\",\"timezone\":\"5.5\"}",
+	"instanceUuid": "690446d0-8720-11e6-b241-0e4b6da19b11"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="updateIntegrationFlow" doc:name="Flow-ref to updateIntegrationFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    <munit:test name="Over-All-test-suite-healthCheckFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTPP']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integrationId":21,
+	"userId":"Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q"
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <flow-ref name="healthCheckFlow" doc:name="Flow-ref to healthCheckFlow"/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+</mule>

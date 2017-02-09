@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {},
+        "flowVariables": {
+            "deleteRequest": {}
+        }
+    },
+    "outputMessageMetadata": {},
+    "id": "d92fff13-9274-4cce-a4d4-895186b66d92",
+    "version": "5.2.0.0"
+}

@@ -1,0 +1,480 @@
+{
+	"items": [
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODg3MjYzMi05NGZjLTRhZTctOWM0YS05NWRmODFjMWJmNDA",
+			"emails": [
+				"nicklegger@augmedix.com"
+			],
+			"displayName": "Nick Legger",
+			"nickName": "Nick",
+			"firstName": "Nick",
+			"lastName": "Legger",
+			"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+			"created": "2016-01-25T18:38:23.283Z",
+			"type": "person"
+		}
+	]
+}
+==================================================
+{
+	"items": [
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lNTNiMDRhMS0xMWNkLTQyMjgtYTkwYy02MDIxYjIyYjRhZDk",
+			"emails": [
+				"masewell@cisco.com"
+			],
+			"displayName": "Mark Sewell",
+			"nickName": "Mark",
+			"firstName": "Mark",
+			"lastName": "Sewell",
+			"avatar": "https://1efa7a94ed216783e352-c62266528714497a17239ececf39e9e2.ssl.cf1.rackcdn.com/V1~e649b345b19a4b680c4db148a9655fa6~n1xFN5RbTAOK3-tuw-dfNQ==~1600",
+			"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+			"created": "2015-05-20T17:50:37.580Z",
+			"type": "person"
+		}
+	]
+}
+===========================================
+nicklegger@augmedix.com
+-------------------------
+
+{
+  "googleCalendersList": {
+    "kind": "calendar#calendarList",
+    "etag": "\"p32cfd849lvvt20g\"",
+    "nextSyncToken": "CJj2oImv_9ECEhduaWNrbGVnZ2VyQGF1Z21lZGl4LmNvbQ==",
+    "items": [
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484811249352000\"",
+        "id": "ice-calendar-ooo@augmedix.com",
+        "summary": "ice-calendar-ooo@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "1",
+        "backgroundColor": "#ac725e",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484811246685000\"",
+        "id": "nicklegger@augmedix.com",
+        "summary": "nicklegger@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "7",
+        "backgroundColor": "#42d692",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "owner",
+        "defaultReminders": [
+          {
+            "method": "popup",
+            "minutes": 10
+          }
+        ],
+        "notificationSettings": {
+          "notifications": [
+            {
+              "type": "eventCreation",
+              "method": "email"
+            },
+            {
+              "type": "eventChange",
+              "method": "email"
+            },
+            {
+              "type": "eventCancellation",
+              "method": "email"
+            },
+            {
+              "type": "eventResponse",
+              "method": "email"
+            }
+          ]
+        },
+        "primary": true
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484072651958000\"",
+        "id": "turjo@augmedix.com",
+        "summary": "Sabbir Hossain (Turjo)",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "15",
+        "backgroundColor": "#9fc6e7",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1472501477215000\"",
+        "id": "will@augmedix.com",
+        "summary": "will@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "11",
+        "backgroundColor": "#fbe983",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1483562456816000\"",
+        "id": "venkat@augmedix.com",
+        "summary": "venkat@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "23",
+        "backgroundColor": "#cd74e6",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484173899642000\"",
+        "id": "azad@augmedix.com",
+        "summary": "azad@augmedix.com",
+        "timeZone": "Asia/Dhaka",
+        "colorId": "16",
+        "backgroundColor": "#4986e7",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1476990114724000\"",
+        "id": "robtoy@augmedix.com",
+        "summary": "robtoy@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "16",
+        "backgroundColor": "#4986e7",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1486517996788000\"",
+        "id": "augmedix.com_2d31363738343133372d353830@resource.calendar.google.com",
+        "summary": "SF-1161-210-Hammer-4",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "19",
+        "backgroundColor": "#c2c2c2",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1470244923456000\"",
+        "id": "lukas@augmedix.com",
+        "summary": "lukas@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "15",
+        "backgroundColor": "#9fc6e7",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1482861836397000\"",
+        "id": "augmedix.com_lkcjl01n4om4dfdi5tt5gmd7k8@group.calendar.google.com",
+        "summary": "ICE-Out-Of-Office",
+        "description": "Use this Calendar when going out of office or PTO.",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "19",
+        "backgroundColor": "#c2c2c2",
+        "foregroundColor": "#000000",
+        "accessRole": "owner",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1472494310418000\"",
+        "id": "ruben@augmedix.com",
+        "summary": "ruben@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "18",
+        "backgroundColor": "#b99aff",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1454696164175000\"",
+        "id": "reda@augmedix.com",
+        "summary": "reda@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "21",
+        "backgroundColor": "#cca6ac",
+        "foregroundColor": "#000000",
+        "accessRole": "freeBusyReader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484811247559000\"",
+        "id": "augmedix.com_5rgihhfhjv0ff9vc1tnqnbar8k@group.calendar.google.com",
+        "summary": "Augmedix - ICE Maintenance Calendar",
+        "description": "This will be used for our Tech teams to schedule outages.\nAlso, please post dates that we cannot have any maintenance performed and what the times will be along with all relevant information.\n\n",
+        "location": "San Francisco",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "23",
+        "backgroundColor": "#cd74e6",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "owner",
+        "defaultReminders": [],
+        "notificationSettings": {
+          "notifications": [
+            {
+              "type": "eventCreation",
+              "method": "email"
+            },
+            {
+              "type": "eventChange",
+              "method": "email"
+            },
+            {
+              "type": "eventCancellation",
+              "method": "email"
+            },
+            {
+              "type": "eventResponse",
+              "method": "email"
+            },
+            {
+              "type": "agenda",
+              "method": "email"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484611322750000\"",
+        "id": "samantha@augmedix.com",
+        "summary": "samantha@augmedix.com",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "16",
+        "backgroundColor": "#4986e7",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1470089776962000\"",
+        "id": "augmedix.com_33323737393031342d383831@resource.calendar.google.com",
+        "summary": "SF-1161-210-Glass-14",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "6",
+        "backgroundColor": "#ffad46",
+        "foregroundColor": "#000000",
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484811248256000\"",
+        "id": "#contacts@group.v.calendar.google.com",
+        "summary": "Contacts",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "17",
+        "backgroundColor": "#9a9cff",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1484811248739000\"",
+        "id": "en.usa#holiday@group.v.calendar.google.com",
+        "summary": "Holidays in United States",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "17",
+        "backgroundColor": "#9a9cff",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      }
+    ]
+  }
+}
+=====================================================================
+msewell@tropo.com
+-------------------
+
+{
+  "googleCalendersList": {
+    "kind": "calendar#calendarList",
+    "etag": "\"p32k99ed0s7vd20g\"",
+    "nextSyncToken": "CKiUuaDh_tECEhFtc2V3ZWxsQHRyb3BvLmNvbQ==",
+    "items": [
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1403020989659000\"",
+        "id": "voxeolabs.com_3kjfo8njc738tpnb1saec88tsc@group.calendar.google.com",
+        "summary": "Events",
+        "description": "Tropo attended / sponsored industry events and blog post calendar",
+        "timeZone": "America/New_York",
+        "colorId": "9",
+        "backgroundColor": "#7bd148",
+        "foregroundColor": "#000000",
+        "accessRole": "writer",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1433664488133000\"",
+        "id": "msewell@tropo.com",
+        "summary": "msewell@voxeolabs.com",
+        "timeZone": "America/New_York",
+        "colorId": "9",
+        "backgroundColor": "#44a703",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "owner",
+        "defaultReminders": [
+          {
+            "method": "popup",
+            "minutes": 10
+          }
+        ],
+        "notificationSettings": {
+          "notifications": [
+            {
+              "type": "eventCreation",
+              "method": "email"
+            },
+            {
+              "type": "eventChange",
+              "method": "email"
+            },
+            {
+              "type": "eventCancellation",
+              "method": "email"
+            },
+            {
+              "type": "eventResponse",
+              "method": "email"
+            }
+          ]
+        },
+        "primary": true
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318817734000\"",
+        "id": "kboone@tropo.com",
+        "summary": "kboone@tropo.com",
+        "timeZone": "America/New_York",
+        "colorId": "17",
+        "backgroundColor": "#9a9cff",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "freeBusyReader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318789755000\"",
+        "id": "akalsey@tropo.com",
+        "summary": "Adam Kalsey",
+        "timeZone": "America/Los_Angeles",
+        "colorId": "17",
+        "backgroundColor": "#9a9cff",
+        "foregroundColor": "#000000",
+        "accessRole": "freeBusyReader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318815373000\"",
+        "id": "jdupree@tropo.com",
+        "summary": "Justin Dupree",
+        "timeZone": "America/New_York",
+        "colorId": "3",
+        "backgroundColor": "#f83a22",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318816438000\"",
+        "id": "kbond@tropo.com",
+        "summary": "kbond@voxeolabs.com",
+        "timeZone": "America/New_York",
+        "colorId": "7",
+        "backgroundColor": "#42d692",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318818717000\"",
+        "id": "pbellanti@tropo.com",
+        "summary": "pbellanti@tropo.com",
+        "timeZone": "America/New_York",
+        "colorId": "17",
+        "backgroundColor": "#9a9cff",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1403021004469000\"",
+        "id": "voxeolabs.com_3233373337303932393938@resource.calendar.google.com",
+        "summary": "Vacation Calendar",
+        "timeZone": "America/New_York",
+        "colorId": "9",
+        "backgroundColor": "#7bd148",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318695134000\"",
+        "id": "#contacts@group.v.calendar.google.com",
+        "summary": "Contacts",
+        "timeZone": "America/New_York",
+        "colorId": "12",
+        "backgroundColor": "#fad165",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      },
+      {
+        "kind": "calendar#calendarListEntry",
+        "etag": "\"1418318812630000\"",
+        "id": "en.usa#holiday@group.v.calendar.google.com",
+        "summary": "Holidays in United States",
+        "timeZone": "America/New_York",
+        "colorId": "15",
+        "backgroundColor": "#9fc6e7",
+        "foregroundColor": "#000000",
+        "selected": true,
+        "accessRole": "reader",
+        "defaultReminders": []
+      }
+    ]
+  }
+}

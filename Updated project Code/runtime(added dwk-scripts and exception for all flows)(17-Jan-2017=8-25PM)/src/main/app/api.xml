@@ -1,0 +1,2617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:api-platform-gw="http://www.mulesoft.org/schema/mule/api-platform-gw"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/api-platform-gw http://www.mulesoft.org/schema/mule/api-platform-gw/current/mule-api-platform-gw.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+   
+    <apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
+    
+    <api-platform-gw:api apiName="${runtime.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>           
+    <flow name="api-main">
+        <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="api-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    
+    <flow name="api-console">
+        <http:listener config-ref="api-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
+    </flow>
+    
+    <flow name="get:/applications:api-config">
+        <flow-ref name="getApplicationsFlow" doc:name="Get Applications Flow Reference"/>
+    </flow>
+    
+    <flow name="get:/applications/{applicationId}:api-config">
+        <flow-ref name="getApplicationFlow" doc:name="Get Application Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="get:/integrations:api-config">
+        <flow-ref name="getIntegrationsFlow" doc:name="Get Integrations Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="get:/integrations/{integrationId}:api-config">
+        <flow-ref name="getIntegrationFlow" doc:name="Get Integration Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+     <flow name="get:/integrations/{integrationId}/settings:api-config">
+        <flow-ref name="getIntegrationSettingsFlow" doc:name="Get Integration Settings Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/integrations/instances:api-config">
+        <flow-ref name="getIntegrationInstancesRouterFlow" doc:name="Get Integration Instances Router Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="post:/integrations/instances:api-config">
+        <flow-ref name="postIntegrationInstanceFlow" doc:name="Post Integration Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/integrations/instances/{instanceId}:api-config">
+        <flow-ref name="getIntegrationInstanceFlow" doc:name="getIntegrationInstanceFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="put:/integrations/instances/{instanceId}:api-config">
+        <flow-ref name="putIntegrationInstanceFlow" doc:name="Put Integration Instance Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="delete:/integrations/instances/{instanceId}:api-config">
+        <flow-ref name="deleteIntegrationInstanceFlow" doc:name="Delete Integration Instance Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/integrations/{integrationId}/appTokens:api-config">
+    	<flow-ref name="getIntegrationTokensRouterFlow" doc:name="Get Integration Tokens Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="post:/integrations/{integrationId}/appTokens:api-config">
+    	<flow-ref name="postIntegrationTokenFlow" doc:name="postIntegrationTokenFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="delete:/integrations/{integrationId}/appTokens:api-config">
+        <flow-ref name="deleteIntegrationTokenOperationsFlow" doc:name="Delete Integration Tokens Operation Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/integrations/{integrationId}/appTokens/{appTokenId}:api-config">
+        <flow-ref name="getIntegrationTokenFlow" doc:name="Get Integration Token Flow Reference"/>
+  <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+  
+    </flow>
+    
+    <flow name="put:/integrations/{integrationId}/appTokens/{appTokenId}:api-config">
+        <flow-ref name="putIntegrationTokenFlow" doc:name="Put Integration Token Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+     <flow name="delete:/integrations/{integrationId}/appTokens/{appTokenId}:api-config">
+        <flow-ref name="deleteIntegrationTokenFlow" doc:name="Delete Integration Token Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+     <flow name="get:/trackingDetails/{trackingId}:api-config">
+        <flow-ref name="getTrackingIdSettingsFlow" doc:name="getTrackingIdSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    
+    <flow name="post:/trackingDetails/{trackingId}:api-config">
+        <flow-ref name="postTrackingIdSettingsFlow" doc:name="postTrackingIdSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="delete:/trackingDetails/{trackingId}:api-config">
+        <flow-ref name="deleteTrackingIdSettingsFlow" doc:name="deleteTrackingIdSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/clients/appSettings:api-config">
+        <flow-ref name="getClientApplicationsSettingsFlow" doc:name="Get Client Applications Settings"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="get:/clients/appSettings/{integrationId}:api-config">
+        <flow-ref name="getClientApplicationSettingsFlow" doc:name="Get Client Application Setting Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/clients/{clientId}/tokens:api-config">
+        <flow-ref name="getClientTokensFlow" doc:name="Get Client Tokens Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="post:/clients/{clientId}/tokens:api-config">
+    	<flow-ref name="postClientTokenFlow" doc:name="Create Client Token Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="delete:/clients/{clientId}/tokens:api-config">
+        <flow-ref name="deleteClientOperationsFlow" doc:name="Delete Client Operations Flow Reference"/>
+<choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+</flow>
+    
+    <flow name="get:/clients/{clientId}/tokens/{clientTokenId}:api-config">
+        <flow-ref name="getClientTokenFlow" doc:name="Get Client Token Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="put:/clients/{clientId}/tokens/{clientTokenId}:api-config">
+        <flow-ref name="putClientTokenFlow" doc:name="Put Client Token Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+     <flow name="delete:/clients/{clientId}/tokens/{clientTokenId}:api-config">
+        <flow-ref name="deleteClientTokenFlow" doc:name="Delete Client Token Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/clients/{clientId}/settings:api-config">
+        <flow-ref name="getAllClientAppSettingsFlow" doc:name="Get Client Application Settings Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="post:/clients/{clientId}/settings:api-config">
+    	<flow-ref name="postClientAppSettingsFlow" doc:name="Create Client App Settings Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/clients/{clientId}/settings/{appSettingsId}:api-config">
+        <flow-ref name="getClientAppSettingsFlow" doc:name="Get Client App Settings Flow Reference"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="put:/clients/{clientId}/settings/{appSettingsId}:api-config">
+        <flow-ref name="putClientAppSettingsFlow" doc:name="Put Client App Settings Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+     <flow name="delete:/clients/{clientId}/settings/{appSettingsId}:api-config">
+        <flow-ref name="deleteClientAppSettingsFlow" doc:name="Delete Client App Settings Flow Reference"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="get:/dropbox/settings/{userId}:api-config">
+        <flow-ref name="getAllDropboxSettings" doc:name="getAllDropboxSettings"/>
+  <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+  
+    </flow>
+    <flow name="post:/dropbox/settings:api-config">
+        <flow-ref name="postDropboxCursorSettings" doc:name="postDropboxCursorSettings"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="put:/dropbox/settings/{userId}:api-config">
+        <flow-ref name="putDropboxCursorSettings" doc:name="putDropboxCursorSettings"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/dropbox/settings/tokensettings/{instanceUuid}:api-config">
+        <flow-ref name="getDropboxTokenSettings" doc:name="getDropboxTokenSettings"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="get:/box/settings/{userId}:api-config">
+        <flow-ref name="getBoxSettingsFlow" doc:name="Get Box Settings Flow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="post:/box/settings/{userId}:api-config">
+        <flow-ref name="postBoxSettingsFlow" doc:name="postBoxSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="put:/box/settings/{userId}:api-config">
+        <flow-ref name="putBoxSettingsFlow" doc:name="putBoxSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/docusign/settings/{envId}:api-config">
+        <flow-ref name="getDocusingPdfBytesFlow" doc:name="getDocusingPdfBytesFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="post:/docusign/settings/{envId}:api-config">
+        <flow-ref name="PostDocusignSettingsFlow" doc:name="PostDocusignSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+
+    <flow name="get:/googleDrive/settings/{userId}:api-config">
+        <flow-ref name="getGoogleDriveSettingsFlow" doc:name="getGoogleDriveSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/googleDrive/settings/{userId}:api-config">
+        <flow-ref name="PutGoogleDriveSettingsFlow" doc:name="Put Google Drive Settings Flow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="post:/googleDrive/settings/{userId}:api-config">
+        <flow-ref name="PostGoogleDriveSettingsFlow" doc:name="PostGoogleDriveSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+     <flow name="get:/sharePoint/settings/{userId}:api-config">
+        <flow-ref name="getSharePointSettingsFlow" doc:name="getSharePointSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/sharePoint/settings/{userId}:api-config">
+        <flow-ref name="putSharePointSettingsFlow" doc:name="putSharePointSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="post:/sharePoint/settings/{userId}:api-config">
+        <flow-ref name="postSharePointSettingsFlow" doc:name="postSharePointSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/onedrive/settings/{userId}:api-config">
+        <flow-ref name="getOnedriveSettingsFlow" doc:name="getOnedriveSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/onedrive/settings/{userId}:api-config">
+        <flow-ref name="putOnedriveSettingsFlow" doc:name="putOnedriveSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="post:/onedrive/settings/{userId}:api-config">
+        <flow-ref name="postOnedriveSettingsFlow" doc:name="postOnedriveSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="get:/twitter/settings/{userId}:api-config">
+        <flow-ref name="getTwitterSettingsFlow" doc:name="getTwitterSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="put:/twitter/settings/{userId}:api-config">
+        <flow-ref name="putTwitterSettingsFlow" doc:name="putTwitterSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="post:/twitter/settings/{userId}:api-config">
+        <flow-ref name="postTwitterSettingsFlow" doc:name="postTwitterSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="get:/oneDriveBusiness/settings/{userId}:api-config">
+        <flow-ref name="getOnedriveBusinessSettingsFlow" doc:name="getOnedriveBusinessSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="put:/oneDriveBusiness/settings/{userId}:api-config">
+        <flow-ref name="putOnedriveBusinessSettingsFlow" doc:name="putOnedriveBusinessSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/docusign/settings/{envId}:api-config">
+        <logger level="INFO" doc:name="Logger"/>
+        <flow-ref name="PutDocusignSettingFlow" doc:name="PutDocusignSettingFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/certificate/settings/{envId}:api-config">
+        <flow-ref name="getDocusignCertificateSettingsFlow" doc:name="getDocusignCertificateSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    <flow name="post:/certificate/settings/{envId}:api-config">
+        <flow-ref name="PostDocusignCertificateSettingsFlow" doc:name="PostDocusignCertificateSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+	<flow name="put:/certificate/settings/{envId}:api-config">
+        <flow-ref name="PutDocusignCertificateSettingsFlow" doc:name="PutDocusignCertificateSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="post:/oneDriveBusiness/settings/{userId}:api-config">
+        <flow-ref name="postOnedriveBusinessSettingsFlow" doc:name="postOnedriveBusinessSettingsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+   
+    </flow>
+    
+    <flow name="get:/evernote/settings/{evernoteUserId}:api-config">
+        <flow-ref name="getEverNoteSettingsFlow" doc:name="getEverNoteSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    
+    <flow name="post:/evernote/settings/{evernoteUserId}:api-config">
+        <flow-ref name="postEverNoteSettingsFlow" doc:name="postEverNoteSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    
+    <flow name="delete:/evernote/settings/{evernoteUserId}:api-config">
+        <flow-ref name="deleteEverNoteSettingsFlow" doc:name="deleteEverNoteSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/office365/settings/{userId}:api-config">
+        <flow-ref name="getOffice365SettingsFlow" doc:name="getOffice365SettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="post:/office365/settings/{userId}:api-config">
+        <flow-ref name="postOffice365SettingsFlow" doc:name="postOffice365SettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/office365/settings/{userId}:api-config">
+        <flow-ref name="putOffice365SettingsFlow" doc:name="putOffice365SettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="delete:/office365/settings/{userId}:api-config">
+        <flow-ref name="deleteOffice365SettingsFlow" doc:name="deleteOffice365SettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="get:/googleCalendar/settings/{userId}:api-config">
+        <flow-ref name="getGoogleCalendarSettingsFlow" doc:name="getGoogleCalendarSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="post:/googleCalendar/settings/{userId}:api-config">
+        <flow-ref name="postGoogleCalendarSettingsFlow" doc:name="postGoogleCalendarSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="put:/googleCalendar/settings/{userId}:api-config">
+        <flow-ref name="putGoogleCalendarSettingsFlow" doc:name="putGoogleCalendarSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <flow name="delete:/googleCalendar/settings/{userId}:api-config">
+        <flow-ref name="deleteGoogleCalendarSettingsFlow" doc:name="deleteGoogleCalendarSettingsFlow"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="500">
+            <apikit:exception value="java.lang.Exception" />
+            <set-variable variableName="exceptionDetails" value="#[exception]" doc:name="Store Exception"/>
+            <flow-ref name="coreServicesLoggingFlow" doc:name="Core Services Logging Flow Reference"/>
+            <dw:transform-message doc:name="Build Error">
+                <dw:set-payload resource="classpath:dwScripts/buildError500.dwl"/>
+            </dw:transform-message>        
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>

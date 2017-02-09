@@ -1,0 +1,549 @@
+calender list
+---------------
+https://www.googleapis.com/calendar/v3/users/me/calendarList(GET)
+
+{
+  "kind": "calendar#calendarList",
+  "etag": "\"p32cbjfflsm2d00g\"",
+  "nextSyncToken": "CJi5vfXlhNACEhdjYWxlbmRlcmNpc2NvQGdtYWlsLmNvbQ==",
+  "items": [
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com",
+      "summary": "varmacalendar",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "22",
+      "backgroundColor": "#f691b2",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "calendercisco@gmail.com",
+      "summary": "calendercisco@gmail.com",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "15",
+      "backgroundColor": "#9fc6e7",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": [
+        {
+          "method": "popup",
+          "minutes": 30
+        }
+      ],
+      "notificationSettings": {
+        "notifications": [
+          {
+            "type": "eventCreation",
+            "method": "email"
+          },
+          {
+            "type": "eventChange",
+            "method": "email"
+          },
+          {
+            "type": "eventCancellation",
+            "method": "email"
+          },
+          {
+            "type": "eventResponse",
+            "method": "email"
+          }
+        ]
+      },
+      "primary": true
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477908424926000\"",
+      "id": "l28fvtbr9vd9ce83vjn83dd25o@group.calendar.google.com",
+      "summary": "MyMeetingsCalendar",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "9",
+      "backgroundColor": "#7bd148",
+      "foregroundColor": "#000000",
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477774583996000\"",
+      "id": "i0cmj6vtk6jcvkaito3ios4g44@group.calendar.google.com",
+      "summary": "Eidiko Calender",
+      "description": "All Eidiko Timings",
+      "location": "hyderabad",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "11",
+      "backgroundColor": "#fbe983",
+      "foregroundColor": "#000000",
+      "selected": true,
+      "accessRole": "owner",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477569382939000\"",
+      "id": "#contacts@group.v.calendar.google.com",
+      "summary": "Contacts",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "13",
+      "backgroundColor": "#92e1c0",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1477771403166000\"",
+      "id": "en.christian#holiday@group.v.calendar.google.com",
+      "summary": "Christian Holidays",
+      "timeZone": "Asia/Calcutta",
+      "summaryOverride": "Christian Holidays Subscribed for Watch",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1474282952045000\"",
+      "id": "en.indian#holiday@group.v.calendar.google.com",
+      "summary": "Holidays in India",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    },
+    {
+      "kind": "calendar#calendarListEntry",
+      "etag": "\"1474369520745000\"",
+      "id": "en.islamic#holiday@group.v.calendar.google.com",
+      "summary": "Muslim Holidays",
+      "timeZone": "Asia/Calcutta",
+      "colorId": "8",
+      "backgroundColor": "#16a765",
+      "foregroundColor": "#000000",
+      "accessRole": "reader",
+      "defaultReminders": []
+    }
+  ]
+}
+
+events
+===========
+https://www.googleapis.com/calendar/v3/calendars/calendercisco@gmail.com/events(GET)
+
+
+{
+  "kind": "calendar#events",
+  "etag": "\"p3288pflluqdsu0g\"",
+  "summary": "calendercisco@gmail.com",
+  "updated": "2016-09-19T17:11:21.706Z",
+  "timeZone": "Asia/Calcutta",
+  "accessRole": "owner",
+  "defaultReminders": [
+    {
+      "method": "popup",
+      "minutes": 30
+    }
+  ],
+  "nextSyncToken": "CJCMvrX2m88CEJCMvrX2m88CGAU=",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948585661658000\"",
+      "id": "6957ji9bltg59smrkgp4h43e3o",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=Njk1N2ppOWJsdGc1OXNtcmtncDRoNDNlM28gY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T13:47:10.000Z",
+      "updated": "2016-09-19T13:47:10.829Z",
+      "summary": "Spare Time",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-20T14:00:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-20T15:00:00+05:30"
+      },
+      "iCalUID": "6957ji9bltg59smrkgp4h43e3o@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948587607462000\"",
+      "id": "mkdbhfbmf45njk3313evraa9k8",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bWtkYmhmYm1mNDVuamszMzEzZXZyYWE5azggY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T14:03:23.000Z",
+      "updated": "2016-09-19T14:03:23.731Z",
+      "summary": "Evng Tea",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-20T17:30:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-20T18:30:00+05:30"
+      },
+      "iCalUID": "mkdbhfbmf45njk3313evraa9k8@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948588493874000\"",
+      "id": "c7ma9bptnbtjj1kgb6jl9r246g",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=YzdtYTlicHRuYnRqajFrZ2I2amw5cjI0NmcgY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T14:10:46.000Z",
+      "updated": "2016-09-19T14:10:46.937Z",
+      "summary": "Dinner TIle Of Tue",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-20T19:30:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-20T20:30:00+05:30"
+      },
+      "iCalUID": "c7ma9bptnbtjj1kgb6jl9r246g@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948592398334000\"",
+      "id": "74tohermbckut9tse6n0006klk",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=NzR0b2hlcm1iY2t1dDl0c2U2bjAwMDZrbGsgY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T14:43:19.000Z",
+      "updated": "2016-09-19T14:43:19.167Z",
+      "summary": "vcxzv",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-20T15:30:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-20T16:30:00+05:30"
+      },
+      "iCalUID": "74tohermbckut9tse6n0006klk@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948592522810000\"",
+      "id": "s9stap0i6p540voln9r1v0f100",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=czlzdGFwMGk2cDU0MHZvbG45cjF2MGYxMDAgY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T14:44:21.000Z",
+      "updated": "2016-09-19T14:44:21.405Z",
+      "summary": "freeTime",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-19T14:00:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-19T15:00:00+05:30"
+      },
+      "iCalUID": "s9stap0i6p540voln9r1v0f100@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948592894402000\"",
+      "id": "fv7hm8si59r4n3cudj3t640768",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=ZnY3aG04c2k1OXI0bjNjdWRqM3Q2NDA3NjggY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T14:47:27.000Z",
+      "updated": "2016-09-19T14:47:27.201Z",
+      "summary": "HEllo",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-19T20:30:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-19T21:30:00+05:30"
+      },
+      "iCalUID": "fv7hm8si59r4n3cudj3t640768@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948593892838000\"",
+      "id": "ibklc81va2un7kuivur64q8294",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=aWJrbGM4MXZhMnVuN2t1aXZ1cjY0cTgyOTQgY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T13:01:30.000Z",
+      "updated": "2016-09-19T14:55:46.419Z",
+      "summary": "Dinner Time",
+      "description": "Test center fail",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-19T19:30:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-19T20:30:00+05:30"
+      },
+      "iCalUID": "ibklc81va2un7kuivur64q8294@google.com",
+      "sequence": 0,
+      "attendees": [
+        {
+          "email": "anilpani.eidiko@gmail.com",
+          "displayName": "Anil Kumar Pani",
+          "responseStatus": "needsAction"
+        },
+        {
+          "email": "calendercisco@gmail.com",
+          "organizer": true,
+          "self": true,
+          "responseStatus": "accepted"
+        }
+      ],
+      "reminders": {
+        "useDefault": true
+      },
+      "attachments": [
+        {
+          "fileUrl": "https://drive.google.com/file/d/0B9YdHBJCea1CamRJMTRrcWJyUzQ/view?usp=drive_web",
+          "title": "eidiko.png",
+          "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
+          "fileId": "0B9YdHBJCea1CamRJMTRrcWJyUzQ"
+        }
+      ]
+    }
+  ]
+}
+==========================================
+(Get)https://www.googleapis.com/calendar/v3/calendars/calendercisco@gmail.com/events?syncToken=CKDsy4PHnc8CEKDsy4PHnc8CGAU=
+
+{
+  "kind": "calendar#events",
+  "etag": "\"p324alsnjqeesu0g\"",
+  "summary": "calendercisco@gmail.com",
+  "updated": "2016-09-20T09:42:16.821Z",
+  "timeZone": "Asia/Calcutta",
+  "accessRole": "owner",
+  "defaultReminders": [
+    {
+      "method": "popup",
+      "minutes": 30
+    }
+  ],
+  "nextSyncToken": "CIiq8vPTnc8CEIiq8vPTnc8CGAU=",
+  "items": []
+}
+====================================
+
+{
+  "kind": "calendar#events",
+  "etag": "\"p33gcr2u9qqesu0g\"",
+  "summary": "calendercisco@gmail.com",
+  "updated": "2016-09-20T09:54:12.364Z",
+  "timeZone": "Asia/Calcutta",
+  "accessRole": "owner",
+  "defaultReminders": [
+    {
+      "method": "popup",
+      "minutes": 30
+    }
+  ],
+  "nextSyncToken": "CODNi8nWnc8CEODNi8nWnc8CGAU=",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948730504160000\"",
+      "id": "6957ji9bltg59smrkgp4h43e3o",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=Njk1N2ppOWJsdGc1OXNtcmtncDRoNDNlM28gY2FsZW5kZXJjaXNjb0Bt",
+      "created": "2016-09-19T13:47:10.000Z",
+      "updated": "2016-09-20T09:54:12.080Z",
+      "summary": "Spare Time",
+      "creator": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "organizer": {
+        "email": "calendercisco@gmail.com",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-09-20T14:00:00+05:30"
+      },
+      "end": {
+        "dateTime": "2016-09-20T15:30:00+05:30"
+      },
+      "iCalUID": "6957ji9bltg59smrkgp4h43e3o@google.com",
+      "sequence": 0,
+      "reminders": {
+        "useDefault": true
+      }
+    }
+  ]
+}
+
+=========================================
+delete events
+-------------------------
+{
+  "kind": "calendar#events",
+  "etag": "\"p334d10mpt6esu0g\"",
+  "summary": "calendercisco@gmail.com",
+  "updated": "2016-09-20T11:19:46.045Z",
+  "timeZone": "Asia/Calcutta",
+  "accessRole": "owner",
+  "defaultReminders": [
+    {
+      "method": "popup",
+      "minutes": 30
+    }
+  ],
+  "nextSyncToken": "CMjQgtnpnc8CEMjQgtnpnc8CGAU=",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948740159030000\"",
+      "id": "c7ma9bptnbtjj1kgb6jl9r246g",
+      "status": "cancelled"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948740161946000\"",
+      "id": "mkdbhfbmf45njk3313evraa9k8",
+      "status": "cancelled"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948740168646000\"",
+      "id": "6957ji9bltg59smrkgp4h43e3o",
+      "status": "cancelled"
+    },
+    {
+      "kind": "calendar#event",
+      "etag": "\"2948740170384000\"",
+      "id": "74tohermbckut9tse6n0006klk",
+      "status": "cancelled"
+    }
+  ]
+}
+==============================
+recurrent event
+-----------------------
+{
+  "kind": "calendar#events",
+  "etag": "\"p33gf56mpsnjsu0g\"",
+  "summary": "varmacalendar",
+  "description": "",
+  "updated": "2016-10-19T21:18:53.340Z",
+  "timeZone": "Asia/Calcutta",
+  "accessRole": "owner",
+  "defaultReminders": [],
+  "nextSyncToken": "CODymtnl588CEODymtnl588CGAU=",
+  "items": [
+    {
+      "kind": "calendar#event",
+      "etag": "\"2953823866208000\"",
+      "id": "mjfk4c46f7030k4uefvkcdafvc",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=bWpmazRjNDZmNzAzMGs0dWVmdmtjZGFmdmNfMjAxNjEwMTlUMjEzMDAwWiAzbGRvcG9ibmIxbXBhMXFnbzRybWFtb2N0OEBn",
+      "created": "2016-10-19T20:29:23.000Z",
+      "updated": "2016-10-19T21:18:53.104Z",
+      "summary": "hhh",
+      "description": "zcbcvbcvvbxcv",
+      "location": "Hyderabad, Telangana, India",
+      "creator": {
+        "email": "calendercisco@gmail.com"
+      },
+      "organizer": {
+        "email": "3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com",
+        "displayName": "varmacalendar",
+        "self": true
+      },
+      "start": {
+        "dateTime": "2016-10-20T03:00:00+05:30",
+        "timeZone": "Asia/Calcutta"
+      },
+      "end": {
+        "dateTime": "2016-10-20T03:45:00+05:30",
+        "timeZone": "Asia/Calcutta"
+      },
+      "recurrence": [
+        "RRULE:FREQ=DAILY"
+      ],
+      "iCalUID": "mjfk4c46f7030k4uefvkcdafvc@google.com",
+      "sequence": 2,
+      "reminders": {
+        "useDefault": true
+      }
+    }
+  ]
+}

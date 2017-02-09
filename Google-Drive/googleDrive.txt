@@ -1,0 +1,2014 @@
+server  API_KEY =  AIzaSyDVAGEkAmaOd0tbF2Gp7ULP1TcfDpYSLOc (enable key for project = https://console.developers.google.com/apis/api/drive/overview?project=eidikoproject) 
+
+ 
+
+ admin = https://console.developers.google.com/iam-admin/iam/project?project=pradeep-project
+ 
+project_name = EidikoProject
+Project ID  = eidikoproject
+Project number = 351775149349
+
+
+
+client_id =  351775149349-7837j91ugod4amf74rhr8tesg5kmc4ab.apps.googleusercontent.com 
+client_secret =  3x65a-uG3f9PD7ROznVfDME4 
+redirect_uri = https://www.getpostman.com/oauth2/callback
+================================================================================
+imp-urls = https://developers.google.com/identity/protocols/OAuth2ForDevices
+			https://developers.google.com/identity/protocols/OAuth2ForDevices#obtainingatoken
+===============================================================
+drive scope
+---------------------
+{
+  "access_token": "ya29.Ci8nA4guSYMWkBg3H5-uOSiGWMelTcWQPBVldNGlTAs8gI6X_MH957vKE8WVltloYg",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}
+
+without drive scope
+{
+  "access_token": "ya29.CjAlA1b9x-hnjyVU2ZrCLRGna59Qfjm3jx5w4QOnjisz9LEg58iBNUQKnNocykT8Z5g",
+  "token_type": "Bearer",
+  "expires_in": 3578,
+  "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjRkODMzY2U0ODQzZTJlMTA0Y2FiNjkwNzFkZTg3Y2M3ZDc5NThhNjAifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhdF9oYXNoIjoiU0dDelFVM0NjTU1TQ09SVm5zaC1DQSIsImF1ZCI6IjYwOTU3MjE5Mjg0NC1lZ2JjY3MxZWxvbms5MHU0MHQ3OGlrdTlrODU5NmNvbC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExNjQ1NDE2Mjk1NzkxMzI2ODk2OCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiI2MDk1NzIxOTI4NDQtZWdiY2NzMWVsb25rOTB1NDB0Nzhpa3U5azg1OTZjb2wuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6InBrNDU1Mzc1QGdtYWlsLmNvbSIsImlhdCI6MTQ2ODkxMTM2OSwiZXhwIjoxNDY4OTE0OTY5LCJuYW1lIjoicHJhZGVlcCBrYW51a3VudGxhIiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tdkpEMTU1aVd3emcvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQ0kvMXd5ZVN1UXBsOHcvczk2LWMvcGhvdG8uanBnIiwiZ2l2ZW5fbmFtZSI6InByYWRlZXAiLCJmYW1pbHlfbmFtZSI6ImthbnVrdW50bGEiLCJsb2NhbGUiOiJlbiJ9.JJBvgAZd-FNKOuTHGn1Mf8vDNQiuDwW4GZ6z_41PjnKlrGP37vMEFNdsmPPsVF8k7UXrPFpwYg-EZOtB1eHou-boG86BteLeE54MMB8-7HK3OrzI68edSrOEn-NMU3Tttr6P10eSmMI0wGWNlTcndU_RwKWWmmqvoIFtjXYHeIiKthjAOJzFX1YcU5r1kmcDdNuOKe9XYxstEg31tGiT_kPC-qlFJL1auRAJRa3ZXlPYKcjiXcCL0Bq1EcHd2MoYWQb7bDy9q1YKKLh9YVyuQszCXC_16sBwrzDeHJy5bpyZzTikncCOKP0dq_tcah0FtiKcE1X-6oxHXr3CN8-9mw"
+}
+=========================================
+Docs = https://support.google.com/a/answer/6248925?hl=en
+
+
+======================================
+API docs = developers.google.com/drive
+code samples = goo.gl/A3kb60
+
+
+push notification
+-----------------------------------
+GitHub = https://github.com/googledrive/pushnotifications-playground
+https://developers.google.com/drive/v3/web/push
+
+bit.ly/PushIntro
+
+developer.google.com/web/shows/
+=======================================================================================
+AccessToken:
+-----------------
+https://developers.google.com/identity/protocols/OAuth2ForDevices#obtainingatoken
+https://developers.google.com/identity/protocols/OAuth2WebServer
+
+ClientId and Client Secret:
+-----------------------------
+https://developers.google.com/drive/v2/web/auth/web-client
+
+Google All Apis:
+---------------------
+https://developers.google.com/drive/v2/reference/
+
+WebHook:
+-------------
+https://developers.google.com/drive/v3/web/push(http://183.82.99.100:8899/hooks/googleDrive/455375)
+
+=========================================================
+ revoke refresh token
+ -------------------------
+ https://developers.google.com/identity/protocols/OAuth2WebServer#offline
+ https://security.google.com/settings/security/permissions?pli=1
+
+
+Code Generation : 
+-----------------------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive
+&access_type=offline&state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&redirect_uri=https://cisco-spark-integration-management-new-dev.cloudhub.io/
+&response_type=code&client_id=281078810714-va95phaieeh6luqgbil93h4j7jsvbes1.apps.googleusercontent.com
+
+
+code-using-all-scopes
+-------------------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly
+https://www.googleapis.com/auth/drive.metadata.readonly 
+https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.apps.readonly https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.photos.readonly
+&state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&redirect_uri=https://cisco-spark-integration-management-dev.cloudhub.io/&response_type=code&client_id=351775149349-u9r7r9q1nshknbts4ch4t9955jmevlc4.apps.googleusercontent.com
+
+
+CODE Response : 
+---------------
+https://app.getpostman.com/oauth2/callback?state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&code=4/rCxoghYVKvMGL6fyanlsXKyYoCF1KzACU0jxEhxlowY
+
+
+Access Token Generation :
+-------------------------
+METHOD : POST  
+Host   : www.googleapis.com/oauth2/v4/token
+Content-Type: application/x-www-form-urlencoded
+
+code=4/P7q7W91a-oMsCeLvIaQm6bTrgtp7&
+client_id=8819981768.apps.googleusercontent.com&
+client_secret={client_secret}&
+redirect_uri=https://oauth2.example.com/code&
+grant_type=authorization_code
+
+
+Access Token Response :
+-----------------------
+{
+  "access_token": "ya29.CjArAwUxL7GUc32x1LbmuQ8BaWlm-RvNCnIQoVMGooR3uKnhBEgv7cyeAGCcvJ_QYnw",
+  "token_type": "Bearer",
+  "expires_in": 3578
+}
+
+===============================================================================
+
+ciscosparkintegrations@gmail.com
+------------------------------------
+{
+  "access_token": "ya29.Ci9BA6-PkbyyUlehPalNwvc_PK8PpvuYHQNET8nST-nSmHhdlbhgVdMdKKGbzFXf8A",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/CLJvDt8EqWbpibJhjgPEmkfbqDYlcskJw1R354UcBj0"
+}
+
+==================================================================================
+WebHook_Creation for entire Resource : 
+-------------------------------
+POST https://www.googleapis.com/drive/v3/changes/watch?pageToken=10
+Authorization: Bearer auth_token_for_current_user
+Content-Type: application/json
+
+{
+  "id": "4ba78bf0-6a47-11e2-bcfd-0800200c9a77", // Your channel ID.
+  "type": "web_hook",
+  "address": "https://mydomain.com/notifications", // Your receiving URL.
+}
+
+
+Watch Response :
+-----------------
+{
+  "kind": "api#channel",
+  "id": string,
+  "resourceId": string,
+  "resourceUri": string,
+  "token": string,
+  "expiration": long
+}
+-----
+{
+  "kind": "api#channel",
+  "id": "01234567-89ab-cdef-0123456789ab"", // ID you specified for this channel.
+  "resourceId": "o3hgv1538sdjfh", // ID of the watched resource.
+  "resourceUri": "https://www.googleapis.com/drive/v3/files/o3hgv1538sdjfh", // Version-specific ID of the watched resource.
+  "token": "target=myApp-myFilesChannelDest", // Present only if one was provided.
+  "expiration": 1426325213000, // Actual expiration time as Unix timestamp (in ms), if applicable.
+}
+================================================================
+webhook for files
+---------------------
+POST https://www.googleapis.com/drive/v3/files/fileId/watch
+Authorization: Bearer auth_token_for_current_user
+Content-Type: application/json
+
+{
+  "id": "01234567-89ab-cdef-0123456789ab", // Your channel ID.
+  "type": "web_hook",
+  "address": "https://mydomain.com/notifications", // Your receiving URL.
+  ...
+  "token": "target=myApp-myFilesChannelDest", // (Optional) Your channel token.
+  "expiration": 1426325213000 // (Optional) Your requested channel expiration time.
+}
+================================================================
+Webhook stop :
+-------------------------------------------------
+POST 		 :  https://www.googleapis.com/drive/v3/channels/stop
+Authorization: Bearer {auth_token_for_current_user}
+Content-Type : application/json
+
+{
+  "id": "4ba78bf0-6a47-11e2-bcfd-0800200c9a66",// when generating webhook(in body)
+  "resourceId": "ret08u3rv24htgh289g"
+}
+
+================================================================================================
+GOOGLE DRIVE WEBHOOKS(https://www.filestack.com/docs/google-drive-webhooks)
+These are the three event types that will send messages to your webhook url(s) concerning Google Drive:
+
+    Google Drive File Uploads
+    Google Drive File Exports
+    Google Drive File Conversions
+
+	
+	FILE UPLOAD RESPONSE
+	---------------------------
+	{  
+		"action":"fp.upload",
+		"timestamp":1443444905,
+		"id":100946,
+		"text":{  
+			"url":"https://www.filestackapi.com/api/file/WAunDTTqQfCNWwUUyf6n",
+			"client":"Google Drive",
+			"type":"image/jpeg",
+			"filename":"1579337399020824.jpg",
+			"size":139154
+		}
+	}
+	
+	FILE EXPORTED RESPONSE
+	-------------------------------------
+	{
+	  "action": "fp.export",
+	  "timestamp": 1444257665, 
+	  "id": 142447, 
+	  "text":{
+		"source": "https://www.filestackapi.com/api/file/qHi4LxRh28IeEBdJcFpw",
+		"client": "Google Drive",
+		"filename": "newFiletest.jpg",
+		"created": "https://www.filestackapi.com/api/file/s40jJOQDGVr2T86cgOAe"
+	  }
+	}
+	
+=========================================
+==================================================================================
+Get All Files and Folders
+-----------------------------
+{
+  "kind": "drive#fileList",
+  "files": [
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaclRuMW52MHpMTGM",
+      "name": "Drive Webhook Test",
+      "mimeType": "application/vnd.google-apps.folder"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1ZY4LSe3bjnfLzrHmOJTA4kxaLnJjXxiXdgco-wAW01I",
+      "name": "from_hipchat",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1mgB-XNqgDmwewoWyI1pHhXV8oXCr6sgHSziGyfUFDbg",
+      "name": "Hip chat test",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1rByS8v6q_mThnZrMeLM_dXFCldUgllWpzZxSikxD47w",
+      "name": "Untitled document",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1LdJ0pHXnjas2xOwTOPCg0KvH9efYQanEeObq40GpH6o",
+      "name": "Untitled document",
+      "mimeType": "application/vnd.google-apps.document"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaTThuNFZSSG0yMms",
+      "name": "pydev eclipse.txt",
+      "mimeType": "text/plain"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaeXZBREQtenpuNUU",
+      "name": "pydev eclipse.txt",
+      "mimeType": "text/plain"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1YGRkjgoiGL76kIFt2cHU1tUT81Pq7uENKWNi2Gu230KlZ1YxfrfzBRA7",
+      "name": "DriveWebhooks",
+      "mimeType": "application/vnd.google-apps.script"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaZ280NUNKQ0o2Ym8",
+      "name": "Examplesprograms.zip",
+      "mimeType": "application/zip"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaWlVySGxrbDFTUlE",
+      "name": "Project2.zip",
+      "mimeType": "application/zip"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaYV9BTHAtMS1DSmM",
+      "name": "JSP.zip",
+      "mimeType": "application/zip"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQaT2NCZmxfY0VsRWs",
+      "name": "project softwares.zip",
+      "mimeType": "application/zip"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0B67R--HNWuQad25NNm1FWTBVMVU",
+      "name": "A Cocktail Approach for Travel.zip",
+      "mimeType": "application/zip"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0BxZwZOjznHOxdlQwMklaV3F4RkE",
+      "name": "TEXTBOOK_JOHN_Cloud Computing_Implementation,Management and Security.pdf",
+      "mimeType": "application/pdf"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0BxZwZOjznHOxcFV3ZWNVa1J2YWc",
+      "name": "TEXTBOOK_BUYYA_cloud computing_principles_and_paradigms.pdf",
+      "mimeType": "application/pdf"
+    },
+    {
+      "kind": "drive#file",
+      "id": "0BxZwZOjznHOxYTh2VzdwSUw4Z2M",
+      "name": "TEXTBOOK_HWANG_distributed and cloud computing.pdf",
+      "mimeType": "application/pdf"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1sibXhovF3ijWtDeVDQckh15FenL1iMetQNTmOSXm8NnI_2yCgGyF9ulbe4kB",
+      "name": "oracle-form-report.pdf",
+      "mimeType": "application/pdf"
+    },
+    {
+      "kind": "drive#file",
+      "id": "1i50KEg4amcCo0uT6tNJkMY1ql_-BzxY76s_JnpMAN3A",
+      "name": "Employee management system.docx",
+      "mimeType": "application/vnd.google-apps.document"
+    }
+  ]
+}
+
+===========================================================
+webhook for Folder
+-------------------------------
+POST https://www.googleapis.com/drive/v3/files/0B67R--HNWuQaclRuMW52MHpMTGM/watch
+
+Authorization = Bearer ya29.Ci8vAygZXK_bL-3nL8F67zl8zpfT58XW4PMb2BfiSsLipk-LRXS5XL9kcyJrqKpSPA
+
+Content-Type = application/json
+
+Request body
+------------
+{
+    "id":"my-channel-pradeep",
+    "type":"web_hook",
+    "address":"https://183.82.99.100:8099/googleDrive/455375"
+}
+
+webhook_response
+--------------------
+{
+  "kind": "api#channel",
+  "id": "my-channel-GD",
+  "resourceId": "abEihUHkE0-fzVBUmDgwGiwReJc",
+  "resourceUri": "https://www.googleapis.com/drive/v3/files/0B67R--HNWuQaclRuMW52MHpMTGM?acknowledgeAbuse=false&alt=json",
+  "expiration": "1469787930000"
+}
+-------------------------------------------------------
+request
+------------
+{
+    "id":"my-channel-pradeep",
+    "type":"web_hook",
+    "address":"https://183.82.99.100:8099/googleDrive/455375"
+}
+
+response
+---------------
+{
+  "kind": "api#channel",
+  "id": "my-channel-pradeep",
+  "resourceId": "abEihUHkE0-fzVBUmDgwGiwReJc",
+  "resourceUri": "https://www.googleapis.com/drive/v3/files/0B67R--HNWuQaclRuMW52MHpMTGM?acknowledgeAbuse=false&alt=json",
+  "expiration": "1469789015000"
+}
+-------------------------------
+request
+-------
+{
+    "id":"my-channel-pradeep1",
+    "type":"web_hook",
+    "address":"https://183.82.99.100:8899/googleDrive/455375"
+}
+
+response
+-------------
+{
+  "kind": "api#channel",
+  "id": "my-channel-pradeep1",
+  "resourceId": "abEihUHkE0-fzVBUmDgwGiwReJc",
+  "resourceUri": "https://www.googleapis.com/drive/v3/files/0B67R--HNWuQaclRuMW52MHpMTGM?acknowledgeAbuse=false&alt=json",
+  "expiration": "1469789555000"
+}
+====================
+response
+------------
+{
+  "kind": "api#channel",
+  "id": "my-channel-eidiko",
+  "resourceId": "LYcsDODiwuwQtK9g0_SF-pzEAIk",
+  "resourceUri": "https://www.googleapis.com/drive/v3/files/1ZY4LSe3bjnfLzrHmOJTA4kxaLnJjXxiXdgco-wAW01I?acknowledgeAbuse=false&alt=json",
+  "expiration": "1469790733000"
+}
+===================================
+all changes
+---------------
+https://www.googleapis.com/drive/v3/changes/watch?pageToken=1
+
+request
+---------
+{
+    "id":"cloudhub",
+    "type":"web_hook",
+    "address":"https://183.82.99.100:8899/googleDrive/455375"
+}
+
+Response
+------------
+{
+  "kind": "api#channel",
+  "id": "cloudhub",
+  "resourceId": "QL1_KnsPYlNelMUb-dQIr7n2enM",
+  "resourceUri": "https://www.googleapis.com/drive/v3/changes?includeRemoved=true&pageSize=100&pageToken=1&restrictToMyDrive=false&spaces=drive&alt=json",
+  "expiration": "1469879825000"
+}
+====================================
+GET https://www.googleapis.com/drive/v3/changes?includeRemoved=true&pageSize=100&pageToken=1&restrictToMyDrive=false&spaces=drive&alt=json
+{
+  "kind": "drive#changeList",
+  "nextPageToken": "1586",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "1i50KEg4amcCo0uT6tNJkMY1ql_-BzxY76s_JnpMAN3A",
+      "removed": false,
+      "time": "2013-08-31T08:31:52.708Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1i50KEg4amcCo0uT6tNJkMY1ql_-BzxY76s_JnpMAN3A",
+        "name": "Employee management system.docx",
+        "mimeType": "application/vnd.google-apps.document"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYV9BTHAtMS1DSmM",
+      "removed": false,
+      "time": "2015-03-30T05:14:20.962Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaYV9BTHAtMS1DSmM",
+        "name": "JSP.zip",
+        "mimeType": "application/zip"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaT2NCZmxfY0VsRWs",
+      "removed": false,
+      "time": "2015-04-01T04:44:52.682Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaT2NCZmxfY0VsRWs",
+        "name": "project softwares.zip",
+        "mimeType": "application/zip"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWlVySGxrbDFTUlE",
+      "removed": false,
+      "time": "2015-04-09T17:47:30.221Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaWlVySGxrbDFTUlE",
+        "name": "Project2.zip",
+        "mimeType": "application/zip"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZ280NUNKQ0o2Ym8",
+      "removed": false,
+      "time": "2015-11-12T05:52:46.708Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaZ280NUNKQ0o2Ym8",
+        "name": "Examplesprograms.zip",
+        "mimeType": "application/zip"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "1sibXhovF3ijWtDeVDQckh15FenL1iMetQNTmOSXm8NnI_2yCgGyF9ulbe4kB",
+      "removed": false,
+      "time": "2016-02-14T18:01:35.638Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1sibXhovF3ijWtDeVDQckh15FenL1iMetQNTmOSXm8NnI_2yCgGyF9ulbe4kB",
+        "name": "oracle-form-report.pdf",
+        "mimeType": "application/pdf"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "1U7ehFrzeFAMvscQ4s3x-54lzGvSEvg4-M0ZGOqxSOks",
+      "removed": true,
+      "time": "2016-02-14T18:06:36.918Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQad2QxSHYwaThXb2gwVUNmLXAwRWVHUl9jR1l3",
+      "removed": true,
+      "time": "2016-02-14T18:06:36.918Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaV3pmUDFqeXg5NlU",
+      "removed": true,
+      "time": "2016-02-14T18:06:36.918Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZEgzX1FocE1sQm8",
+      "removed": true,
+      "time": "2016-02-14T18:06:41.749Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaS1NGendRN0dwcUk",
+      "removed": true,
+      "time": "2016-02-14T18:06:41.749Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZVFPejY2bVFuVWc",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYXprQzRTdHYyWlk",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQac2NTVWVZV2Z5V0U",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaRFdzUzRwRGNRMVE",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaMWlPUF9UaHppTmM",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaNUJwb3d1Z1hhOUU",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaRWhIeGNjVnlOQ2s",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaMWRVODlSV2lHODQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQadC1LSWlBaFlER0U",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZEFQdzcyMWxiemM",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.149Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaenNMenRRM1YtV3M",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTl9WMzhvODV4eTg",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaS0NQZUxlWUtRSTA",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQadlJLZHdsRVIyZ1U",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaS0gxRG52c0t0a1E",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaejZ4Z0FBU0lLZUk",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaNDVRaS11Sk1scFU",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaRkx5YjA5NEZuZjQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaOUJWWklHU1JYdmM",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaR0hvQXByeGNuUDg",
+      "removed": true,
+      "time": "2016-02-14T18:06:44.687Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaRG91TDJWZC1rQmc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQacnNEeFJsRUswRDg",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaT2tCMF9HYk1lSWc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaUlk1UzRVd3AxU2c",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaR0dicnp2SGZ2dzg",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaT2FYSWRVb3N1YkU",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYWhtOFZLMDRRREU",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQadkNuMm5OdlNOOVk",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaMXF3dW9oSXkxOG8",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaRWNka1l2NVNXU0k",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.446Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaSkRnMmg4d2NndzQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWHBMMU5OWTEtOWc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaSWdFckJxUWhCWUE",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQad0xKMjRQR2QzZzQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVHZGQWVreklGYXM",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTDQwbFF2QUxBQWc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaQTZxWk51WFFwZHc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVU5QaDBvelhBT1k",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQabmEzZEQyZ2RrTGc",
+      "removed": true,
+      "time": "2016-02-14T18:06:45.981Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQabU5ZT2l5NWtCY00",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaN2p4cngzVnFPeE0",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQabjZ4ZE82dGdYZjA",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYVIyMFN3SWQ2S1E",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVXBwNEFKM1R4cDQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYzdwRnNtTl9Va2s",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaek5ZQ2xmZnd0Rms",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZkVLVU9JRmpDMU0",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYlVhS3FlTW50TFE",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTnozVHdoSWlMQ1U",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaNjV3UG9IRDF6b0E",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQabWVybUdsVllnTDQ",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaa1p6dFEyUWQxems",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaQlBZbEpPSThkTXM",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQabGVZOTI5eWJXUG8",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaa3hweDNmM2I0eGs",
+      "removed": true,
+      "time": "2016-02-14T18:06:47.099Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaU3BESkdScmU0Vnc",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.119Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaSVlMdXpQUmtMOXc",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaUGFGS2xXRnJndTA",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQac25LRnNJQ1VRems",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaMW1yQnNBUUZCUE0",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTlpfNmpnX1N1dFk",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVU03TFFsOUFBOVk",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaQVFhZm1ITzFmNFU",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTm5fSGtiUmtIY1k",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYXBldE1JNWhfZ0U",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZFhPWHQ1R09hQjg",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQadjdVbXgzMFVqVFE",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaaDFta25ZOHNCVEk",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaYmZPRDdQbk9Fc1k",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVWZCSU16bno1clU",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQacDExMjc0ZG44T0E",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWnE2TXhCM056a28",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaVmV0LVBTM09sTkk",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaTzl4LUFfa3dQeGM",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaZG1Ba1FMX3pxRlU",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaNk9USmNESzVQbUU",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaNXgyV2dsMnZneTg",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQac1o4cnNaejNvSWc",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQad2tNRzZ2bUk1eU0",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaREFJckNoSFJRX1U",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaa1hCeFhFaXZSd3M",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQacE1zdlFMQnM0ak0",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaSHZZb3RKdzBvdkU",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaUDdWQ1BFdTRRMG8",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaQWJ4Q0RNZnN1SUE",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWjRPVW1ZMy1kbDg",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWnZfcFFCamc0YTg",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaWWE0RDZYOWhfYVE",
+      "removed": true,
+      "time": "2016-02-14T18:06:48.340Z"
+    }
+  ]
+}
+=========================================================================================
+GET https://www.googleapis.com/drive/v3/about
+{
+	"kind": "drive#about",
+	"user": {
+		"kind": "drive#user",
+		"displayName": "pradeep kanukuntla",
+		"photoLink": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg",
+		"me": true,
+		"permissionId": "15445378977656088305",
+		"emailAddress": "pk455375@gmail.com"
+	},
+	"storageQuota": {
+		"limit": "16106127360",
+		"usage": "920238934",
+		"usageInDrive": "741724073",
+		"usageInDriveTrash": "232"
+	},
+	"importFormats": {
+		"application/x-vnd.oasis.opendocument.presentation": [
+			"application/vnd.google-apps.presentation"
+		],
+		"text/tab-separated-values": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"image/jpeg": [
+			"application/vnd.google-apps.document"
+		],
+		"image/bmp": [
+			"application/vnd.google-apps.document"
+		],
+		"image/gif": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.ms-excel.sheet.macroenabled.12": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.template": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.ms-powerpoint.presentation.macroenabled.12": [
+			"application/vnd.google-apps.presentation"
+		],
+		"application/vnd.ms-word.template.macroenabled.12": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
+			"application/vnd.google-apps.document"
+		],
+		"image/pjpeg": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.google-apps.script+text/plain": [
+			"application/vnd.google-apps.script"
+		],
+		"application/vnd.ms-excel": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/vnd.sun.xml.writer": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.ms-word.document.macroenabled.12": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.ms-powerpoint.slideshow.macroenabled.12": [
+			"application/vnd.google-apps.presentation"
+		],
+		"text/rtf": [
+			"application/vnd.google-apps.document"
+		],
+		"text/plain": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.oasis.opendocument.spreadsheet": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/x-vnd.oasis.opendocument.spreadsheet": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"image/png": [
+			"application/vnd.google-apps.document"
+		],
+		"application/x-vnd.oasis.opendocument.text": [
+			"application/vnd.google-apps.document"
+		],
+		"application/msword": [
+			"application/vnd.google-apps.document"
+		],
+		"application/pdf": [
+			"application/vnd.google-apps.document"
+		],
+		"application/json": [
+			"application/vnd.google-apps.script"
+		],
+		"application/x-msmetafile": [
+			"application/vnd.google-apps.drawing"
+		],
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.template": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/vnd.ms-powerpoint": [
+			"application/vnd.google-apps.presentation"
+		],
+		"application/vnd.ms-excel.template.macroenabled.12": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"image/x-bmp": [
+			"application/vnd.google-apps.document"
+		],
+		"application/rtf": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.openxmlformats-officedocument.presentationml.template": [
+			"application/vnd.google-apps.presentation"
+		],
+		"image/x-png": [
+			"application/vnd.google-apps.document"
+		],
+		"text/html": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.oasis.opendocument.text": [
+			"application/vnd.google-apps.document"
+		],
+		"application/vnd.openxmlformats-officedocument.presentationml.presentation": [
+			"application/vnd.google-apps.presentation"
+		],
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/vnd.google-apps.script+json": [
+			"application/vnd.google-apps.script"
+		],
+		"application/vnd.openxmlformats-officedocument.presentationml.slideshow": [
+			"application/vnd.google-apps.presentation"
+		],
+		"application/vnd.ms-powerpoint.template.macroenabled.12": [
+			"application/vnd.google-apps.presentation"
+		],
+		"text/csv": [
+			"application/vnd.google-apps.spreadsheet"
+		],
+		"application/vnd.oasis.opendocument.presentation": [
+			"application/vnd.google-apps.presentation"
+		],
+		"image/jpg": [
+			"application/vnd.google-apps.document"
+		],
+		"text/richtext": [
+			"application/vnd.google-apps.document"
+		]
+	},
+	"exportFormats": {
+		"application/vnd.google-apps.form": [
+			"application/zip"
+		],
+		"application/vnd.google-apps.document": [
+			"application/rtf",
+			"application/vnd.oasis.opendocument.text",
+			"text/html",
+			"application/pdf",
+			"application/zip",
+			"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+			"text/plain"
+		],
+		"application/vnd.google-apps.drawing": [
+			"image/svg+xml",
+			"image/png",
+			"application/pdf",
+			"image/jpeg"
+		],
+		"application/vnd.google-apps.spreadsheet": [
+			"text/csv",
+			"application/x-vnd.oasis.opendocument.spreadsheet",
+			"application/zip",
+			"application/pdf",
+			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+		],
+		"application/vnd.google-apps.script": [
+			"application/vnd.google-apps.script+json"
+		],
+		"application/vnd.google-apps.presentation": [
+			"application/vnd.openxmlformats-officedocument.presentationml.presentation",
+			"application/pdf",
+			"text/plain"
+		]
+	},
+	"maxImportSizes": {
+		"application/vnd.google-apps.document": "10485760",
+		"application/vnd.google-apps.spreadsheet": "104857600",
+		"application/vnd.google-apps.presentation": "104857600",
+		"application/vnd.google-apps.drawing": "2097152"
+	},
+	"maxUploadSize": "5242880000000",
+	"appInstalled": false,
+	"folderColorPalette": [
+		"#ac725e",
+		"#d06b64",
+		"#f83a22",
+		"#fa573c",
+		"#ff7537",
+		"#ffad46",
+		"#fad165",
+		"#fbe983",
+		"#b3dc6c",
+		"#7bd148",
+		"#16a765",
+		"#42d692",
+		"#92e1c0",
+		"#9fe1e7",
+		"#9fc6e7",
+		"#4986e7",
+		"#9a9cff",
+		"#b99aff",
+		"#a47ae2",
+		"#cd74e6",
+		"#f691b2",
+		"#cca6ac",
+		"#cabdbf",
+		"#8f8f8f"
+	]
+}
+=========================
+no changes
+-----------
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2848",
+  "changes": []
+}
+===============================
+sample.xml Added(in webhook testing room)
+-----------------
+get https://www.googleapis.com/drive/v3/changes?pageToken=2580
+	
+	Header : Authorization Bearer  ya29.CjM7AyklT6gMI9tPU3Zu5QKOl06_o22RGA8_m7lnWhNw9jpyVfCkF_2MDJkr4D8djk8Ij4E
+
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2823",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaclRuMW52MHpMTGM",
+      "removed": false,
+      "time": "2016-08-10T03:20:55.736Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaclRuMW52MHpMTGM",
+        "name": "Drive Webhook Test",
+        "mimeType": "application/vnd.google-apps.folder"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaclg3YmR2b0FqV00",
+      "removed": false,
+      "time": "2016-08-10T03:21:07.765Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaclg3YmR2b0FqV00",
+        "name": "sample.xml",
+        "mimeType": "text/xml"
+      }
+    }
+  ]
+}
+======================
+uploaded GETRUNTIMEACCESSTOKENFLOW.txt(main dir)
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2828",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQadmUwZk1ydzNCZ0E",
+      "removed": false,
+      "time": "2016-08-10T03:24:45.631Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQadmUwZk1ydzNCZ0E",
+        "name": "GETRUNTIMEACCESSTOKENFLOW.txt",
+        "mimeType": "text/plain"
+      }
+    }
+  ]
+}
+==============================
+added doc(eidiko proj)
+--------------
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2856",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "0B67R--HNWuQaclRuMW52MHpMTGM",
+      "removed": false,
+      "time": "2016-08-10T03:58:39.571Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaclRuMW52MHpMTGM",
+        "name": "Drive Webhook Test",
+        "mimeType": "application/vnd.google-apps.folder"
+      }
+    },
+    {
+      "kind": "drive#change",
+      "fileId": "1eEW8A0R19NZuv4jEFthDtXj07MUafJnfMEtqom49bj4",
+      "removed": false,
+      "time": "2016-08-10T03:59:08.704Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1eEW8A0R19NZuv4jEFthDtXj07MUafJnfMEtqom49bj4",
+        "name": "eidiko proj",
+        "mimeType": "application/vnd.google-apps.document"
+      }
+    }
+  ]
+}
+=================================
+added spread sheet
+-----------------
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2865",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "1mpsNPkeaVxOoJf_j3gHgDoLISjBlbSEHlcJdUAYZpXM",
+      "removed": false,
+      "time": "2016-08-10T04:27:22.176Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1mpsNPkeaVxOoJf_j3gHgDoLISjBlbSEHlcJdUAYZpXM",
+        "name": "Eidiko spreadsheet",
+        "mimeType": "application/vnd.google-apps.spreadsheet"
+      }
+    }
+  ]
+}
+=========================================
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "2925",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "1Yd6zgoL-AmogxW9tGe00KniGBOiar0YpQGbwrYjVQCM",
+      "removed": false,
+      "time": "2016-08-11T04:53:14.982Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1Yd6zgoL-AmogxW9tGe00KniGBOiar0YpQGbwrYjVQCM",
+        "name": "my slide_copy",
+        "mimeType": "application/vnd.google-apps.presentation"
+      }
+    }
+  ]
+}
+========================================
+docx and excel
+-------------------
+{
+      "kind": "drive#change",
+      "fileId": "0B8Frq-z2gVGETWpJTjJ6SFJ3cG8",
+      "removed": false,
+      "time": "2016-08-16T06:13:45.634Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B8Frq-z2gVGETWpJTjJ6SFJ3cG8",
+        "name": "confluence.docx",
+        "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      }
+	  
+	  https://docs.google.com/document/d/1SEbiXRy8rIQ0wW6YHjScRfFxCA5ozao9Jq3ncTQLieA/edit
+	  
+	  
+	  {
+      "kind": "drive#change",
+      "fileId": "0B8Frq-z2gVGEMUpvVGJaTW1BVkE",
+      "removed": false,
+      "time": "2016-08-16T06:15:04.808Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B8Frq-z2gVGEMUpvVGJaTW1BVkE",
+        "name": "JPPL_Sprint3_TestResults.xlsx",
+        "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      }
+	https://docs.google.com/spreadsheets/d/1VzYAP1D_28QDg-17ioSaVKRq8T77mJC76nT7I8IPsfE/edit#gid=0  
+	  
+	  
+	  
+form
+---------------
+{
+      "kind": "drive#change",
+      "fileId": "1WBmLVU8Ons9c6srmuk00a8s7zGHpyLvKVU9uO5YXxyY",
+      "removed": false,
+      "time": "2016-08-16T06:53:49.808Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1WBmLVU8Ons9c6srmuk00a8s7zGHpyLvKVU9uO5YXxyY",
+        "name": "Untitled form",
+        "mimeType": "application/vnd.google-apps.form"
+      }
+https://docs.google.com/forms/d/1WBmLVU8Ons9c6srmuk00a8s7zGHpyLvKVU9uO5YXxyY/edit
+
+
+-----------------------------
+drawing
+
+{
+      "kind": "drive#change",
+      "fileId": "1ynHCbtjugwQdtirmSXwYir-l_anFACx3C98B8deQkCg",
+      "removed": false,
+      "time": "2016-08-16T07:12:33.321Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1ynHCbtjugwQdtirmSXwYir-l_anFACx3C98B8deQkCg",
+        "name": "Cisco Drawing",
+        "mimeType": "application/vnd.google-apps.drawing"
+      }
+	  
+https://docs.google.com/drawings/d/1ynHCbtjugwQdtirmSXwYir-l_anFACx3C98B8deQkCg/edit
+
+=================================================
+pdf added
+------------------
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "38",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "0BxQz5u-pOxnaTktqdXM1VmZ2cHM",
+      "removed": false,
+      "time": "2016-08-22T06:47:06.085Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0BxQz5u-pOxnaTktqdXM1VmZ2cHM",
+        "name": "pdf.pdf",
+        "mimeType": "application/pdf"
+      }
+    }
+  ]
+}
+
+https://annotatepdf.appspot.com/#/edit/0BxQz5u-pOxnaTktqdXM1VmZ2cHM
+https://www.googleapis.com/drive/v3/files/0BxQz5u-pOxnaTktqdXM1VmZ2cHM/comments?fields=comments,kind,nextPageToken
+
+pdf viewer
+--------------
+https://annotatepdf.appspot.com/#/edit/1sibXhovF3ijWtDeVDQckh15FenL1iMetQNTmOSXm8NnI_2yCgGyF9ulbe4kB
+
+===============================================
+maps
+-----------
+{
+  "kind": "drive#changeList",
+  "newStartPageToken": "525",
+  "changes": [
+    {
+      "kind": "drive#change",
+      "fileId": "1-TtD4XcK-QNTlvtmRtyN3hNbA4c",
+      "removed": false,
+      "time": "2016-08-16T07:25:19.716Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "1-TtD4XcK-QNTlvtmRtyN3hNbA4c",
+        "name": "Cisco Map",
+        "mimeType": "application/vnd.google-apps.map"
+      }
+    }
+  ]
+}
+
+
+https://www.google.com/maps/d/edit?mid=1uPIpc0VmTPBM_BMfA7-AQsOqCG0
+
+======================================
+for Docs = https://docs.google.com/document/d/1eEW8A0R19NZuv4jEFthDtXj07MUafJnfMEtqom49bj4
+for spreadsheet = https://drive.google.com/drive/folders/0B67R--HNWuQaclRuMW52MHpMTGM
+				  https://docs.google.com/spreadsheets/d/1mpsNPkeaVxOoJf_j3gHgDoLISjBlbSEHlcJdUAYZpXM/edit#gid=0
+				  
+for folders = https://drive.google.com/drive/folders/0B67R--HNWuQaclRuMW52MHpMTGM
+=================================================
+google site
+------------------
+https://sites.google.com/s/0B67R--HNWuQaRVAyOFUzZi1rS0E/p/0B67R--HNWuQaU1hxcWhwSmpMM2M/edit
+
+
+{
+  "kind": "drive#changeList",
+  "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/yZsIKPL1Bxgzknm65AA-dMMvVRI\"",
+  "selfLink": "https://www.googleapis.com/drive/v2/changes?pageToken=6000",
+  "largestChangeId": "6020",
+  "items": [
+    {
+      "kind": "drive#change",
+      "id": "6020",
+      "fileId": "0B67R--HNWuQaRVAyOFUzZi1rS0E",
+      "selfLink": "https://www.googleapis.com/drive/v2/changes/6020",
+      "deleted": false,
+      "modificationDate": "2016-12-16T07:01:47.531Z",
+      "file": {
+        "kind": "drive#file",
+        "id": "0B67R--HNWuQaRVAyOFUzZi1rS0E",
+        "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/MTQ4MTg3MTcwNzQyNg\"",
+        "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaRVAyOFUzZi1rS0E",
+        "alternateLink": "https://sites.google.com/s/0B67R--HNWuQaRVAyOFUzZi1rS0E/edit?userId=-1992581115796282648",
+        "embedLink": "https://drive.google.com/file/d/0B67R--HNWuQaRVAyOFUzZi1rS0E/preview?usp=drivesdk",
+        "iconLink": "https://lh3.googleusercontent.com/-3IJJGEnZKCE/V3veYM26CbI/AAAAAAAACKM/FcHoaxs_UB8U_DmzopL4PzfFV_Udsop0wCLcB/s16-c-k/Atari_ICN_16.png",
+        "thumbnailLink": "https://lh3.googleusercontent.com/TpDcQ_Fo9NPUv7QfDvUwuGMKjeQeWv9hFePLc-ipANmVniFwG8HlURsV5mCV5_ScAuVPkA=s220",
+        "title": "MyGSite",
+        "mimeType": "application/vnd.google-apps.site",
+        "labels": {
+          "starred": false,
+          "hidden": false,
+          "trashed": false,
+          "restricted": false,
+          "viewed": true
+        },
+        "createdDate": "2016-12-16T07:01:35.085Z",
+        "modifiedDate": "2016-12-16T07:01:47.426Z",
+        "modifiedByMeDate": "2016-12-16T07:01:47.426Z",
+        "lastViewedByMeDate": "2016-12-16T07:01:47.426Z",
+        "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+        "version": "6019",
+        "parents": [
+          {
+            "kind": "drive#parentReference",
+            "id": "0AK7R--HNWuQaUk9PVA",
+            "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaRVAyOFUzZi1rS0E/parents/0AK7R--HNWuQaUk9PVA",
+            "parentLink": "https://www.googleapis.com/drive/v2/files/0AK7R--HNWuQaUk9PVA",
+            "isRoot": true
+          }
+        ],
+        "userPermission": {
+          "kind": "drive#permission",
+          "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/VIc5I8rq4xwwqP54pULFknihG7s\"",
+          "id": "me",
+          "selfLink": "https://www.googleapis.com/drive/v2/files/0B67R--HNWuQaRVAyOFUzZi1rS0E/permissions/me",
+          "role": "owner",
+          "type": "user"
+        },
+        "quotaBytesUsed": "0",
+        "ownerNames": [
+          "pradeep kanukuntla"
+        ],
+        "owners": [
+          {
+            "kind": "drive#user",
+            "displayName": "pradeep kanukuntla",
+            "picture": {
+              "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+            },
+            "isAuthenticatedUser": true,
+            "permissionId": "15445378977656088305",
+            "emailAddress": "pk455375@gmail.com"
+          }
+        ],
+        "lastModifyingUserName": "pradeep kanukuntla",
+        "lastModifyingUser": {
+          "kind": "drive#user",
+          "displayName": "pradeep kanukuntla",
+          "picture": {
+            "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+          },
+          "isAuthenticatedUser": true,
+          "permissionId": "15445378977656088305",
+          "emailAddress": "pk455375@gmail.com"
+        },
+        "editable": true,
+        "copyable": false,
+        "writersCanShare": true,
+        "shared": false,
+        "explicitlyTrashed": false,
+        "appDataContents": false,
+        "properties": [
+          {
+            "kind": "drive#property",
+            "etag": "\"m64ksZC09nG4-fB1IRhNTNcF3vg/OsnAyqRfscVuK0NdpXiuJMro-Zs\"",
+            "key": "is_site_document",
+            "visibility": "PUBLIC",
+            "value": "true"
+          }
+        ],
+        "spaces": [
+          "drive"
+        ]
+      }
+    }
+  ]
+}
+
+=======================================================
+https://www.googleapis.com/drive/v3/files/1HempTQ6kYz0i-Od897uUL5XiCMeL15e7vMUNTfiX6Io/comments?fields=comments,kind,nextPageToken
+
+comment create
+----------------------
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAxneQLo",
+      "createdTime": "2016-08-17T09:43:53.764Z",
+      "modifiedTime": "2016-08-17T09:43:53.764Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "Cisco Eidiko",
+        "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+        "me": true
+      },
+      "htmlContent": "looks like easy task",
+      "content": "looks like easy task",
+      "deleted": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Hi"
+      },
+      "anchor": "kix.8k223dnwlw6w",
+      "replies": []
+    }
+  ]
+}
+---------------------
+comment Replay
+---------------------
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAxneQLo",
+      "createdTime": "2016-08-17T09:43:53.764Z",
+      "modifiedTime": "2016-08-17T09:45:11.245Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "Cisco Eidiko",
+        "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+        "me": true
+      },
+      "htmlContent": "looks like easy task",
+      "content": "looks like easy task",
+      "deleted": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Hi"
+      },
+      "anchor": "kix.8k223dnwlw6w",
+      "replies": [
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAxneQLs",
+          "createdTime": "2016-08-17T09:45:11.245Z",
+          "modifiedTime": "2016-08-17T09:45:11.245Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "Cisco Eidiko",
+            "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+            "me": true
+          },
+          "htmlContent": "ok",
+          "content": "ok",
+          "deleted": false
+        }
+      ]
+    }
+  ]
+}
+---------------------------
+replay
+--
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAxneQLo",
+      "createdTime": "2016-08-17T09:43:53.764Z",
+      "modifiedTime": "2016-08-17T09:51:43.990Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "Cisco Eidiko",
+        "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+        "me": true
+      },
+      "htmlContent": "looks like easy task",
+      "content": "looks like easy task",
+      "deleted": false,
+      "resolved": false,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Hi"
+      },
+      "anchor": "kix.8k223dnwlw6w",
+      "replies": [
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAxneQLs",
+          "createdTime": "2016-08-17T09:45:11.245Z",
+          "modifiedTime": "2016-08-17T09:45:11.245Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "Cisco Eidiko",
+            "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+            "me": true
+          },
+          "htmlContent": "ok",
+          "content": "ok",
+          "deleted": false
+        },
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAxndW1A",
+          "createdTime": "2016-08-17T09:51:43.990Z",
+          "modifiedTime": "2016-08-17T09:51:43.990Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "Cisco Eidiko",
+            "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+            "me": true
+          },
+          "htmlContent": "i will check it",
+          "content": "i will check it",
+          "deleted": false
+        }
+      ]
+    }
+  ]
+}
+============================
+comment resolved
+-------------------
+{
+  "kind": "drive#commentList",
+  "comments": [
+    {
+      "kind": "drive#comment",
+      "id": "AAAAAxneQLo",
+      "createdTime": "2016-08-17T09:43:53.764Z",
+      "modifiedTime": "2016-08-17T10:14:10.166Z",
+      "author": {
+        "kind": "drive#user",
+        "displayName": "Cisco Eidiko",
+        "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+        "me": true
+      },
+      "htmlContent": "looks like easy task",
+      "content": "looks like easy task",
+      "deleted": false,
+      "resolved": true,
+      "quotedFileContent": {
+        "mimeType": "text/html",
+        "value": "Hi"
+      },
+      "anchor": "kix.8k223dnwlw6w",
+      "replies": [
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAxneQLs",
+          "createdTime": "2016-08-17T09:45:11.245Z",
+          "modifiedTime": "2016-08-17T09:59:46.152Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "Cisco Eidiko",
+            "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+            "me": true
+          },
+          "htmlContent": "hi hello",
+          "content": "hi hello",
+          "deleted": false
+        },
+        {
+          "kind": "drive#reply",
+          "id": "AAAAAxnuQKg",
+          "createdTime": "2016-08-17T10:14:10.166Z",
+          "modifiedTime": "2016-08-17T10:14:10.166Z",
+          "author": {
+            "kind": "drive#user",
+            "displayName": "Cisco Eidiko",
+            "photoLink": "//ssl.gstatic.com/s2/profiles/images/silhouette96.png",
+            "me": true
+          },
+          "deleted": false,
+          "action": "resolve"
+        }
+      ]
+    }
+  ]
+}
+
+======================================================================
+dev credentials
+--------------------
+UserMail:        ciscoeidikodev@outlook.com
+password:        CiscoEidiko@10
+AppName:         Cisco Spark Dev
+ClientId:        971699694203-nshfhghj1p6u2er5vrvk86gup2a4tdk4.apps.googleusercontent.com
+ClientSecret:    LoIYNAlPovodn9FBZuZgfNTh
+Redirecturl:     https://cisco-spark-integration-management-new-dev.cloudhub.io/
+======================================================
+UserName : Cisco spark 
+ID : ciscosparkdemo@outlook.com 
+Password : Integrations@411
+client_id : 372491498771-lk9l1i652digr4518adivrce8an5738k.apps.googleusercontent.com
+client_secret : zYUvvEqzdtTOkp8BaXxRpGKT
+redirect_uri : https://depot.ciscospark.com/
+=======================================================
+prod credentials
+-------------------------
+UserName : Cisco Eidiko 
+ID : ciscosparkintegrations@eidiko.com
+Password : CiscoEidiko@9
+client_id : 281078810714-va95phaieeh6luqgbil93h4j7jsvbes1.apps.googleusercontent.com
+client_secret : 2Q3cTLyDi47cZVEa0ODLcuwR
+redirect_uri : https://depot.ciscospark.com/
+
+
+unm=ciscoeidikodev@outlook.com
+pwd=CiscoEidiko@10
+------------------------------------
+"integrationSpecificAuthDetails": {
+    "tokenResponse": {
+      "access_token": "ya29.Ci9GA1saAPuSlmd8lPytPyEe1h8G_t64phb3eg9P8rkgbkX8MoTfjqdUR8rMog4vQA",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "refresh_token": "1/2Ga9hrOvSK8BfTDpLypHNyktquXbWjASQEpcA080N5Q"
+    }
+	
+	
+==========================================
+[
+  {
+    "tokenId": 441,
+    "applicationId": 10,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzNWJhMWNlYTVlNWMwNDdhNmYwNTc1ZjE1NjU0MWZiMmY1OGQ1NDczMDdkNmUyMWYzNDQ3NzBiNzdmOGMxNWFh",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
+    "accessToken": "ya29.Ci9HA0_Rlm1ptyI6tCYSSBuXBQrmYf-uoOq0UXevxoOm3GViNSxUudF_wuy6RUt5pA",
+    "expires": "2016-08-22T06:51:26",
+    "refreshExpires": null,
+    "refreshToken": "1/gTKvW4cTiTGQvvVhO9SzRmvM6cgGpVBpTNcjJNMQgac",
+    "subDomain": null
+  }
+]
+=================
+put
+----------
+{
+  "accessToken": "ya29.CjBQA9qC0BG0Xbcql1Kkfui5laPDioxnsYDUhVouxAvg5N4X0nZYK0pr1NyCJrhaBK8",
+  "expires": 3600
+}
+=====================================
+settings
+--------------------
+{
+  "googleDriveUser": {
+    "user": {
+      "kind": "drive#user",
+      "displayName": "pradeep kanukuntla",
+      "picture": {
+        "url": "https://lh4.googleusercontent.com/-vJD155iWwzg/AAAAAAAAAAI/AAAAAAAAACI/1wyeSuQpl8w/s64/photo.jpg"
+      },
+      "isAuthenticatedUser": true,
+      "permissionId": "15445378977656088305",
+      "emailAddress": "pk455375@gmail.com"
+    }
+  },
+  "googleDriveFolders": {
+    "Folders": [
+      "pradeep Test1",
+      "Drive Webhook Test"
+    ],
+    "Files": [
+      "pradeep doc",
+      "pradeep Docs",
+      "cisco drawing",
+      "papertrail-bundle1.pem",
+      "pdf.pdf",
+      "confluence.docx",
+      "pradeep prep",
+      "confluence.docx",
+      "Eidiko spreadsheet",
+      "myw3schoolsimage.jpg",
+      "pdf.pdf",
+      "newrelic-responses.txt",
+      "Employee management system.docx",
+      "Stripe.txt",
+      "scatter-gather_in_pagerduty.txt",
+      "DriveWebhooks",
+      "Examplesprograms.zip",
+      "Project2.zip",
+      "JSP.zip",
+      "project softwares.zip",
+      "A Cocktail Approach for Travel.zip",
+      "TEXTBOOK_JOHN_Cloud Computing_Implementation,Management and Security.pdf",
+      "TEXTBOOK_BUYYA_cloud computing_principles_and_paradigms.pdf",
+      "TEXTBOOK_HWANG_distributed and cloud computing.pdf",
+      "oracle-form-report.pdf"
+    ]
+  }
+}
+
+======================================================================================
+when token revoke
+--------------------
+{
+  "googleDriveSettingsResponse": {
+    "error": "invalid_grant",
+    "error_description": "Token has been expired or revoked."
+  }
+}
+
+=========================================================================
+Test By API (kpradeep455375)
+------------------------------
+c_id = 425093181331-ek0vf29ca72urd68c3ral091ebqfkf84.apps.googleusercontent.com
+
+c_sec = n0cxfPvPDmpffivAUNLtjCE5
+
+R_url = https://depot.ciscospark.com/
+
+code Generation:
+-----------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/drive&access_type=offline&state=security_token%3D138r5719ru3e1%26url%3Dhttps://oa2cb.example.com/myHome&redirect_uri=https://depot.ciscospark.com/&response_type=code&client_id=425093181331-ek0vf29ca72urd68c3ral091ebqfkf84.apps.googleusercontent.com
+
+
+
+{
+  "access_token": "ya29.GlvjA3qy6v9NhIANKY9s4S2cI36Umn9JED-90HYWaOIJa8XyK03QusaqX5K6ciTRhiYj53j1hGrUkDamh8w5W6wwD4fqrqL2qEXB-vbsSqzg6Bx1HksxLzPhJKS1",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/ZSYuqHeyFzF5q6J7X9Rzw4AeHhkGSFL2GZQ1o_E00WknFGQ84m8SpCl-4bnjjpHe"
+}
+
+

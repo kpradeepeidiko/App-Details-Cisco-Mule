@@ -1,0 +1,5 @@
+{
+  "tokenResponse": {
+    "message": "You must provide domain url for OAuth"
+  }
+}

@@ -1,0 +1,266 @@
+project name =eidikocalender
+
+Api key=AIzaSyA93K172jgvXl9_LDjoGN3hfAE-aLEOmPo
+
+email=calendercisco@gmail.com
+password=sarasu10
+
+ClientId=351638767458-u1b5gn103mohg80smk7qn3oadvgtkg0b.apps.googleusercontent.com
+
+ClientSecret=3bNG84xYK2H7r2QorbMkeXv4
+redirect_uri=https://requestb.in/1dubelg1
+Scope=https://www.googleapis.com/auth/calendar //Read write
+
+Authrization code
+======================
+
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
+&access_type=offline&state=security_token&redirect_uri=https://requestb.in/1dubelg1
+&response_type=code&client_id=351638767458-u1b5gn103mohg80smk7qn3oadvgtkg0b.apps.googleusercontent.com
+
+=======================================================================================
+POST https://www.googleapis.com/oauth2/v4/token
+
+{
+  "access_token": "ya29.Ci9kA1X_CMF4ERTQomWBAwz8kP9_Xh4fmJKFQGBUD5XqTxrynuYC6CGBP_Ln_JQflQ",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/yvI9afCr2T5eQVnMkDw0EPo_qiUM76Q7KGjhPUkOu9A"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================
+prod
+---------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
+&access_type=offline&redirect_uri=https://depot.ciscospark.com/
+&response_type=code&client_id=281078810714-va95phaieeh6luqgbil93h4j7jsvbes1.apps.googleusercontent.com
+
+{
+  "access_token": "ya29.Ci9kAxYadzBX0eKcx1IeX9zlCziSlQJDIK0iV8EAhgIi52bBcu-o6bszibhSA8_vtA",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/Psxkn-l0-gohPeYA4AgJ4sT4PwZJuIFUtbiIenhyZKs"
+}
+
+
+======================================================
+
+dev
+--------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
+&access_type=offline&redirect_uri=https://cisco-spark-integration-management-new-dev.cloudhub.io/
+&response_type=code&client_id=971699694203-nshfhghj1p6u2er5vrvk86gup2a4tdk4.apps.googleusercontent.com
+
+
+
+
+
+{
+  "access_token": "ya29.Ci9kA4I0ZttigSKblGH_PEuKASf6DTimrAx8z1xYFB3TY9bOpKnIK2YIkM8WPBEgWQ",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/jqEEd7lNaFje_WHecEF3PY9Atp8TCp9A4x84UWbpxns"
+}
+=================================
+final added domain in dev
+-------------------------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
+&access_type=offline&redirect_uri=https://cisco-spark-integration-management-new-dev.cloudhub.io/
+&response_type=code&client_id=115073480405-qopk4jee450f35sjirovbo69c1130ka8.apps.googleusercontent.com
+
+
+POST https://www.googleapis.com/oauth2/v4/token
+{
+  "access_token": "ya29.Ci9lAx-o-dB3Lf46qbVTWR1EGb7JWg0-DuE6yFXV7MazPFbVLM6bbjDQQ0ePRDOiwQ",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/tOxBPAJ_-68dwOzjA8cCLEmfxkoFFIk-o2H9-EvNbNw"
+}
+
+
+============
+{
+  "error": "invalid_grant",
+  "error_description": "Bad Request"
+}
+
+
+{error=invalid_grant, error_description=Bad Request}
+===============
+convert unix timestamp
+--------------------------
+http://www.timestampconvert.com/?
+go2=true&offset=-5.5&timestamp=1475207577000&
+Submit=++++++Convert+to+Date++++++
+
+
+watch request for varma calender
+----------------------------------
+https://www.googleapis.com/calendar/v3/calendars/1c1nsrpaoek2tam03dc77f5ht8@group.calendar.google.com/events/watch
+{
+  "id": "xyz",
+  "token":"ciscoSpark",
+  "address": "https://cisco-spark-integration-management-ext-dev.cloudhub.io/api/googleCalenderWebhooks/varma1234"
+}
+
+
+
+
+{
+  "error": {
+    "errors": [
+      {
+        "domain": "push",
+        "reason": "channelIdNotUnique",
+        "message": "Channel id varma123 not unique"
+      }
+    ],
+    "code": 400,
+    "message": "Channel id varma123 not unique"
+  }
+}
+
+
+#[message.inboundProperties.containsKey('user-agent=APIs-Google')]
+message.inboundProperties.containsKey('x-goog-channel-id')
+message.inboundProperties.containsKey('x-goog-resource-id')
+message.inboundProperties.containsKey('x-goog-resource-state')
+#[message.inboundProperties.containsKey('user-agent=APIs-Google') 
+|| message.inboundProperties.containsKey('x-goog-channel-id') 
+|| message.inboundProperties.containsKey('x-goog-resource-id') 
+|| message.inboundProperties.containsKey('x-goog-resource-state')]
+=====================================
+Headers
+-------------
+{
+	http.scheme = http, 
+	host = ef8ddadd.ngrok.io, 
+	x - forwarded -for = 66.249 .85 .152, 
+	accept = * /*, 
+	http.method=POST, 
+	x-goog-channel-id=sarasu786, 
+	http.relative.path=/api/hooks/sarasu786, 
+	user-agent=APIs-Google; (+https://developers.google.com/webmasters/APIs-Google.html), 
+	http.request.path=/api/hooks/sarasu786, 
+	x-goog-resource-state=exists, 
+	x-goog-resource-id=GGfFAKfkGxwsMIztAPJjQhWTSkA, 
+	http.uri.params=ParameterMap{[]}, 
+	x-goog-channel-expiration=Tue, 04 Oct 2016 09:40:28 GMT, 
+	x-goog-message-number=125700, 
+	x-forwarded-proto=https, 
+	http.query.string=, 
+	http.remote.address=/127.0.0.1:59693, 
+	http.request.uri=/api/hooks/sarasu786, 
+	x-goog-resource-uri=https://www.googleapis.com/calendar/v3/calendars/1c1nsrpaoek2tam03dc77f5ht8@group.calendar.google.com/events?maxResults=250&alt=json, http.version=HTTP/1.1, http.query.params=ParameterMap{[]}, content-length=0, http.listener.path=/api/hooks/sarasu786, accept-encoding=gzip,deflate,br
+}
+
+payload
+---------
+{NullPayload}
+
+========================================
+<poll doc:name="Poll">
+    <fixed-frequency-scheduler frequency="2" timeUnit="MINUTES"/>
+    <flow-ref name="startGoogleDrivePollingFlow" doc:name="startGoogleDrivePollingFlow"/>
+</poll>
+		
+======================================
+java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+String dateInString = flowVars.startTimeToConvertUTC;
+java.util.Date date = formatter.parse(dateInString);
+java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
+sdf.setTimeZone(TimeZone.getTimeZone("UTC")); 
+flowVars.startTimeToUTC = sdf.format(date);
+
+
+flowVars.utcDay = flowVars.startTimeToUTC.toString().split('T')[0]
+flowVars.utcTime = flowVars.startTimeToUTC.toString().split('T')[1]
+utcTimeAMPM = #[(new org.mule.el.datetime.DateTime(flowVars.utcTime)).format("hh:mm a")]
+=================================================================================================
+flowVars.startDate = flowVars.itemDetails.start.dateTime.toString().split('T')[0]
+flowVars.endDate = flowVars.itemDetails.start.dateTime.toString().split('T')[0]
+========================================================================================================
+min = #[(new org.mule.el.datetime.DateTime(server.dateTime)).plusHours(-24)]
+max = #[(new org.mule.el.datetime.DateTime(server.dateTime)).plusHours(24)]
+=================================================================================
+flowVars.itemDetails.toString().contains('recurrence')
+====================================================================
+time based reminders
+------------------------
+#[(flowVars.RTime>=flowVars.serverTimeMinusTwo && flowVars.RTime<=server.dateTime.format('hh:mm a')) && (flowVars.utcDay==server.dateTime.format("yyyy-MM-dd"))]
+ 
+ later
+ 
+#[(flowVars.RTime==flowVars.serverTimeMinusTwo || flowVars.RTime<=server.dateTime.format('hh:mm a')) && (flowVars.utcDay==server.dateTime.format("yyyy-MM-dd"))]
+======================================================================
+day based
+-----------------------
+#[(flowVars.remainderArray != []) && ((flowVars.dayTimeBase>=flowVars.serverTimeMinusTwo) && (flowVars.dayTimeBase<=server.dateTime.format('hh:mm a')))]
+
+later
+
+#[(flowVars.remainderArray != []) && ((flowVars.dayTimeBase==flowVars.serverTimeMinusTwo) || (flowVars.dayTimeBase==server.dateTime.format('hh:mm a')))]
+======================================================================
+
+token revoke condition
+-----------------------
+{
+  "message": {
+    "error": "invalid_grant",
+    "error_description": "Token has been expired or revoked."
+  }
+}
+
+==================================================================================================
+Through API (account : kpradeep455375@gmail.com)
+-------------
+c_id = 425093181331-ek0vf29ca72urd68c3ral091ebqfkf84.apps.googleusercontent.com
+
+c_sec = n0cxfPvPDmpffivAUNLtjCE5
+
+R_url = https://depot.ciscospark.com/
+
+code Generation:
+-----------------
+https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
+&access_type=offline&redirect_uri=https://depot.ciscospark.com/&response_type=code&client_id=425093181331-ek0vf29ca72urd68c3ral091ebqfkf84.apps.googleusercontent.com
+
+
+for pk455375
+--------------
+{
+  "access_token": "ya29.GlvkA2uioJvgxBB8pI5zPInbhblPh_wl5oiY_kYvv2SnlSk_i1WGJCV-6NWe9HxBWrFb9mNJ47CR9SL1BX256H5uAA9jaPCpnsF2VgloFQv7UQe9SJTAZ8slpfm4",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/YQeMm1zVgnoubJkmKaQuw2CPj6RrpoALaOl20sb6_d8"
+}
+
+for kpradeep.eidiko
+--------------------
+{
+  "access_token": "ya29.GlvkA5wylBMkiYW_hBR0NSzqEHVHtlZPoKMPQbHAICsksZi5w4LgI9elfsqNksWUVWTsunXgwz7KgYqg4w6CG5rUrs9nes1wU0SxyeCm20AzZdIRE1AISnCCLrEh",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "1/ISIj0skCkv8jzcPyxdQFeEG6rBjPZhnU0U1ZDL5NbCc"
+}
+
+
+

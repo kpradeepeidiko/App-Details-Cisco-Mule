@@ -1,0 +1,37 @@
+{
+  "office365CalendarsList": {
+    "@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars",
+    "value": [
+      {
+        "@odata.id": "https://outlook.office.com/api/v2.0/Users('bbea961d-bf45-4665-81d7-c190460288d7@c2f9884d-08ed-4256-b3d9-610f99bde877')/Calendars('AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSVAAAA')",
+        "Id": "AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSVAAAA",
+        "Name": "Calendar",
+        "Color": "Auto",
+        "ChangeKey": "oCKArC7bkEeTHUZkUDiD0AAAAAAlxw=="
+      },
+      {
+        "@odata.id": "https://outlook.office.com/api/v2.0/Users('bbea961d-bf45-4665-81d7-c190460288d7@c2f9884d-08ed-4256-b3d9-610f99bde877')/Calendars('AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSWAAAA')",
+        "Id": "AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSWAAAA",
+        "Name": "United States holidays",
+        "Color": "Auto",
+        "ChangeKey": "oCKArC7bkEeTHUZkUDiD0AAAAAAlyA=="
+      },
+      {
+        "@odata.id": "https://outlook.office.com/api/v2.0/Users('bbea961d-bf45-4665-81d7-c190460288d7@c2f9884d-08ed-4256-b3d9-610f99bde877')/Calendars('AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSYAAAA')",
+        "Id": "AQMkADI4MGJhNzk1LTI3MjYtNDc5NC04OTE0LWNhYjM5MzczMjhmZABGAAADb5hjjwdRuE2UeLY0xDF7GwcAoCKArC7bkEeTHUZkUDiD0AAAAgEGAAAAoCKArC7bkEeTHUZkUDiD0AAAAiSYAAAA",
+        "Name": "Birthdays",
+        "Color": "Auto",
+        "ChangeKey": "oCKArC7bkEeTHUZkUDiD0AAAAAAlyg=="
+      }
+    ]
+  },
+  "office365CalendarUser": {
+    "@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me",
+    "@odata.id": "https://outlook.office.com/api/v2.0/Users('bbea961d-bf45-4665-81d7-c190460288d7@c2f9884d-08ed-4256-b3d9-610f99bde877')",
+    "Id": "bbea961d-bf45-4665-81d7-c190460288d7@c2f9884d-08ed-4256-b3d9-610f99bde877",
+    "EmailAddress": "pavanvarma@Muleinfo.onmicrosoft.com",
+    "DisplayName": "pavan varma",
+    "Alias": "pavanvarma",
+    "MailboxGuid": "280ba795-2726-4794-8914-cab3937328fd"
+  }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<flow name="getOffice365SettingsFlow">
+		<logger message="office365 user ID =  #[flowVars['userId']]"
+			level="INFO" doc:name="Logger" />
+		<db:select config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[SELECT * from OFFICE365_SETTINGS WHERE user_id=#[flowVars['userId']]]]></db:parameterized-query>
+
+		</db:select>
+		<logger message="get O365 Settings= #[payload]" level="INFO"
+			doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when expression="#[payload != []]">
+				<dw:transform-message doc:name="Transform Message">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGetCalendarSettings.dwl"
+						mimeType="application/java" />
+					<dw:set-payload resource="classpath:dwScripts/buildGetCalendarSettings.dwl" />
+
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="No Results">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGoogleDriveNoResultExample.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGoogleDriveNoResultExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getOffice365SettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="postOffice365SettingsFlow">
+		<logger
+			message="POST EverNote ++++++++ #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<db:insert config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[INSERT INTO OFFICE365_SETTINGS(user_id,cursor_timestamp) values(#[payload['userId']],#[payload['cursorTime']])]]></db:parameterized-query>
+
+		</db:insert>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildGoogleDriveOperationExample.dwl"
+				mimeType="application/java" />
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGoogleDriveOperationExample.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in postOffice365SettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="putOffice365SettingsFlow">
+		<logger
+			message="O365 Put payload ++++++++ #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[UPDATE OFFICE365_SETTINGS set cursor_timestamp=#[payload['cursorTime']] where user_id=#[payload['userId']]]]></db:parameterized-query>
+
+		</db:update>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildGoogleDriveOperationExample.dwl"
+				mimeType="application/java" />
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGoogleDriveOperationExample.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in putOffice365SettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="deleteOffice365SettingsFlow">
+		<db:delete config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query><![CDATA[delete from OFFICE365_SETTINGS where user_id=#[flowVars['userId']]]]></db:parameterized-query>
+		</db:delete>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildGoogleDriveOperationExample.dwl"
+				mimeType="application/java" />
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGoogleDriveOperationExample.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in deleteOffice365SettingsFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+</mule>

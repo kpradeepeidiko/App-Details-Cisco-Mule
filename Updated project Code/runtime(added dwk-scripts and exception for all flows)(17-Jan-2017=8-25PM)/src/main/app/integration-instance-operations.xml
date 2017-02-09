@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+
+	<flow name="getIntegrationInstancesRouterFlow">
+		<flow-ref name="setIntegrationInstancesFiltersFlow" doc:name="setIntegrationInstancesFiltersFlow" />
+		<choice doc:name="Choice - Filters">
+			<when
+				expression="#[flowVars.integrationId == empty &amp;&amp; flowVars.userId != empty &amp;&amp; flowVars.instanceUuid == empty]">
+				<flow-ref name="getIntegrationInstancesPerUserFlow"
+					doc:name="Get Integration Instances Per User Flow Reference" />
+			</when>
+			<when
+				expression="#[flowVars.integrationId != empty &amp;&amp; flowVars.userId == empty &amp;&amp; flowVars.instanceUuid == empty]">
+				<flow-ref name="getIntegrationInstancesPerIntegrationFlow"
+					doc:name="Get Integration Instances Per Integration Flow Reference" />
+			</when>
+			<when
+				expression="#[flowVars.integrationId != empty &amp;&amp; flowVars.userId != empty &amp;&amp; flowVars.instanceUuid == empty]">
+				<flow-ref name="getIntegrationInstancesPerUserAndIntegrationFlow"
+					doc:name="getIntegrationInstancesPerUserAndIntegrationFlow" />
+			</when>
+			<when expression="#[flowVars.instanceUuid != empty]">
+				<flow-ref name="getIntegrationInstancesPerInstanceUuidFlow"
+					doc:name="Get Integration Instances Per Instance UUID Flow Reference" />
+			</when>
+			<otherwise>
+				<flow-ref name="getAllIntegrationInstancesFlow"
+					doc:name="Get All Integration Instances Flow Reference" />
+			</otherwise>
+		</choice>
+
+		<choice doc:name="Check Result Set Size">
+			<when expression="#[payload != []]">
+				<dw:transform-message doc:name="Build Get Integration Instances Response">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGetIntegrationInstancesResponse.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGetIntegrationInstancesResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Build No Results Message">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildSelectNoResultsResponse.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildSelectNoResultsResponse.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstancesRouterFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="setIntegrationInstancesFiltersFlow">
+		<set-variable variableName="userId"
+			value="#[message.inboundProperties.'http.query.params'.userId]"
+			doc:name="Set User ID" />
+		<set-variable variableName="integrationId"
+			value="#[message.inboundProperties.'http.query.params'.integrationId]"
+			doc:name="Set Integration ID" />
+		<set-variable variableName="status"
+			value="#[message.inboundProperties.'http.query.params'.status]"
+			doc:name="Set Integration Instance Status" />
+		<set-variable variableName="instanceUuid"
+			value="#[message.inboundProperties.'http.query.params'.instanceUuid]"
+			doc:name="Set Instance UUID" />
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in setIntegrationInstancesFiltersFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="getIntegrationInstancesPerUserFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE user_id = '#[flowVars['userId']]' AND status = #[flowVars['status']]]]></db:parameterized-query>
+
+
+		</db:select>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstancesPerUserFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="getIntegrationInstancesPerInstanceUuidFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE instance_uuid = #[flowVars['instanceUuid']] AND status = #[flowVars['status']]]]></db:parameterized-query>
+
+		</db:select>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstancesPerInstanceUuidFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="getIntegrationInstancesPerIntegrationFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE integration_id = #[flowVars['integrationId']] AND status = #[flowVars['status']]]]></db:parameterized-query>
+		</db:select>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstancesPerIntegrationFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="getIntegrationInstancesPerUserAndIntegrationFlow">
+
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE integration_id = #[flowVars['integrationId']] AND user_id = #[flowVars['userId']] AND status = #[flowVars['status']]]]></db:parameterized-query>
+
+
+		</db:select>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstancesPerUserAndIntegrationFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="getAllIntegrationInstancesFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE status = #[flowVars['status']]]]></db:parameterized-query>
+		</db:select>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getAllIntegrationInstancesFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="getIntegrationInstanceFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Get Integration Instance Details">
+			<db:parameterized-query><![CDATA[SELECT * FROM INTEGRATION_INSTANCES WHERE instance_id = #[flowVars['instanceId']]]]></db:parameterized-query>
+		</db:select>
+		<choice doc:name="Check Result Set Size">
+			<when expression="#[payload != []]">
+				<dw:transform-message doc:name="Build Get Integration Instance Response">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildGetIntegrationInstanceResponse.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGetIntegrationInstanceResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Build No Results Message">
+					<dw:input-payload
+						doc:sample="classpath:dwScripts/buildSelectNoResultsResponse.dwl"
+						mimeType="application/java" />
+					<dw:set-payload
+						resource="classpath:dwScripts/buildSelectNoResultsResponse.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in getIntegrationInstanceFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="postIntegrationInstanceFlow">
+		<logger message="post instance #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<dw:transform-message doc:name="Transform Json Field to Java">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromJsonFieldToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-variable resource="classpath:dwScripts/fromJsonFieldToJava.dwl"
+				variableName="jsonField" />
+		</dw:transform-message>
+		<logger
+			message="POSAT INTE #[payload], (map Notation = USer ID #[payload['userId']], Integration ID #[payload['channelId']]) +++++(Dot-notation USer ID #[payload.userId], Integration ID #[payload.channelId])"
+			level="INFO" doc:name="Logger" />
+		<db:insert config-ref="MySQL_Configuration" doc:name="Insert Integration Instance"
+			autoGeneratedKeys="true" autoGeneratedKeysColumnNames="instance_id">
+			<db:parameterized-query><![CDATA[INSERT INTO INTEGRATION_INSTANCES (integration_id, config_json, message_format, user_id, channel_id, status, created_date, updated_date, instance_uuid) VALUES (#[payload['integrationId']],#[flowVars.jsonField.toString()], #[payload['messageFormat']], #[payload['userId']],#[payload['channelId']] , #[payload['status']],#[server.dateTime.format('yyyy-MM-dd h:mm:ss')], #[server.dateTime.format('yyyy-MM-dd h:mm:ss')], #[payload['instanceUuid']])]]></db:parameterized-query>
+
+		</db:insert>
+		<dw:transform-message doc:name="Build Success Response">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildInsertSuccessResponse.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/buildInsertSuccessResponse.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in postIntegrationInstanceFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="putIntegrationInstanceFlow">
+		<logger message="uppate instance #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<set-variable variableName="config_json" value="#[json:configJson]"
+			doc:name="configJson" />
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:input-payload doc:sample="classpath:dwScripts/fromObjectToJava.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/fromObjectToJava.dwl" />
+		</dw:transform-message>
+		<db:update config-ref="MySQL_Configuration" doc:name="Update Integration Instance">
+			<db:parameterized-query><![CDATA[UPDATE INTEGRATION_INSTANCES SET 
+config_json = IF (#[payload['configJson'] != empty], #[flowVars['config_json']], config_json),
+message_format = IF (#[payload['messageFormat'] != empty], #[payload['messageFormat']], message_Format), 
+user_id = IF (#[payload['userId'] != empty], #[payload['userId']], user_id), 
+channel_id = IF (#[payload['channelId'] != empty], #[payload['channelId']], channel_id), 
+status = IF (#[payload['status'] != empty], #[payload['status']], status),  
+updated_date = #[server.dateTime.format('yyyy-MM-dd h:mm:ss')], 
+instance_uuid = IF (#[payload['instanceUuid'] != empty], #[payload['instanceUuid']], instance_uuid)
+WHERE instance_id = #[flowVars['instanceId']]]]></db:parameterized-query>
+
+
+		</db:update>
+		<dw:transform-message doc:name="Build Success Response">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildUpdateSuccessResponse.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/buildUpdateSuccessResponse.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in putIntegrationInstanceFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+	<flow name="deleteIntegrationInstanceFlow">
+		<db:delete config-ref="MySQL_Configuration" doc:name="Delete Integration Instance">
+			<db:parameterized-query><![CDATA[DELETE FROM INTEGRATION_INSTANCES WHERE instance_id = #[flowVars['instanceId']]]]></db:parameterized-query>
+		</db:delete>
+		<dw:transform-message doc:name="Build Success Response">
+			<dw:input-payload
+				doc:sample="classpath:dwScripts/buildDeleteSuccessResponse.dwl"
+				mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/buildDeleteSuccessResponse.dwl" />
+		</dw:transform-message>
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				logException="false">
+				<set-variable variableName="exception" value="#[exception.message]"
+					doc:name="exception" />
+				<logger
+					message="Exception in deleteIntegrationInstanceFlow = #[flowVars['exception']]"
+					level="INFO" doc:name="Logger" />
+
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+
+
+</mule>

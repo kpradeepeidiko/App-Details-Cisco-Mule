@@ -1,0 +1,10 @@
+{
+  "applicationId": 1,
+  "applicationName": "Bitbucket",
+  "description": "Bitbucket Application",
+  "authorizationType": "Oauth2",
+  "authorizationEndpoint": "https://bitbucket.org/site/oauth2/authorize",
+  "tokenEndpoint": "https://bitbucket.org/site/oauth2/access_token",
+  "tokenValidationUrl": "",
+  "clientId":""
+}

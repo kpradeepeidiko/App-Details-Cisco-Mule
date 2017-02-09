@@ -1,0 +1,39 @@
+{% extends "subscribe.html" %}
+
+{% block title %}
+Google Drive Push Notifications Playground - Monitor all changes
+{% endblock %}
+
+{% block sheader %}
+<script type="text/javascript">
+  // User interface messages
+  var messages = {
+    "unsubscribedTitle": "Subscribe to all changes in Drive",
+    "unsubscribedContent": "This is a demo application to receive push notifications for any changes to files in your Drive account.",
+    "subscribedTitle": "Subscribing",
+    "subscribedContent": "You are subscribed to receive changes to files in your Drive account. Make changes to a file to see the notifications.",
+    "subscribeButton": "Subscribe",
+    "waitMessage": "Please wait...",
+    "buttonUnsubscribe": "Unsubscribe"
+  }
+  // Make AJAX call to subscribe
+  var subscribeRequest = function(retryCount) {
+    var request = $.ajax({
+      type: "POST",
+      url: "/subscribe",
+      data: { state: "{{ state }}" },
+    })
+    request.done(function(msg){
+      updateSubscribed($.parseJSON(msg).notification_id);
+    });
+    request.fail(function(jqXHR){
+      retry(subscribeRequest, subscribeFailUpdate, jqXHR, retryCount)(++retryCount);
+    });
+  }
+
+  function subscribe() {
+    updateWait($("#subscribeButton"), messages['waitMessage'], true);
+    subscribeRequest(0);
+  }
+</script>
+{% endblock %}

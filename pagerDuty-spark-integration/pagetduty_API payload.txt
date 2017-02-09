@@ -1,0 +1,127 @@
+{
+	"messages": [{
+		"type": "incident.trigger",
+		"data": {
+			"incident": {
+				"id": "P0X54O4",
+				"incident_number": 39,
+				"created_on": "2017-01-06T05:03:43Z",
+				"status": "triggered",
+				"pending_actions": [{
+					"type": "resolve",
+					"at": "2017-01-06T09:03:43Z"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/P0X54O4",
+				"incident_key": null,
+				"service": {
+					"id": "PRQ5FD4",
+					"name": "dummySevice",
+					"html_url": "https://ctsoffice.pagerduty.com/services/PRQ5FD4",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PR758V9",
+					"name": "Test-Escalation",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PTE0R6O",
+					"name": "Naseer",
+					"email": "naseer.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O"
+				},
+				"trigger_summary_data": {
+					"description": "Mymule incident Description"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/P0X54O4/log_entries/R5I40QNR89ZEWB0FZ7YU4WR2SI",
+				"trigger_type": "trigger_svc_event",
+				"last_status_change_on": "2017-01-06T05:03:43Z",
+				"last_status_change_by": null,
+				"number_of_escalations": null,
+				"assigned_to": [{
+					"at": "2017-01-06T05:03:43Z",
+					"object": {
+						"id": "PTE0R6O",
+						"name": "Naseer",
+						"email": "naseer.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PTE0R6O",
+						"type": "user"
+					}
+				}, {
+					"at": "2017-01-06T05:03:43Z",
+					"object": {
+						"id": "PC8AH9P",
+						"name": "pradeep_k",
+						"email": "kpradeep.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "7ff3cf60-d3cd-11e6-b3ce-22000ae21df7",
+		"created_on": "2017-01-06T05:03:43Z"
+	}]
+}
+=============================================================
+{
+	"messages": [{
+		"type": "incident.assign",
+		"data": {
+			"incident": {
+				"id": "P0X54O4",
+				"incident_number": 39,
+				"created_on": "2017-01-06T05:03:43Z",
+				"status": "triggered",
+				"pending_actions": [{
+					"type": "resolve",
+					"at": "2017-01-06T09:03:43Z"
+				}],
+				"html_url": "https://ctsoffice.pagerduty.com/incidents/P0X54O4",
+				"incident_key": null,
+				"service": {
+					"id": "PRQ5FD4",
+					"name": "dummySevice",
+					"html_url": "https://ctsoffice.pagerduty.com/services/PRQ5FD4",
+					"deleted_at": null,
+					"description": ""
+				},
+				"escalation_policy": {
+					"id": "PR758V9",
+					"name": "Test-Escalation",
+					"deleted_at": null
+				},
+				"assigned_to_user": {
+					"id": "PC8AH9P",
+					"name": "pradeep_k",
+					"email": "kpradeep.eidiko@gmail.com",
+					"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P"
+				},
+				"trigger_summary_data": {
+					"description": "Mymule incident Description"
+				},
+				"trigger_details_html_url": "https://ctsoffice.pagerduty.com/incidents/P0X54O4/log_entries/R5I40QNR89ZEWB0FZ7YU4WR2SI",
+				"trigger_type": "trigger_svc_event",
+				"last_status_change_on": "2017-01-06T05:06:19Z",
+				"last_status_change_by": null,
+				"number_of_escalations": null,
+				"assigned_to": [{
+					"at": "2017-01-06T05:03:43Z",
+					"object": {
+						"id": "PC8AH9P",
+						"name": "pradeep_k",
+						"email": "kpradeep.eidiko@gmail.com",
+						"html_url": "https://ctsoffice.pagerduty.com/users/PC8AH9P",
+						"type": "user"
+					}
+				}],
+				"urgency": "high"
+			}
+		},
+		"id": "dc8ad020-d3cd-11e6-b3ce-22000ae21df7",
+		"created_on": "2017-01-06T05:06:19Z"
+	}]
+}
+===============================================================

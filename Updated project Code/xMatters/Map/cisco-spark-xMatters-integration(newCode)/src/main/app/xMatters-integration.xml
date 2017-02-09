@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+	<flow name="postAuthDetailsFlow">
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['postTokenResponse']]" doc:name="Message Enricher">
+			<flow-ref name="postxMattersTokenFlow" doc:name="postxMattersTokenFlow" />
+		</enricher>
+		<dw:transform-message doc:name="Build Post Auth Details Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="postFormatMessageFlow">
+		<logger message="Msg_for initial #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message metadata:id="16db4717-7738-482e-a489-7aed77630932"
+			doc:name="Build Post Format Message Request">
+			<dw:input-payload doc:sample="sample_data\json.json" />
+			<dw:set-variable variableName="response"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['response']['hookResponse'].containsKey('status') &amp;&amp; flowVars['response']['hookResponse'].containsKey('username')]">
+				<logger message="entered into event status update" level="INFO"
+					doc:name="event" />
+				<set-variable variableName="myArrayList"
+					value="#[new java.util.ArrayList()]" doc:name="Define An Array" />
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['response']['hookResponse']['eventProperties'] != []]">
+						<foreach
+							collection="#[flowVars['response']['hookResponse']['eventProperties']]"
+							doc:name="For Each">
+							<expression-component doc:name="Remove '{' , '}' and ':'"><![CDATA[flowVars['test']= payload.toString().replace('{','').replace('=','  :  ').replace('}','')]]></expression-component>
+							<expression-component doc:name="Added To Array"><![CDATA[myArrayList.add(flowVars['test'])]]></expression-component>
+						</foreach>
+						<expression-component doc:name="Remove "><![CDATA[flowVars['name'] = flowVars['myArrayList'].toString().replace('[','').replace(']','').replace(",","\n - ")]]></expression-component>
+					</when>
+					<otherwise>
+						<logger level="INFO" doc:name="Logger"
+							message="In event updates : Event_properties = #[flowVars['response']['hookResponse']['eventProperties']]" />
+					</otherwise>
+				</choice>
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['response']['hookResponse']['status'] == 'active']">
+						<choice doc:name="Check Array Message Empty Or Not">
+							<when expression="#[flowVars['name'] != empty]">
+								<set-variable variableName="postMessage"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** :  created by **'+flowVars['response']['hookResponse']['username']+'** \n - '+flowVars['name']+'']"
+									doc:name="Event Active" />
+							</when>
+							<otherwise>
+								<set-variable doc:name="Event Active"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** :  created by **'+flowVars['response']['hookResponse']['username']+'**']"
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['status'] == 'suspended']">
+						<choice doc:name="Check Array From Message Is Empty Or Not">
+							<when expression="#[flowVars['name'] != empty]">
+								<set-variable variableName="postMessage"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : suspended by **'+flowVars['response']['hookResponse']['username']+'** \n - '+flowVars['name']+'']"
+									doc:name="Event Suspended" />
+							</when>
+							<otherwise>
+								<set-variable doc:name="Event Suspended"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : suspended by **'+flowVars['response']['hookResponse']['username']+'**']"
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['status'].contains('terminated')]">
+						<choice doc:name="Choice">
+							<when expression="#[flowVars['name'] != empty]">
+								<set-variable variableName="postMessage"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : terminated by **'+flowVars['response']['hookResponse']['username']+'** \n - '+flowVars['name']+'']"
+									doc:name="Event Terminated" />
+							</when>
+							<otherwise>
+								<set-variable variableName="postMessage"
+									value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : terminated by **'+flowVars['response']['hookResponse']['username']+'**']"
+									doc:name="Event Terminated" />
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<logger level="INFO" doc:name="Logger" message="default Event Condition" />
+					</otherwise>
+				</choice>
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse'].containsKey('device') &amp;&amp; flowVars['response']['hookResponse'].containsKey('deliveryStatus')]">
+				<logger message="entered into device delivery" level="INFO"
+					doc:name="device" />
+				<set-variable variableName="myArrayList"
+					value="#[new java.util.ArrayList()]" doc:name="Define An Array" />
+				<choice doc:name="Check If Event Properties Exists Or Not">
+					<when
+						expression="#[flowVars['response']['hookResponse']['eventProperties'] != []]">
+						<foreach
+							collection="#[flowVars['response']['hookResponse']['eventProperties']]"
+							doc:name="For Each">
+							<expression-component doc:name="Remove '{' , '}' and ':'"><![CDATA[flowVars['test']= payload.toString().replace('{','').replace('=',' : ').replace('}','')]]></expression-component>
+							<expression-component doc:name="Added To Array"><![CDATA[myArrayList.add(flowVars['test'])]]></expression-component>
+						</foreach>
+						<expression-component doc:name="Remove "><![CDATA[flowVars['name'] = flowVars['myArrayList'].toString().replace('[','').replace(']','').replace(",","\n - ")]]></expression-component>
+					</when>
+					<otherwise>
+						<logger level="INFO" doc:name="Logger"
+							message="In device delivery :  Event_properties = #[flowVars['response']['hookResponse']['eventProperties']]" />
+					</otherwise>
+				</choice>
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars.response.hookResponse.message == null &amp;&amp; flowVars.response.hookResponse.eventType == null]">
+                        <choice doc:name="Check Message From Array From ">
+                            <when expression="#[flowVars['name'] != empty]">
+                                <set-variable variableName="postMessage1" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - '+flowVars['name']+'']" doc:name="(msg &amp;&amp; evnt_type) ==null"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="(msg &amp;&amp; evnt_type) ==null" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+'']" variableName="postMessage1"/>
+                            </otherwise>
+                        </choice>
+
+					</when>
+					<when
+						expression="#[flowVars.response.hookResponse.message == null &amp;&amp; flowVars.response.hookResponse.eventType != null]">
+
+                        <choice doc:name="Check Message Array Is Empty Or Not">
+                            <when expression="#[flowVars['name'] != empty]">
+                                <set-variable variableName="postMessage1" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Event Type : '+flowVars['response']['hookResponse']['eventType']+' \n - '+flowVars['name']+'']" doc:name="msg = null"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="msg = null" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response'['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Event Type : '+flowVars['response']['hookResponse']['eventType']+'']" variableName="postMessage1"/>
+                            </otherwise>
+                        </choice>
+					</when>
+					<when
+						expression="#[flowVars.response.hookResponse.message != null &amp;&amp; flowVars.response.hookResponse.eventType == null]">
+
+                        <choice doc:name="Check Message From Array Is Empty Or Not">
+                            <when expression="#[flowVars['name'] != empty]">
+                                <set-variable variableName="postMessage1" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Message : '+flowVars['response']['hookResponse']['message']+' \n - '+flowVars['name']+'']" doc:name="event type = null"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="event type = null" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Message : '+flowVars['response']['hookResponse']['message']+'']" variableName="postMessage1"/>
+                            </otherwise>
+                        </choice>
+					</when>
+					<otherwise>
+
+                        <choice doc:name="Check Message From Array Is Empty Or Not">
+                            <when expression="#[flowVars['name'] != empty]">
+                                <set-variable variableName="postMessage1" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Event Type : '+flowVars['response']['hookResponse']['eventType']+' \n - Message : '+flowVars['response']['hookResponse']['message']+' \n - '+flowVars['name']+'']" doc:name="Device Delivery Updates"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="Device Delivery Updates" value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** : delivered to **'+flowVars['response']['hookResponse']['recipient']+'**ZZ '+flowVars['response']['hookResponse']['device']+' \n - Event Type : '+flowVars['response']['hookResponse']['eventType']+' \n - Message : '+flowVars['response']['hookResponse']['message']+'']" variableName="postMessage1"/>
+                            </otherwise>
+                        </choice>
+					</otherwise>
+				</choice>
+				<expression-component doc:name="Expression"><![CDATA[flowVars['postMessage'] = flowVars['postMessage1'].toString().replace("ZZ","'s")]]></expression-component>
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse'].containsKey('device') &amp;&amp; flowVars['response']['hookResponse'].containsKey('response')]">
+				<logger message="entered into notifications resonse" level="INFO"
+					doc:name="response" />
+				<set-variable variableName="myArrayList"
+					value="#[new java.util.ArrayList()]" doc:name="Define An Array" />
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['response']['hookResponse']['eventProperties'] != []]">
+						<foreach
+							collection="#[flowVars['response']['hookResponse']['eventProperties']]"
+							doc:name="For Each">
+							<expression-component doc:name="Remove '{' , '}' and ':'"><![CDATA[flowVars['test']= payload.toString().replace('{','').replace('=','  :  ').replace('}','')]]></expression-component>
+							<expression-component doc:name="Added To Array"><![CDATA[myArrayList.add(flowVars['test'])]]></expression-component>
+						</foreach>
+						<expression-component doc:name="Remove "><![CDATA[flowVars['name'] = flowVars['myArrayList'].toString().replace('[','').replace(']','').replace(",","\n - ")]]></expression-component>
+					</when>
+					<otherwise>
+						<logger level="INFO" doc:name="Logger"
+							message="In notification response :  Event_properties = #[flowVars['response']['hookResponse']['eventProperties']]" />
+					</otherwise>
+				</choice>
+				<choice doc:name="Check Message Array Is Empty Or Not">
+					<when expression="#[flowVars['name'] != empty]">
+						<set-variable variableName="postMessage"
+							value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** :  **'+flowVars['response']['hookResponse']['recipient']+'** responded **'+flowVars['response']['hookResponse']['response']+'** from **'+flowVars['response']['hookResponse']['device']+'** \n - '+flowVars['name']+'']"
+							doc:name="Notifications Response" />
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage"
+							value="#['Event **'+flowVars['response']['hookResponse']['eventIdentifier']+'** :  **'+flowVars['response']['hookResponse']['recipient']+'** responded **'+flowVars['response']['hookResponse']['response']+'** from **'+flowVars['response']['hookResponse']['device']+'**']"
+							doc:name="Notifications Response" />
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<logger message="default notification" level="INFO" doc:name="Logger" />
+			</otherwise>
+		</choice>
+		<choice doc:name="check post message null">
+			<when expression="#[flowVars.postMessage != empty]">
+				<dw:transform-message doc:name="Build Post Format Message Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"formatMessage":[{
+		"markDown":null,
+		"text":null,
+		"html":null
+		}]
+}]]></dw:set-payload>
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<logger
+				message="exception in Format flow +++++ #[flowVars['exception']]+++++++++++++++"
+				level="INFO" doc:name="Logger" />
+		</catch-exception-strategy>
+	</flow>
+
+	<flow name="postIntegrationSettingsFlow">
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['webhook']]" doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow" />
+		</enricher>
+		<choice doc:name="Check Webhook Url Generated">
+			<when expression="#[flowVars['webhook'] != empty]">
+				<dw:transform-message doc:name="Build Get Integration Settings Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGetIntegrationSettingsResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message
+					doc:name="Build Get Integration Settings Failure Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildPostSettingsFailureResponseExample.dwl" />
+				</dw:transform-message>
+
+			</otherwise>
+		</choice>
+	</flow>
+
+	<flow name="setupIntegrationFlow">
+		<dw:transform-message doc:name="Build Setup Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildSetupIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+	<flow name="updateIntegrationFlow">
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['updateIntegrationResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="updatexMattersIntegrationFlow" doc:name="Update xMatters Integration Flow Reference" />
+		</enricher>
+		<dw:transform-message doc:name="Transform Update Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildUpdateIntegrationResponseExample.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="tearDownIntegrationFlow">
+		<dw:transform-message doc:name="Build Tear Down Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="healthCheckFlow">
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-variable variableName="healthChechRequest"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		<set-variable variableName="integrationId"
+			value="#[flowVars['healthChechRequest']['integrationId']]" doc:name="Set Integration Id" />
+		<enricher target="#[flowVars['generateWebhookUrlResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow" />
+		</enricher>
+		<http:request config-ref="HTTP_Integration_Runtime_Request_Configuration"
+			path="/integrations/instances" method="GET" doc:name="Get Instance Details">
+			<http:request-builder>
+				<http:query-param paramName="client_id"
+					value="${runtime.clientidenforcement.id}" />
+				<http:query-param paramName="client_secret"
+					value="${runtime.clientidenforcement.secret}" />
+				<http:query-param paramName="integrationId"
+					value="#[flowVars['healthChechRequest']['integrationId']]" />
+				<http:query-param paramName="userId"
+					value="#[flowVars['healthChechRequest']['userId']]" />
+				<http:query-param paramName="status" value="ACTIVE" />
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-variable variableName="instanceDetails"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+		</dw:transform-message>
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['instanceDetails'].toString() != '{message=No results}']">
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+flowVars.instanceDetails.configJson]]></dw:set-payload>
+				</dw:transform-message>
+				<set-payload value="#[payload]" mimeType="application/json"
+					doc:name="Set Payload" />
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-variable variableName="configJsonDetails"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+				</dw:transform-message>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload resource="classpath:dwScripts/buildHealthCheckResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integration_status":"Integration is working fine",
+	"integration_name":"xMatters",
+	"integration_description":"This is xMatters Integration",
+	"integrationId": flowVars['integrationId']
+}]]></dw:set-payload>
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integration_status":"Integration has some issues",
+	"integration_name":"xMatters",
+	"integration_description":"This is xMatters Integration",
+	"integrationId": flowVars['integrationId'],
+	"exception": flowVars['exception']
+	
+}]]></dw:set-payload>
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+
+</mule>

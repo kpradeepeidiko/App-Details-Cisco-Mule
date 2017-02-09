@@ -1,0 +1,259 @@
+only count  #[message.payloadAs(java.lang.String).replace('payload=','"result":')]
+------------------------
+ 1st ParameterMap{[payload=[{"min_id":"697781840597286917","max_id":"697812145387413504","counts":[{"source_name":"bandaru1-PC","source_id":398878273,"timeseries":{"1470301377":3,"1470303187":3,"1470304986":3,"1470306801":3,"1470308602":3}}],"saved_search":{"id":12359593,"name":"important","query":"\\FileUploader.cpp","html_edit_url":"https://papertrailapp.com/searches/12359593/edit","html_search_url":"https://papertrailapp.com/searches/12359593"},"reached_beginning":true,"min_time_at":"2016-08-04T05:49:28Z"}]]} 
+ 2nd {payload={"min_id":"697781840597286917","max_id":"697812145387413504","counts":[{"source_name":"bandaru1-PC","source_id":398878273,"timeseries":{"1470301377":3,"1470303187":3,"1470304986":3,"1470306801":3,"1470308602":3}}],"saved_search":{"id":12359593,"name":"important","query":"\\FileUploader.cpp","html_edit_url":"https://papertrailapp.com/searches/12359593/edit","html_search_url":"https://papertrailapp.com/searches/12359593"},"reached_beginning":true,"min_time_at":"2016-08-04T05:49:28Z"}}
+ 
+ {
+	"result": {
+		"min_id": "697781840597286917",
+		"max_id": "697812145387413504",
+		"counts": [{
+			"source_name": "bandaru1-PC",
+			"source_id": 398878273,
+			"timeseries": {
+				"1470301377": 3,
+				"1470303187": 3,
+				"1470304986": 3,
+				"1470306801": 3,
+				"1470308602": 3
+			}
+		}],
+		"saved_search": {
+			"id": 12359593,
+			"name": "important",
+			"query": "\\FileUploader.cpp",
+			"html_edit_url": "https://papertrailapp.com/searches/12359593/edit",
+			"html_search_url": "https://papertrailapp.com/searches/12359593"
+		},
+		"reached_beginning": true,
+		"min_time_at": "2016-08-04T05:49:28Z"
+	}
+}
+=============================
+1st ParameterMap{[payload=[{"min_id":"697781840597286917","max_id":"697812145387413504","events":[{"id":697781840597286917,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697781840614064128,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697781840618258433,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697789431087955972,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697789431096344587,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697789431100538882,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697796978738003969,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697796978775752724,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697796978779947008,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697804589466189828,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697804589474578435,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697804589474578451,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697812145383219200,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697812145383219202,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697812145387413504,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"}],"saved_search":{"id":12359593,"name":"important","query":"\\FileUploader.cpp","html_edit_url":"https://papertrailapp.com/searches/12359593/edit","html_search_url":"https://papertrailapp.com/searches/12359593"},"reached_beginning":true,"min_time_at":"2016-08-04T05:49:28Z"}]]} ::::::::::::jdfvjdfvjkdfvjk
+2nd {payload={"min_id":"697781840597286917","max_id":"697812145387413504","events":[{"id":697781840597286917,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697781840614064128,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697781840618258433,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T14:32:57+05:30","display_received_at":"Aug 04 14:32:57","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697789431087955972,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697789431096344587,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697789431100538882,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T15:03:07+05:30","display_received_at":"Aug 04 15:03:07","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697796978738003969,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697796978775752724,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697796978779947008,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T15:33:06+05:30","display_received_at":"Aug 04 15:33:06","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697804589466189828,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697804589474578435,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697804589474578451,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T16:03:21+05:30","display_received_at":"Aug 04 16:03:21","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"},{"id":697812145383219200,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697812145383219202,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Warning","facility":"User"},{"id":697812145387413504,"source_ip":"183.82.99.100","program":"acvpnagent","message":"Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ","received_at":"2016-08-04T16:33:22+05:30","display_received_at":"Aug 04 16:33:22","source_id":398878273,"source_name":"bandaru1-PC","hostname":"bandaru1-PC","severity":"Error","facility":"User"}],"saved_search":{"id":12359593,"name":"important","query":"\\FileUploader.cpp","html_edit_url":"https://papertrailapp.com/searches/12359593/edit","html_search_url":"https://papertrailapp.com/searches/12359593"},"reached_beginning":true,"min_time_at":"2016-08-04T05:49:28Z"}}
+
+{
+	"result": {
+		"min_id": "697781840597286917",
+		"max_id": "697812145387413504",
+		"events": [{
+			"id": 697781840597286917,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ",
+			"received_at": "2016-08-04T14:32:57+05:30",
+			"display_received_at": "Aug 04 14:32:57",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697781840614064128,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ",
+			"received_at": "2016-08-04T14:32:57+05:30",
+			"display_received_at": "Aug 04 14:32:57",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697781840618258433,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ",
+			"received_at": "2016-08-04T14:32:57+05:30",
+			"display_received_at": "Aug 04 14:32:57",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Error",
+			"facility": "User"
+		}, {
+			"id": 697789431087955972,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ",
+			"received_at": "2016-08-04T15:03:07+05:30",
+			"display_received_at": "Aug 04 15:03:07",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697789431096344587,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ",
+			"received_at": "2016-08-04T15:03:07+05:30",
+			"display_received_at": "Aug 04 15:03:07",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697789431100538882,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ",
+			"received_at": "2016-08-04T15:03:07+05:30",
+			"display_received_at": "Aug 04 15:03:07",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Error",
+			"facility": "User"
+		}, {
+			"id": 697796978738003969,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ",
+			"received_at": "2016-08-04T15:33:06+05:30",
+			"display_received_at": "Aug 04 15:33:06",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697796978775752724,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ",
+			"received_at": "2016-08-04T15:33:06+05:30",
+			"display_received_at": "Aug 04 15:33:06",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697796978779947008,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ",
+			"received_at": "2016-08-04T15:33:06+05:30",
+			"display_received_at": "Aug 04 15:33:06",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Error",
+			"facility": "User"
+		}, {
+			"id": 697804589466189828,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ",
+			"received_at": "2016-08-04T16:03:21+05:30",
+			"display_received_at": "Aug 04 16:03:21",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697804589474578435,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ",
+			"received_at": "2016-08-04T16:03:21+05:30",
+			"display_received_at": "Aug 04 16:03:21",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697804589474578451,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ",
+			"received_at": "2016-08-04T16:03:21+05:30",
+			"display_received_at": "Aug 04 16:03:21",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Error",
+			"facility": "User"
+		}, {
+			"id": 697812145383219200,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::CFileUploader File: ..\\FileUploader.cpp Line: 121 Internal test mode: Accepting self signed certifcate ",
+			"received_at": "2016-08-04T16:33:22+05:30",
+			"display_received_at": "Aug 04 16:33:22",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697812145383219202,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::SendHttpRequest File: ..\\FileUploader.cpp Line: 189 Invoked Function: HttpSession::SendRequest Return Code: 12007 (0x00002EE7) Description: WINDOWS_ERROR_CODE  ",
+			"received_at": "2016-08-04T16:33:22+05:30",
+			"display_received_at": "Aug 04 16:33:22",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Warning",
+			"facility": "User"
+		}, {
+			"id": 697812145387413504,
+			"source_ip": "183.82.99.100",
+			"program": "acvpnagent",
+			"message": "Function: CFileUploader::PostDataGetResponse File: ..\\FileUploader.cpp Line: 407 Invoked Function: CFileUploader::SendHttpRequest Return Code: -29032423 (0xFE450019) Description: HTTP_SESSION_ERROR_DNS_RESOLUTION  ",
+			"received_at": "2016-08-04T16:33:22+05:30",
+			"display_received_at": "Aug 04 16:33:22",
+			"source_id": 398878273,
+			"source_name": "bandaru1-PC",
+			"hostname": "bandaru1-PC",
+			"severity": "Error",
+			"facility": "User"
+		}],
+		"saved_search": {
+			"id": 12359593,
+			"name": "important",
+			"query": "\\FileUploader.cpp",
+			"html_edit_url": "https://papertrailapp.com/searches/12359593/edit",
+			"html_search_url": "https://papertrailapp.com/searches/12359593"
+		},
+		"reached_beginning": true,
+		"min_time_at": "2016-08-04T05:49:28Z"
+	}
+}
+
+========================================================
+Testing
+
+To receive a web hook containing a fixed set of log data, use the test client mentioned above.
+
+To feed real log data from your Papertrail account into a local development environment, use a service such as:
+
+    UltraHook(http://www.ultrahook.com/) => http://github.eidiko.ultrahook.com  			unm = kp.eidiko pwd = Sarasu@10 (api key nJ3lvLHPlvpIGaC3hzoWXGG1pOPTlDJr)
+    Requestbin(http://requestb.in/)
+    PostCatcher(http://postcatcher.in/)
+
+
+
+================================================================================
+<when expression="#[flowVars['request']['hookResponse']['result']['events'].size()&lt;=3]">
+                <set-variable variableName="paperTailArray" value="#[new java.util.ArrayList()]" doc:name="Set An Array for &lt;= 3"/>
+                <foreach collection="#[flowVars['request']['hookResponse']['result']['events']]" doc:name="For Each">
+                    <set-variable variableName="storeValues" value="#['\n        \n        Date = '+flowVars.request.hookResponse.result.events[flowVars.counter-1].display_received_at+'  \n        Hostname = '+flowVars.request.hookResponse.result.events[flowVars.counter-1].hostname+'  \n        Message = '+flowVars.request.hookResponse.result.events[flowVars.counter-1].message+'']" doc:name="Store Values"/>
+                    <expression-component doc:name="Expression"><![CDATA[paperTailArray.add(flowVars['storeValues'])]]></expression-component>
+                </foreach>
+                <set-variable variableName="Result" value="#[flowVars.paperTailArray.toString().replace(',',' ')]" doc:name="Variable"/>
+                <set-variable variableName="Result" value="#[flowVars.Result.toString().replace('[',' ')]" doc:name="Variable"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.Result = flowVars.Result.toString().replace(']',' ')
+
+]]></expression-component>
+                <set-variable variableName="postMessage" value="#['Search Query  ['+flowVars['request']['hookResponse']['result']['saved_search']['query']+']('+flowVars['request']['hookResponse']['result']['saved_search']['html_search_url']+')  found '+flowVars['request']['hookResponse']['result']['events'].size()+' matches. Upto 3 recent matches briefed below. [Click here]('+flowVars['request']['hookResponse']['result']['saved_search']['html_search_url']+') to see all '+flowVars['request']['hookResponse']['result']['events'].size()+'   \n        '+flowVars['Result']+'']" doc:name="Post Message"/>
+            </when>

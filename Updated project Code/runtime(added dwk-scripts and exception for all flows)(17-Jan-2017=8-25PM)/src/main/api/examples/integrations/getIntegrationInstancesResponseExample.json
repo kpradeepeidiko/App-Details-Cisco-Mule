@@ -1,0 +1,22 @@
+{
+  "instanceId": 17,
+  "integrationId": 1,
+  "userId": "12323t453453sfse",
+  "updatedDate": "2016-06-25T00:00:00",
+  "messageFormat": "Trello: #{event} has happened",
+  "createdDate": "2016-06-25T00:00:00",
+  "status": "ACTIVE",
+  "channelId": "12345gfggrtrtgr",
+  "configJson": "{room=aaabbc}"
+},
+{
+  "instanceId": 18,
+  "integrationId": 1,
+  "userId": "12323t453453sfse",
+  "updatedDate": "2016-06-25T00:00:00",
+  "messageFormat": "Trello: #{event} has happened",
+  "createdDate": "2016-06-25T00:00:00",
+  "status": "ACTIVE",
+  "channelId": "12345gfggrtrtgr",
+  "configJson": "{room=aaabbc}"
+}

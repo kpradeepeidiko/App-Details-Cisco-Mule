@@ -1,0 +1,219 @@
+File Zilla
+---------------------------
+host = freetzi.com
+username = pradeep.freetzi.com
+pwd = sarasu@10
+
+Username: pradeep-mgmt.cloudhub.io
+Password: kpmahija12
+==============================================
+freetzi.com
+-------------------------
+Dear user, your account pradeep.freetzi.com was successfully activated on ramses.freewha.com server.
+Your address is http://pradeep.freetzi.com and you can visit/update your site right now.
+
+Account Manager:
+-----------------------------------------------
+You're hosted on ramses.freewha.com server. Account Manager is located at http://pradeep.freetzi.com/cpanel.
+
+Username: pradeep.freetzi.com
+Password: kpmahija12
+
+If you have accounts created on more than one server, see http://www.freewebhostingarea.com/members/.
+ 
+Some scripts require server path. Yours is /home/vhosts/pradeep.freetzi.com.
+
+
+Your Personal FTP Information:
+---------------------------------------
+FTP Server/Host: pradeep.freetzi.com
+
+FTP Login/Username: pradeep.freetzi.com
+
+FTP PassWord: kpmahija12
+
+To upload your files go to our Web based FTP client (recommended), located at http://pradeep.freetzi.com/ftp/.
+
+Once logged in, you will be able to create a new dir, new file, to upload a zip archive and have it unzipped automatically, to edit your files, to select files and download them as .zip, to copy, move, delete, rename, chmod (change permissions), search anything under your account, ability to see and edit dot files like .htaccess. With a normal ftp program you will not be able to do this.
+For a complete list of features see http://pradeep.freetzi.com/ftp/help.html.
+MySQL database Information:
+You will get a limited number of free databases per account. But you can create other accounts and get as many free databases as you want.
+ATTENTION!!! MySQL databases must be activated @ Account Manager >> Hit Create DB button.
+MySQL HostName is localhost only. We don't allow external connections.
+phpMyAdmin is located at http://pradeep.freetzi.com/pma/. Log in using MySQL username.
+PhpMyAdmin (PMA) is a tool that will help you to administer your database. You don't have privileges to create a database with PMA because, as said before, databases must be created @ Account Manager using Create DB button.
+Database details (db name, username) will be provided at Account Manager once you create the database.
+
+Other features at Account Manager
+One click Autoinstaller for PhpBB3, SMF, WordPress, Joomla, Drupal (with Clean URLs preenabled), Moodle.
+One click database backup & One click database import
+Manage DB button (available after you create a database) >> then choose Backup DB or Import DB buttons
+Configure PHP
+you can turn on/off Register Globals, Magic Quotes gpc, Allow_url_include variables.
+safe_mode is automatically turned off few hours after account creation.
+Reset Account
+useful if you want to delete all files/databases under your account.
+Fix Ownership
+some files are created with apache permissions (e.g. unpack an archive, php scripts) and you're not able to edit/delete them. This feature will fix permissions and you will be able to manipulate all files under your account.
+
+Free hit tracker (web counter)
+Sign up @ http://www.1FreeCounter.com then just insert the code into your pages.
+We have full support for mod_rewrite or dot files (.htaccess, .htpasswd).
+Attention!! A wrong .htaccess file can block your site and instead you will see a
+500 internal server error.
+ 
+With .htaccess you're able to set custom error pages.
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+404.html - not found errors
+403.html - forbidden errors
+ 
+enable indexes using:
+Options +Indexes
+IndexOptions FancyIndexing
+ 
+turn on/off php variables:
+php_flag display_errors On
+php_flag register_globals On
+ 
+block sites using:
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} ^http://.*badsite\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http://.*otherbadsite\.com [NC]
+RewriteRule .* - [F]
+note the OR if you want to add block more than one domain.
+ 
+block IPs using:
+order allow,deny
+deny from 192.168.0.101
+deny from 10.0.0.
+allow from all
+first example 192.168.0.101, you block that particular ip
+second example 10.0.0., you block all ips starting with 10.0.0.
+ 
+block an ISP or a particular user coming from an ISP:
+order allow,deny
+deny from bad-isp.com
+deny from user.other-bad-isp.com
+allow from all
+Attention!! Use a very hard to guess password to prevent your account being hacked. Also, install only new and optimized scripts. Take care with full permissions 777!!! For security reasons, set permissions for script configuration file to 644.
+
+You will find a lot of useful information if you check our FAQ Section.
+
+For latest news follow us at TWITTER.
+
+Our service is ad free for small sites. To support us so we can offer a quality service, upgrade your account at http://www.freewebhostingarea.com/removeads.html.
+ 
+Thank you for using our services,
+Free Web Hosting Area.com
+==============================================================================================================
+
+Welcome to FreeWebHostingArea.com!
+--------------------------------------------------
+Dear user, your account www.webhookdomain.com was successfully activated on doms.freewha.com server. Your address is http://www.webhookdomain.com, update ASAP nameservers (see below), else your site will not work!!
+We don't offer free domains, but free hosting for already registered domains!!! If you don't own this domain (yearly fee to a domain registrar) it will not work. To register a domain for a good price, please check http://www.protonhosting.com/.
+Add an index page (examples: index.html or index.php) and put your files directly on root. No public_html folder required.
+Be sure that your account has minimum 1hit per month. Inactive accounts are deleted at the end of month.
+
+DNS Information:
+----------------------------------------------------------------------
+Set Nameservers to the following records, else your site will not work.
+Primary Nameserver: ns1.freewha.com [5.9.106.213] 
+Secondary Nameserver: ns2.freewha.com [5.9.126.141]
+Change to NameServers may take up to 24 hours, depending on location.
+ 
+Attention!! We only allow nameserver records! Pointing A record to our IPs is strictly forbidden.
+For full email support (pop/imap), check email tutorial.
+You can register unlimited subdomains: subdomain.yourdomain.com. But for each one you must go to domain registration form on the same server and register a new account.
+
+Account Manager:
+-----------------------------------------------------
+You're hosted on doms.freewha.com server. Account Manager is located at http://www.webhookdomain.com/cpanel (use http://doms.freewha.com/cgi-bin/amanager.cgi until you have our nameservers).
+
+Username: www.webhookdomain.com
+Password: kpmahija12
+
+If you have accounts created on more than one server, see http://www.freewebhostingarea.com/members/.
+ 
+Some scripts require server path. Yours is /home/vhosts/www.webhookdomain.com.
+
+Your Personal FTP Information:
+------------------------------------------------
+FTP Server/Host: www.webhookdomain.com or doms.freewha.com
+
+FTP Login/Username: www.webhookdomain.com
+
+FTP PassWord: kpmahija12
+
+To upload your files go to our Web based FTP client (recommended), located at http://www.webhookdomain.com/ftp/.
+
+Once logged in, you will be able to create a new dir, new file, to upload a zip archive and have it unzipped automatically, to edit your files, to select files and download them as .zip, to copy, move, delete, rename, chmod (change permissions), search anything under your account, ability to see and edit dot files like .htaccess. With a normal ftp program you will not be able to do this.
+For a complete list of features see http://www.webhookdomain.com/ftp/help.html.
+MySQL database Information:
+You will get a limited number of free databases per account. But you can create other accounts and get as many free databases as you want.
+ATTENTION!!! MySQL databases must be activated @ Account Manager >> Hit Create DB button.
+MySQL HostName is localhost only. We don't allow external connections.
+phpMyAdmin is located at http://www.webhookdomain.com/pma/. Log in using MySQL username.
+PhpMyAdmin (PMA) is a tool that will help you to administer your database. You don't have privileges to create a database with PMA because, as said before, databases must be created @ Account Manager using Create DB button.
+Database details (db name, username) will be provided at Account Manager once you create the database.
+
+Other features at Account Manager
+One click Autoinstaller for PhpBB3, SMF, WordPress, Joomla, Drupal (with Clean URLs preenabled), Moodle.
+One click database backup & One click database import
+Manage DB button (available after you create a database) >> then choose Backup DB or Import DB buttons
+Configure PHP
+you can turn on/off Register Globals, Magic Quotes gpc, Allow_url_include variables.
+safe_mode is automatically turned off few hours after account creation.
+Reset Account
+useful if you want to delete all files/databases under your account.
+Fix Ownership
+some files are created with apache permissions (e.g. unpack an archive, php scripts) and you're not able to edit/delete them. This feature will fix permissions and you will be able to manipulate all files under your account.
+
+Free hit tracker (web counter)
+Sign up @ http://www.1FreeCounter.com then just insert the code into your pages.
+We have full support for mod_rewrite or dot files (.htaccess, .htpasswd).
+Attention!! A wrong .htaccess file can block your site and instead you will see a
+500 internal server error.
+ 
+With .htaccess you're able to set custom error pages.
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+404.html - not found errors
+403.html - forbidden errors
+ 
+enable indexes using:
+Options +Indexes
+IndexOptions FancyIndexing
+ 
+turn on/off php variables:
+php_flag display_errors On
+php_flag register_globals On
+ 
+block sites using:
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} ^http://.*badsite\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http://.*otherbadsite\.com [NC]
+RewriteRule .* - [F]
+note the OR if you want to add block more than one domain.
+ 
+block IPs using:
+order allow,deny
+deny from 192.168.0.101
+deny from 10.0.0.
+allow from all
+first example 192.168.0.101, you block that particular ip
+second example 10.0.0., you block all ips starting with 10.0.0.
+ 
+block an ISP or a particular user coming from an ISP:
+order allow,deny
+deny from bad-isp.com
+deny from user.other-bad-isp.com
+allow from all
+Attention!! Use a very hard to guess password to prevent your account being hacked. Also, install only new and optimized scripts. Take care with full permissions 777!!! For security reasons, set permissions for script configuration file to 644.
+
+You will find a lot of useful information if you check our FAQ Section.
+
+For latest news follow us at TWITTER.
+
+Our service is ad free for small sites. To support us so we can offer a quality service, upgrade your account at http://www.freewebhostingarea.com/removeads.html.
+ 

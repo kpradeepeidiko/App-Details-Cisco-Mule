@@ -1,0 +1,101 @@
+<flow name="healthCheckFlow">
+        <set-variable variableName="userId" value="#[json:userId]" doc:name="Set UserId"/>
+        <set-variable variableName="integrationId" value="#[json:integrationId]" doc:name="Set IntegrationId"/>
+        <logger message="USERID #[flowVars['userId']] AND #[flowVars['integrationId']]" level="INFO" doc:name="Logger"/>
+        <enricher target="#[flowVars['tokenResult']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow"/>
+        </enricher>
+        <logger message="#[flowVars.tokenResult.toString()] TCHECKKKKKKKKKKKKKKKK" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[ flowVars.tokenResult.toString() != 'No results']">
+                <set-variable variableName="refreshToken" value="#[flowVars['tokenResult']['refreshToken']]" doc:name="Set RefreshToken"/>
+                <logger message="#[flowVars['tokenResult']['refreshToken']] REFRESAHTOKENTOKEN" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="appTokenId" value="#[flowVars['tokenResult']['tokenId']]" doc:name="Set appTokenId"/>
+                <logger message="#[flowVars['tokenResult']] TOKENNNNNNNNNNNNNNNN #[flowVars['refreshTokenResult']]EFRESH TOKEN RESUTL" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="status" value="#['ACTIVE']" doc:name="Set Status"/>
+                <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/" method="GET" doc:name="HTTP">
+                    <http:request-builder>
+                        <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                        <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                        <http:query-param paramName="integrationId" value="#[flowVars['integrationId']]"/>
+                        <http:query-param paramName="userId" value="#[flowVars['userId']]"/>
+                        <http:query-param paramName="status" value="#[flowVars['status']]"/>
+
+
+                    </http:request-builder>
+                </http:request>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="PAYYYYYYYYYYYYYYYYYYYYYYYYY #[payload]" level="INFO" doc:name="Logger"/>
+            <choice doc:name="Choice">
+            <when expression="#[payload[0] != empty]">
+                <enricher target="#[flowVars['refreshResult']]" doc:name="Message Enricher">
+                    <flow-ref name="refreshBitbucketTokenFlow" doc:name="refreshBitbucketTokenFlow"/>
+                </enricher>
+                <set-variable variableName="token" value="#[flowVars['refreshResult']['access_token']]" doc:name="Set Integration AccessToken"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload[0]['configJson']]]></dw:set-payload>
+                </dw:transform-message>
+                        <logger message="#[message.payloadAs(java.lang.String)] HHHHHHHHHHHHHSDDDDDDDDD" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="hookId" value="#[json:webhookUuid]" doc:name="Set webhookUuid"/>
+                <set-variable variableName="repoId" value="#[json:repo_id]" doc:name="Set repoId"/>
+                        <logger message="FLOWWWWWWWWWWWWWWWWW #[flowVars['repoId']]" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="repository" value="#[json:repo_name]" doc:name="Set repository"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars['hookId'] = flowVars.hookId.toString().replace('{','').replace('}','')]]></expression-component>
+                        <flow-ref name="getBitbucketUserFlow" doc:name="getBitbucketUserFlow"/>
+                        <set-variable variableName="user" value="#[payload['username']]" doc:name="Set user"/>
+                        <logger message="#[message.payloadAs(java.lang.String)] HHHHHHHHHHHHHSDDDDDDDDD" level="INFO" doc:name="Logger"/>
+                        <flow-ref name="getBitbucketSpecificRepoFromSlugIdFlow" doc:name="getBitbucketSpecificRepoFromSlugIdFlow"/>
+                        <set-variable variableName="repository" value="#[payload['name']]" doc:name="Variable"/>
+                        <expression-component doc:name="Expression"><![CDATA[flowVars['repository'] = flowVars.repository.toLowerCase();]]></expression-component>
+                <logger message="HHHHHHHHHHHHHHHHH #[flowVars['hookId']] and #[flowVars['user']] and #[flowVars['repository']] AND #[flowVars['token']]" level="INFO" doc:name="Logger"/>
+                <enricher target="#[flowVars['getHookResult']]" doc:name="Message Enricher">
+                    <flow-ref name="getBitbucketHookFlow" doc:name="getBitbucketHookFlow"/>
+                </enricher>
+                <enricher target="#[flowVars['putIntegrationTokenOperationResult']]" doc:name="Message Enricher">
+                    <flow-ref name="putIntegrationTokenOperationFlow" doc:name="putIntegrationTokenOperationFlow"/>
+                </enricher>
+            </when>
+            <otherwise>
+                <set-variable variableName="getHookResult" value="#['No Instances found to get the webhook detials for the given user']" doc:name="Set hookResult"/>
+            </otherwise>
+        </choice>
+            
+            
+            </when>
+            <otherwise>
+                <logger message="NO RESULT FOUND NO RESULT FOUND" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="getHookResult" value="#['No Integration App token found to get the instance detials for the given user']" doc:name="Set HookResult"/>
+            </otherwise>
+        </choice>
+
+        
+        <dw:transform-message doc:name="Build Health Check Response">
+            <dw:set-payload resource="classpath:dwScripts/buildHealthCheckResponse.dwl"/>
+
+        </dw:transform-message>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <logger message="Exception has been encounter while processing health check #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+            <set-variable variableName="exception" value="#[exception.message]" doc:name="Set Exception Message."/>
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integration_status":"The below integration has some issues!!",
+	"integration_name":"Bitbucket",
+	"integration_description":"This is bitbucket integration",
+	"integrationId": flowVars['integrationId'],
+	"exception": flowVars['exception']
+	
+}]]></dw:set-payload>
+            </dw:transform-message>
+        </catch-exception-strategy>
+    </flow>
