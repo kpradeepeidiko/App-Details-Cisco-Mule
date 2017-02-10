@@ -1,0 +1,12 @@
+{
+    "integration_id": 1,
+    "description": "This is the Bitbucket integration description",
+    "integration_name": "bitbucket integration",
+    "created_date": "2016-06-23T00:00:00",
+    "updated_date": "2016-06-23T00:00:00",
+    "icon_lowres": "icon",
+    "icon_highres": "icon",
+    "status": "ONLINE",
+    "status_timestamp": "2016-06-23T00:00:00",
+    "enablement": "ENABLED",
+}

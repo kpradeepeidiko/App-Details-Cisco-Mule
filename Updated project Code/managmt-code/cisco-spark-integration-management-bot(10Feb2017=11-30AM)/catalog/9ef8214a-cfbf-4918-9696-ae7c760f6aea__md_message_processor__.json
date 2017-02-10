@@ -1,0 +1,11 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "CiscoSpark__Configuration",
+            "typeId": "org.mule.modules.spark.bean.MessagesPostRequest"
+        }
+    },
+    "id": "9ef8214a-cfbf-4918-9696-ae7c760f6aea",
+    "version": "5.2.0.0"
+}

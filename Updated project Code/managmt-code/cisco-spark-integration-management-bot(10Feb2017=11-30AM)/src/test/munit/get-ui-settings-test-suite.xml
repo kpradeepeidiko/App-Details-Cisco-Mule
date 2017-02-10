@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
+    
+    <munit:config name="munit" doc:name="MUnit configuration" />
+    
+    <spring:beans>
+        <spring:import resource="classpath:get-ui-settings.xml"/>
+        <spring:import resource="classpath:common-global.xml"/>
+        <spring:import resource="classpath:common-integration-runtime-operations.xml"/>
+        <spring:import resource="classpath:common-spark-api-invocations.xml"/>
+    </spring:beans>
+    
+    <munit:test name="get-ui-settings-test-suite-getIntegrationUiSettingsFlowTest" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock HTTP Request to Dynamic Integration">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['HTTP Request to Specific Integration Settings']"/>
+            </mock:with-attributes>
+            <mock:then-return mimeType="application/json"/>
+        </mock:when>
+        <dw:transform-message doc:name="Build Input Query Param Properties">
+            <dw:set-variable resource="classpath:dwTestScripts/buildInputPropertiesGetIntegrationInstances.dwl" variableName="queryParams"/>
+        </dw:transform-message>
+        <set-variable variableName="integrationId" value="#[1]" doc:name="Set Integration ID"/>
+        
+        <munit:set payload="''" doc:name="Mock Message">
+            <munit:inbound-properties>
+                <munit:inbound-property key="http.query.params" value="#[flowVars.queryParams]"/>
+            </munit:inbound-properties>
+        </munit:set>
+        
+        <flow-ref name="getIntegrationUiSettingsFlow" doc:name="Flow-ref to getIntegrationUiSettingsFlow"/>
+    	<munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+    
+</mule>

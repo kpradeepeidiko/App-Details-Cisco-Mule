@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+ 	<flow name="postIntegrationInstanceFlow">
+ 	
+ 	<set-variable variableName="userId" value="#[message.inboundProperties.'http.query.params'.userId]" doc:name="Set UserId"/>
+        <set-variable variableName="roomId" value="#[json:channelId]" doc:name="Set Channel Id"/>
+        <logger message="INCOMING PAYLOAD #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="messageToSpark" value="#[json:messageToSpark]" doc:name="Set Message To Spark"/>
+        <set-variable variableName="configJson" value="#[json:configJson]" doc:name="configJson" />
+        <logger message="#[flowVars.configJson] CONFIGJSON  #[json:configJson/private_message]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="privateMessage" value="#[json:configJson/private_message]" doc:name="Set Private Message or not"/>
+        <set-variable variableName="getInstanceUuid" value="#[json:instanceUuid]" doc:name="Get Instance Uuid"/>
+
+        <dw:transform-message doc:name="Store Original Post Integration Instance Payload">
+            <dw:set-variable resource="classpath:dwScripts/storeOriginalPostIntegrationInstancePayload.dwl" variableName="integrationPostRequest"/>
+        </dw:transform-message>
+
+        
+         <choice doc:name="Choice Existance of UUID">
+            <when expression="#[flowVars['getInstanceUuid'] != empty]">
+                <set-variable variableName="instanceUuid" value="#[flowVars['getInstanceUuid']]" doc:name="Use the existing UUID"/>
+
+            </when>
+            <otherwise>
+                <set-variable variableName="instanceUuid" value="#[function:uuid]" doc:name="Generate a new UUID"/>
+
+            </otherwise>
+        </choice>
+        
+        <enricher target="#[flowVars['integrationInstancePostResult']]" doc:name="Message Enricher">
+            <flow-ref name="createIntegrationInstanceFlow" doc:name="createIntegrationInstanceFlow"/>
+        </enricher>
+        <set-variable variableName="instanceId" value="#[flowVars['integrationInstancePostResult']['id']]" doc:name="instanceId"/>
+        
+        <dw:transform-message doc:name="Set Integration Id">
+            <dw:set-variable resource="classpath:dwScripts/storeIntegrationId.dwl" variableName="integrationId"/>
+        </dw:transform-message>
+        <choice doc:name="Choice to get Bot or Integration Token">
+            <when expression="#[flowVars.privateMessage == 'true']">
+                <enricher target="#[flowVars['clinetTokensResult']]" doc:name="Message Enricher">
+                    <flow-ref name="getBotClientTokenFlow" doc:name="Get Spark BOT Token Flow Reference"/>
+                </enricher>
+            </when>
+            <otherwise>
+                <remove-variable variableName="privateMessage" doc:name="Remove Private Message "/>
+
+                <enricher target="#[flowVars['clinetTokensResult']]" doc:name="Message Enricher">
+                    <flow-ref name="getClientTokenFlow" doc:name="Get Spark Integration Token Flow Reference"/>
+                </enricher>
+            </otherwise>
+        </choice>
+        <logger message="PRIVATE MESSAGE #[flowVars.privateMessage]" level="INFO" doc:name="Logger"/>
+
+        <set-variable variableName="sparkToken" value="#[flowVars['clinetTokensResult'][0]['accessToken']]" doc:name="Set Spark Token"/>
+        <logger message="SPARK TOKEN DETAILS #[flowVars['clinetTokensResult'][0]]" level="INFO" doc:name="Logger"/>
+        
+        <enricher target="#[flowVars['integrationSettings']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationSettingsFlow" doc:name="Get Integration Settings Flow Reference"/>
+        </enricher>
+        
+        <enricher target="#[flowVars['startIntegrationResponse']]" doc:name="Message Enricher">
+            <flow-ref name="invokeDynamicIntegrationFlow" doc:name="Invoke Dynamic Integration Flow Reference"/>
+        </enricher>
+        <choice doc:name="Choice to post form Bot or Integration Token">
+            <when expression="#[flowVars.privateMessage == 'true']">
+                <logger level="INFO" doc:name="Logger" message="Posting Message Using Bot token"/>
+                 <enricher target="#[flowVars['postSparkMessageResponse']]" doc:name="Message Enricher">
+            <flow-ref name="postBotSparkMessageFlow" doc:name="postBotSparkMessageFlow"/>
+        </enricher>
+            </when>
+            <otherwise>
+                <logger level="INFO" doc:name="Logger" message="Posting Message Using Integration token"/>
+                 <enricher target="#[flowVars['postSparkMessageResponse']]" doc:name="Message Enricher">
+            <flow-ref name="postSparkMessageFlow" doc:name="postSparkMessageFlow"/>
+        </enricher>
+            </otherwise>
+        </choice>
+       
+        
+        <dw:transform-message doc:name="Build Post Integration Instance Final Response">
+            <dw:set-payload resource="classpath:dwScripts/buildPostIntegrationInstanceResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="invokeDynamicIntegrationFlow">
+        <set-variable variableName="dynamicHost" value="#[flowVars['integrationSettings']['host']]" doc:name="Set Dynamic Host"/>
+        
+        <set-variable variableName="dynamicBasePath" value="#[flowVars['integrationSettings']['basePath']]" doc:name="Set Dynamic Base Path"/>
+        
+        <set-variable variableName="dynamicPort" value="#[flowVars['integrationSettings']['port']]" doc:name="Set Dynamic Port"/>
+        
+        <dw:transform-message doc:name="Build Setup Integration Request">
+            <dw:set-payload resource="classpath:dwScripts/buildSetupIntegrationRequest.dwl"/>
+        </dw:transform-message>
+        <logger message="PYALOAD TO SPECIFIC FLOW #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+        
+        <http:request config-ref="HTTP_Dynamic_Request_Configuration" path="/setupIntegration" method="POST" doc:name="HTTP Request to Specific Integration">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${integrations.management.client.id}"/>
+                <http:query-param paramName="client_secret" value="${integrations.management.client.secret}"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+ 
+    <flow name="createIntegrationInstanceFlow">
+        <dw:transform-message doc:name="Build Post Integration Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPostIntegrationRequest.dwl"/>
+        </dw:transform-message>
+        <logger message="CREATE INSTANCE #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+
+
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="From Json Payload to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+
+</mule>

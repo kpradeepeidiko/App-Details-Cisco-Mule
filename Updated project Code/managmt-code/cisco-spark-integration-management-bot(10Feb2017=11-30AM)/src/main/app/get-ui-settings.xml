@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    
+    
+    <flow name="getSparkRooms">
+        <logger message="STARTING  UISETTINGS " level="INFO" doc:name="Set UserId In API XML"/>
+
+        <enricher target="#[flowVars['clinetTokensResult']]" doc:name="Message Enricher">
+            <flow-ref name="getClientTokenFlow" doc:name="getClientTokenFlow"/>
+        </enricher>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars['clinetTokensResult'].toString() != '{message=No results}']">
+                <set-variable variableName="sparkToken" value="#[flowVars['clinetTokensResult'][0]['accessToken']]" doc:name="Set Spark Token"/>
+                <set-variable variableName="max" value="3000" doc:name="Set Max Rooms Lenght"/>
+                <logger message="STARTING SPARK ROOKS #[server.dateTime]" level="INFO" doc:name="Logger"/>
+                <enricher target="#[flowVars['sparkRoomSettings']]" doc:name="Message Enricher">
+                    <flow-ref name="getSparkRoomsBySortByIdFlow" doc:name="getSparkRoomsBySortByIdFlow"/>
+                </enricher>
+                <logger message="ENDING SPARK ROOKS #[server.dateTime] AND #[flowVars['sparkRoomSettings'].toString()]" level="DEBUG" doc:name="Logger"/>
+                <dw:transform-message doc:name="Build Get UI Settings Response">
+                    <dw:set-payload resource="classpath:dwScripts/buildGetSparkRooms.dwl"/>
+                </dw:transform-message>
+                <logger message="ENDING UISETTINGS  #[server.dateTime]" level="INFO" doc:name="Logger"/>
+            </when>
+            <otherwise>
+                <dw:transform-message doc:name="Build Get UI Settings Response">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"message":"Get Client Tokens Empty"
+}]]></dw:set-payload>
+                </dw:transform-message>
+            </otherwise>
+        </choice>
+
+    </flow>
+    
+    
+    <flow name="getSparkRoomsScatterGather">
+
+        <enricher target="#[flowVars['clinetTokensResult']]" doc:name="Message Enricher">
+            <flow-ref name="getClientTokenFlow" doc:name="getClientTokenFlow"/>
+        </enricher>
+        <logger message="in GetUISettings ClientTokens = #[flowVars.clinetTokensResult]++++++++++++++++of 0 #[flowVars.clinetTokensResult[0]]+++++++++" level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars.clinetTokensResult.toString() != '{message=No results}']">
+                <set-variable variableName="sparkToken" value="#[flowVars.clinetTokensResult[0].accessToken]" doc:name="Set Spark Token"/>
+                <set-variable variableName="max" value="25" doc:name="Set Max Rooms Length"/>
+                <enricher target="#[flowVars['sparkRoomSettings']]" doc:name="Message Enricher">
+                    <flow-ref name="getSparkRoomsFlow" doc:name="getSparkRoomsFlow"/>
+                </enricher>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"sparkRoomSettings": flowVars['sparkRoomSettings']
+}]]></dw:set-payload>
+                </dw:transform-message>
+            </when>
+            <otherwise>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"UISettingsGetClientTokens": flowVars.clinetTokensResult
+}]]></dw:set-payload>
+                </dw:transform-message>
+            </otherwise>
+        </choice>
+
+
+    </flow>
+    
+    <flow name="getIntegrationUiSettingsFlowScatterGather">
+
+
+        
+        <enricher target="#[flowVars['integrationSettings']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationSettingsFlow" doc:name="getIntegrationSettingsFlow"/>
+        </enricher>
+        
+        <enricher target="#[flowVars['dynamicSettings']]" doc:name="Message Enricher">
+            <flow-ref name="getDynamicIntegrationSettingsFlow" doc:name="getDynamicIntegrationSettingsFlow"/>
+        </enricher>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"integrationSpecificSettings" : flowVars['dynamicSettings']
+}]]></dw:set-payload>
+        </dw:transform-message>
+
+    </flow>
+    
+    
+    
+    <flow name="getIntegrationUiSettingsFlow">
+
+        <set-variable variableName="userId" value="#[message.inboundProperties.'http.query.params'.userId]" doc:name="Set UserId"/>
+        <scatter-gather doc:name="Scatter-Gather">
+            <flow-ref name="getSparkRoomsScatterGather" doc:name="getSparkRoomsScatterGather"/>
+            <flow-ref name="getIntegrationUiSettingsFlowScatterGather" doc:name="getIntegrationUiSettingsFlowScatterGather"/>
+        </scatter-gather>
+
+        
+        <dw:transform-message doc:name="Build Get UI Settings Response">
+            <dw:set-payload resource="classpath:dwScripts/buildGetUiSettingsResponse.dwl"/>
+        </dw:transform-message>
+
+    </flow>
+    
+    <flow name="getDynamicIntegrationSettingsFlow">
+        <set-variable variableName="dynamicHost" value="#[flowVars['integrationSettings']['host']]" doc:name="Set Dynamic Host"/>
+        
+        <set-variable variableName="dynamicBasePath" value="#[flowVars['integrationSettings']['basePath']]" doc:name="Set Dynamic Base Path"/>
+        
+        <set-variable variableName="dynamicPort" value="#[flowVars['integrationSettings']['port']]" doc:name="Set Dynamic Port"/>
+
+        
+        <dw:transform-message doc:name="Build Post Specific Integration Settings Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPostSpecificIntegrationSettingsRequest.dwl"/>
+        </dw:transform-message>
+        
+        <http:request config-ref="HTTP_Dynamic_Request_Configuration" path="/settings" method="POST" doc:name="HTTP Request to Specific Integration Settings">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${integrations.management.client.id}"/>
+                <http:query-param paramName="client_secret" value="${integrations.management.client.secret}"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+            </http:request-builder>
+        </http:request>
+        
+         <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>	
+    
+</mule>

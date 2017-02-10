@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    
+    <http:request-config name="HTTPS_Pages_Request_Configuration" host="#[flowVars.pageHost]" port="#[flowVars.pagePort]" doc:name="HTTPS Request Configuration" protocol="HTTPS"/>
+    
+    <http:request-config name="HTTP_Pages_Request_Configuration" host="#[flowVars.pageHost]" port="#[flowVars.pagePort]" doc:name="HTTP Request Configuration" />
+    
+    <expression-filter expression="#[flowVars.action != 'CONNECT' and flowVars.action != 'DISCONNECT' and flowVars.action != 'LIST']" name="Expression" doc:name="Expression"/>
+
+	<flow name="getIntegrationHtmlContentFlow">
+        <logger message="INTEGRASTIONID #[flowVars['integrationId']] and ACTIONNNNNNNNNN #[flowVars['action']]" level="INFO" doc:name="Logger"/>
+
+        <enricher target="#[flowVars['integrationSettingsResponse']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationSettingsFlow" doc:name="getIntegrationSettingsFlow"/>
+        </enricher>
+        
+        <flow-ref name="dynamicPageInvocationFlow" doc:name="dynamicPageInvocationFlow"/>
+        
+        <choice doc:name="Choice Between Protocol">
+            <when expression="#[flowVars['protocol'] == 'https']">
+                <set-variable variableName="pagePort" value="#[443]" doc:name="Set Page Port to 443"/>
+                <http:request config-ref="HTTPS_Pages_Request_Configuration" path="#[flowVars.pagePath]" method="GET" doc:name="HTTPS Call">
+                    <http:request-builder>
+                        <http:header headerName="Access-Control-Allow-Origin" value="*"/>
+                    </http:request-builder>
+                </http:request>
+            </when>
+            <otherwise>
+            	<set-variable variableName="pagePort" value="#[7080]" doc:name="Set Page Port to 80"/>
+                <http:request config-ref="HTTP_Pages_Request_Configuration" path="#[flowVars.pagePath]" method="GET" doc:name="HTTP Call">
+                    <http:request-builder>
+                        <http:header headerName="Access-Control-Allow-Origin" value="*"/>
+                    </http:request-builder>
+                </http:request>
+            </otherwise>
+        </choice>
+        
+        <set-property propertyName="Content-Type" value="text/html" doc:name="Set Content Type to HTML"/>
+    </flow>
+    <flow name="get-static-contentFlow">
+        <set-variable variableName="uriPath" value="#[message.inboundProperties.'http.request.uri'.split(&quot;CiscoWebcontent/&quot;)]" doc:name="staticPagePath"/>
+        <http:request config-ref="HTTP_Request_Configuration_StaticContent" path="/{uriPath}" method="GET" doc:name="HTTP">
+           <http:request-builder>
+                <http:uri-param paramName="uriPath" value="#[flowVars['uriPath'][1]]"/>
+
+
+
+           </http:request-builder>
+       </http:request>
+    </flow>
+    
+    <flow name="dynamicPageInvocationFlow" >
+    	 <choice doc:name="Choice Page to Load">
+            <when expression="#[flowVars['action'] == 'CONNECT']">                
+                <set-variable variableName="page" value="#[flowVars['integrationSettingsResponse']['setupPageUri']]" doc:name="Store Setup Page"/>
+            </when>
+            <when expression="#[flowVars['action'] == 'DISCONNECT']">              
+            	<set-variable variableName="page" value="#[flowVars['integrationSettingsResponse']['deletePageUri']]" doc:name="Store Delete Page"/>
+            </when>
+            <when expression="#[flowVars['action'] == 'LIST']">
+        		<set-variable variableName="page" value="#[flowVars['integrationSettingsResponse']['editPageUri']]" doc:name="Store Edit Page"/>
+            </when>
+            <otherwise>
+
+                <filter ref="Expression" doc:name="Filter Message if action is different"/>
+            </otherwise>
+        </choice>
+        
+        <set-variable variableName="pageHost" value="#[new java.net.URL(flowVars['page']).getHost()]" doc:name="Set Page Host"/>
+        
+        <set-variable variableName="pagePath" value="#[new java.net.URL(flowVars['page']).getPath()]" doc:name="Set Page PathHost"/>
+        
+        <set-variable variableName="protocol" value="#[new java.net.URL(flowVars['page']).getProtocol()]" doc:name="Set Protocol"/>
+    </flow>
+
+
+</mule>

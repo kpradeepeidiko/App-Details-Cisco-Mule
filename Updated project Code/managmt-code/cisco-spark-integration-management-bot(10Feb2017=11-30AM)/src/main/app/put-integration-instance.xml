@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    
+ 	<flow name="updateIntegrationInstanceFlowReplaced">
+        <enricher doc:name="Message Enricher" target="#[flowVars['putIntegrationInstanceResult']]">
+            <flow-ref name="putIntegrationInstanceFlow" doc:name="Put Integration Instance Flow Reference"/>
+        </enricher>
+        <dw:transform-message doc:name="Build Put Integration Instance Response">
+            <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationInstanceResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    
+    <flow name="putDynamicIntegrationFlow">
+        <set-variable variableName="dynamicHost" value="#[flowVars['integrationSettings']['host']]" doc:name="Set Dynamic Host"/>
+        
+        <set-variable variableName="dynamicBasePath" value="#[flowVars['integrationSettings']['basePath']]" doc:name="Set Dynamic Base Path"/>
+        
+        <set-variable variableName="dynamicPort" value="#[flowVars['integrationSettings']['port']]" doc:name="Set Dynamic Port"/>
+        <set-payload value="#[flowVars['getIntegrationinstanceResult']]" mimeType="application/json" doc:name="Set Payload to Empty"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	
+		"channelId": flowVars['getIntegrationinstanceResult']['channelId'],
+		"integrationId": flowVars['getIntegrationinstanceResult']['integrationId'],
+		"status": flowVars['getIntegrationinstanceResult']['status'],
+		"userId": flowVars['getIntegrationinstanceResult']['userId'],
+		"configJson": flowVars['getIntegrationinstanceResult']['configJson'],
+		"instance_id": flowVars['getIntegrationinstanceResult']['instance_id'],
+		"repo_modified":flowVars['getIntegrationinstanceResult']['repo_modified'],
+		"repo_name_old": flowVars['getIntegrationinstanceResult']['repo_name_old'],
+		"room_modified":flowVars['getIntegrationinstanceResult']['room_modified'],
+		"repo_id_old": flowVars['getIntegrationinstanceResult']['repo_id_old'],
+		"instanceUuid": flowVars['getIntegrationinstanceResult']['instanceUuid']
+	
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="PAYLOAD TO SPECIFIC FLOW #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+
+        
+        <http:request config-ref="HTTP_Dynamic_Request_Configuration" path="/updateIntegration" method="POST" doc:name="HTTP Request to Specific Integration">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${integrations.management.client.id}"/>
+                <http:query-param paramName="client_secret" value="${integrations.management.client.secret}"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+
+
+
+
+
+            </http:request-builder>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    
+    <flow name="updateIntegrationInstanceFlow">
+       <dw:transform-message doc:name="Build Put Integration Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationRequest.dwl"/>
+        </dw:transform-message>
+        <logger message="INCOMING PAYLOAD IN UPDATE #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+
+        <set-variable variableName="integrationId" value="#[json:integrationId]" doc:name="integrationId"/>
+
+        <enricher target="#[flowVars['updateOutput']]" doc:name="Message Enricher">
+            <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="HTTP">
+                <http:request-builder>
+                     <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                    <http:query-param paramName="integration_id" value="#[flowVars.integrationId]"/>
+                    <http:uri-param paramName="instanceId" value="#[flowVars.instanceId]"/>
+
+
+
+                </http:request-builder>
+            </http:request>
+        </enricher>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getIntegrationinstanceResult"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+        </dw:transform-message>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-variable variableName="updateOutput" value="#[payload]" doc:name="Variable"/>
+        <enricher target="#[flowVars['integrationSettings']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationSettingsFlow" doc:name="getIntegrationSettingsFlow"/>
+        </enricher>
+        <enricher target="#[flowVars['tearDownResponse']]" doc:name="Message Enricher">
+            <flow-ref name="putDynamicIntegrationFlow" doc:name="putDynamicIntegrationFlow"/>
+        </enricher>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    
+     
+    
+    
+    <flow name="putIntegrationInstanceFlow">
+        <dw:transform-message doc:name="Build Put Integration Request">
+            <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationRequest.dwl"/>
+        </dw:transform-message>
+
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="instanceId" value="#[flowVars['instanceId']]"/>
+
+
+
+
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-payload value="#[{&quot;message&quot;:&quot;Operation Executed Successfully&quot;}]"  doc:name="Set Message"/>
+		<dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+
+
+</mule>

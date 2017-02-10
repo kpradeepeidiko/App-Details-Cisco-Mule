@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+    <vm:connector name="VM" validateConnections="true" doc:name="VM"/>
+    <flow name="refreshClientTokensFlow">
+        <enricher target="#[flowVars['sparkTokenDetails']]" doc:name="Message Enricher">
+            <flow-ref name="getClientTokenFlow" doc:name="getClientTokenFlow"/>
+        </enricher>
+        <foreach doc:name="For Each" collection="#[flowVars['sparkTokenDetails']]">
+            <flow-ref name="refresh-client-tokensFlow" doc:name="refresh-client-tokensFlow"/>
+                    </foreach>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy " level="INFO" doc:name="Logger"/>
+
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <set-variable variableName="exceptionIntegrationId" value="#[flowVars.integrationId]" doc:name="Set Integration Id"/>
+                <set-variable variableName="exceptionUserId" value="#[flowVars.userId]" doc:name="Set User Id"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+				<set-variable variableName="exceptionIntegrationId" value="#[flowVars.integrationId]" doc:name="Set Integration Id"/>
+                <set-variable variableName="exceptionUserId" value="#[flowVars.userId]" doc:name="Set User Id"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    </flow>
+    <flow name="refresh-client-tokensFlow">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="sparkRefreshToken" connector-ref="VM" doc:name="VM"/>
+        <logger message="ClientId : #[payload.clientTokenId]" level="DEBUG" doc:name="Logger"/>
+        <expression-filter expression="#[payload['expires']!=null&amp;&amp;payload['accessToken']!=null&amp;&amp;payload['refreshToken']!=null]" doc:name="Expression"/>
+    <set-variable variableName="serverTime" value="#[(new org.mule.el.datetime.DateTime(server.dateTime)).plusDays(1)]" doc:name="SetServerTime"/>
+            <set-variable variableName="expiresTime" value="#[(new org.mule.el.datetime.DateTime(payload['expires']))]" doc:name="SetExpiresTimes"/>
+            <logger message="Server Time is: #[flowVars['serverTime']] Expiry Time is: #[flowVars['expiresTime']]" level="DEBUG" doc:name="Logger"/>
+            <choice doc:name="Choice">
+                <when expression="#[payload['refreshToken'] != empty &amp;&amp; flowVars['serverTime'].isAfter(flowVars['expiresTime'])]">
+                    <dw:transform-message doc:name="Transform Message">
+                        <dw:set-variable variableName="clientDetails"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+                    </dw:transform-message>
+                    <set-variable variableName="uuid" value="ANYPOINT_#[function:uuid]" doc:name="Generate UUid"/>
+                    <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/clients/appSettings/{integrationId}" method="GET" doc:name="HTTP">
+                        <http:request-builder>
+                        <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                        <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                        <http:uri-param paramName="integrationId" value="#[flowVars.clientDetails.integrationId]"/>
+                        </http:request-builder>
+                    </http:request>
+                    <dw:transform-message doc:name="Transform Message">
+                        <dw:set-variable variableName="appSettingsResponse"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+                    </dw:transform-message>
+                    <choice doc:name="Choice">
+                        <when expression="#[flowVars.appSettingsResponse.message!='No results']">
+                        <logger message="Before Call to spark API for ClientID : #[flowVars.clientDetails.clientTokenId]" level="DEBUG" doc:name="Logger"/>
+                            <http:request config-ref="HTTP_Request_Configuration_Spark_API" path="${cisco.spark.path}" method="POST" host="${cisco.spark.host}" port="${cisco.spark.port}" doc:name="HTTP Refresh Spark Token">
+                                <http:request-builder>
+                                <http:query-param paramName="grant_type" value="refresh_token"/>
+                                <http:query-param paramName="client_id" value="#[flowVars['appSettingsResponse']['accessClientId']]"/>
+                                <http:query-param paramName="client_secret" value="#[flowVars['appSettingsResponse']['accessClientSecret']]"/>
+                                <http:query-param paramName="refresh_token" value="#[flowVars['clientDetails']['refreshToken']]"/>
+                                <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
+                                <http:header headerName="TrackingID" value="#[flowVars.uuid]"/>
+                                </http:request-builder>
+                            </http:request>
+                            
+                            
+                            <async doc:name="Async">
+            <set-variable variableName="trackingId" value="#[message.inboundProperties.TrackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+                        <logger message="Response from Spark API for ClientID #[flowVars['clientDetails']['clientTokenId']] payload is #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+                            <dw:transform-message doc:name="Transform Message">
+                                <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+                            </dw:transform-message>
+                            <set-variable variableName="refreshExpires" value="#[(new org.mule.el.datetime.DateTime(server.dateTime)).plusDays(89).format('yyyy-MM-dd HH:mm:ss')]" doc:name="Set refreshExpires"/>
+                            <set-variable variableName="expires" value="#[(new org.mule.el.datetime.DateTime(server.dateTime)).plusSeconds(payload['expires_in']).format('yyyy-MM-dd HH:mm:ss')]" doc:name="Set AccessToken Expires"/>
+                            <dw:transform-message doc:name="Transform Message">
+                                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"accessToken":payload['access_token'],
+	"expires":flowVars['expires'],
+	"refreshExpires":flowVars['refreshExpires']
+}]]></dw:set-payload>
+                            </dw:transform-message>
+                            <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/clients/{clientId}/tokens/{clientTokenId}" method="PUT" doc:name="HTTP Put Spark Token">
+                                <http:request-builder>
+                                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                                <http:uri-param paramName="clientId" value="1"/>
+                                <http:uri-param paramName="clientTokenId" value="#[flowVars['clientDetails']['clientTokenId']]"/>
+
+                                </http:request-builder>
+                            </http:request>
+                        <logger message="Access Token Updated in DB for : #[flowVars['clientDetails']['clientTokenId']]" level="DEBUG" doc:name="Logger"/>
+                        </when>
+                        <otherwise>
+                            <logger message="#[flowVars.appSettingsResponse] " level="INFO" doc:name="Logger"/>
+                        </otherwise>
+                    </choice>
+
+                </when>
+                <otherwise>
+                    <logger level="DEBUG" doc:name="Logger" message="not expired"/>
+                </otherwise>
+            </choice>
+        <choice-exception-strategy doc:name="Choice Exception Strategy" doc:description="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="Catch Exception Strategy">
+                <logger message="Exception caught 401 for Client ID #[flowVars['clientDetails']['clientTokenId']] Message #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    
+    </flow>
+</mule>
