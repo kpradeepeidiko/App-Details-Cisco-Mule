@@ -1,0 +1,23 @@
+authorize_uri :  https://login.mailchimp.com/oauth2/authorize
+access_token_uri:  https://login.mailchimp.com/oauth2/token
+Mailchimp-specific metadata endpoint : https://login.mailchimp.com/oauth2/metadata
+
+
+authorize_uri = https://login.mailchimp.com/oauth2/authorize?response_type=code&client_id=356715380679&redirect_uri=http://192.168.1.35/oauth/(User-specific config:
+      - client_id     = 635959587059
+      - client_secret = 0da3e7744949e1406b7b250051ee1a95
+      - redirect_uri   = http://192.168.1.8/oauth/complete.php)MailChimp Standard OAuth2 config:
+      - authorize_uri    =  https://login.mailchimp.com/oauth2/authorize
+      - access_token_uri = https://login.mailchimp.com/oauth2/token
+      - base_uri         = https://login.mailchimp.com/oauth2/MailChimp Custom config:
+      - metadata_uri     = https://login.mailchimp.com/oauth2/metadataacount details
+------------------------
+username: ravivarma2.eidiko@gmail.com
+passwd: Gottumukkala10@app name :App integrationclient ID: 356715380679
+client secret: 62e761662ea9b6063ccf6eef3d1475f0
+redirect_uri: http://192.168.1.35/oauth/
+
+
+
+
+https://login.mailchimp.com/oauth2/authorize?response_type=code&client_id=356715380679&redirect_uri=http://192.168.1.35/oauth/
