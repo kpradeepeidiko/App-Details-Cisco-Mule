@@ -1,0 +1,43 @@
+{
+  "hookResponse": {
+    "events": [
+      {
+        "resource": 270657281533912,
+        "user": 211495747884480,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2017-02-13T13:05:33.345Z",
+        "parent": null
+      },
+      {
+        "resource": 270657281533912,
+        "user": 211495747884480,
+        "type": "task",
+        "action": "changed",
+        "created_at": "2017-02-13T13:05:33.512Z",
+        "parent": null
+      },
+      {
+        "resource": 270657281533914,
+        "user": 211495747884480,
+        "type": "story",
+        "action": "added",
+        "created_at": "2017-02-13T13:05:33.338Z",
+        "parent": 270657281533912
+      }
+    ]
+  },
+  "userEvents": "{\"project_id\":\"254198644626092\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682163\",\"displayName\":\"DANA BANK\",\"webhook_id\":270646428458277,\"notifications\":[\"created\",\"subtask\",\"assigned\",\"unassigned\",\"completed\",\"incomplete\",\"comment\",\"attachment\",\"duedate\",\"taskcopied\",\"markfavorite\",\"markduplicate\",\"subtask_taskcopied\",\"subtask_duedate\",\"subtask_assigned\",\"subtask_unassigned\",\"subtask_completed\",\"subtask_incomplete\",\"subtask_comment\",\"subtask_attachment\",\"subtask_markfavorite\",\"subtask_markduplicate\"],\"asana_user_id\":211495747884480}",
+  "instanceDetails": {
+    "instanceId": 11964,
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ZDE3OTViNC02MWE0LTQ2ZTQtYTZjOC04YTBkMDUwYmRkYTQ",
+    "updatedDate": "2017-02-13T10:54:33",
+    "messageFormat": "Asana Bot",
+    "createdDate": "2017-02-13T10:32:54",
+    "status": "ACTIVE",
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMGFiNTMyMDAtYWMxMC0xMWU2LWEyY2EtZjU5YzNmNDM3NTIy",
+    "configJson": "{\"project_id\":\"254198644626092\",\"organization_id\":\"9433177677643\",\"team_id\":\"214681741682163\",\"displayName\":\"DANA BANK\",\"webhook_id\":270646428458277,\"notifications\":[\"created\",\"subtask\",\"assigned\",\"unassigned\",\"completed\",\"incomplete\",\"comment\",\"attachment\",\"duedate\",\"taskcopied\",\"markfavorite\",\"markduplicate\",\"subtask_taskcopied\",\"subtask_duedate\",\"subtask_assigned\",\"subtask_unassigned\",\"subtask_completed\",\"subtask_incomplete\",\"subtask_comment\",\"subtask_attachment\",\"subtask_markfavorite\",\"subtask_markduplicate\"],\"asana_user_id\":211495747884480}",
+    "instanceUuid": "c72cbf40-f1d7-11e6-b9c6-12258e4e24c4"
+  }
+}
