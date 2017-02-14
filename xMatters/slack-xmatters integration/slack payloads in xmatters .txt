@@ -1,0 +1,37 @@
+token=B7KKCmBkiQtZ0EgSVIpCVY6g
+team_id=T0001
+team_domain=example
+channel_id=C2147483705
+channel_name=test
+user_id=U2147483697
+user_name=Steve
+command=/weather
+text=94070
+response_url=https://hooks.slack.com/commands/1234/5678
+======================================================================
+from csc-titans channel
+---------------------------
+channel_name = csc-titans
+user_id = U0VFG8GKB
+user_name = pradeep.eidiko
+team_domain = eidiko
+team_id = T0HEG0FD3
+text = csc-titans
+channel_id = C3R67D67L
+command = /xmatters
+response_url = https://hooks.slack.com/commands/T0HEG0FD3/141170993124/DYixrI0BnZcra5CuiM38hxvs
+token = B7KKCmBkiQtZ0EgSVIpCVY6g
+====================================================================================
+from pradeep channel
+---------------------------
+channel_name = directmessage
+user_id = U0VFG8GKB
+user_name = pradeep.eidiko
+team_domain = eidiko
+team_id = T0HEG0FD3
+text = csc-titans
+channel_id = D1K2NGXFD
+command = /xmatters
+response_url = https://hooks.slack.com/commands/T0HEG0FD3/141784410359/7VpjG9QFgjxiz2lZMO3Ezphy
+token = B7KKCmBkiQtZ0EgSVIpCVY6g
+
