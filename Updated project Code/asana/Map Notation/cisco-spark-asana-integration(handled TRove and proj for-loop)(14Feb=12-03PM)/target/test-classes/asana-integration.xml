@@ -126,7 +126,6 @@ payload]]></dw:set-variable>
 				</choice>
 			</when>
 			<otherwise>
-
 				<dw:transform-message doc:name="Set Failure Message">
 					<dw:set-payload><![CDATA[%dw 1.0
 %output application/json
@@ -973,25 +972,31 @@ payload]]></dw:set-variable>
 
 										</otherwise>
 									</choice>
-                                    <choice doc:name="SubTask Projects Fields">
-                                        <when expression="#[flowVars['taskDetails']['data']['projects'] != []]">
-                                            <foreach collection="#[flowVars['taskDetails']['data']['projects']]" doc:name="Select SubTask Project Name">
-                                        <logger message="projects = #[payload] ::::::::::: #[flowVars['ue']['project_id']]" level="DEBUG" doc:name="loop SubTask projects"/>
-                                        <choice doc:name="Compare User Selected Project">
-                                            <when expression="#[payload['id']==flowVars['ue']['project_id']]">
-                                                <set-variable variableName="projectName" value="#[payload['name']]" doc:name="Set Project Name"/>
-                                            </when>
-                                            <otherwise>
-                                                <logger level="DEBUG" doc:name="Logger" message="project #[payload['name']] : #[payload['id']]========#[flowVars['ue']['project_id']]"/>
-                                            </otherwise>
-                                        </choice>
-                                    </foreach>
-                                        </when>
-                                        <otherwise>
-                                            <logger level="DEBUG" doc:name="Logger" message="subTask Projects = #[flowVars['taskDetails']['data']['projects']]"/>
-                                        </otherwise>
-                                    </choice>
-									
+									<choice doc:name="SubTask Projects Fields">
+										<when expression="#[flowVars['taskDetails']['data']['projects'] != []]">
+											<foreach collection="#[flowVars['taskDetails']['data']['projects']]"
+												doc:name="Select SubTask Project Name">
+												<logger
+													message="projects = #[payload] ::::::::::: #[flowVars['ue']['project_id']]"
+													level="DEBUG" doc:name="loop SubTask projects" />
+												<choice doc:name="Compare User Selected Project">
+													<when expression="#[payload['id']==flowVars['ue']['project_id']]">
+														<set-variable variableName="projectName"
+															value="#[payload['name']]" doc:name="Set Project Name" />
+													</when>
+													<otherwise>
+														<logger level="DEBUG" doc:name="Logger"
+															message="project #[payload['name']] : #[payload['id']]========#[flowVars['ue']['project_id']]" />
+													</otherwise>
+												</choice>
+											</foreach>
+										</when>
+										<otherwise>
+											<logger level="DEBUG" doc:name="Logger"
+												message="subTask Projects = #[flowVars['taskDetails']['data']['projects']]" />
+										</otherwise>
+									</choice>
+
 									<foreach collection="#[flowVars['taskDetails1']['data']['projects']]"
 										doc:name="Select parent Task Project Name">
 										<logger
@@ -1352,7 +1357,7 @@ payload]]></dw:set-variable>
 
 														</http:request-builder>
 													</http:request>
-													<logger level="DEBUG" doc:name="Logger"
+													<logger level="DEBUG" doc:name="Logger (for Task)"
 														message="Parent Task Details = #[message.payloadAs(java.lang.String)]" />
 													<dw:transform-message doc:name="Transform Message">
 														<dw:set-variable variableName="taskDetails1"><![CDATA[%dw 1.0
@@ -1376,6 +1381,31 @@ payload]]></dw:set-variable>
 															<set-variable variableName="taskName"
 																value="#[flowVars['taskDetails1']['data']['name']]"
 																doc:name="Set Task Name" />
+														</otherwise>
+													</choice>
+													<choice doc:name="SubTask Projects Fields">
+														<when
+															expression="#[flowVars['taskDetails']['data']['projects'] != []]">
+															<foreach collection="#[flowVars['taskDetails']['data']['projects']]"
+																doc:name="Select SubTask Project Name">
+																<logger
+																	message="projects = #[payload] ::::::::::: #[flowVars['ue']['project_id']]"
+																	level="DEBUG" doc:name="loop SubTask projects" />
+																<choice doc:name="Compare User Selected Project">
+																	<when expression="#[payload['id']==flowVars['ue']['project_id']]">
+																		<set-variable variableName="projectName"
+																			value="#[payload['name']]" doc:name="Set Project Name" />
+																	</when>
+																	<otherwise>
+																		<logger level="DEBUG" doc:name="Logger"
+																			message="project #[payload['name']] : #[payload['id']]========#[flowVars['ue']['project_id']]" />
+																	</otherwise>
+																</choice>
+															</foreach>
+														</when>
+														<otherwise>
+															<logger level="DEBUG" doc:name="Logger"
+																message="subTask Projects = #[flowVars['taskDetails']['data']['projects']]" />
 														</otherwise>
 													</choice>
 													<foreach collection="#[flowVars['taskDetails1']['data']['projects']]"
