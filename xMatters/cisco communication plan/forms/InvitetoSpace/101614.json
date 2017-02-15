@@ -1,5 +1,5 @@
 {
-  "name": "Invite to Channel",
+  "name": "Invite to Space",
   "description": "Send an xMatters message to invite people to a Cisco Spark space",
   "isActive": true,
   "isREST": true,
@@ -93,7 +93,7 @@
     "emailTemplates": [
       {
         "emailSubject": "${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the \n${d3e0cb06-055f-40c5-85f1-82e3498cfea2} space in Cisco Spark ",
-        "email": "Hi ${person.firstName},<div><br></div><div>${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the <b>#${d3e0cb06-055f-40c5-85f1-82e3498cfea2}&nbsp;</b>channel in Slack.</div><div><br></div><div>Can you join the conversation?</div>",
+        "email": "Hi ${person.firstName},<div><br></div><div>${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the <b>#${d3e0cb06-055f-40c5-85f1-82e3498cfea2}&nbsp;</b>space in Cisco Spark.</div><div><br></div><div>Can you join the conversation?</div>",
         "languageCode": "en"
       }
     ],
