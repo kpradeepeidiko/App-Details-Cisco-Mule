@@ -1,0 +1,21 @@
+{
+  "integrations": [
+    {
+      "id": "4cb0e207-5a73-4183-abd8-6f35fd1e7bf3",
+      "name": "Invite to Channel",
+      "action": "CREATE_EVENT",
+      "type": "INBOUND_WEBHOOK",
+      "deployed": true,
+      "form": "3c3d016a-ba6a-454b-b1c5-7e682b876936",
+      "script": "// Capture incoming webhook properties from the request parameters\ntrigger.properties = request.parameters;\n\n// Identify requested recipients\nvar targets = request.parameters.text.split(' ');\n\nvar unknown = [];\ntrigger.recipients = [];\n\n// Verify recipients exist\nfor (var i = 0; i < targets.length; i++) {\n\n    // Prepare the HTTP request\n    var req = http.request({\n        'endpoint': 'xMatters',\n        'method': 'GET',\n        'path': 'api/xm/1/groups/' + targets[i]\n    });\n\n    // Send the request \n    var response = req.write();\n\n    // Determine if the requested targets exist in xMatters or are unknown\n\n    if (response.statusCode === 200) {\n        trigger.recipients.push({\"targetName\": targets[i]});\n    }\n    else if (response.statusCode === 404) {\n        unknown.push(targets[i]);\n    }\n\n}\n\n// Create xMatters event\nform.post(trigger);\n\n// Post to Cisco Spark if any targeted recipients are unknown\nif (unknown.length > 0) {\n\nvar Cisco SparkWebHookURL = request.parameters.response_url;\nvar Cisco SparkPath = Cisco SparkWebHookURL.substring(Cisco SparkWebHookURL.indexOf(\".com\") + 4);\nvar payload = {};\n\npayload.channel = '#' + request.parameters.channel_name;\npayload.text = 'These groups do not exist in xMatters and cannot be notified: ' + unknown;\n\nvar postData = 'payload=' + encodeURI(JSON.stringify(payload));\n\nvar req = http.request({\n    method: 'POST',\n    endpoint: 'Cisco Spark',\n    path: Cisco SparkPath,\n    headers: {\n        'Content-Type': 'application/json',\n    }\n});\n\nreq.write(payload);\n}"
+    }
+  ],
+  "endpoints": [
+    {
+      "name": "Cisco Spark",
+      "baseUrl": "https://web.ciscospark.com",
+      "type": "EXTERNAL",
+      "authentication": "NO_AUTH"
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "name": "Invite to Channel",
+  "description": "Send an xMatters message to invite people to a Cisco Spark space",
+  "isActive": true,
+  "isREST": true,
+  "isSendREST": false,
+  "order": 0,
+  "enableFillCount": false,
+  "generalFillCount": 0,
+  "uuid": "3c3d016a-ba6a-454b-b1c5-7e682b876936",
+  "layoutSections": [
+    {
+      "sectionType": 2,
+      "isVisible": true,
+      "isCollapsed": false,
+      "order": 0,
+      "sectionItems": []
+    },
+    {
+      "sectionType": 1,
+      "title": "Cisco Spark Webhook",
+      "isVisible": true,
+      "isCollapsed": false,
+      "order": 1,
+      "sectionItems": [
+        {
+          "id": "632cc11a-97a6-4dce-aaf6-0f2885dbc3bc",
+          "order": 0,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "user_name"
+        },
+        {
+          "id": "d3e0cb06-055f-40c5-85f1-82e3498cfea2",
+          "order": 1,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "channel_name"
+        },
+        {
+          "id": "6cd45752-2a1f-43f3-9c95-0bc73a138d03",
+          "order": 2,
+          "textIsMultiLine": true,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "text"
+        },
+        {
+          "id": "f51ac031-8e2f-4ce1-90d1-9d83f214109f",
+          "order": 4,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "channel_id"
+        },
+        {
+          "id": "5e99139a-94c2-46fb-afb0-73f2f7a73b46",
+          "order": 5,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "command"
+        },
+        {
+          "id": "80dfd538-1072-43e7-b20a-0287c9fdf9de",
+          "order": 6,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "team_domain"
+        },
+        {
+          "id": "10cc2647-d0a9-41ba-ae8a-931b6412636e",
+          "order": 9,
+          "textIsMultiLine": false,
+          "isRequired": false,
+          "isVisible": true,
+          "isIncludeInCallbacks": true,
+          "propertyName": "user_id"
+        }
+      ]
+    }
+  ],
+  "messages": {
+    "emailTemplates": [
+      {
+        "emailSubject": "${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the \n${d3e0cb06-055f-40c5-85f1-82e3498cfea2} space in Cisco Spark ",
+        "email": "Hi ${person.firstName},<div><br></div><div>${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the <b>#${d3e0cb06-055f-40c5-85f1-82e3498cfea2}&nbsp;</b>channel in Slack.</div><div><br></div><div>Can you join the conversation?</div>",
+        "languageCode": "en"
+      }
+    ],
+    "smsTemplates": [
+      {
+        "sms": "${632cc11a-97a6-4dce-aaf6-0f2885dbc3bc} is looking for you in the ${d3e0cb06-055f-40c5-85f1-82e3498cfea2} Cisco Spark space",
+        "languageCode": "en"
+      }
+    ],
+    "internationalVoiceScriptSteps": [
+      {
+        "languageCode": "en",
+        "voiceScriptSteps": [
+          {
+            "playType": "PHRASE",
+            "voiceScriptStepType": 1,
+            "phrase": "Cisco Spark message from"
+          },
+          {
+            "playType": "PHRASE",
+            "voiceScriptStepType": 2,
+            "propertyName": "user_name"
+          },
+          {
+            "playType": "PHRASE",
+            "voiceScriptStepType": 2,
+            "propertyName": "text"
+          }
+        ]
+      }
+    ]
+  },
+  "responses": [
+    {
+      "textResponse": "On my way",
+      "description": "On my way",
+      "voicePrompt": "On my way",
+      "digit": 1,
+      "contribution": "POSITIVE",
+      "action": "STOP_NOTIFYING_USER",
+      "isJoinConference": false,
+      "textResponseLanguageCode": "en",
+      "descriptionLanguageCode": "en",
+      "voicePromptLanguageCode": "en",
+      "recordingPhrase": "",
+      "order": 0,
+      "translations": [
+        {
+          "languageCode": "en",
+          "textResponse": "On my way",
+          "description": "On my way",
+          "voicePrompt": "On my way"
+        }
+      ]
+    },
+    {
+      "textResponse": "Can't make it",
+      "description": "Can't make it",
+      "voicePrompt": "Can't make it",
+      "digit": 2,
+      "contribution": "NEGATIVE",
+      "action": "ESCALATE",
+      "isJoinConference": false,
+      "textResponseLanguageCode": "en",
+      "descriptionLanguageCode": "en",
+      "voicePromptLanguageCode": "en",
+      "recordingPhrase": "",
+      "order": 1,
+      "translations": [
+        {
+          "languageCode": "en",
+          "textResponse": "Can't make it",
+          "description": "Can't make it",
+          "voicePrompt": "Can't make it"
+        }
+      ]
+    }
+  ],
+  "callbacks": {
+    "delivery": "45d3dca9-485b-4bbf-9db7-c48419ec6fb0",
+    "response": "64d0d728-c1f7-4c2d-b6de-c9d662f9a35a"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "version": "1.5",
+  "name": "Cisco Spark",
+  "description": "Cisco Spark Integration created using the xMatters Integration Builder",
+  "isActive": true,
+  "order": 17
+}

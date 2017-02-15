@@ -1,0 +1,86 @@
+[
+  {
+    "baseType": 3,
+    "name": "channel_id",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "channel_name",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "command",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "team_domain",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "text",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 2000,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "user_id",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  },
+  {
+    "baseType": 3,
+    "name": "user_name",
+    "defaultValue": "",
+    "description": "",
+    "helpText": "",
+    "isSystem": false,
+    "minLength": 0,
+    "maxLength": 30,
+    "validationRegex": "",
+    "isValidate": false
+  }
+]
