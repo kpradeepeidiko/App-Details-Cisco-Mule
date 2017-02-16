@@ -1,0 +1,59 @@
+// Capture incoming webhook properties from the request parameters
+trigger.properties = request.parameters;
+
+// Identify requested recipients
+var targets = request.parameters.text.split(' ');
+
+var unknown = [];
+trigger.recipients = [];
+
+// Verify recipients exist
+for (var i = 0; i < targets.length; i++) {
+
+    // Prepare the HTTP request
+    var req = http.request({
+        'endpoint': 'xMatters',
+        'method': 'GET',
+        'path': 'api/xm/1/groups/' + targets[i]
+    });
+
+    // Send the request 
+    var response = req.write();
+
+    // Determine if the requested targets exist in xMatters or are unknown
+
+    if (response.statusCode === 200) {
+        trigger.recipients.push({"targetName": targets[i]});
+    }
+    else if (response.statusCode === 404) {
+        unknown.push(targets[i]);
+    }
+
+}
+
+// Create xMatters event
+form.post(trigger);
+
+// Post to Slack if any targeted recipients are unknown
+if (unknown.length > 0) {
+
+var slackWebHookURL = request.parameters.response_url;
+var slackPath = slackWebHookURL.substring(slackWebHookURL.indexOf(".com") + 4);
+var payload = {};
+
+payload.channel = '#' + request.parameters.channel_name;
+payload.text = 'These groups do not exist in xMatters and cannot be notified: ' + unknown;
+
+var postData = 'payload=' + encodeURI(JSON.stringify(payload));
+
+var req = http.request({
+    method: 'POST',
+    endpoint: 'Slack',
+    path: slackPath,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+});
+
+req.write(payload);
+}
