@@ -7,3 +7,11 @@
         <set-property propertyName="http.status" value="#[200]" doc:name="Set Status"/>
         <logger message="outbound headers = #[message.outboundProperties]" level="INFO" doc:name="Logger"/>
     </flow>
+	
+{
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+	"organizationId": "211496583283303",
+	"responseType": "teams",
+	"asana_user_id": 187152065370189
+}
