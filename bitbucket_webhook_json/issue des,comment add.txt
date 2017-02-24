@@ -1,0 +1,372 @@
+descsription change
+----------------------
+{
+	"actor": {
+		"username": "surendra255",
+		"display_name": "Surendra",
+		"type": "user",
+		"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/users/surendra255"
+			},
+			"avatar": {
+				"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+			}
+		}
+	},
+	"changes": {
+		"content": {
+			"old": "Issue updated in dev",
+			"new": "Issue updated in dev environment"
+		}
+	},
+	"comment": {
+		"content": {},
+		"updated_on": null,
+		"user": {
+			"username": "surendra255",
+			"display_name": "Surendra",
+			"type": "user",
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				}
+			}
+		},
+		"created_on": "2017-02-23T09:39:44.682860+00:00",
+		"type": "issue_comment",
+		"id": 34642782,
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5/issues/2#comment-34642782"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/comments/34642782"
+			}
+		}
+	},
+	"repository": {
+		"uuid": "{9fa80ed6-8a61-4c51-bef1-47c4db619daf}",
+		"owner": {
+			"username": "surendra255",
+			"display_name": "Surendra",
+			"type": "user",
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				}
+			}
+		},
+		"is_private": true,
+		"name": "Repo5",
+		"scm": "git",
+		"website": "",
+		"full_name": "surendra255/repo5",
+		"type": "repository",
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5"
+			},
+			"avatar": {
+				"href": "https://bitbucket.org/surendra255/repo5/avatar/32/"
+			}
+		}
+	},
+	"issue": {
+		"component": null,
+		"content": {
+			"html": "<p>Issue updated in dev environment</p>",
+			"markup": "markdown",
+			"raw": "Issue updated in dev environment"
+		},
+		"votes": 0,
+		"edited_on": null,
+		"priority": "major",
+		"reporter": {
+			"username": "surendra255",
+			"display_name": "Surendra",
+			"type": "user",
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				}
+			}
+		},
+		"type": "issue",
+		"id": 2,
+		"links": {
+			"vote": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/vote"
+			},
+			"attachments": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/attachments"
+			},
+			"comments": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/comments"
+			},
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5/issues/2/test-file1"
+			},
+			"watch": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/watch"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2"
+			}
+		},
+		"version": null,
+		"milestone": null,
+		"watches": 1,
+		"title": "Test file1",
+		"repository": {
+			"full_name": "surendra255/repo5",
+			"name": "Repo5",
+			"type": "repository",
+			"uuid": "{9fa80ed6-8a61-4c51-bef1-47c4db619daf}",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/repo5"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/surendra255/repo5/avatar/32/"
+				}
+			}
+		},
+		"kind": "enhancement",
+		"state": "new",
+		"updated_on": "2017-02-23T09:39:44.661290+00:00",
+		"assignee": {
+			"username": "surendra255",
+			"display_name": "Surendra",
+			"type": "user",
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				}
+			}
+		},
+		"created_on": "2017-02-21T05:50:01.485556+00:00"
+	}
+}
+===========================================================================
+issue comment 
+------------------
+{
+	"actor": {
+		"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+		"username": "surendra255",
+		"type": "user",
+		"display_name": "Surendra",
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/"
+			},
+			"avatar": {
+				"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/users/surendra255"
+			}
+		}
+	},
+	"comment": {
+		"user": {
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"username": "surendra255",
+			"type": "user",
+			"display_name": "Surendra",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				}
+			}
+		},
+		"id": 34643386,
+		"updated_on": null,
+		"created_on": "2017-02-23T10:02:06.979079+00:00",
+		"type": "issue_comment",
+		"content": {},
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5/issues/2#comment-34643386"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/comments/34643386"
+			}
+		}
+	},
+	"issue": {
+		"votes": 0,
+		"priority": "major",
+		"repository": {
+			"full_name": "surendra255/repo5",
+			"uuid": "{9fa80ed6-8a61-4c51-bef1-47c4db619daf}",
+			"type": "repository",
+			"name": "Repo5",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/repo5"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/surendra255/repo5/avatar/32/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5"
+				}
+			}
+		},
+		"version": null,
+		"state": "new",
+		"id": 2,
+		"type": "issue",
+		"watches": 1,
+		"content": {
+			"markup": "markdown",
+			"raw": "Issue updated in dev environment",
+			"html": "<p>Issue updated in dev environment</p>"
+		},
+		"title": "Test file1",
+		"assignee": {
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"username": "surendra255",
+			"type": "user",
+			"display_name": "Surendra",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				}
+			}
+		},
+		"milestone": null,
+		"edited_on": null,
+		"reporter": {
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"username": "surendra255",
+			"type": "user",
+			"display_name": "Surendra",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				}
+			}
+		},
+		"updated_on": "2017-02-23T10:02:06.956834+00:00",
+		"created_on": "2017-02-21T05:50:01.485556+00:00",
+		"component": null,
+		"kind": "enhancement",
+		"links": {
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2"
+			},
+			"watch": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/watch"
+			},
+			"attachments": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/attachments"
+			},
+			"vote": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/vote"
+			},
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5/issues/2/test-file1"
+			},
+			"comments": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5/issues/2/comments"
+			}
+		}
+	},
+	"repository": {
+		"full_name": "surendra255/repo5",
+		"uuid": "{9fa80ed6-8a61-4c51-bef1-47c4db619daf}",
+		"website": "",
+		"owner": {
+			"uuid": "{3a11774e-bcaf-4229-8f2c-e76685876edc}",
+			"username": "surendra255",
+			"type": "user",
+			"display_name": "Surendra",
+			"links": {
+				"html": {
+					"href": "https://bitbucket.org/surendra255/"
+				},
+				"avatar": {
+					"href": "https://bitbucket.org/account/surendra255/avatar/32/"
+				},
+				"self": {
+					"href": "https://api.bitbucket.org/2.0/users/surendra255"
+				}
+			}
+		},
+		"name": "Repo5",
+		"type": "repository",
+		"links": {
+			"html": {
+				"href": "https://bitbucket.org/surendra255/repo5"
+			},
+			"avatar": {
+				"href": "https://bitbucket.org/surendra255/repo5/avatar/32/"
+			},
+			"self": {
+				"href": "https://api.bitbucket.org/2.0/repositories/surendra255/repo5"
+			}
+		},
+		"is_private": true,
+		"scm": "git"
+	},
+	"changes": {}
+}

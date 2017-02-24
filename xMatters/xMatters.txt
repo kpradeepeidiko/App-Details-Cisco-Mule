@@ -25,6 +25,25 @@ password : sarasu10
 
 kpradeep.eidiko@gmail.com
 Sarasu@10
+
+working
+++++++++++++++++++++
+domain url : https://natservices.xmatters.com/xmatters/signIn.do
+unm : pk455375@gmail.com
+pwd : Sarasu@10
+
+curl --request POST --data 'grant_type=password&client_id=b40d8c92-f391-4afb-8e57-1a3f912bf16c&username={username}&password={password}' 'https://natservices.xmatters.com/api/xm/1/oauth2/token'
+
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwIjoiMzFYalR2Ny8vLy8zLzgvKy82LzcvLy8vLzRjQStBY0FBQUFCZ1BOUkVBY0FBQUNBQVFBQUJBRENBQUFFQU9nQThQL29mNDhaOEg5eENBPT0iLCJhdWQiOlsibmF0c2VydmljZXMueG1hdHRlcnMuY29tIl0sInN1YiI6InBrNDU1Mzc1QGdtYWlsLmNvbSIsImF6cCI6ImI0MGQ4YzkyLWYzOTEtNGFmYi04ZTU3LTFhM2Y5MTJiZjE2YyIsImlzcyI6InhtYXR0ZXJzIiwic2JpIjoyMzEwOTksImV4cCI6MTQ4NzgzMzk2OSwiaWF0IjoxNDg3ODMzMDY5LCJhaWQiOjIwMDYyNCwianRpIjoiMmY4NzNhOGQtYTY3ZC00YjI2LWE4ZGItYjE0OGRjM2IzMGUwIn0.sQx9snCpm3AJNCKlbgLRtE3dC0HIEaWqe-HndlUGwBVJsWISyiSP8QWSkZKkTo2UV9mraOMnzcsf5c6NAtLFFYEQNBjCsK3lTHhsCYUNTzgY917g5JnqMjHzWpgVD4-0wlQ5-WnK-nC5OKnZ4YcGsntLxe2rl17JUX2yFgvbm63zqbuLolEHxVn63J9AbuQkeECc27BQc67Rss5HRH9iTiRJfqMykJ7nuAH5CB180H9C9pVJ_mS5zfA9pxGHAIGBwKD9hZTQjc8C02kKwHpcQbh0Lhmm6Pmn1hhXaPsxGE_GNXB6owwE96BgBKNoJNihUq9VSYL_ukgoP8uO58Zgbw",
+  "token_type": "bearer",
+  "refresh_token": "afe54309-09dd-486b-aad1-01a482138211",
+  "expires_in": 900,
+  "jti": "2f873a8d-a67d-4b26-a8db-b148dc3b30e0"
+}
+
+
+
 ============================================================================
 support : username : eidiko mail 
 		  Password : Sarasu@10
