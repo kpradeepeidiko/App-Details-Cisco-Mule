@@ -1,0 +1,14 @@
+Jenkins Details
+------------------
+192.168.2.216
+Rajasekhar
+sarasu10
+======================================
+27 feb 2017
+------------
+1) Google calendar queues were incresed, Created mule ticket and worked on it.
+2) Worked on ticket-286(integrate pagerduty and jenkins).
+3) Monitored deployments in dev and prod
+
+28 feb 2017
+-------------
