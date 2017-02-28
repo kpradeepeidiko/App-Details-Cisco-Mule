@@ -4,11 +4,28 @@ Jenkins Details
 Rajasekhar
 sarasu10
 ======================================
+24 feb 2017
+++++++++++++
+1) Worked on bibucket issue in message format.
+2) Followed up from the supports, for the jira ticket-269.
+3) Monitored deployments in dev and prod and provided status mail.
+
 27 feb 2017
-------------
++++++++++++++
 1) Google calendar queues were incresed, Created mule ticket and worked on it.
 2) Worked on ticket-286(integrate pagerduty and jenkins).
-3) Monitored deployments in dev and prod
+3) Changed Settings response for bitbucket when token revoked in dev
+4) Monitored deployments in dev and prod and provided status mail.
 
 28 feb 2017
--------------
+++++++++++++
+1) Mule soft provided a document(for the mule ticket) on tuning performance studied it.
+2) In Google calendar, If Calendar consists only one event than for the day_based message in spark displaying as "There are 1 events today" worked on it.
+3) Changed Settings response for bitbucket when token revoked in prod.
+4) Monitored deployments in dev and prod and provided status mail.
+
+
+
+
+
+=======================================================================================
