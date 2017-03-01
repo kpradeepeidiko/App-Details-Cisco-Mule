@@ -22,8 +22,9 @@ sarasu10
 1) Mule soft provided a document(for the mule ticket) on tuning performance gone through it.
 2) In Google calendar, If Calendar consists only one event than for the day_based message in spark displaying as "There are 1 events today", worked on it and resolved.
 3) Changed Settings response for bitbucket when token revoked in prod.
-4) Added twitter-requestMap flows(get,post,put,delete) in runtime and deployed in dev
+4) Added twitter-requestMap flows(get,post,put,delete) and delete method for google-drive in runtime and deployed in dev
 5) Monitored deployments in dev and prod and provided status mail.
+
 
 
 
