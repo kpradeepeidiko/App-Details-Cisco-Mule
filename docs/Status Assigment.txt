@@ -11,7 +11,7 @@ sarasu10
 3) Monitored deployments in dev and prod and provided status mail.
 
 27 feb 2017
-+++++++++++++
++++++++++++
 1) Google calendar queues were incresed, Created mule ticket and worked on it.
 2) Worked on ticket-286(integrate pagerduty and jenkins).
 3) Changed Settings response for bitbucket when token revoked in dev
@@ -25,6 +25,12 @@ sarasu10
 4) Added twitter-requestMap flows(get,post,put,delete) and delete method for google-drive in runtime and deployed in dev
 5) Monitored deployments in dev and prod and provided status mail.
 
+
+01 Mar 2017
++++++++++++
+1) Worked on xmatters and clarified nisha/ranjith doubts about 2 way.
+2) Due runtime memory reached to 80%, changed some loggers from "info" to "debug" and filled empty loggers.
+3) Monitored deployments in dev and prod and provided status mail.
 
 
 
