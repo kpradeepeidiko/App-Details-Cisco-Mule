@@ -32,6 +32,11 @@ sarasu10
 2) Worked on xmatters and clarified nisha/ranjith doubts about 2 way.
 3) Monitored deployments in dev and prod and provided status mail.
 
+02 Mar 2017
+++++++++++++
+1) Gone through the documsnts, which mule support has given for the case(00158911 - increaing queues depth).
+2) worked on jira ticket-273(Improve message formatting) for my apps.
+3) Monitored deployments in dev and prod and provided status mail.
 
 
 
