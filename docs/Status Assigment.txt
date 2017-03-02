@@ -28,7 +28,7 @@ sarasu10
 
 01 Mar 2017
 +++++++++++
-1) Due runtime(in dev) memory reached to 80%, changed some loggers from "info" to "debug" and filled empty loggers.
+1) Due runtime(in dev) memory reached to 80%, changed some loggers from "info" to "debug" and filled empty loggers,done some changes in twitter requestMap flows, corrected delete query in googledrive flow.
 2) Worked on xmatters and clarified nisha/ranjith doubts about 2 way.
 3) Monitored deployments in dev and prod and provided status mail.
 
