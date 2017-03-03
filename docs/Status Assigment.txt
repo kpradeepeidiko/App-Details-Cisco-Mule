@@ -41,7 +41,7 @@ sarasu10
 
 3 Mar 2017
 ------------
-1) Worked on xmatters :
+1) Worked on xmatters and prepared a documents on following:
    -->Command triggered by supervisor or any one?
    
    -->Follow standard communication form or any form from customer works so customer can just provide us the communication form url? Only target value required?
