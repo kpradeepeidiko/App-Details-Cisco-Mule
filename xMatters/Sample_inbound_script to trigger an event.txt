@@ -1,0 +1,31 @@
+var data;
+
+//If your data is posted as JSON
+//data = JSON.parse(request.body);
+
+// If yourdata is posted as query string parameters or form post body
+data = request.parameters;
+
+//Ifyour data is posted as xml
+//data = JXON.parse(request.body)
+
+// Parse data from incoming payloadand construct the trigger object
+//trigger.properties.user_name = data.user_name;
+//trigger.properties.channel_name = data.channel_name;
+//trigger.properties.text = data.text;
+//trigger.properties.channel_id = data.channel_id;
+//trigger.properties.command =data.command;
+//trigger.properties.team_domain = data.team_domain;
+//trigger.properties.user_id =data.user_id;
+
+// Identify requested recipients
+var targets = data.text.split(' ');
+
+// Define recipients
+trigger.recipients = [];
+for (var i = 0; i < targets.length; i++) {
+   trigger.recipients.push({'targetName': targets[i]});
+}
+
+// Post trigger to form
+form.post(trigger);

@@ -34,9 +34,21 @@ sarasu10
 
 02 Mar 2017
 ++++++++++++
-1) Gone through the documsnts, which mule support has given for the case(00158911 - increaing queues depth).
-2) worked on jira ticket-273(Improve message formatting) for my apps.
-3) Monitored deployments in dev and prod and provided status mail.
+1) Gone through the documents, which mule support has given for the case(00158911 - increaing queues depth).
+2) Worked on jira ticket-273(Improve message formatting) for my apps.
+3) Followed up jira ticket-269, google calendar support changed status to "invalid", for the query i posted.
+4) Monitored deployments in dev and prod and provided status mail.
+
+3 Mar 2017
+------------
+1) Worked on xmatters :
+   -->Command triggered by supervisor or any one?
+   
+   -->Follow standard communication form or any form from customer works so customer can just provide us the communication form url? Only target value required?
+   
+   -->Command can be sent to only group or individual person can also be alerted?
+   
+2) Monitored deployments in dev and prod and provided status mail.
 
 
 
