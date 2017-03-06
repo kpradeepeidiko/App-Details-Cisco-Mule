@@ -57,8 +57,9 @@ sarasu10
 
 6 Mar 2017
 +++++++++++
-1) 
-2) Monitored deployments in dev and prod and provided status mail.
+1) Implemented pagination for get foldersAndfiles in settings flow for google drive and deployed in dev.
+2) In Office_365, If a calendar consists of one event than for day-based reminders, the message in spark displaying as "there are 1 events today", so corrected the code and deployed in dev and prod.
+3) Monitored deployments in dev and prod and provided status mail.
 
 
 
