@@ -1,9 +1,0 @@
-{
-  "channelResponse": {
-    "kind": "api#channel",
-    "id": "jhbfgjhk455375",
-    "resourceId": "GGfFAKfkGxwsMIztAPJjQhWTSkA",
-    "resourceUri": "https://www.googleapis.com/calendar/v3/calendars/1c1nsrpaoek2tam03dc77f5ht8@group.calendar.google.com/events?maxResults=250&alt=json",
-    "expiration": "1475231915000"
-  }
-}

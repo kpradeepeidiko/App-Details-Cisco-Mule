@@ -370,3 +370,342 @@ issue comment
 	},
 	"changes": {}
 }
+========================================================================================
+resolved
+-----------
+{
+  "hookResponse": {
+    "changes": {
+      "status": {
+        "new": "resolved",
+        "old": "new"
+      }
+    },
+    "comment": {
+      "user": {
+        "type": "user",
+        "uuid": "{d42a0df2-ba7a-4eb8-8f35-e6b22ddb18a6}",
+        "display_name": "Rajasekhar vendidandi",
+        "username": "vendidandi",
+        "links": {
+          "html": {
+            "href": "https://bitbucket.org/vendidandi/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/users/vendidandi"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/vendidandi/avatar/32/"
+          }
+        }
+      },
+      "content": {
+        
+      },
+      "updated_on": null,
+      "type": "issue_comment",
+      "created_on": "2017-03-06T13:01:03.380141+00:00",
+      "id": 34888193,
+      "links": {
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/issues/2#comment-34888193"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2/comments/34888193"
+        }
+      }
+    },
+    "repository": {
+      "type": "repository",
+      "project": {
+        "uuid": "{b9183e84-3e35-4854-8783-db157c6812b8}",
+        "type": "project",
+        "name": "Mulesoft",
+        "key": "MUL",
+        "links": {
+          "html": {
+            "href": "https://bitbucket.org/account/user/eidikospark/projects/MUL"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/teams/eidikospark/projects/MUL"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/user/eidikospark/projects/MUL/avatar/32"
+          }
+        }
+      },
+      "owner": {
+        "type": "team",
+        "uuid": "{68b8c461-5661-4a34-b5c8-00f31eaea20a}",
+        "display_name": "EidikoSpark",
+        "username": "eidikospark",
+        "links": {
+          "html": {
+            "href": "https://bitbucket.org/eidikospark/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/teams/eidikospark"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/eidikospark/avatar/32/"
+          }
+        }
+      },
+      "is_private": true,
+      "scm": "git",
+      "uuid": "{a07c8b32-9a1f-42b1-a979-e2e46d47e0f3}",
+      "name": "MavanWeb",
+      "links": {
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/avatar/32/"
+        }
+      },
+      "full_name": "eidikospark/mavanweb",
+      "website": ""
+    },
+    "issue": {
+      "content": {
+        "html": "<p>test</p>",
+        "raw": "test",
+        "markup": "markdown"
+      },
+      "priority": "major",
+      "repository": {
+        "type": "repository",
+        "name": "MavanWeb",
+        "uuid": "{a07c8b32-9a1f-42b1-a979-e2e46d47e0f3}",
+        "full_name": "eidikospark/mavanweb",
+        "links": {
+          "html": {
+            "href": "https://bitbucket.org/eidikospark/mavanweb"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/eidikospark/mavanweb/avatar/32/"
+          }
+        }
+      },
+      "state": "resolved",
+      "assignee": null,
+      "reporter": {
+        "type": "user",
+        "uuid": "{d42a0df2-ba7a-4eb8-8f35-e6b22ddb18a6}",
+        "display_name": "Rajasekhar vendidandi",
+        "username": "vendidandi",
+        "links": {
+          "html": {
+            "href": "https://bitbucket.org/vendidandi/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/users/vendidandi"
+          },
+          "avatar": {
+            "href": "https://bitbucket.org/account/vendidandi/avatar/32/"
+          }
+        }
+      },
+      "id": 2,
+      "links": {
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/issues/2/issue"
+        },
+        "comments": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2/comments"
+        },
+        "attachments": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2/attachments"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2"
+        },
+        "vote": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2/vote"
+        },
+        "watch": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/2/watch"
+        }
+      },
+      "edited_on": null,
+      "version": null,
+      "votes": 0,
+      "type": "issue",
+      "created_on": "2017-01-20T15:00:07.379184+00:00",
+... [truncated]
+
+==================================================
+reopen issue
+---------------
+{
+  "hookResponse": {
+    "changes": {
+      "status": {
+        "new": "open",
+        "old": "resolved"
+      }
+    },
+    "repository": {
+      "name": "MavanWeb",
+      "project": {
+        "type": "project",
+        "key": "MUL",
+        "name": "Mulesoft",
+        "uuid": "{b9183e84-3e35-4854-8783-db157c6812b8}",
+        "links": {
+          "avatar": {
+            "href": "https://bitbucket.org/account/user/eidikospark/projects/MUL/avatar/32"
+          },
+          "html": {
+            "href": "https://bitbucket.org/account/user/eidikospark/projects/MUL"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/teams/eidikospark/projects/MUL"
+          }
+        }
+      },
+      "full_name": "eidikospark/mavanweb",
+      "scm": "git",
+      "uuid": "{a07c8b32-9a1f-42b1-a979-e2e46d47e0f3}",
+      "type": "repository",
+      "website": "",
+      "is_private": true,
+      "owner": {
+        "type": "team",
+        "display_name": "EidikoSpark",
+        "links": {
+          "avatar": {
+            "href": "https://bitbucket.org/account/eidikospark/avatar/32/"
+          },
+          "html": {
+            "href": "https://bitbucket.org/eidikospark/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/teams/eidikospark"
+          }
+        },
+        "uuid": "{68b8c461-5661-4a34-b5c8-00f31eaea20a}",
+        "username": "eidikospark"
+      },
+      "links": {
+        "avatar": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/avatar/32/"
+        },
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb"
+        }
+      }
+    },
+    "actor": {
+      "type": "user",
+      "display_name": "Rajasekhar vendidandi",
+      "links": {
+        "avatar": {
+          "href": "https://bitbucket.org/account/vendidandi/avatar/32/"
+        },
+        "html": {
+          "href": "https://bitbucket.org/vendidandi/"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/vendidandi"
+        }
+      },
+      "uuid": "{d42a0df2-ba7a-4eb8-8f35-e6b22ddb18a6}",
+      "username": "vendidandi"
+    },
+    "comment": {
+      "user": {
+        "type": "user",
+        "display_name": "Rajasekhar vendidandi",
+        "links": {
+          "avatar": {
+            "href": "https://bitbucket.org/account/vendidandi/avatar/32/"
+          },
+          "html": {
+            "href": "https://bitbucket.org/vendidandi/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/users/vendidandi"
+          }
+        },
+        "uuid": "{d42a0df2-ba7a-4eb8-8f35-e6b22ddb18a6}",
+        "username": "vendidandi"
+      },
+      "updated_on": null,
+      "id": 34888452,
+      "created_on": "2017-03-06T13:10:37.044983+00:00",
+      "type": "issue_comment",
+      "content": {
+        
+      },
+      "links": {
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/issues/23#comment-34888452"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23/comments/34888452"
+        }
+      }
+    },
+    "issue": {
+      "assignee": null,
+      "updated_on": "2017-03-06T13:10:36.992494+00:00",
+      "state": "open",
+      "edited_on": null,
+      "kind": "bug",
+      "created_on": "2017-02-06T07:03:13.381370+00:00",
+      "type": "issue",
+      "version": null,
+      "reporter": {
+        "type": "user",
+        "display_name": "Rajasekhar vendidandi",
+        "links": {
+          "avatar": {
+            "href": "https://bitbucket.org/account/vendidandi/avatar/32/"
+          },
+          "html": {
+            "href": "https://bitbucket.org/vendidandi/"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/users/vendidandi"
+          }
+        },
+        "uuid": "{d42a0df2-ba7a-4eb8-8f35-e6b22ddb18a6}",
+        "username": "vendidandi"
+      },
+      "links": {
+        "attachments": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23/attachments"
+        },
+        "comments": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23/comments"
+        },
+        "watch": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23/watch"
+        },
+        "vote": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23/vote"
+        },
+        "html": {
+          "href": "https://bitbucket.org/eidikospark/mavanweb/issues/23/eidiko-issues"
+        },
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/repositories/eidikospark/mavanweb/issues/23"
+        }
+      },
+      "watches": 1,
+      "milestone": null,
+      "component": null,
+      "id": 23,
+      "votes": 0,
+      "content": {
+        "markup": "ma... [truncated]
