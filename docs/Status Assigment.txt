@@ -3,7 +3,8 @@ Jenkins Details
 192.168.2.216
 Rajasekhar
 sarasu10
-======================================
+
+========================================================================================================
 24 feb 2017
 ++++++++++++
 1) Worked on bibucket issue in message format.
@@ -32,15 +33,17 @@ sarasu10
 2) Worked on xmatters and clarified nisha/ranjith doubts about 2 way.
 3) Monitored deployments in dev and prod and provided status mail.
 
+
 02 Mar 2017
 ++++++++++++
-1) Gone through the documents, which mule support has given for the case(00158911 - increaing queues depth).
+1) Gone through the documents, which mule support has given for the case(00158911 - increasing queues depth).
 2) Worked on jira ticket-273(Improve message formatting) for my apps.
 3) Followed up jira ticket-269, google calendar support changed status to "invalid", for the query i posted.
 4) Monitored deployments in dev and prod and provided status mail.
 
+
 3 Mar 2017
-------------
+++++++++++
 1) Worked on xmatters and prepared a documents on following:
    -->Command triggered by supervisor or any one?
    
@@ -52,7 +55,12 @@ sarasu10
 
 
 
+6 Mar 2017
++++++++++++
+1) 
+2) Monitored deployments in dev and prod and provided status mail.
 
 
 
-=======================================================================================
+
+=======================================================================================================
