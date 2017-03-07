@@ -28,9 +28,26 @@ POST https://www.googleapis.com/oauth2/v4/token
   "refresh_token": "1/yvI9afCr2T5eQVnMkDw0EPo_qiUM76Q7KGjhPUkOu9A"
 }
 
+================================================
+{
+  "isValidToken": false,
+  "APIHttpStatus": 400,
+  "messageFromAPI": {
+    "error": "invalid_grant",
+    "error_description": "Token has been expired or revoked."
+  }
+}
 
+--------------
 
-
+{
+  "isValidToken": false,
+  "APIHttpStatus": 400,
+  "messageFromAPI": {
+    "error": "invalid_grant",
+    "error_description": "Bad Request"
+  }
+}
 
 
 
@@ -68,9 +85,6 @@ dev
 https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
 &access_type=offline&redirect_uri=https://cisco-spark-integration-management-new-dev.cloudhub.io/
 &response_type=code&client_id=971699694203-nshfhghj1p6u2er5vrvk86gup2a4tdk4.apps.googleusercontent.com
-
-
-
 
 
 {

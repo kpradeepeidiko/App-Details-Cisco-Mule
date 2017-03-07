@@ -21,6 +21,11 @@ using tranformations on db value
 -------------------------------------
 obj-to-json-->trafrm Msg(input payload-json = output define Map)--> boj-to-json
 ====================================================================================================
+to get http status = #[message.inboundProperties.'http.status']
+
+#[message.inboundProperties.'http.query.params'.guid]
+
+
 input : http://192.168.1.200:8089/integrations/1001
 output : 1001
 use Expression as : #[message.inboundProperties.'http.request.uri'.split("/")[2]]
