@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd">
+
+	<CiscoSpark:config name="CiscoSpark__Configuration"  doc:name="CiscoSpark: Configuration"/>
+    
+    <flow name="getSparkProfileFlow">
+    	 <CiscoSpark:get-people-detail config-ref="CiscoSpark__Configuration" doc:name="Get Spark Profile" token="Bearer #[flowVars['sparkToken']]"/>
+        <async doc:name="Async">
+        <set-variable variableName="trackingId" value="#[payload.trackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <set-variable variableName="requestType" value="#['GET']" doc:name="Set Request Type"/>
+            <set-variable variableName="params" value="#['getSparkProfileFlow']" doc:name="Set params"/>
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+       
+    </flow>
+    
+    <flow name="getSparkRoomsFlow">
+    	 <CiscoSpark:get-rooms config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="CiscoSpark"   max="#[flowVars['max']]" sortByMostRecentlyActive="true"/>
+        <logger message="GETTING SPARK ROOMS FLOW #[message.payloadAs(java.lang.String)] " level="INFO" doc:name="Logger"/>
+        <async doc:name="Async">
+        <set-variable variableName="trackingId" value="#[payload.trackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <set-variable variableName="requestType" value="#['GET']" doc:name="Set Request Type"/>
+            <set-variable variableName="params" value="#['getSparkRoomsFlow']" doc:name="Set params"/>
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+    </flow>
+    
+    
+    <flow name="getSparkRoomsBySortByIdFlow">
+    	 <CiscoSpark:get-rooms config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="CiscoSpark"   max="#[flowVars['max']]" sortBy="id"/>
+        <logger message="GETTING SPARK ROOMS FLOW #[message.payloadAs(java.lang.String)] " level="INFO" doc:name="Logger"/>
+        <async doc:name="Async">
+        <set-variable variableName="trackingId" value="#[payload.trackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <set-variable variableName="requestType" value="#['GET']" doc:name="Set Request Type"/>
+            <set-variable variableName="params" value="#['getSparkRoomsFlow']" doc:name="Set params"/>
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+    </flow>
+
+	<flow name="postSparkMessageFlow">
+		<CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="CiscoSpark">
+            <CiscoSpark:messages-post-request roomId="#[flowVars['roomId']]" markdown="#[flowVars['messageToSpark']]"/>
+        </CiscoSpark:post-messages>
+        <logger message="POSTING MESSAGE TO SPARK ROOMMMMMMM #[message.payloadAs(java.lang.String)] #[payload.statusCode] and #[payload.statusMessage] " level="INFO" doc:name="Logger"/>
+        <logger message="#[message.inboundProperties] INBOUDN PROPERTIES" level="INFO" doc:name="Logger"/>
+        <logger message="#[message.outboundProperties] OUTBOUND PROPERTIES" level="INFO" doc:name="Logger"/>
+        <async doc:name="Async">
+            <set-variable variableName="trackingId" value="#[payload.trackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <set-variable variableName="requestType" value="#['POST']" doc:name="Set Request Type"/>
+            <set-variable variableName="params" value="#['postSparkMessageFlow']" doc:name="Set params"/>
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+	</flow>
+	<flow name="postBotSparkMessageFlow">
+		<CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars.sparkToken]" doc:name="CiscoSpark">
+            <CiscoSpark:messages-post-request  markdown="#[flowVars.messageToSpark]" toPersonId="#[flowVars.roomId]"/>
+        </CiscoSpark:post-messages>
+        <async doc:name="Async">
+        <set-variable variableName="trackingId" value="#[payload.trackingID]" doc:name="Set Traking Id"/>
+            <set-variable variableName="statusCode" value="#[payload.statusCode]"
+					doc:name="Set Status Code" />
+				<set-variable variableName="statusMessage" value="#[payload.statusMessage]"
+					doc:name="Set Status Message" />
+            <set-variable variableName="requestType" value="POST" doc:name="Set Request Type"/>
+            <set-variable variableName="params" value="#['postBotSparkMessageFlow']" doc:name="Set params"/>
+            <flow-ref name="trackingDetailsFlow" doc:name="Save Tracking Details"/>
+        </async>
+</flow>
+
+</mule>

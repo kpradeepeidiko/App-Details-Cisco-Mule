@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:s3="http://www.mulesoft.org/schema/mule/s3"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:api-platform-gw="http://www.mulesoft.org/schema/mule/api-platform-gw"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/api-platform-gw http://www.mulesoft.org/schema/mule/api-platform-gw/current/mule-api-platform-gw.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/s3 http://www.mulesoft.org/schema/mule/s3/current/mule-s3.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+	<apikit:config name="api-config" raml="api.raml"
+		consoleEnabled="false" doc:name="Router" />
+
+	<api-platform-gw:api apiName="${management.mule.env.raml.title}"
+		version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery" />
+
+
+	<flow name="api-main">
+		<http:listener config-ref="api-httpListenerConfig" path="/api/*"
+			doc:name="HTTP">
+			<http:response-builder>
+				<http:header headerName="Access-Control-Allow-Origin"
+					value="*" />
+			</http:response-builder>
+
+		</http:listener>
+		<apikit:router config-ref="api-config" doc:name="APIkit Router" />
+		<set-property propertyName="Access-Control-Allow-Origin"
+			value="*" doc:name="Property" />
+		<exception-strategy ref="api-apiKitGlobalExceptionMapping"
+			doc:name="Reference Exception Strategy" />
+	</flow>
+
+	<flow name="api-console">
+		<http:listener config-ref="api-httpListenerConfig" path="/console/*"
+			doc:name="HTTP" />
+		<apikit:console config-ref="api-config" doc:name="APIkit Console" />
+	</flow>
+	<flow name="delete:/integrations/instances:api-config">
+		<flow-ref name="deleteAllIntegrationInstanceFlow" doc:name="deleteAllIntegrationInstanceFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+		
+	</flow>
+
+	<flow name="get:/applications/{applicationId}:api-config">
+		<flow-ref name="getApplicationDetailsFlow" doc:name="Get Application Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations:api-config">
+		<flow-ref name="getIntegrationsFlow" doc:name="getIntegrationsFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="post:/integrations/{integrationId}/authDetails:api-config">
+		<flow-ref name="postIntegrationAuthDetailsFlow" doc:name="postIntegrationAuthDetailsFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/{integrationId}/uiSettings:api-config">
+		<flow-ref name="getIntegrationUiSettingsFlow" doc:name="getIntegrationUiSettingsFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+	<flow name="get:/integrations/{integrationId}/getSparkRooms:api-config">
+		<set-variable variableName="userId"
+			value="#[message.inboundProperties.'http.query.params'.userId]"
+			doc:name="Set UserId" />
+		<flow-ref name="getSparkRooms" doc:name="getSparkRooms" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+
+
+	<flow name="post:/integrations/{integrationId}/uiSettings:api-config">
+		<flow-ref name="postUiSettingsImplementationFlow" doc:name="postUiSettingsImplementationFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/healthCheck:api-config">
+		<set-variable variableName="maap" value="#[new java.util.HashMap()]"
+			doc:name="Set Map to load token and integrationId" />
+		<flow-ref name="getIntegrationHealthCheckFlow" doc:name="getIntegrationHealthCheckFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/frameworkStatus:api-config">
+
+		<flow-ref name="masterEndPointFlow" doc:name="masterEndPointFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+
+	</flow>
+
+
+
+
+	<flow name="post:/integrations/{integrationId}/appTokens:api-config">
+		<flow-ref name="postIntegrationAppTokensFlow" doc:name="Post Integration App Tokens Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/{integrationId}/appTokens:api-config">
+		<flow-ref name="getIntegrationTokenCall" doc:name="Get Integration Token Call" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow
+		name="delete:/integrations/{integrationId}/appTokens/{appTokenId}:api-config">
+		<flow-ref name="deleteIntegrationAppTokensFlow" doc:name="deleteIntegrationAppTokensFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/{integrationId}:api-config">
+		<flow-ref name="getIntegrationFlow" doc:name="Get Integration Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/htmlContent:api-config">
+		<set-variable variableName="action"
+			value="#[message.inboundProperties.'http.query.params'.action]"
+			mimeType="text/plain" doc:name="Store Action" />
+		<set-variable variableName="integrationId"
+			value="#[message.inboundProperties.'http.query.params'.integrationId]"
+			doc:name="Set IntegrationId" />
+		<async doc:name="Async">
+			<flow-ref name="trackingDetailsFlow" doc:name="Tracking Details" />
+		</async>
+
+		<flow-ref name="getIntegrationHtmlContentFlow" doc:name="getIntegrationHtmlContentFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+	<flow name="get:/staticContent:api-config">
+		<flow-ref name="get-static-contentFlow" doc:name="get-static-contentFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/integrations/instances/{instanceId}:api-config">
+		<flow-ref name="getIntegrationInstanceFlow" doc:name="Get Integration Instance Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="post:/integrations/instances:api-config">
+		<flow-ref name="postIntegrationInstanceFlow" doc:name="Post Integration Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+	<flow name="get:/integrations/instances:api-config">
+		<flow-ref name="getIntegrationInstancesListFlow" doc:name="Get Integration Instances Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="put:/integrations/instances/{instanceId}:api-config">
+		<flow-ref name="updateIntegrationInstanceFlow" doc:name="updateIntegrationInstanceFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="delete:/integrations/instances/{instanceId}:api-config">
+		<flow-ref name="deleteIntegrationInstanceCall" doc:name="Delete Integration Instance Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="get:/clients/tokens:api-config">
+		<flow-ref name="getSparkTokenFlow" doc:name="getSparkTokenFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+	<flow name="get:/clients/appSettings:api-config">
+		<flow-ref name="getClientAppSettingsOperationFlow"
+			doc:name="Get Client App Settings Operation Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+	<flow name="get:/clients/appSettings/{integrationId}:api-config">
+		<flow-ref name="getClientAppSettingsPerIntegrationIdOperationFlow"
+			doc:name="Get Client App Settings Per IntegrationId Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="post:/clients/tokens:api-config">
+		<flow-ref name="postSparkTokenFlow" doc:name="Post Spark Token Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+	<flow name="post:/hooks/{instanceUuid}:api-config">
+		<flow-ref name="getMessageformatFlow" doc:name="getMessageformatFlow" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+	<flow name="head:/hooks/{instanceUuid}:api-config">
+		<logger level="INFO" doc:name="Logger"
+			message="Head hooks Flow Headers = #[message.inboundProperties]:::::::::::::::::payload=#[message.payloadAs(java.lang.String)]" />
+	</flow>
+	<flow name="get:/hooks/{instanceUuid}:api-config">
+		<logger level="INFO" doc:name="Logger"
+			message="Get hooks flow Headers = #[message.inboundProperties]::::::::::payload=#[message.payloadAs(java.lang.String)]" />
+	</flow>
+	<flow name="get:/hooks:api-config">
+		<flow-ref name="everNoteWebhookFlow" doc:name="everNoteWebhookFlow" />
+		<logger level="INFO" doc:name="Logger"
+			message="Get hooks flow Headers = #[message.inboundProperties]::::::::::payload=#[message.payloadAs(java.lang.String)]" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+	<flow name="delete:/integrations/{integrationId}/appTokens:api-config">
+		<flow-ref name="deleteIntegrationTokenByIntegrationIdAndUserIdFlow"
+			doc:name="Delete Integration Token Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+	<flow name="delete:/clients/tokens:api-config">
+		<flow-ref name="deleteClientTokenByIntegrationIdAndUserIdFlow"
+			doc:name="Delete Client Token Flow Reference" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+	<flow name="refreshSparkTokenPolling">
+		<poll doc:name="Poll">
+			<fixed-frequency-scheduler frequency="23"
+				timeUnit="HOURS" />
+			<logger
+				message="#['....................................................\n...Started Refreshing Spark Token Polling...\n.....................................................']"
+				level="INFO" doc:name="Logger" />
+		</poll>
+		<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration"
+			path="/clients/{clientId}/tokens" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:query-param paramName="client_id"
+					value="${runtime.clientidenforcement.id}" />
+				<http:query-param paramName="client_secret"
+					value="${runtime.clientidenforcement.secret}" />
+				<http:query-param paramName="integrationId"
+					value="#[flowVars['integrationId']]" />
+				<http:query-param paramName="userId" value="#[flowVars['userId']]" />
+				<http:uri-param paramName="clientId" value="1" />
+
+
+
+
+			</http:request-builder>
+		</http:request>
+
+
+
+		<dw:transform-message doc:name="Transform Response to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<foreach doc:name="For Each">
+			<vm:outbound-endpoint exchange-pattern="one-way"
+				path="sparkRefreshToken" connector-ref="VM" doc:name="VM" />
+		</foreach>
+		<logger
+			message="#['....................................................\n...Refreshing Spark Token Polling Ended...\n.....................................................']"
+			level="INFO" doc:name="Logger" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+
+	<flow name="healthCheckPolling">
+		<poll doc:name="Poll">
+			<fixed-frequency-scheduler frequency="5"
+				timeUnit="MINUTES" />
+			<logger message="Started health check Polling.....!!!!!"
+				level="INFO" doc:name="Logger" />
+		</poll>
+
+		<vm:outbound-endpoint exchange-pattern="request-response"
+			doc:name="VM" connector-ref="VM" path="healthCheck" />
+        <exception-strategy ref="GlobalExceptionStrategy" doc:name="Reference Exception Strategy"/>
+	</flow>
+
+
+	<apikit:mapping-exception-strategy
+		name="api-apiKitGlobalExceptionMapping">
+		<apikit:mapping statusCode="404">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotFoundException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Resource not found&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="405">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Method not allowed&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="415">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload
+				value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="406">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.NotAcceptableException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="400">
+			<apikit:exception
+				value="org.mule.module.apikit.exception.BadRequestException" />
+			<set-property propertyName="Content-Type" value="application/json"
+				doc:name="Property" />
+			<set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }"
+				doc:name="Set Payload" />
+		</apikit:mapping>
+		<apikit:mapping statusCode="500">
+			<apikit:exception value="java.lang.Exception" />
+			<set-variable variableName="exceptionDetails" value="#[exception]"
+				doc:name="Store Exception" />
+			<flow-ref name="coreServicesLoggingFlow" doc:name="Core Services Logging Flow Reference" />
+			<dw:transform-message doc:name="Build Error">
+				<dw:set-payload resource="classpath:dwScripts/buildError500.dwl" />
+			</dw:transform-message>
+		</apikit:mapping>
+	</apikit:mapping-exception-strategy>
+</mule>

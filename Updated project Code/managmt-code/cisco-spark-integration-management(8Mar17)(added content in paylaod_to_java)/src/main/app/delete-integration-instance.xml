@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+
+	<flow name="deleteIntegrationInstanceFlow">
+        
+        <dw:transform-message doc:name="Build Delete Integration Instance Request">
+            <dw:set-payload resource="classpath:dwScripts/buildDeleteIntegrationInstanceRequest.dwl"/>
+        </dw:transform-message>
+        <logger message="#[flowVars['instanceId']] INID #[flowVars['userId']] AND #[flowVars['integrationId']]  AND #[flowVars['messageToSpark']] INCOMING PAYLOAD IN DELETE INSTANCE #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+        
+        <enricher target="#[flowVars['getIntegrationInstanceResponse']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationInstanceFlow" doc:name="getIntegrationInstanceFlow"/>
+        </enricher>
+        
+        <set-variable variableName="integrationId" value="#[flowVars['getIntegrationInstanceResponse']['integrationId']]" doc:name="Set Integration Id"/>
+        <logger message="CONFIGJSON FROM INSTANCE ID #[flowVars['getIntegrationInstanceResponse']['configJson']] AND PRIVATE MESSAGE #[flowVars.privateMessage]" level="INFO" doc:name="Logger"/>
+
+        
+        <enricher target="#[flowVars['integrationSettings']]" doc:name="Message Enricher">
+            <flow-ref name="getIntegrationSettingsFlow" doc:name="getIntegrationSettingsFlow"/>
+        </enricher>
+        
+        <enricher target="#[flowVars['putIntegrationResponse']]" doc:name="Message Enricher">
+            <flow-ref name="putIntegrationInstanceFlow" doc:name="Put Integration Instance Flow Reference"/>
+        </enricher>
+        
+        <enricher target="#[flowVars['tearDownResponse']]" doc:name="Message Enricher">
+            <flow-ref name="tearDownDynamicIntegrationFlow" doc:name="Tear Down Dynamic Integration Flow"/>
+        </enricher>
+        <set-variable variableName="integrationId" value="#[flowVars['getIntegrationInstanceResponse']['integrationId']]" doc:name="Set Integration Id"/>
+        <set-variable variableName="userId" value="#[flowVars['getIntegrationInstanceResponse']['userId']]" doc:name="Set User Id"/>
+        <set-variable variableName="configJson" value="#[flowVars['getIntegrationInstanceResponse']['configJson']]" mimeType="application/json" doc:name="Set ConfigJosn value"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+flowVars.configJson]]></dw:set-payload>
+        </dw:transform-message>
+        <set-variable variableName="privateMessage" value="#[payload['private_message']]" doc:name="Set Private Messge or not"/>
+         <choice doc:name="Choice to get Bot or Integration Token">
+                                    <when expression="#[flowVars.privateMessage == 'true']">
+                                        <logger message="Posting Message Using Bot token!!" level="INFO" doc:name="Logger"/>
+                                        <enricher target="#[flowVars['getClientTokenResponse']]" doc:name="Message Enricher">
+                                            <flow-ref name="getBotClientTokenFlow" doc:name="getBotClientTokenFlow"/>
+                                        </enricher>
+                                    </when>
+                                    <otherwise>
+                                        <logger message="Posting Message Using Integration token!!" level="INFO" doc:name="Logger"/>
+                                        <remove-variable variableName="privateMessage" doc:name="Remove privateMessage"/>
+                                        <enricher target="#[flowVars['getClientTokenResponse']]" doc:name="Message Enricher">
+                                            <flow-ref name="getClientTokenFlow" doc:name="getClientTokenFlow"/>
+                                        </enricher>
+                                    </otherwise>
+                                </choice>
+
+        <set-variable variableName="sparkToken" value="#[flowVars['getClientTokenResponse'][0]['accessToken']]" doc:name="Set Spark Token"/>
+        <set-variable variableName="roomId" value="#[flowVars['getIntegrationInstanceResponse']['channelId']]" doc:name="Set Channel Id"/>
+
+        
+        <choice doc:name="Choice to post form Bot or Integration Token">
+            <when expression="#[flowVars.privateMessage == 'true']">
+                <logger level="INFO" doc:name="Logger" message="Posting Message Using Bot token"/>
+                 <enricher target="#[flowVars['postSparkMessageResponse']]" doc:name="Message Enricher">
+            <flow-ref name="postBotSparkMessageFlow" doc:name="postBotSparkMessageFlow"/>
+        </enricher>
+            </when>
+            <otherwise>
+                <logger level="INFO" doc:name="Logger" message="Posting Message Using Integration token"/>
+                 <enricher target="#[flowVars['postSparkMessageResponse']]" doc:name="Message Enricher">
+            <flow-ref name="postSparkMessageFlow" doc:name="postSparkMessageFlow"/>
+        </enricher>
+            </otherwise>
+        </choice>
+        
+        <dw:transform-message doc:name="Build Delete Integration Instance Response">
+            <dw:set-payload resource="classpath:dwScripts/buildDeleteIntegrationInstanceResponse.dwl"/>
+        </dw:transform-message>
+        
+        
+    </flow>
+    <flow name="deleteIntegrationInstanceCall">
+        <set-variable variableName="userId" value="#[message.inboundProperties.'http.query.params'.userId]" doc:name="Set UserId"/>
+        <set-variable variableName="integrationId" value="#[message.inboundProperties.'http.query.params'.integrationId]" doc:name="Set IntegrationId"/>
+        <set-variable variableName="messageToSpark" value="#[message.inboundProperties.'http.query.params'.messageToSpark]" doc:name="Set Message To Spark"/>
+        <flow-ref name="deleteIntegrationInstanceFlow" doc:name="deleteIntegrationInstanceFlow"/>
+    </flow>
+
+
+	<flow name="tearDownDynamicIntegrationFlow">
+        <set-variable variableName="dynamicHost" value="#[flowVars['integrationSettings']['host']]" doc:name="Set Dynamic Host"/>
+        
+        <set-variable variableName="dynamicBasePath" value="#[flowVars['integrationSettings']['basePath']]" doc:name="Set Dynamic Base Path"/>
+        
+        <set-variable variableName="dynamicPort" value="#[flowVars['integrationSettings']['port']]" doc:name="Set Dynamic Port"/>
+        
+        <dw:transform-message doc:name="Build Tear Down Integration Request">
+            <dw:set-payload resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl"/>
+        </dw:transform-message>
+        <logger message=" PAYLOAD IN DELETE INSTANCE TO SPECIFINTEGRATION :: #[message.payloadAs(java.lang.String)]" level="DEBUG" doc:name="Logger"/>
+
+        
+        <http:request config-ref="HTTP_Dynamic_Request_Configuration" path="/tearDownIntegration" method="POST" doc:name="HTTP Request to Specific Integration">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${integrations.management.client.id}"/>
+                <http:query-param paramName="client_secret" value="${integrations.management.client.secret}"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+
+</mule>
