@@ -162,7 +162,26 @@ if ==> tt = 2016-10-10 (yyyy-MM-dd format)
 #[(new org.mule.el.datetime.DateTime(flowVars.tt)).format("MMM dd")] gives Oct 10
 #[(new org.mule.el.datetime.DateTime(flowVars.tt)).plusDays(-1).format("MMM dd")] gives Oct 9
 
-===========================================================================================================
+========================================================================================================
+dwl scripts formats
+----------------------
+<dw:set-variable variableName="userEventsVariable" 
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+				
+<dw:set-payload
+				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
+				
+				
+				
+===================================================================================================
+Setting mime/type in transformation message
+----------------------------------------------
+MimeType was not resolved '*/*' delegating to Java.
+
+<dw:input-payload mimeType="application/json"/>
+<dw:input-payload mimeType="application/java"/>
+
+======================================================================================================
 health _check flow
 -----------------------
 token_response = message=No results
