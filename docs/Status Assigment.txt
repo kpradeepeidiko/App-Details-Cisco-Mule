@@ -68,6 +68,18 @@ sarasu10
 1) worked on jira tickets - 269,273,286
 2) Monitored deployments in dev and prod and provided status mail.
 
+8 Mar 2017
++++++++++++
+1) Added dwl scripts for all tranformation for : pagerduty,papertrail,asana,googleCalendar,codeship,mailchimp,github,newRelic,docusign,runtime
+
+2) Monitored deployments in dev and prod and provided status mail.
+
+9 Mar 2017
+++++++++++++
+1) Deployed app(pagerduty,papertrail,asana,googleCalendar,codeship,mailchimp) in dev which were done with adding dwl scripts for all transform messages.
+2) Added dwl scripts for all tranform messages and deployed in dev for apps : Google drive, Office365.
+3) For runtime, added input mime_type for all tranform messages and deployed in dev(for MimeType was not resolved '*/*' delegating to Java.).
+4) Monitored deployments in dev and prod and provided status mail.
 
 
 
