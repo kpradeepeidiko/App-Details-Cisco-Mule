@@ -89,9 +89,9 @@ sarasu10
 
 13 Mar 2017
 ++++++++++++
-1) added dwl scripts for all transform messages for : management,management-ext,jenkins,jira.
-2) added input mimeTypes for all transformation messages and deployed in dev : management.
-
+1) added dwl scripts for all transform messages for : management,management-ext,jenkins,jira,zendesk.
+2) added input mimeTypes for all transformation messages and deployed in dev : management
+3) Monitored deployments in dev and prod and provided status mail.
 
 
 =======================================================================================================
