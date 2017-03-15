@@ -93,5 +93,18 @@ sarasu10
 2) added input mimeTypes for all transformation messages and deployed in dev : management
 3) Monitored deployments in dev and prod and provided status mail.
 
+14 Mar 2017
+++++++++++++
+1) Looked google calendar and asana connector operations.
+2) In Google drive queues were filled, looked into it.
+3) Added cumberland's xmatters two-way integration with spark as nisha suggested and performed all operations.
+4) Monitored deployments in dev and prod and provided status mail.
+
+15 Mar 2017
+++++++++++++
+1) Handled delete event(Through API) for Google drive.
+2) Looked google drive API, whether it contains an API to search with file/folder names(if user has on lakh folders and files).
+3) 
+
 
 =======================================================================================================
