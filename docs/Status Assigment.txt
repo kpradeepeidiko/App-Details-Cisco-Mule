@@ -104,7 +104,15 @@ sarasu10
 ++++++++++++
 1) Handled delete event(Through API) for Google drive.
 2) Looked google drive API, whether it contains an API to search with file/folder names(if user has on lakh folders and files).
-3) 
+3) followed jira ticket-269,286.
+4) Monitored deployments in dev and prod and provided status mail.
+
+16 Mar 2017
+++++++++++++
+1) Solved mime_type errors for app  : asana, google calendar(all flows).
+2) Looked in to cumberland bot(xmatters 2way integration).
+3) Tried to replicate asana create_task issue.
+4) Monitored deployments in dev and prod and provided status mail.
 
 
 =======================================================================================================
