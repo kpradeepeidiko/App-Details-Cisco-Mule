@@ -114,5 +114,12 @@ sarasu10
 3) Tried to replicate asana create_task issue.
 4) Monitored deployments in dev and prod and provided status mail.
 
+17 Mar 2017
+++++++++++++
+1) Solved mime_types error for apps : mailchimp, O365(all flows)
+2) Worked on xmatters quires as per nisha
+3) Worked on asana task create issue
+4) Monitored deployments in dev and prod and provided status mail.
+
 
 =======================================================================================================
