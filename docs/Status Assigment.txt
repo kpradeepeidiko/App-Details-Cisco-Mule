@@ -121,5 +121,18 @@ sarasu10
 3) Worked on asana task create issue
 4) Monitored deployments in dev and prod and provided status mail.
 
+20 Mar 2017
+++++++++++++
+1) Added input mime types for transform messages and deployed in dev/prod for : Office365, google drive, google calendar, management-ext, mailchimp.
+2) Worked on asana multiple task create issue.
+3) Changed bitbucket message format for issue event(resolve/reopen).
+4) Monitored deployments in dev and prod and provided status mail.
+
+21 Mar 2017
++++++++++++
+1) Added input mime types for transform messages and deployed in dev/prod for : pagerduty, papertrail, management.
+2) 
+4) Monitored deployments in dev and prod and provided status mail. 
+
 
 =======================================================================================================
