@@ -1,0 +1,146 @@
+When properties of the form has "checked" required field and when we hit inbound url with out passsing form properties than : 
+
+
+POST : https://eidiko007.xmatters.com/api/integration/1/functions/0df5eea9-8f2d-42aa-9cee-a4037b945fb4/triggers
+
+body : application/json
+{
+  "recipients": [
+    "sampleGroup1"
+  ]
+}
+
+-----------------
+Response :
+{
+  "requestId": "b357e4bf-fed0-4c29-8ab7-4082b1bcaea1"
+}
+
+When going in to activity stream
+
+{
+	"code": 400,
+	"reason": "Bad Request",
+	"message": "Property 'Service' is required."
+}
+
+400 BAD_REQUEST
+==============================================================================
+When properties of the form has "unchecked" required field and when we hit inbound url with out passsing with out  properties than :
+
+POST : https://eidiko007.xmatters.com/api/integration/1/functions/0df5eea9-8f2d-42aa-9cee-a4037b945fb4/triggers
+
+Body : application/json
+{
+  "recipients": [
+    "sampleGroup1"
+  ]
+}
+
+-------------------------------
+Response : 
+
+{
+  "requestId": "cda49310-6fd1-47f1-b282-3d4cfdd452b1"
+}
+
+When going in to activity stream
+
+{
+	"id": "07612c96-fd5c-4646-b4f3-38b65202d232",
+	"form": {
+		"id": "f08c07dc-b708-40f9-a6c6-27db9e3d7914"
+	},
+	"submitter": {
+		"id": "773d8c40-7ab5-47b3-8186-98bb30dc309b",
+		"targetName": "sparkintegrations",
+		"links": {
+			"self": "/api/xm/1/people/773d8c40-7ab5-47b3-8186-98bb30dc309b"
+		}
+	},
+	"recipients": {
+		"count": 1,
+		"total": 1,
+		"data": [{
+			"id": "d68f1f3a-f1d8-4ed9-959a-a4c7387c6283",
+			"targetName": "sampleGroup1",
+			"recipientType": "GROUP",
+			"status": "ACTIVE",
+			"externallyOwned": false,
+			"allowDuplicates": true,
+			"useDefaultDevices": true,
+			"observedByAll": true,
+			"description": "sample",
+			"links": {
+				"self": "/api/xm/1/groups/d68f1f3a-f1d8-4ed9-959a-a4c7387c6283"
+			},
+			"targeted": true
+		}],
+		"links": {
+			"self": "/api/xm/1/events/07612c96-fd5c-4646-b4f3-38b65202d232/recipients?targeted=true&offset=0&limit=1000"
+		}
+	},
+	"priority": "MEDIUM",
+	"expirationInMinutes": 1440,
+	"overrideDeviceRestrictions": false,
+	"escalationOverride": false,
+	"bypassPhoneIntro": false,
+	"requirePhonePassword": false,
+	"voicemailOptions": {
+		"retry": 3,
+		"every": 60,
+		"leave": "callbackandmessage"
+	},
+	"responseOptions": {
+		"count": 2,
+		"total": 2,
+		"data": [{
+			"number": 1,
+			"text": "Acknowledge",
+			"description": "Acknowledge to own this task",
+			"prompt": "Acknowledge to own this task",
+			"action": "END",
+			"contribution": "POSITIVE",
+			"joinConference": false
+		}, {
+			"number": 2,
+			"text": "Escalate",
+			"description": "Escalate to the next person in the group",
+			"prompt": "Escalate to the next person in the group",
+			"action": "ESCALATE",
+			"contribution": "NEUTRAL",
+			"joinConference": false
+		}]
+	},
+	"eventId": "1827000",
+	"links": {
+		"self": "/api/xm/1/events/07612c96-fd5c-4646-b4f3-38b65202d232"
+	},
+	"requestId": "cda49310-6fd1-47f1-b282-3d4cfdd452b1",
+	"properties": {
+		"Details#en": "The problem is being worked on and we will send additional updates shortly.",
+		"Severity": "Critical",
+		"Status": "Unavailable"
+	}
+}
+======================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

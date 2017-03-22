@@ -130,9 +130,14 @@ sarasu10
 
 21 Mar 2017
 +++++++++++
-1) Added input mime types for transform messages and deployed in dev/prod for : pagerduty, papertrail, management.
-2) 
-4) Monitored deployments in dev and prod and provided status mail. 
+1) Added input mime types for transform messages and deployed in prod for : pagerduty, papertrail, management, Zendesk.
+2) Worked on jira ticket-299.
+3) Monitored deployments in dev and prod and provided status mail. 
 
+22 Mar 2017
+++++++++++++
+1) Worked on API versioning, Mule Project versioning and POM.xml updation for  runtime 3.8.3.
+2) xMatters has updated their API and UI, So worked whether xmatters updates reach our requirements.
+3) Monitored deployments in dev and prod and provided status mail.
 
 =======================================================================================================
