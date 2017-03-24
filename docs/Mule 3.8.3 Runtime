@@ -1,7 +1,63 @@
-New mule 3.8.3 runtime
-+++++++++++++++++++++++
+API versioning, Mule Project versioning and POM.xml updation for  runtime 3.8.3.
 
+New mule 3.8.3 runtime url
++++++++++++++++++++++++++++
 https://docs.mulesoft.com/mule-user-guide/v/3.8/dataweave-xml-reference#maven-dependency-snippet
 
 
+========================================================================================================
+API versioning
++++++++++++++++
+To improve the governance, it's a good practice to version APIs in the API Manager. This version should be tight to the environment and it's useful for the developers and the consumers of the APIs since is the
+visible version in the API Manager and in the API Portals. This version is simplified to 2 numbers and must include the stage (e.g: 1.0-dev,1.0-prod,1.0-stag,1.0-uat, etc).
 
+example : 
+-------------
+cisco-spark-< app_name >-integration
+	-> 1.0-dev
+	-> 1.0-prod
+	-> 1.0-stag
+
+=======================================================================================================
+Mule Project Version
++++++++++++++++++++++
+The "Mule Project Version", is the version defined in the pom.xml of the mule-project, this version is useful only for the developers and the internal team. This version is visible in the Runtime Manager (Anypoint Platform) since the file-name of the deployed project contains the project-name and the version. This version should follow the "Semantic Versioning" (http://semver.org/) standard 
+(e.g: 1.0.1-rc.1). latest version = 2.0.0
+
+example : 
+----------
+cisco-spark-pagerduty-integration-1.0.1-rc.1-SNAPSHOT
+
+
+======================================================================================================
+For transform messages
++++++++++++++++++++++++
+in xml, we have to use
+-----------------------
+<mule
+
+      xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+      xsi:schemaLocation="
+            ...
+            http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+
+
+in pom.xml, we have to use following dependency
+-----------------------------------------------
+<dependency>
+    <groupId>com.mulesoft.weave</groupId>
+    <artifactId>mule-plugin-weave</artifactId>
+    <version>${mule.version}</version>
+    <scope>provided</scope>
+</dependency>
+
+(For users of Mule Runtime version 3.8.0, the aftifactID you need to use is mule-plugin-weave_2.11, rather than just mule-plugin-weave.)
+
+
+what "variables" we can use
+-----------------------------
+<dw:transform-message>
+    <dw:set-payload resource="classpath:path/transform.dwl"/>
+    <dw:set-variable variableName="myVariable" resource="classpath:path/transform.dwl"/>
+    <dw:set-session-variable variableName="mySessionVariable" resource="classpath:path/transform.dwl"/>
+</dw:transform-message>

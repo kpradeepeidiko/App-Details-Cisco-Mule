@@ -140,4 +140,17 @@ sarasu10
 2) xMatters has updated their API and UI, So worked whether xmatters updates reach our requirements.
 3) Monitored deployments in dev and prod and provided status mail.
 
+23 Mar 2017
++++++++++++
+1) Worked on API versioning, Mule Project versioning and POM.xml updation for  runtime 3.8.3.
+2) Worked on jira ticket-299( Added "description" field for all events : deployed in dev and tested).
+3) Monitored deployments in dev and prod and provided status mail.
+
+24 Mar 2017
+++++++++++++
+1) Worked on : removing evernote flows from management, removed "jenkins-webhook-api.xml" file from jenkins project and dependencies of that file.
+2) Worked on getClientToken call in management.
+3) Tried to install latest mule softwares. but, due to internet slow, not able to install.
+4) Monitored deployments in dev and prod and provided status mail.
+
 =======================================================================================================

@@ -5,8 +5,8 @@ pagerduty API KEY   :  YNR83AqzAtufQgaqzkY8
 =====================================================
 For pagetduty use these credentials
 --------------------------------------
-domain url : https://eidikosystemsintgrators.pagerduty.com/sign_in
-username : pradeep.kanukuntla@eidiko.com
+domain url : https://kpindustries.pagerduty.com/sign_in
+username : pk455375@gmail.com
 pwd : pagerduty@10
 
 
