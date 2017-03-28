@@ -13,9 +13,19 @@ db-->in variable(#[message.payload[0].Spark_Token])
 components
 -------------------
 <expression-component doc:name="Expression"><![CDATA[flowVars.tu = flowVars.req.myUrl.split('duplicated task from ')[1]]]></expression-component>
+
 <logger message="#[flowVars.tt]" level="INFO" doc:name="Logger"/>
+
 <set-variable variableName="v1" value="12:52 AM" doc:name="v1"/>
 
+<choice doc:name="Choice">
+            <when expression="">
+                <logger level="INFO" doc:name="Logger"/>
+            </when>
+            <otherwise>
+                <logger level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
 ====================================================================
 using tranformations on db value
 -------------------------------------

@@ -163,7 +163,7 @@ sarasu10
 28 Mar 2017
 ++++++++++++
 1) Triggered all pagerduty events(with API and web-based) from prod and captured messages(with added description url field) in doc and updated in jira ticket.
-2) 
+2) Changed redirect url for asana, mailchimp, O365 in dev
 3) Monitored deployments in dev and prod and provided status mail.
 
 =======================================================================================================
