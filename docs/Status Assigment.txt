@@ -153,4 +153,17 @@ sarasu10
 3) Tried to install latest mule softwares. but, due to internet slow, not able to install.
 4) Monitored deployments in dev and prod and provided status mail.
 
+27 Mar 2017
+++++++++++++
+1) Deployed pagerduty in prod by adding description field for all events and tested.
+2) Fixed bitbucket bug in issue create event and API version.
+3) Worked on API naming and versioning(using API auto-discovery functionality).
+4) Monitored deployments in dev and prod and provided status mail.
+
+28 Mar 2017
+++++++++++++
+1) Triggered all pagerduty events(with API and web-based) from prod and captured messages(with added description url field) in doc and updated in jira ticket.
+2) 
+3) Monitored deployments in dev and prod and provided status mail.
+
 =======================================================================================================

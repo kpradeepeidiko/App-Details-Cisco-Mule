@@ -17,6 +17,13 @@ cisco-spark-< app_name >-integration
 	-> 1.0-dev
 	-> 1.0-prod
 	-> 1.0-stag
+	
+	
+	
+<api-platform-gw:api apiName="Q3 API" version="1.0development" flowRef="api-main" create="true" apikitRef="api-config" doc:name="API Autodiscovery">
+  <api-platform-gw:description>Consume site statistics and perform Q3 computations</api-platform-gw:description>
+  <api-platform-gw:tag>Q3results</api-platform-gw:tag>
+</api-platform-gw:api>
 
 =======================================================================================================
 Mule Project Version
