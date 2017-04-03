@@ -277,4 +277,201 @@ for kpradeep.eidiko
 }
 
 
+===================================================================================
+flowVars['splitCondtn'] = flowVars['offValue'].split('\\.');
+flowVars['offset1'] = Integer.parseInt(flowVars['splitCondtn'][0]);
+flowVars['offset2'] = Integer.parseInt(flowVars['splitCondtn'][1])
 
+
+flowVars['minusPlus'] = flowVars['offset1'].toString().split('-');
+flowVars['offset3'] = Integer.parseInt(flowVars['minusPlus'][1])
+
+-----------------------------------------
+
+flowVars['minusPlus'] = flowVars['offValue'].toString().split('-');
+flowVars['offValue1'] = Integer.parseInt(flowVars['minusPlus'][1])
+
+==============================================================================================
+attendees
+-----------
+{
+	"kind": "calendar#events",
+	"etag": "\"p330b7kngnq0t60g\"",
+	"summary": "igor.maxuk@grammarly.com",
+	"updated": "2017-03-31T19:36:46.232Z",
+	"timeZone": "Europe/Kiev",
+	"accessRole": "owner",
+	"defaultReminders": [{
+		"method": "popup",
+		"minutes": 10
+	}],
+	"nextSyncToken": "CMCz0vC-gdMCEMCz0vC-gdMCGAU=",
+	"items": [{
+		"kind": "calendar#event",
+		"etag": "\"2973949058034000\"",
+		"id": "m558v9hje2hbp6s5b5f345mbqs_20170403T103000Z",
+		"status": "confirmed",
+		"htmlLink": "https://www.google.com/calendar/event?eid=bTU1OHY5aGplMmhicDZzNWI1ZjM0NW1icXNfMjAxNzA0MDNUMTAzMDAwWiBpZ29yLm1heHVrQGdyYW1tYXJseS5jb20",
+		"created": "2016-11-28T13:02:05.000Z",
+		"updated": "2017-02-13T08:28:49.017Z",
+		"summary": "English with Dana - Igor Maxuk",
+		"location": "KV-5th-Room1 (10)",
+		"creator": {
+			"email": "anna.bespala@grammarly.com"
+		},
+		"organizer": {
+			"email": "grammarly.com_8d6olif942n6l2dkaq5t0llddk@group.calendar.google.com",
+			"displayName": "English classes"
+		},
+		"start": {
+			"dateTime": "2017-04-03T13:30:00+03:00"
+		},
+		"end": {
+			"dateTime": "2017-04-03T15:00:00+03:00"
+		},
+		"recurringEventId": "m558v9hje2hbp6s5b5f345mbqs",
+		"originalStartTime": {
+			"dateTime": "2017-04-03T13:30:00+03:00"
+		},
+		"iCalUID": "m558v9hje2hbp6s5b5f345mbqs@google.com",
+		"sequence": 0,
+		"attendees": [{
+			"email": "igor.maxuk@grammarly.com",
+			"self": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "grammarly.com_3139333735343531383933@resource.calendar.google.com",
+			"displayName": "KV-5th-Room1 (10)",
+			"resource": true,
+			"responseStatus": "accepted"
+		}],
+		"hangoutLink": "https://plus.google.com/hangouts/_/grammarly.com/igor-maxuk?hceid=Z3JhbW1hcmx5LmNvbV84ZDZvbGlmOTQybjZsMmRrYXE1dDBsbGRka0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t.m558v9hje2hbp6s5b5f345mbqs",
+		"reminders": {
+			"useDefault": true
+		}
+	}, {
+		"kind": "calendar#event",
+		"etag": "\"2979147785620000\"",
+		"id": "pb1i5r8tmg28nfjs9pl91dr0g0_20170403T130000Z",
+		"status": "confirmed",
+		"htmlLink": "https://www.google.com/calendar/event?eid=cGIxaTVyOHRtZzI4bmZqczlwbDkxZHIwZzBfMjAxNzA0MDNUMTMwMDAwWiBpZ29yLm1heHVrQGdyYW1tYXJseS5jb20",
+		"created": "2016-10-04T17:38:08.000Z",
+		"updated": "2017-03-15T10:31:32.810Z",
+		"summary": "It standup",
+		"location": "KV-8th-Collective Subject (10)",
+		"creator": {
+			"email": "anatoliy.visikirskiy@grammarly.com",
+			"displayName": "Anatoliy Visikirskiy"
+		},
+		"organizer": {
+			"email": "anatoliy.visikirskiy@grammarly.com",
+			"displayName": "Anatoliy Visikirskiy"
+		},
+		"start": {
+			"dateTime": "2017-04-03T16:00:00+03:00",
+			"timeZone": "Europe/Kiev"
+		},
+		"end": {
+			"dateTime": "2017-04-03T16:30:00+03:00",
+			"timeZone": "Europe/Kiev"
+		},
+		"recurringEventId": "pb1i5r8tmg28nfjs9pl91dr0g0",
+		"originalStartTime": {
+			"dateTime": "2017-04-03T16:00:00+03:00",
+			"timeZone": "Europe/Kiev"
+		},
+		"iCalUID": "pb1i5r8tmg28nfjs9pl91dr0g0@google.com",
+		"sequence": 4,
+		"attendees": [{
+			"email": "grammarly.com_33343939313936372d383136@resource.calendar.google.com",
+			"displayName": "KV-8th-Collective Subject (10)",
+			"resource": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "pavel.lukin@grammarly.com",
+			"displayName": "Pavel Lukin",
+			"responseStatus": "accepted"
+		}, {
+			"email": "anatoliy.visikirskiy@grammarly.com",
+			"displayName": "Anatoliy Visikirskiy",
+			"organizer": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "igor.maxuk@grammarly.com",
+			"self": true,
+			"responseStatus": "accepted"
+		}],
+		"hangoutLink": "https://plus.google.com/hangouts/_/grammarly.com/anatoliy-visiki?hceid=YW5hdG9saXkudmlzaWtpcnNraXlAZ3JhbW1hcmx5LmNvbQ.pb1i5r8tmg28nfjs9pl91dr0g0",
+		"guestsCanModify": true,
+		"reminders": {
+			"useDefault": true
+		}
+	}, {
+		"kind": "calendar#event",
+		"etag": "\"2981977954456000\"",
+		"id": "gegb2es25qqtoecs5ld188st04_20170403T133000Z",
+		"status": "confirmed",
+		"htmlLink": "https://www.google.com/calendar/event?eid=Z2VnYjJlczI1cXF0b2VjczVsZDE4OHN0MDRfMjAxNzA0MDNUMTMzMDAwWiBpZ29yLm1heHVrQGdyYW1tYXJseS5jb20",
+		"created": "2016-10-12T08:35:54.000Z",
+		"updated": "2017-03-31T19:36:17.228Z",
+		"summary": "Build-out discussion",
+		"location": "KV-8th-Collective Subject (10)",
+		"creator": {
+			"email": "anna.bespala@grammarly.com"
+		},
+		"organizer": {
+			"email": "anna.bespala@grammarly.com"
+		},
+		"start": {
+			"dateTime": "2017-04-03T16:30:00+03:00"
+		},
+		"end": {
+			"dateTime": "2017-04-03T17:30:00+03:00"
+		},
+		"recurringEventId": "gegb2es25qqtoecs5ld188st04",
+		"originalStartTime": {
+			"dateTime": "2017-04-03T16:30:00+03:00"
+		},
+		"iCalUID": "gegb2es25qqtoecs5ld188st04@google.com",
+		"sequence": 0,
+		"attendees": [{
+			"email": "berezynskyi.andrii@gmail.com",
+			"displayName": "Andrii Berezynskyi",
+			"responseStatus": "declined"
+		}, {
+			"email": "anna.bespala@grammarly.com",
+			"organizer": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "b.dorogov@gmail.com",
+			"displayName": "Boris Dorogov",
+			"responseStatus": "accepted"
+		}, {
+			"email": "mesyacv@mail.ru",
+			"responseStatus": "accepted"
+		}, {
+			"email": "e.mikheeva@trk.ua",
+			"responseStatus": "accepted"
+		}, {
+			"email": "anatoliy.visikirskiy@grammarly.com",
+			"displayName": "Anatoliy Visikirskiy",
+			"responseStatus": "needsAction"
+		}, {
+			"email": "grammarly.com_33343939313936372d383136@resource.calendar.google.com",
+			"displayName": "KV-8th-Collective Subject (10)",
+			"resource": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "igor.maxuk@grammarly.com",
+			"self": true,
+			"responseStatus": "accepted"
+		}, {
+			"email": "georgiy.nikolaev@cbre.ua",
+			"responseStatus": "accepted"
+		}],
+		"hangoutLink": "https://plus.google.com/hangouts/_/grammarly.com/build-out?hceid=YW5uYS5iZXNwYWxhQGdyYW1tYXJseS5jb20.gegb2es25qqtoecs5ld188st04",
+		"reminders": {
+			"useDefault": true
+		}
+	}]
+}

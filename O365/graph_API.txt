@@ -1,0 +1,195 @@
+Azure ClientId : c08f81ba-f90b-4c90-9558-45540903d705
+Azure ClientSecret : VfX20MxCcVy5Z/4tvLviEHfWDFTRFHmE/a0qM7GrwLw=
+
+
+To get Authorizarion code :
+------------------------------- https://login.microsoftonline.com/common/oauth2/authorize?client_id=c08f81ba-f90b-4c90-9558-45540903d705&response_type=code&redirect_uri=https://183.82.99.100:8443/CiscoWebcontent/spark1.html&response_mode=query&scope=openid offline_access https://outlook.office.com/calendars.read&state=12345
+
+
+
+
+To get ACESS TOKEN: 
+-----------------------
+https://login.microsoftonline.com/common/oauth2/token
+
+body : x-www-form-urlencoded
+
+code , client_id , client_secret, redirect_uri , grant_type : authorization_code , resource : https://graph.microsoft.com/
+
+response : 
+---------------------
+
+{
+  "token_type": "Bearer",
+  "scope": "Calendars.Read Calendars.Read.Shared Contacts.Read Mail.Read User.Read",
+  "expires_in": "3599",
+  "ext_expires_in": "0",
+  "expires_on": "1491206440",
+  "not_before": "1491202540",
+  "resource": "https://graph.microsoft.com/",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCbmZpRy1tQTZOVGFlN0NkV1c3UWZkMG9hbjZKMnQxaFg4V0FqNFFjQTA2bHNjLXdCU0QySUwwTUFVSnRLN19kaFdvNFJhRFNraTRyNzZtRDhLTUcwMTIxd0hCeFhVYXR4M1FyLWJFVEhvYmlBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiYTNRTjBCWlM3czRuTi1CZHJqYkYwWV9MZE1NIiwia2lkIjoiYTNRTjBCWlM3czRuTi1CZHJqYkYwWV9MZE1NIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNjdkM2M3NWMtNTgxYS00MGFhLTgxNjQtOWFlMThhZGJiNjFkLyIsImlhdCI6MTQ5MTIwMjU0MCwibmJmIjoxNDkxMjAyNTQwLCJleHAiOjE0OTEyMDY0NDAsImFjciI6IjEiLCJhaW8iOiJBU1FBMi84REFBQUExbFZZK1VPS0pmaHNWUCtsWmVYU2RNWXhwNVp4elYwa3RDZjRmTEpSWC9JPSIsImFtciI6WyJwd2QiXSwiYXBwX2Rpc3BsYXluYW1lIjoiT2ZmaWNlMzY1Q2FsZW5kZXJBcHAgRGV2IiwiYXBwaWQiOiJjMDhmODFiYS1mOTBiLTRjOTAtOTU1OC00NTU0MDkwM2Q3MDUiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6Ikd1bnRoYSIsImdpdmVuX25hbWUiOiJIYXJpc2giLCJpcGFkZHIiOiIxODMuODIuOTkuMTAwIiwibmFtZSI6IkhhcmlzaCBHdW50aGEiLCJvaWQiOiJkODg4OTI5OS0wZTNiLTRiMWMtODRlOC02ZmFlYzViMDQ2NDgiLCJwbGF0ZiI6IjMiLCJwdWlkIjoiMTAwMzNGRkY5RjY4NDMwMCIsInNjcCI6IkNhbGVuZGFycy5SZWFkIENhbGVuZGFycy5SZWFkLlNoYXJlZCBDb250YWN0cy5SZWFkIE1haWwuUmVhZCBVc2VyLlJlYWQiLCJzdWIiOiJxaGRXWTdXbmxIQ3JZbWxNbFVjc2gyZzVJUnlaV05NR1V6UUpNU3dBM2dzIiwidGlkIjoiNjdkM2M3NWMtNTgxYS00MGFhLTgxNjQtOWFlMThhZGJiNjFkIiwidW5pcXVlX25hbWUiOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1cG4iOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1dGkiOiJfSnpvU2NTVnAwcTdRNkxYaFc0WUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJmMjhhMWY1MC1mNmU3LTQ1NzEtODE4Yi02YTEyZjJhZjZiNmMiXX0.Lf-fOnyxyVaeg4xw5gKahsSIEAdqsRjQ8B2mOCM6YdWOGHYHuVRXo8LDhImEXT7-SqGzQ72SJrdhEGADOSjN0NdoEAdYIqfxobBdxZYeizGZu455wL0pHODM06OsZh9FH1rr9D2HgLXy8oirKTqPCaZtSveHbm4dVHwyhyXIQ6dMqvFTMsaku4HhRiJyKFLQECIhxJn-A4Pz0iY4iouqVWO_TgI5zsGRo5g6P2M0E6ptEQPRHPSiltJ23PuoRxVGWbWfx3jL1Fb_Tt-oM_n4_N4MaaetUNYOmHdRNV3V_AF6X_nNt9Ksl3wYqhJxYFk2EC-lszwohLNNOO0BkWTZ9g",
+  "refresh_token": "AQABAAAAAABnfiG-mA6NTae7CdWW7Qfd1yO4eE6l0TvcaSXYpaQxbjlz0xs7U4VisDD-3pTSLvJhyncUWAwmb2l8W0DnDqjfMYb07M7hvcdOei8_m6SVbi_5Vt8HTtZttKWFZZ9gtJg2y1Tjb6Zh14eIxgOrNQocWmgGExx2QsRThSH85_8N0TKA0iWVmoKwIspfueRagMMShnClgAIR5e1C4FCMZVQs9W4tX9fjw3t6k8C7pQBjfVqgsWNe6iiu0pvZgBBah38WyGj45h6iaWhrbgoXu7FJoOOg_nxyO_QgW18dDmFgo7q5gzifNmLv8-hs44ts02n8Vy51HPTMqoWorNGwkuq8R3a-UJ2W_kUP3WANPMms4aUx6iqfJxfaVI2IV6YgIM0i8WlhjbI5VXWopxe6c1uFWD6CGioVLHrXKm9EKTW5fcidAaH1QZSCuhQ7na9FbU_UuTpGbvRYImH_gta1xiu0cB9Ae08AnYxFlfiTN7eVTQChxnEvuBjV09jmnpr8Io2zyTpUmLlLhu3e_EZEMgpYv5OBJJs8k03UE_mYU-gmWj9fP2lSAbpUC2oWLvnZbIVaoHHDqExcMApvyMumrw5NBNDTjuriEF3sunHcHWtr0hhbwCzBjZCCzCJNjVcfw7kAqlKCEQr6Rw_TdpgdmjuNQXRFKvjh9Ldt6BmjBbPPxhjwT_Go4XjUH3ufJ3W1pQTLijRP0kO0iVd2CxqnKYwfX9vBvi7Ve9isWrCvQETLivwvnJf7haIsFdXIBVYl1wvyRtqCRq7b73Pu2qowoEgbIAA",
+  "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImEzUU4wQlpTN3M0bk4tQmRyamJGMFlfTGRNTSIsImtpZCI6ImEzUU4wQlpTN3M0bk4tQmRyamJGMFlfTGRNTSJ9.eyJhdWQiOiJjMDhmODFiYS1mOTBiLTRjOTAtOTU1OC00NTU0MDkwM2Q3MDUiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82N2QzYzc1Yy01ODFhLTQwYWEtODE2NC05YWUxOGFkYmI2MWQvIiwiaWF0IjoxNDkxMjAyNTQwLCJuYmYiOjE0OTEyMDI1NDAsImV4cCI6MTQ5MTIwNjQ0MCwiYW1yIjpbInB3ZCJdLCJmYW1pbHlfbmFtZSI6Ikd1bnRoYSIsImdpdmVuX25hbWUiOiJIYXJpc2giLCJpcGFkZHIiOiIxODMuODIuOTkuMTAwIiwibmFtZSI6IkhhcmlzaCBHdW50aGEiLCJvaWQiOiJkODg4OTI5OS0wZTNiLTRiMWMtODRlOC02ZmFlYzViMDQ2NDgiLCJwbGF0ZiI6IjMiLCJzdWIiOiJvald2TkV5cVZrYlVtRDZXZmxickhGdGZRdXdvbGUwR0V1MUxWU0lWNVM4IiwidGlkIjoiNjdkM2M3NWMtNTgxYS00MGFhLTgxNjQtOWFlMThhZGJiNjFkIiwidW5pcXVlX25hbWUiOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1cG4iOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1dGkiOiJfSnpvU2NTVnAwcTdRNkxYaFc0WUFBIiwidmVyIjoiMS4wIn0.kKKadrk3ZJYJ1lQsRsCfkYpRCzcbkEAa98otRM-ikryNHAq-56QlpUhCftM7J11PSDUK4suX3AUhMtFcYS5tU2eCzdbv15ZkrRwnNtYoIjjVCU0WB-L4JnkuHIo4Ri7Ef-Ra66p_8uqp5FOQDO4ZNGf4HrPGasg8RhZAckBvcEGBNc59QBqmfRQPny0y9vXPt11H-r3Tc0-DImIeTNqVrOWUzYp3C4cuHJFoBDu6bg26oaPz3Qp6AgyTl2IWUQ7o0eu5nDUuGxuaLrQZwNV7MJey2CJQT4FWNpvBNGK9bfxZHT-rMZmypP_u0QijQtSZOIASi5sva-FKClItt9vtUg"
+}
+
+
+=====================================================================================================
+graph API page
+---------------
+https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/api/user_list_calendars
+
+=====================================================================================================
+get user_details
+---------------
+
+GET : https://graph.microsoft.com/v1.0/me 
+
+Header : Authorization Bearer Access_Token
+
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+  "id": "d8889299-0e3b-4b1c-84e8-6faec5b04648",
+  "businessPhones": [],
+  "displayName": "Harish Guntha",
+  "givenName": "Harish",
+  "jobTitle": null,
+  "mail": "harish.guntha@eidiko.com",
+  "mobilePhone": null,
+  "officeLocation": null,
+  "preferredLanguage": "en-US",
+  "surname": "Guntha",
+  "userPrincipalName": "harish.guntha@eidiko.com"
+}
+
+
+======================================================================
+GET : https://graph.microsoft.com/v1.0/me/calendars
+
+Header : Authorization Bearer Access_Token
+
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('d8889299-0e3b-4b1c-84e8-6faec5b04648')/calendars",
+  "value": [
+    {
+      "id": "AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAEGAACRfA6PqQ26QquaulmJSEs6AAAAuKBpAAA=",
+      "name": "Calendar",
+      "color": "auto",
+      "changeKey": "kXwOj6kNukKrmrpZiUhLOgAAALjtzA=="
+    },
+    {
+      "id": "AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAEGAACRfA6PqQ26QquaulmJSEs6AAAAuKBqAAA=",
+      "name": "United States holidays",
+      "color": "auto",
+      "changeKey": "kXwOj6kNukKrmrpZiUhLOgAAALjtzQ=="
+    },
+    {
+      "id": "AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAEGAACRfA6PqQ26QquaulmJSEs6AAAAuKBsAAA=",
+      "name": "Birthdays",
+      "color": "auto",
+      "changeKey": "kXwOj6kNukKrmrpZiUhLOgAAALjtzw=="
+    },
+    {
+      "id": "AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAEGAACRfA6PqQ26QquaulmJSEs6AAAAuKBtAAA=",
+      "name": "Test Calendar",
+      "color": "auto",
+      "changeKey": "kXwOj6kNukKrmrpZiUhLOgAAALjt0A=="
+    }
+  ]
+}
+=============================================================================
+startTime : #[(new org.mule.el.datetime.DateTime(server.dateTime)).plusHours(-24)]
+
+endTime : #[(new org.mule.el.datetime.DateTime(server.dateTime)).plusHours(24)]
+=============================================================================
+get calenders events
+-------------------------
+GET : https://graph.microsoft.com/v1.0/me/calendars/{calendat_id}/events
+
+Header : Authorization Bearer Access_Token
+
+Q_params : 	startDateTime=2017-04-02T07:22:54.670Z
+			endDateTime=2017-04-04T07:22:54.681Z
+
+
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('d8889299-0e3b-4b1c-84e8-6faec5b04648')/calendars('AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAEGAACRfA6PqQ26QquaulmJSEs6AAAAuKBpAAA%3D')/events",
+  "value": [
+    {
+      "@odata.etag": "W/\"kXwOj6kNukKrmrpZiUhLOgAAAtL+Bg==\"",
+      "id": "AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAENAACRfA6PqQ26QquaulmJSEs6AAAC0q3hAAA=",
+      "createdDateTime": "2017-03-08T09:19:40.0532289Z",
+      "lastModifiedDateTime": "2017-03-08T09:19:40.1313564Z",
+      "changeKey": "kXwOj6kNukKrmrpZiUhLOgAAAtL+Bg==",
+      "categories": [],
+      "originalStartTimeZone": "UTC",
+      "originalEndTimeZone": "UTC",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000A51F3C1DED97D20100000000000000001000000034E6C202CE48794C9193CE744AD144E8",
+      "reminderMinutesBeforeStart": 1440,
+      "isReminderOn": true,
+      "hasAttachments": false,
+      "subject": "Eidiko calenadar",
+      "bodyPreview": "vdfgdf",
+      "importance": "normal",
+      "sensitivity": "normal",
+      "isAllDay": true,
+      "isCancelled": false,
+      "isOrganizer": true,
+      "responseRequested": true,
+      "seriesMasterId": null,
+      "showAs": "workingElsewhere",
+      "type": "seriesMaster",
+      "webLink": "https://outlook.office365.com/owa/?itemid=AAMkADgyZTRmMzI1LTNmNTYtNDRjOC04ODA4LTFmOGVhOGQyZGMwOQBGAAAAAADIPgTPR19ASojKlq9LQ9mMBwCRfA6PqQ26QquaulmJSEs6AAAAAAENAACRfA6PqQ26QquaulmJSEs6AAAC0q3hAAA%3D&exvsurl=1&path=/calendar/item",
+      "onlineMeetingUrl": null,
+      "responseStatus": {
+        "response": "organizer",
+        "time": "0001-01-01T00:00:00Z"
+      },
+      "body": {
+        "contentType": "html",
+        "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>vdfgdf</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "start": {
+        "dateTime": "2017-03-08T00:00:00.0000000",
+        "timeZone": "UTC"
+      },
+      "end": {
+        "dateTime": "2017-03-09T00:00:00.0000000",
+        "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "Hyderabad",
+        "address": {
+          "street": "",
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "countryOrRegion": "India",
+          "postalCode": ""
+        }
+      },
+      "recurrence": {
+        "pattern": {
+          "type": "daily",
+          "interval": 1,
+          "month": 0,
+          "dayOfMonth": 0,
+          "firstDayOfWeek": "sunday",
+          "index": "first"
+        },
+        "range": {
+          "type": "endDate",
+          "startDate": "2017-03-08",
+          "endDate": "2017-03-09",
+          "recurrenceTimeZone": "India Standard Time",
+          "numberOfOccurrences": 0
+        }
+      },
+      "attendees": [],
+      "organizer": {
+        "emailAddress": {
+          "name": "Harish Guntha",
+          "address": "harish.guntha@eidiko.com"
+        }
+      }
+    }
+  ]
+}
