@@ -35,6 +35,13 @@ to get http status = #[message.inboundProperties.'http.status']
 
 #[message.inboundProperties.'http.query.params'.guid]
 
+(or)
+
+#[message.inboundProperties['http.query.params']['client_id']]
+ 
+#[message.inboundProperties['http.query.params']['client_secret']]
+
+
 
 input : http://192.168.1.200:8089/integrations/1001
 output : 1001

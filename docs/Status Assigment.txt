@@ -178,4 +178,10 @@ sarasu10
 2) Reduced displaying of logger values(changed to debug mode) for apps : GC and O365.
 3) Monitored deployments in dev and prod and provided status mail.
 
+3 April 2017
++++++++++++++
+1) Worked on microsoft O365 graph API to support current O365 API implementation.
+2) Worked on jira tickets - 269, 286, 299.
+3) Monitored deployments in dev and prod and provided status mail.
+
 =======================================================================================================
