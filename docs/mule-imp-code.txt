@@ -158,7 +158,14 @@ catch 403 error
 		   	<set-payload value="{&quot;error&quot;: &quot;You are not a member of that team.&quot;}" mimeType="application/json" doc:name="errorMessage" />
  		</catch-exception-strategy>
  </choice-exception-strategy>
-===========================================================================================================
+=======================================================================================================
+
+
+Ternary operator
+-------------------
+#[(flowVars.name != empty) ? flowVars.name : 'name empty']
+
+
 
 #[server.dateTime.changeTimeZone('UTC')] (Gives 2016-11-03T10:59:44.607Z)
 

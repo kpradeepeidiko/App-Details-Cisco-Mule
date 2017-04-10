@@ -184,4 +184,29 @@ sarasu10
 2) Worked on jira tickets - 269, 286, 299.
 3) Monitored deployments in dev and prod and provided status mail.
 
+4 April 2017
++++++++++++++
+1) Worked on API versioning, Mule project versioning, Policies, Cliend id enforcement, Rate limit - SLA based, Throttling - SLA based.
+2) Worked on difference between apps creating in dev.microsoft.com and azure AD.
+3) Monitored deployments in dev and prod and provided status mail.
+
+5 April 2017
+++++++++++++
+1) 
+2) 
+3) Monitored deployments in dev and prod and provided status mail.
+
+
+6 April 2017
+++++++++++++
+1) Worked on O365 Calendar, Displaying Location field bug.
+2) 
+3) Monitored deployments in dev and prod and provided status mail.
+
+10 April 2017
++++++++++++++
+1) Changed post-integration-instance in management and changed setup flow response for asana.
+2) 
+3) Monitored deployments in dev and prod and provided status mail.
+
 =======================================================================================================
