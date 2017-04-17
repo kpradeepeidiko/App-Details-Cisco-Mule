@@ -733,3 +733,144 @@ RC
 		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Calendars('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAAAAEGAAC-y6gjH8lzQKpo6xwB7WdaAAAsp06eAAA=')"
 	}]
 }
+==========================================================================
+while pasting huge content in description 
+------------------------------------------
+{
+	"@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAEGAADs9AE0XfsJTqf63_3D3IqpAAADd4qDAAA%3D')/Events",
+	"value": [{
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAADd4abAADs9AE0XfsJTqf63_3D3IqpAAAE8KGCAAA=')",
+		"@odata.etag": "W/\"7PQBNF37CU6n+t/tw9yKqQAABPEy/Q==\"",
+		"Id": "AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAADd4abAADs9AE0XfsJTqf63_3D3IqpAAAE8KGCAAA=",
+		"CreatedDateTime": "2017-04-13T07:10:49.5496675Z",
+		"LastModifiedDateTime": "2017-04-13T07:15:25.6464865Z",
+		"ChangeKey": "7PQBNF37CU6n+t/tw9yKqQAABPEy/Q==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000FBA85B1425B4D20100000000000000001000000056FF2E17D4E0804E81E663F6BE9725F7",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Test@2",
+		"BodyPreview": "Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented,[14] and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"write once, run a",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p%2Fm1qQoc96UN8%2FMdIBwDs9AE0XfsJTqf63%2B3D3IqpAAADd4abAADs9AE0XfsJTqf63%2B3D3IqpAAAE8KGCAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p></p>\r\n<p style=\"margin:0.5em 0px; line-height:inherit; color:rgb(34,34,34); font-family:sans-serif; font-size:14px\">\r\n<b>Java</b>&nbsp;is a general-purpose&nbsp;<a href=\"https://en.wikipedia.org/wiki/Programming_language\" title=\"Programming language\" style=\"color:rgb(11,0,128); background:none\">computer programming language</a>&nbsp;that is&nbsp;<a href=\"https://en.wikipedia.org/wiki/Concurrent_computing\" title=\"Concurrent computing\" style=\"color:rgb(11,0,128); background:none\">concurrent</a>,&nbsp;<a href=\"https://en.wikipedia.org/wiki/Class-based_programming\" title=\"Class-based programming\" style=\"color:rgb(11,0,128); background:none\">class-based</a>,&nbsp;<a href=\"https://en.wikipedia.org/wiki/Object-oriented_programming\" title=\"Object-oriented programming\" style=\"color:rgb(11,0,128); background:none\">object-oriented</a>,<sup id=\"cite_ref-FOOTNOTEGoslingJoySteeleBracha20141_14-0\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-FOOTNOTEGoslingJoySteeleBracha20141-14\" style=\"color:rgb(11,0,128); background:none\">[14]</a></sup>&nbsp;and\r\n specifically designed to have as few implementation dependencies as possible. It is intended to let application developers &quot;<a href=\"https://en.wikipedia.org/wiki/Write_once,_run_anywhere\" title=\"Write once, run anywhere\" style=\"color:rgb(11,0,128); background:none\">write\r\n once, run anywhere</a>&quot; (WORA),<sup id=\"cite_ref-15\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-15\" style=\"color:rgb(11,0,128); background:none\">[15]</a></sup>&nbsp;meaning\r\n that&nbsp;<a href=\"https://en.wikipedia.org/wiki/Compiler\" title=\"Compiler\" style=\"color:rgb(11,0,128); background:none\">compiled</a>&nbsp;Java code can run on all platforms that support Java without the need for recompilation.<sup id=\"cite_ref-design_goals_16-0\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-design_goals-16\" style=\"color:rgb(11,0,128); background:none\">[16]</a></sup>&nbsp;Java\r\n applications are typically compiled to&nbsp;<a href=\"https://en.wikipedia.org/wiki/Java_bytecode\" title=\"Java bytecode\" style=\"color:rgb(11,0,128); background:none\">bytecode</a>&nbsp;that can run on any&nbsp;<a href=\"https://en.wikipedia.org/wiki/Java_virtual_machine\" title=\"Java virtual machine\" style=\"color:rgb(11,0,128); background:none\">Java\r\n virtual machine</a>&nbsp;(JVM) regardless of&nbsp;<a href=\"https://en.wikipedia.org/wiki/Computer_architecture\" title=\"Computer architecture\" style=\"color:rgb(11,0,128); background:none\">computer architecture</a>. As of 2016, Java is one of the most&nbsp;<a href=\"https://en.wikipedia.org/wiki/Measuring_programming_language_popularity\" title=\"Measuring programming language popularity\" style=\"color:rgb(11,0,128); background:none\">popular\r\n programming languages in use</a>,<sup id=\"cite_ref-17\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-17\" style=\"color:rgb(11,0,128); background:none\">[17]</a></sup><sup id=\"cite_ref-18\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-18\" style=\"color:rgb(11,0,128); background:none\">[18]</a></sup><sup id=\"cite_ref-languagepopularity2013_19-0\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-languagepopularity2013-19\" style=\"color:rgb(11,0,128); background:none\">[19]</a></sup><sup id=\"cite_ref-20\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-20\" style=\"color:rgb(11,0,128); background:none\">[20]</a></sup>&nbsp;particularly\r\n for client-server web applications, with a reported 9 million developers.<sup id=\"cite_ref-21\" class=\"reference\" style=\"line-height:1; unicode-bidi:isolate; white-space:nowrap; font-size:11.2px\"><a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)#cite_note-21\" style=\"color:rgb(11,0,128); background:none\">[21]</a></sup>&nbsp;Java\r\n was originally developed by&nbsp;<a href=\"https://en.wikipedia.org/wiki/James_Gosling\" title=\"James Gosling\" style=\"color:rgb(11,0,128); background:none\">James Gosling</a>&nbsp;at&nbsp;<a href=\"https://en.wikipedia.org/wiki/Sun_Microsystems\" title=\"Sun Microsystems\" style=\"color:rgb(11,0,128); background:none\">Sun\r\n Microsystems</a>&nbsp;(which has since been&nbsp;<a href=\"https://en.wikipedia.org/wiki/Sun_acquisition_by_Oracle\" title=\"Sun acquisition by Oracle\" style=\"color:rgb(11,0,128); background:none\">acquired by Oracle Corporation</a>) and released in 1995 as a core component\r\n of Sun Microsystems'&nbsp;<a href=\"https://en.wikipedia.org/wiki/Java_(software_platform)\" title=\"Java (software platform)\" style=\"color:rgb(11,0,128); background:none\">Java platform</a>. The language derives much of its&nbsp;<a href=\"https://en.wikipedia.org/wiki/Syntax_(programming_languages)\" title=\"Syntax (programming languages)\" style=\"color:rgb(11,0,128); background:none\">syntax</a>&nbsp;from&nbsp;<a href=\"https://en.wikipedia.org/wiki/C_(programming_language)\" title=\"C (programming language)\" style=\"color:rgb(11,0,128); background:none\">C</a>&nbsp;and&nbsp;<a href=\"https://en.wikipedia.org/wiki/C%2B%2B\" title=\"C&#43;&#43;\" style=\"color:rgb(11,0,128); background:none\">C&#43;&#43;</a>,\r\n but it has fewer&nbsp;<a href=\"https://en.wikipedia.org/wiki/Low-level_programming_language\" title=\"Low-level programming language\" style=\"color:rgb(11,0,128); background:none\">low-level</a>&nbsp;facilities than either of them.</p>\r\n<p style=\"margin:0.5em 0px; line-height:inherit; color:rgb(34,34,34); font-family:sans-serif; font-size:14px\">\r\nThe original and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Reference_implementation\" title=\"Reference implementation\" style=\"color:rgb(11,0,128); background:none\">reference implementation</a>&nbsp;Java&nbsp;<a href=\"https://en.wikipedia.org/wiki/Compiler\" title=\"Compiler\" style=\"color:rgb(11,0,128); background:none\">compilers</a>,\r\n virtual machines, and&nbsp;<a href=\"https://en.wikipedia.org/wiki/Library_(computing)\" title=\"Library (computing)\" style=\"color:rgb(11,0,128); background:none\">class libraries</a>&nbsp;were originally released by Sun under proprietary licences. As of May 2007, in compliance\r\n with the specifications of the&nbsp;<a href=\"https://en.wikipedia.org/wiki/Java_Community_Process\" title=\"Java Community Process\" style=\"color:rgb(11,0,128); background:none\">Java Community Process</a>, Sun&nbsp;<a href=\"https://en.wikipedia.org/wiki/Software_relicensing\" title=\"Software relicensing\" style=\"color:rgb(11,0,128); background:none\">relicensed</a>&nbsp;most\r\n of its Java technologies under the&nbsp;<a href=\"https://en.wikipedia.org/wiki/GNU_General_Public_License\" title=\"GNU General Public License\" style=\"color:rgb(11,0,128); background:none\">GNU General Public License</a>. Others have also developed alternative implementations\r\n of these Sun technologies, such as the&nbsp;<a href=\"https://en.wikipedia.org/wiki/GNU_Compiler_for_Java\" title=\"GNU Compiler for Java\" style=\"color:rgb(11,0,128); background:none\">GNU Compiler for Java</a>&nbsp;(bytecode compiler),&nbsp;<a href=\"https://en.wikipedia.org/wiki/GNU_Classpath\" title=\"GNU Classpath\" style=\"color:rgb(11,0,128); background:none\">GNU\r\n Classpath</a>&nbsp;(standard libraries), and&nbsp;<a href=\"https://en.wikipedia.org/wiki/IcedTea\" title=\"IcedTea\" style=\"color:rgb(11,0,128); background:none\">IcedTea</a>-Web (browser plugin for applets).</p>\r\n<p style=\"margin:0.5em 0px; line-height:inherit; color:rgb(34,34,34); font-family:sans-serif; font-size:14px\">\r\nThe latest version is&nbsp;<a href=\"https://en.wikipedia.org/wiki/Java_version_history\" title=\"Java version history\" style=\"color:rgb(11,0,128); background:none\">Java 8</a>&nbsp;Update 121 which is the only version currently supported for free by Oracle, although earlier\r\n versions are supported both by Oracle and other companies on a commercial basis.</p>\r\n<p></p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-04-13T07:35:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-04-13T08:05:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Norman Y Mineta San Jose International Airport",
+			"Address": {
+				"Street": "1701 Airport Blvd",
+				"City": "San Jose",
+				"State": "CA",
+				"CountryOrRegion": "United States",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 37.3619,
+				"Longitude": -121.928
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.k@eidikosi.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Calendars('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAEGAADs9AE0XfsJTqf63_3D3IqpAAADd4qDAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Calendars('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAEGAADs9AE0XfsJTqf63_3D3IqpAAADd4qDAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAADd4abAADs9AE0XfsJTqf63_3D3IqpAAAE8KGBAAA=')",
+		"@odata.etag": "W/\"7PQBNF37CU6n+t/tw9yKqQAABPEy/g==\"",
+		"Id": "AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAADd4abAADs9AE0XfsJTqf63_3D3IqpAAAE8KGBAAA=",
+		"CreatedDateTime": "2017-04-13T07:10:02.4504869Z",
+		"LastModifiedDateTime": "2017-04-13T07:15:37.9274417Z",
+		"ChangeKey": "7PQBNF37CU6n+t/tw9yKqQAABPEy/g==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000590C49F824B4D20100000000000000001000000051A2682E5BD60A429A82F602CB8ECBBC",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Test@1",
+		"BodyPreview": "test updated",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p%2Fm1qQoc96UN8%2FMdIBwDs9AE0XfsJTqf63%2B3D3IqpAAADd4abAADs9AE0XfsJTqf63%2B3D3IqpAAAE8KGBAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<div class=\"rps_16b9\">\r\n<div>\r\n<div dir=\"ltr\">\r\n<div id=\"x_divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test updated</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-04-13T07:30:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-04-13T08:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Bowenpally",
+			"Address": {
+				"Street": "",
+				"City": "Bowenpally",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.4558,
+				"Longitude": 78.4833
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.k@eidikosi.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Calendars('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAEGAADs9AE0XfsJTqf63_3D3IqpAAADd4qDAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Calendars('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAEGAADs9AE0XfsJTqf63_3D3IqpAAADd4qDAAA=')"
+	}]
+}

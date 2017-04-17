@@ -1,0 +1,92 @@
+wunderlist
+--------------
+Request
+-----------
+{
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjQzMzY4OWYtYjAwZC0zN2NmLWE2ZGQtZmRiZmEwMjA4ZDlm",
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjMjUxNjg1MDgwNDExMDNiZThiODQ5Mjg3NzkzZmEyNjE2ZGViMjM5MmM3MjU0ZmZmYTk3M2NjMTg4MzQ5MWQy",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"configJson": {
+		"list_id": "290514483",
+		"displayName": "ttt",
+		"notifications": ["task-modified", "user-assigned", "comment-added", "subtask-added", "subtask-completed"]
+	},
+	"messageToSpark": "Wunderlist added to this space"
+}
+
+
+Response
+---------
+{
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjMjUxNjg1MDgwNDExMDNiZThiODQ5Mjg3NzkzZmEyNjE2ZGViMjM5MmM3MjU0ZmZmYTk3M2NjMTg4MzQ5MWQy",
+	"settings": {
+		"settingsId": 9,
+		"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NjMjUxNjg1MDgwNDExMDNiZThiODQ5Mjg3NzkzZmEyNjE2ZGViMjM5MmM3MjU0ZmZmYTk3M2NjMTg4MzQ5MWQy",
+		"integrationType": "Hook",
+		"host": "cisco-spark-wunderlist-integration.cloudhub.io",
+		"port": "443",
+		"basePath": "/api",
+		"apiVersion": "1",
+		"setupPageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/wunderlist.html",
+		"editPageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/wunderlist.html",
+		"deletePageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/wunderlist.html"
+
+	},
+	"integrationInstanceResponse": {
+		"id": 117566,
+		"message": "Operation successfully executed"
+	},
+	"startResponse": {
+		"result": {
+			"id": 2627581,
+			"url": "https://cisco-spark-wunderlist-integration-ext.cloudhub.io/api/hooks/949b1dc0-210b-11e7-be00-120c76c8c408",
+			"list_id": 290514483
+		}
+	}
+}
+====================================================================
+Docusign
+------------
+Request
+--------
+{
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjQzMzY4OWYtYjAwZC0zN2NmLWE2ZGQtZmRiZmEwMjA4ZDlm",
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmYzVjOWMzZWQxY2E5ODRkOTc5YTUyYzFiMjUxOWI2NjYyZDNhODkxNDRlNDJiZDJhY2UzYzg0MzJiNGI2ZDQy",
+	"status": "ACTIVE",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"configJson": {
+		"room_name": "Harish",
+		"displayName": "test",
+		"webhookUrl": "https://cisco-spark-integration-management-ext.cloudhub.io/api/webhooks/32fec110-210c-11e7-8abf-0ee4d776d090"
+	},
+	"messageToSpark": "DocuSign added to this space",
+	"instanceUuid": "32fec110-210c-11e7-8abf-0ee4d776d090",
+	"messageFormat": "DocuSign Bot :Hello...User"
+}
+
+
+Response
+--------
+{
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmYzVjOWMzZWQxY2E5ODRkOTc5YTUyYzFiMjUxOWI2NjYyZDNhODkxNDRlNDJiZDJhY2UzYzg0MzJiNGI2ZDQy",
+	"settings": {
+		"settingsId": 17,
+		"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmYzVjOWMzZWQxY2E5ODRkOTc5YTUyYzFiMjUxOWI2NjYyZDNhODkxNDRlNDJiZDJhY2UzYzg0MzJiNGI2ZDQy",
+		"integrationType": "Hook",
+		"host": "cisco-spark-docusign-integration.cloudhub.io",
+		"port": "443",
+		"basePath": "/api",
+		"apiVersion": "1",
+		"setupPageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/docusign.html",
+
+		"editPageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/docusign.html",
+		"deletePageUri": "https://cisco-spark-integration-webcontent-prod.cloudhub.io/api/docusign.html"
+
+	},
+	"integrationInstanceResponse": {
+		"id": 117570,
+		"message": "Operation successfully executed"
+	},
+	"startResponse": ""
+}
