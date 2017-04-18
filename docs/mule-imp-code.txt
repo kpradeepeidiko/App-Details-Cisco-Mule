@@ -182,6 +182,8 @@ if ==> et = 2016-10-10T14:00:00+05:30
 
 #[(new org.mule.el.datetime.DateTime(flowVars.et)).plusHours(1).format("hh:mm a")]  gives 03:00 PM
 
+#[(new org.mule.el.datetime.DateTime()).plusMonths(4).format("MMMM dd,YYYY")] 
+
 
 
 if ==> tt = 2016-10-10 (yyyy-MM-dd format)
