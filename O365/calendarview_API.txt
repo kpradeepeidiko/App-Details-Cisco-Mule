@@ -1,0 +1,467 @@
+GET : https://outlook.office.com/api/v2.0/me/calendars/AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAAAAEGAAC-y6gjH8lzQKpo6xwB7WdaAAAsp06eAAA=/calendarview?startDateTime=2017-04-19T15:28:09.431Z&endDateTime=2017-04-21T15:28:09.431Z
+
+
+{
+  "@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAAAAEGAAC-y6gjH8lzQKpo6xwB7WdaAAAsp06eAAA%3D')/CalendarView",
+  "value": [
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrYAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zGg==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrYAAA=",
+      "CreatedDateTime": "2017-04-19T05:23:18.8199561Z",
+      "LastModifiedDateTime": "2017-04-19T05:23:18.8379708Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zGg==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000A1EBE60DCDB8D20100000000000000001000000064D1737EC9B2354D9DF07A285820894B",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Future Event #1",
+      "BodyPreview": "She don't like the flash, wanna keep us in the dark. She don't like the fame, hated when we're miles apart. And she getting to the point where it's too much for her. And throw us all away, 'cause it's too much for her. She don't wanna think 'cause the wor",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLrYAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><span style=\"color:rgb(34,34,34); font-family:arial,sans-serif; font-size:small\">She don't like the flash, wanna keep us in the dark.&nbsp;</span><span style=\"color:rgb(34,34,34); font-family:arial,sans-serif; font-size:small\">She don't like the fame, hated when\r\n we're miles apart. </span><span style=\"color:rgb(34,34,34); font-family:arial,sans-serif; font-size:small\">And she getting to the point where it's too much for her.&nbsp;</span><span style=\"color:rgb(34,34,34); font-family:arial,sans-serif; font-size:small\">And\r\n throw us all away, 'cause it's too much for her.&nbsp;</span><span style=\"color:rgb(34,34,34); font-family:arial,sans-serif; font-size:small\">She don't wanna think 'cause the world knows who we are.</span><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-19T16:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-19T16:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Starbucks",
+        "Address": {
+          "Street": "670 River Oaks Pkwy Ste G",
+          "City": "San Jose",
+          "State": "CA",
+          "CountryOrRegion": "United States",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 37.3982,
+          "Longitude": -121.924
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrZAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zGw==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrZAAA=",
+      "CreatedDateTime": "2017-04-19T05:24:44.5109145Z",
+      "LastModifiedDateTime": "2017-04-19T05:24:44.5259264Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zGw==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000B152FA40CDB8D2010000000000000000100000009D9D47D5F05EBD4AA905D37544054FCB",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Future Event #2",
+      "BodyPreview": "mumbai indians vs sunrisers hyderabad cricket match.",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLrZAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>mumbai indians vs sunrisers hyderabad cricket match.</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-19T16:15:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-19T16:45:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Rancho San Antonio County Park",
+        "Address": {
+          "Street": "",
+          "City": "",
+          "State": "California",
+          "CountryOrRegion": "United States",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 37.3311,
+          "Longitude": -122.093
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLraAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zHg==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLraAAA=",
+      "CreatedDateTime": "2017-04-19T05:26:17.7019088Z",
+      "LastModifiedDateTime": "2017-04-19T05:31:06.7264963Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zHg==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000E8238678CDB8D201000000000000000010000000ABE23BB78E078D418846DC834AEE8D44",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Future Events #3",
+      "BodyPreview": "vanity is my favourite sin.",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLraAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>vanity is my favourite<font color=\"#222222\" face=\"arial, sans-serif\" size=\"6\">&nbsp;</font>sin.</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-19T16:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-19T17:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Cisco Cafe 21",
+        "Address": {
+          "Street": "",
+          "City": "",
+          "State": "",
+          "CountryOrRegion": "",
+          "PostalCode": ""
+        },
+        "Coordinates": {}
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrbAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zHw==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrbAAA=",
+      "CreatedDateTime": "2017-04-19T05:26:55.3031678Z",
+      "LastModifiedDateTime": "2017-04-19T05:31:16.6024443Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zHw==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E008000000001AA3EF8ECDB8D2010000000000000000100000008015822A8151734BA6C3732317559BA9",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Future Event #4",
+      "BodyPreview": "test",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLrbAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-20T00:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-20T00:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Palace of Fine Arts",
+        "Address": {
+          "Street": "",
+          "City": "San Francisco",
+          "State": "California",
+          "CountryOrRegion": "United States",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 37.8014,
+          "Longitude": -122.448
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrcAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zIA==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrcAAA=",
+      "CreatedDateTime": "2017-04-19T05:32:52.5576625Z",
+      "LastModifiedDateTime": "2017-04-19T05:32:52.5806809Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zIA==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000C658E063CEB8D201000000000000000010000000EC2B544A3279BD4DB56F57FFB85FD46D",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Sample Event #1",
+      "BodyPreview": "test",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLrcAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-20T16:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-20T16:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Chicago Peneumatic",
+        "Address": {
+          "Street": "404-4th Floor, Amsri Shamira, Old Lancer Lines, Street No 4, F G Road, Near Seacent School, Rani Gunj",
+          "City": "Hyderabad",
+          "State": "Telangana",
+          "CountryOrRegion": "India",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 17.4327,
+          "Longitude": 78.4908
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrdAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zIQ==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLrdAAA=",
+      "CreatedDateTime": "2017-04-19T05:33:26.1416884Z",
+      "LastModifiedDateTime": "2017-04-19T05:33:26.1677095Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zIQ==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E00800000000E803E577CEB8D201000000000000000010000000410BD109DAF77449AB8F94BA955EAD22",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Sample Event #2",
+      "BodyPreview": "test",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLrdAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-20T16:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-20T17:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Chicago Travels",
+        "Address": {
+          "Street": "108, A-Block 1st Floor, Sai Tirumala Towers, St Paul School Road",
+          "City": "Hyderabad",
+          "State": "Telangana",
+          "CountryOrRegion": "India",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 17.3995,
+          "Longitude": 78.4811
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    },
+    {
+      "@odata.id": "https://outlook.office.com/api/v2.0/Users('6dfe8d53-3752-46ed-b01c-eb7ca08cce95@eac5a550-992f-4c15-86ac-289780f7a728')/Events('AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLreAAA=')",
+      "@odata.etag": "W/\"v8uoIx/Jc0CqaOscAe1nWgAAME/zIg==\"",
+      "Id": "AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC-y6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC-y6gjH8lzQKpo6xwB7WdaAAAwTLreAAA=",
+      "CreatedDateTime": "2017-04-19T05:34:38.5299412Z",
+      "LastModifiedDateTime": "2017-04-19T05:34:38.5549616Z",
+      "ChangeKey": "v8uoIx/Jc0CqaOscAe1nWgAAME/zIg==",
+      "Categories": [],
+      "OriginalStartTimeZone": "Pacific Standard Time",
+      "OriginalEndTimeZone": "Pacific Standard Time",
+      "iCalUId": "040000008200E00074C5B7101A82E008000000000C960AA3CEB8D201000000000000000010000000221C2E25D7DFA44BACB9B5065756FFDA",
+      "ReminderMinutesBeforeStart": 15,
+      "IsReminderOn": true,
+      "HasAttachments": false,
+      "Subject": "Sample Events #3",
+      "BodyPreview": "gujarat lions vs kolkata knight riders.",
+      "Importance": "Normal",
+      "Sensitivity": "Normal",
+      "IsAllDay": false,
+      "IsCancelled": false,
+      "IsOrganizer": true,
+      "ResponseRequested": true,
+      "SeriesMasterId": null,
+      "ShowAs": "Busy",
+      "Type": "SingleInstance",
+      "WebLink": "https://outlook.office365.com/owa/?itemid=AAMkAGYwMzI0ZjNmLTZiZjctNDJiYS1iZGE2LWQ5NTZiYzM2ZGVkMwBGAAAAAACVnAFZiM3URoy8EeFUA8JVBwC%2Fy6gjH8lzQKpo6xwB7WdaAAAsp0q1AAC%2Fy6gjH8lzQKpo6xwB7WdaAAAwTLreAAA%3D&exvsurl=1&path=/calendar/item",
+      "OnlineMeetingUrl": null,
+      "ResponseStatus": {
+        "Response": "Organizer",
+        "Time": "0001-01-01T00:00:00Z"
+      },
+      "Body": {
+        "ContentType": "HTML",
+        "Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>gujarat lions vs kolkata knight riders.</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+      },
+      "Start": {
+        "DateTime": "2017-04-21T00:00:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "End": {
+        "DateTime": "2017-04-21T00:30:00.0000000",
+        "TimeZone": "UTC"
+      },
+      "Location": {
+        "DisplayName": "Pioneer Lodge",
+        "Address": {
+          "Street": "1-7-316/1, Main Road, Near Wood Land, Park Lane, Opp Ritikha",
+          "City": "Secunderabad",
+          "State": "Telangana",
+          "CountryOrRegion": "India",
+          "PostalCode": ""
+        },
+        "Coordinates": {
+          "Latitude": 17.4395,
+          "Longitude": 78.4894
+        }
+      },
+      "Recurrence": null,
+      "Attendees": [],
+      "Organizer": {
+        "EmailAddress": {
+          "Name": "Nisha Sukumaran",
+          "Address": "nsukumar@OUROFFICE365.COM"
+        }
+      }
+    }
+  ]
+}
