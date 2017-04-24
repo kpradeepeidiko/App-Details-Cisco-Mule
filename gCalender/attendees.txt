@@ -1,0 +1,318 @@
+{
+	"kind": "calendar#events",
+	"etag": "\"p330dbtm4u2ud60g\"",
+	"summary": "Demo Calendar",
+	"description": "",
+	"updated": "2017-04-24T10:26:00.888Z",
+	"timeZone": "Asia/Calcutta",
+	"accessRole": "owner",
+	"defaultReminders": [],
+	"nextSyncToken": "CMDV9sTwvNMCEMDV9sTwvNMCGAU=",
+	"items": [{
+			"kind": "calendar#event",
+			"etag": "\"2986048970236000\"",
+			"id": "4r4s2r2ce6jircms6e5h4g65mc_20170424T023000Z",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=NHI0czJyMmNlNmppcmNtczZlNWg0ZzY1bWNfMjAxNzA0MjRUMDIzMDAwWiB0MWo5djN2MmYzcG91a2NzN2RtajBjOGxja0Bn",
+			"created": "2017-04-24T09:01:25.000Z",
+			"updated": "2017-04-24T09:01:25.118Z",
+			"summary": "Break Fast",
+			"description": "this is an text message",
+			"location": "Hotel Tourist Plaza, 3-4-1081, Kachiguda Main Road, Barkatpura, Kachiguda, Hyderabad, Telangana 500027, India",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T08:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"end": {
+				"dateTime": "2017-04-24T08:40:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"recurringEventId": "4r4s2r2ce6jircms6e5h4g65mc",
+			"originalStartTime": {
+				"dateTime": "2017-04-24T08:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"iCalUID": "4r4s2r2ce6jircms6e5h4g65mc@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986048970236000\"",
+			"id": "4r4s2r2ce6jircms6e5h4g65mc_20170425T023000Z",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=NHI0czJyMmNlNmppcmNtczZlNWg0ZzY1bWNfMjAxNzA0MjVUMDIzMDAwWiB0MWo5djN2MmYzcG91a2NzN2RtajBjOGxja0Bn",
+			"created": "2017-04-24T09:01:25.000Z",
+			"updated": "2017-04-24T09:01:25.118Z",
+			"summary": "Break Fast",
+			"description": "this is an text message",
+			"location": "Hotel Tourist Plaza, 3-4-1081, Kachiguda Main Road, Barkatpura, Kachiguda, Hyderabad, Telangana 500027, India",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-25T08:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"end": {
+				"dateTime": "2017-04-25T08:40:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"recurringEventId": "4r4s2r2ce6jircms6e5h4g65mc",
+			"originalStartTime": {
+				"dateTime": "2017-04-25T08:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"iCalUID": "4r4s2r2ce6jircms6e5h4g65mc@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986056554170000\"",
+			"id": "o19rfninr3r19h56ps355lpejc",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=bzE5cmZuaW5yM3IxOWg1NnBzMzU1bHBlamMgdDFqOXYzdjJmM3BvdWtjczdkbWowYzhsY2tAZw",
+			"created": "2017-04-24T10:04:37.000Z",
+			"updated": "2017-04-24T10:04:37.085Z",
+			"summary": "My Event #1",
+			"description": "test",
+			"location": "Arizona, USA",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T16:00:00+05:30"
+			},
+			"end": {
+				"dateTime": "2017-04-24T17:00:00+05:30"
+			},
+			"iCalUID": "o19rfninr3r19h56ps355lpejc@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986056591608000\"",
+			"id": "qopvshb4eftv6ohctpb7lpj088",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=cW9wdnNoYjRlZnR2Nm9oY3RwYjdscGowODggdDFqOXYzdjJmM3BvdWtjczdkbWowYzhsY2tAZw",
+			"created": "2017-04-24T10:04:55.000Z",
+			"updated": "2017-04-24T10:04:55.804Z",
+			"summary": "My Event #2",
+			"location": "San Francisco, CA, USA",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T16:05:00+05:30"
+			},
+			"end": {
+				"dateTime": "2017-04-24T17:05:00+05:30"
+			},
+			"iCalUID": "qopvshb4eftv6ohctpb7lpj088@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986056618312000\"",
+			"id": "q1t0bkioetimr3qcnt4stk45gg",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=cTF0MGJraW9ldGltcjNxY250NHN0azQ1Z2cgdDFqOXYzdjJmM3BvdWtjczdkbWowYzhsY2tAZw",
+			"created": "2017-04-24T10:05:09.000Z",
+			"updated": "2017-04-24T10:05:09.156Z",
+			"summary": "My Event #3",
+			"description": "test",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T16:10:00+05:30"
+			},
+			"end": {
+				"dateTime": "2017-04-24T17:10:00+05:30"
+			},
+			"iCalUID": "q1t0bkioetimr3qcnt4stk45gg@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986056641838000\"",
+			"id": "l50ck4vqp9l54ja638eoq5e7f0",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=bDUwY2s0dnFwOWw1NGphNjM4ZW9xNWU3ZjAgdDFqOXYzdjJmM3BvdWtjczdkbWowYzhsY2tAZw",
+			"created": "2017-04-24T10:05:20.000Z",
+			"updated": "2017-04-24T10:05:20.919Z",
+			"summary": "My Event #4",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T16:15:00+05:30"
+			},
+			"end": {
+				"dateTime": "2017-04-24T17:15:00+05:30"
+			},
+			"iCalUID": "l50ck4vqp9l54ja638eoq5e7f0@google.com",
+			"sequence": 0,
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986058510288000\"",
+			"id": "1cov2s8gam0ao3ttdrlr40btu0_20170424T073000Z",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=MWNvdjJzOGdhbTBhbzN0dGRybHI0MGJ0dTBfMjAxNzA0MjRUMDczMDAwWiB0MWo5djN2MmYzcG91a2NzN2RtajBjOGxja0Bn",
+			"created": "2017-04-24T08:54:26.000Z",
+			"updated": "2017-04-24T10:20:55.144Z",
+			"summary": "Lunch Break",
+			"description": "At cafeteria",
+			"location": "Eidiko Systems Integrators, Suite 1, MJR, Prashant Hills, Rai Durg, Hyderabad, Telangana 500032, India",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T13:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"end": {
+				"dateTime": "2017-04-24T14:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"recurringEventId": "1cov2s8gam0ao3ttdrlr40btu0",
+			"originalStartTime": {
+				"dateTime": "2017-04-24T13:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"iCalUID": "1cov2s8gam0ao3ttdrlr40btu0@google.com",
+			"sequence": 0,
+			"attendees": [{
+					"email": "harish.eidiko@gmail.com",
+					"responseStatus": "needsAction"
+				},
+				{
+					"email": "ravindra.eidiko@gmail.com",
+					"displayName": "Ravi Ediko",
+					"responseStatus": "needsAction"
+				},
+				{
+					"email": "anilpani.eidiko@gmail.com",
+					"displayName": "Anil Kumar Pani",
+					"responseStatus": "needsAction"
+				}
+			],
+			"reminders": {
+				"useDefault": true
+			}
+		},
+		{
+			"kind": "calendar#event",
+			"etag": "\"2986058876572000\"",
+			"id": "0buse5poud3113ps85tbsb90p8_20170424T113000Z",
+			"status": "confirmed",
+			"htmlLink": "https://www.google.com/calendar/event?eid=MGJ1c2U1cG91ZDMxMTNwczg1dGJzYjkwcDhfMjAxNzA0MjRUMTEzMDAwWiB0MWo5djN2MmYzcG91a2NzN2RtajBjOGxja0Bn",
+			"created": "2017-04-24T08:55:19.000Z",
+			"updated": "2017-04-24T10:23:58.286Z",
+			"summary": "Tea Break",
+			"description": "At Cafeteria",
+			"location": "Eidiko Systems Integrators, Suite 1, MJR, Prashant Hills, Rai Durg, Hyderabad, Telangana 500032, India",
+			"creator": {
+				"email": "kesava.eidiko@gmail.com"
+			},
+			"organizer": {
+				"email": "t1j9v3v2f3poukcs7dmj0c8lck@group.calendar.google.com",
+				"displayName": "Demo Calendar",
+				"self": true
+			},
+			"start": {
+				"dateTime": "2017-04-24T17:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"end": {
+				"dateTime": "2017-04-24T17:30:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"recurringEventId": "0buse5poud3113ps85tbsb90p8",
+			"originalStartTime": {
+				"dateTime": "2017-04-24T17:00:00+05:30",
+				"timeZone": "Asia/Calcutta"
+			},
+			"iCalUID": "0buse5poud3113ps85tbsb90p8@google.com",
+			"sequence": 0,
+			"attendees": [{
+					"email": "harish.eidiko@gmail.com",
+					"responseStatus": "needsAction"
+				},
+				{
+					"email": "kpradeep.eidiko@gmail.com",
+					"responseStatus": "needsAction"
+				},
+				{
+					"email": "ravindra.eidiko@gmail.com",
+					"displayName": "Ravi Ediko",
+					"responseStatus": "needsAction"
+				},
+				{
+					"email": "anilpani.eidiko@gmail.com",
+					"displayName": "Anil Kumar Pani",
+					"responseStatus": "needsAction"
+				}
+			],
+			"reminders": {
+				"useDefault": true
+			}
+		}
+	]
+}
