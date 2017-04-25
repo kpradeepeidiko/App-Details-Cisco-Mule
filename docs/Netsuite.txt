@@ -1,6 +1,5 @@
 NETSUITE   
 -----------------------------------------
-
 selling eponymoue software
 
 100% cloud
@@ -11,6 +10,11 @@ each role has diff functions
 
 ACCOUNT ID : TSTDRV1512015
 Alex Wolfe : Administrator :3
+====================================================
+city never want to visit = tamilnadu
+born city = hyd
+nick name = ch
+
 
 Connector Credentials
 ====================================================================================
