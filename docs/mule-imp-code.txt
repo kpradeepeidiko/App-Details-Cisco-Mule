@@ -62,7 +62,7 @@ http://localhost:8089/pradeep/{id}/schema/{print}
 
 #[payload != []]
 
-==========================================================================================================================
+===========================================================================================
 
 #[flowVars.name = flowVars.name.toString().split("\\?")[0]]
 
@@ -122,21 +122,20 @@ ${app.home}/classes/googlea43f71d48e2cce70.html
 ALTER TABLE tablename AUTO_INCREMENT = 1
 =============================================
 Add Array
--------------
+----------
 #[new java.util.ArrayList()]
 postMessageArray.add(flowVars.postMessage1)
 
-flowVars.postMessageArray = flowVars.postMessageArray.toString().replace(',','')
-flowVars.postMessageArray = flowVars.postMessageArray.toString().replace('[','')
-flowVars.postMessageArray = flowVars.postMessageArray.toString().replace(']','')
+flowVars.postMessageArray = flowVars.postMessageArray.toString().replace(',','').replace('[','').replace(']','')
 
-in exp
---------
+
+Place 'and' for last ','
+--------------------------------
 flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)
 (to remove '[' and ']' from array)
 
 flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)
-(to place and at las index of ',')
+(to place 'and' at las index of ',')
 
 
 
@@ -215,23 +214,4 @@ health _check flow
 -----------------------
 token_response = message=No results
 		
-[
-  {
-    "instanceId": 6468,
-    "integrationId": "21",
-    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
-    "updatedDate": "2016-10-18T03:32:25",
-    "messageFormat": null,
-    "createdDate": "2016-10-17T02:13:05",
-    "status": "ACTIVE",
-    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vMjlmYzUzZTAtNjQ4MS0xMWU2LWE4NzctNmY2OGRjZjQ2YWFh",
-    "configJson": "{\"time_base\":\"30 minute before\",\"day_base\":\"The day of\",\"day_time_base\":\"10:00 PM\",\"utcTime\":\"4:30 PM\",\"timezone\":\"5.5\",\"calendar_id\":\"3ldopobnb1mpa1qgo4rmamoct8@group.calendar.google.com\",\"resources\":\"varmacalendar\",\"displayName\":\"test\",\"notifications\":[\"eventCreation\",\"eventUpdate\"]}",
-    "instanceUuid": "d2a2e6e0-9473-11e6-ac06-0a8a9e489412"
-  }
-]
 
-{
-  "message": "No results"
-}
-
-message=No results
