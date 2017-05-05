@@ -1,0 +1,39 @@
+POST : https://outlook.office.com/api/v2.0/me/subscriptions
+
+Request 
+----------
+{
+  "@odata.type": "#Microsoft.OutlookServices.PushSubscription",
+  "Resource": "https://outlook.office.com/api/v2.0/me/events",
+  "NotificationURL": " https://e7e1010b.ngrok.io/O365Webhooks",  
+  "ChangeType": "Created, Updated, Deleted",
+  "SubscriptionExpirationDateTime": "2017-05-12T23:05:01.9420124Z",
+  "ClientState": "MySecretClientStateString"
+}
+
+Response
+-----------
+{
+  "@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Subscriptions/$entity",
+  "@odata.type": "#Microsoft.OutlookServices.PushSubscription",
+  "@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Subscriptions('NUVGMjZDQzgtMTBFRS00OEM4LTg4MTktRUEyOTVBNjE0OUNCX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==')",
+  "Id": "NUVGMjZDQzgtMTBFRS00OEM4LTg4MTktRUEyOTVBNjE0OUNCX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==",
+  "Resource": "https://outlook.office.com/api/v2.0/me/events",
+  "ChangeType": "Created, Updated, Deleted, Missed",
+  "NotificationURL": " https://e7e1010b.ngrok.io/O365Webhooks",
+  "SubscriptionExpirationDateTime": "2017-05-12T05:50:42.1645504Z",
+  "ClientState": "MySecretClientStateString"
+}
+
+
+{
+  "@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Subscriptions/$entity",
+  "@odata.type": "#Microsoft.OutlookServices.PushSubscription",
+  "@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Subscriptions('RjZEREM3NzYtRTdDNS00N0YxLUFGRjEtMzRCREUwQjA4QUQzX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==')",
+  "Id": "RjZEREM3NzYtRTdDNS00N0YxLUFGRjEtMzRCREUwQjA4QUQzX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==",
+  "Resource": "https://outlook.office.com/api/v2.0/me/events",
+  "ChangeType": "Created, Updated, Deleted, Missed",
+  "NotificationURL": " https://e7e1010b.ngrok.io/O365Webhooks",
+  "SubscriptionExpirationDateTime": "2017-05-12T05:52:38.7045643Z",
+  "ClientState": "MySecretClientStateString"
+}

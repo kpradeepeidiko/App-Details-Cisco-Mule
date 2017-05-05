@@ -1,0 +1,61 @@
+Event Created
+------------------
+{
+	"value": [{
+		"@odata.type": "#Microsoft.OutlookServices.Notification",
+		"Id": null,
+		"SubscriptionId": "NUVGMjZDQzgtMTBFRS00OEM4LTg4MTktRUEyOTVBNjE0OUNCX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==",
+		"SubscriptionExpirationDateTime": "2017-05-12T05:50:42.1645504Z",
+		"SequenceNumber": 1,
+		"ChangeType": "Created",
+		"Resource": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+		"ResourceData": {
+			"@odata.type": "#Microsoft.OutlookServices.Event",
+			"@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+			"@odata.etag": "W/\"DwAAABYAAADs9AE0XfsJTqf63+3D3IqpAAATa8cT\"",
+			"Id": "AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA="
+		}
+	}]
+}
+
+========================================
+Event updated
+--------------
+{
+	"value": [{
+		"@odata.type": "#Microsoft.OutlookServices.Notification",
+		"Id": null,
+		"SubscriptionId": "NUVGMjZDQzgtMTBFRS00OEM4LTg4MTktRUEyOTVBNjE0OUNCX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==",
+		"SubscriptionExpirationDateTime": "2017-05-12T05:50:42.1645504Z",
+		"SequenceNumber": 2,
+		"ChangeType": "Updated",
+		"Resource": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+		"ResourceData": {
+			"@odata.type": "#Microsoft.OutlookServices.Event",
+			"@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+			"@odata.etag": "W/\"DwAAABYAAADs9AE0XfsJTqf63+3D3IqpAAATa8cU\"",
+			"Id": "AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA="
+		}
+	}]
+}
+
+====================================================================
+Event deleted
+---------------
+{
+	"value": [{
+		"@odata.type": "#Microsoft.OutlookServices.Notification",
+		"Id": null,
+		"SubscriptionId": "NUVGMjZDQzgtMTBFRS00OEM4LTg4MTktRUEyOTVBNjE0OUNCX0FEQzY4MzkzLTQyNzYtNEZFQi1CQkI3LTQyQUY0MDE1MjU4RA==",
+		"SubscriptionExpirationDateTime": "2017-05-12T05:50:42.1645504Z",
+		"SequenceNumber": 3,
+		"ChangeType": "Deleted",
+		"Resource": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+		"ResourceData": {
+			"@odata.type": "#Microsoft.OutlookServices.Event",
+			"@odata.id": "https://outlook.office.com/api/v2.0/Users('588c99ce-309b-4094-9c05-dd2155014f1b@4cbed3a7-6814-4d8c-8a08-8d73b4b5ccef')/Events('AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA=')",
+			"@odata.etag": "W/\"CQAAAA==\"",
+			"Id": "AAMkAGFkYzY4MzkzLTQyNzYtNGZlYi1iYmI3LTQyYWY0MDE1MjU4ZABGAAAAAABxqK9p-m1qQoc96UN8-MdIBwDs9AE0XfsJTqf63_3D3IqpAAAAAAENAADs9AE0XfsJTqf63_3D3IqpAAATacoUAAA="
+		}
+	}]
+}
