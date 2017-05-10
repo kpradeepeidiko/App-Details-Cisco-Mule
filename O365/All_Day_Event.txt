@@ -1,0 +1,406 @@
+{
+	"@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA%3D')/Events",
+	"value": [{
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAOokXtAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAADqP4fA==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAOokXtAAA=",
+		"CreatedDateTime": "2017-05-10T04:57:04.2390553Z",
+		"LastModifiedDateTime": "2017-05-10T04:57:04.46024Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAADqP4fA==",
+		"Categories": [],
+		"OriginalStartTimeZone": "UTC",
+		"OriginalEndTimeZone": "UTC",
+		"iCalUId": "040000008200E00074C5B7101A82E008000000004AD80DDE49C9D20100000000000000001000000047000E99757E224F9F6ADA82EA85B858",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": false,
+		"HasAttachments": false,
+		"Subject": "My All Day Event #1",
+		"BodyPreview": "",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": true,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Free",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAOokXtAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-10T00:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-11T00:00:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Kachehri Chowk",
+			"Address": {
+				"Street": "Kachehri Chowk",
+				"City": "Amritsar",
+				"State": "Punjab",
+				"CountryOrRegion": "India",
+				"PostalCode": "143001"
+			},
+			"Coordinates": {
+				"Latitude": 31.643909454345703,
+				"Longitude": 74.859420776367188
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7zAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAADM8t8Q==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7zAAA=",
+		"CreatedDateTime": "2017-05-09T11:22:24.4753292Z",
+		"LastModifiedDateTime": "2017-05-09T11:27:40.6372703Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAADM8t8Q==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000A8066088B6C8D201000000000000000010000000EC6D590CE5E9BA418907F881EC99B455",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Meeting3",
+		"BodyPreview": "A theme is the central idea found within a story or passage. It can also represent a message or lesson the author wants to convey.",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAMzZ7zAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<div class=\"rps_3d07\">\r\n<div>\r\n<div dir=\"ltr\">\r\n<div id=\"x_divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:rgb(0,0,0); font-family:Calibri,Arial,Helvetica,sans-serif,&quot;EmojiFont&quot;,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoji,&quot;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols\">\r\n<p><span class=\"_Tgc _y9e\">A theme is the central idea found within a story or passage. It can also represent a\r\n<b>message</b> or lesson the author wants to convey</span>.<br>\r\n</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-09T11:55:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-09T12:25:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Mumbai",
+			"Address": {
+				"Street": "",
+				"City": "Mumbai",
+				"State": "Maharashtra",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 18.9401,
+				"Longitude": 72.8349
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7yAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAADM8t8A==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7yAAA=",
+		"CreatedDateTime": "2017-05-09T11:21:43.0667606Z",
+		"LastModifiedDateTime": "2017-05-09T11:26:21.9245592Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAADM8t8A==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E0080000000087BBB16FB6C8D2010000000000000000100000001B9166964160B9459004563E9F3C4E35",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Meeting2",
+		"BodyPreview": "MuleSoft is the company. Presumably, you are asking what Mule ESB, which is MuleSoft's best-known, though certainly not only, product is used for. Mule is an Enterprise service bus",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAMzZ7yAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<div class=\"rps_3463\">\r\n<div>\r\n<div dir=\"ltr\">\r\n<div id=\"x_divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:rgb(0,0,0); font-family:Calibri,Arial,Helvetica,sans-serif,&quot;EmojiFont&quot;,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoji,&quot;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols\">\r\n<p><span class=\"_Tgc _y9e\"><b>MuleSoft</b> is the company. Presumably, you are asking what Mule ESB, which is\r\n<b>MuleSoft's</b> best-known, though certainly not only, product is <b>used</b> for. Mule is an Enterprise service bus</span><br>\r\n</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-09T11:50:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-09T12:20:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Chennai",
+			"Address": {
+				"Street": "",
+				"City": "Chennai",
+				"State": "Tamil Nadu",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 13.0836,
+				"Longitude": 80.2826
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7xAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAADM8t7w==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAMzZ7xAAA=",
+		"CreatedDateTime": "2017-05-09T11:20:57.8790367Z",
+		"LastModifiedDateTime": "2017-05-09T11:25:35.1134796Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAADM8t7w==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E008000000000FA2C254B6C8D201000000000000000010000000B18D86D2C3D39546887B82A0AF9731BA",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Meeting1",
+		"BodyPreview": "An enterprise service bus (ESB) is a software architecture for middleware that provides fundamental services for more complex architectures. For example, an ESB incorporates the features required to implement a service-oriented architecture (SOA)",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAMzZ7xAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<div class=\"rps_3463\">\r\n<div>\r\n<div dir=\"ltr\">\r\n<div id=\"x_divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:rgb(0,0,0); font-family:Calibri,Arial,Helvetica,sans-serif,&quot;EmojiFont&quot;,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoji,&quot;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols\">\r\n<p><span class=\"_Tgc _y9e\">An <b>enterprise service bus</b> (<b>ESB</b>) is a software architecture for middleware that provides fundamental\r\n<b>services</b> for more complex architectures. For example, an <b>ESB</b> incorporates the features required to implement a\r\n<b>service</b>-oriented architecture (SOA)</span><br>\r\n</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-09T11:45:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-09T12:15:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Hyderabad",
+			"Address": {
+				"Street": "",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.366,
+				"Longitude": 78.476
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAKqeTBAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAACqscrQ==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAKqeTBAAA=",
+		"CreatedDateTime": "2017-05-05T08:47:27.9266418Z",
+		"LastModifiedDateTime": "2017-05-05T08:50:24.635163Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAACqscrQ==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E008000000008F458C397CC5D20100000000000000001000000000D358BD31F39943B8EDAAC3DF3CF160",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Test2",
+		"BodyPreview": "",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAKqeTBAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-05T09:10:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-05T09:40:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Chennai",
+			"Address": {
+				"Street": "",
+				"City": "Chennai",
+				"State": "Tamil Nadu",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 13.0836,
+				"Longitude": 80.2826
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Events('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAKqeTAAAA=')",
+		"@odata.etag": "W/\"orLnJq76UEieAdAZXnoqrwAACqscrA==\"",
+		"Id": "AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV-AACisucmrvpQSJ4B0BleeiqvAAAKqeTAAAA=",
+		"CreatedDateTime": "2017-05-05T08:47:07.0492124Z",
+		"LastModifiedDateTime": "2017-05-05T08:50:08.7969408Z",
+		"ChangeKey": "orLnJq76UEieAdAZXnoqrwAACqscrA==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E0080000000025EF1A2D7CC5D201000000000000000010000000CE07F2CBD2C73549A18E33B1A3AF733D",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Test1",
+		"BodyPreview": "",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAKqcV%2FAACisucmrvpQSJ4B0BleeiqvAAAKqeTAAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-05-05T09:05:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-05-05T09:35:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Hyderabad",
+			"Address": {
+				"Street": "",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.366,
+				"Longitude": 78.476
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "Pradeep Kanukuntla",
+				"Address": "pradeep.kanukuntla@eidiko.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
+	}]
+}
