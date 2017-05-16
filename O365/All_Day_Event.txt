@@ -404,3 +404,29 @@
 		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('0aac146f-1bed-4b3a-859d-f2771ec4148d@68daa787-08ee-4f2b-a74c-74aa7ac8c174')/Calendars('AAMkADk3NjNkMjRiLWM1OWYtNGU4MC04ZGM4LTc3MWM0ODZjZDM1MABGAAAAAABTa0nb3OHiSosYUeOc8rTbBwCisucmrvpQSJ4B0BleeiqvAAAAAAEGAACisucmrvpQSJ4B0BleeiqvAAAKqclnAAA=')"
 	}]
 }
+=============================================
+flowVars.DateTime = server.dateTime;
+flowVars.curDT = flowVars.DateTime.toString().split('T')[0];
+flowVars.T1 = flowVars.curDT.concat("T00:00:00Z");
+flowVars.T2 = flowVars.curDT.concat("T23:59:59Z");
+=====================================================================
+
+flowVars.time1 = (new org.mule.el.datetime.DateTime(flowVars.T1)).format("h:mm a");
+flowVars.date1 = (new org.mule.el.datetime.DateTime(flowVars.T1)).format("MMMM d,YYYY");
+flowVars.time2 = (new org.mule.el.datetime.DateTime(flowVars.T2)).format("h:mm a");
+flowVars.date2 = (new org.mule.el.datetime.DateTime(flowVars.T2)).format("MMMM d,YYYY")
+
+
+
+
+			Time1 = #[flowVars.time1]  Date1 = #[flowVars.date1] ++++++++ Time2 = #[flowVars.time2] Date2 = #[flowVars.date2]
+			
+Output : Time1 = 12:00 AM  Date1 = May 11,2017 ++++++++ Time2 = 11:59 PM Date2 = May 11,2017
+
+
+
+
+
+(Time1 = 5:00 AM  Date1 = May 11,2017 ++++++++ Time2 = 7:59 AM Date2 = May 11,2017)
+
+
