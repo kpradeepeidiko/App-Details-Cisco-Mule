@@ -1,0 +1,21 @@
+{
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"instanceId": 135361,
+	"instanceUuid": "d54a3290-3086-11e7-8d39-0631a8e53dc8",
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"configJson": {
+		"notifications": [
+			"created",
+			"subtask",
+			"assigned"
+		],
+		"project_id": "276088541212053",
+		"team_id": "270660444954856",
+		"organization_id": "9433177677643",
+		"displayName": "123456-Duplicate proj",
+		"asana_user_id": 187152065370189
+	},
+	"messageFormat": "Asana Bot",
+	"channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vN2Q3NWIyMzAtZWViNy0xMWU2LThmZmUtODM2MWM3NDRlMmQy",
+	"status": "ACTIVE"
+}

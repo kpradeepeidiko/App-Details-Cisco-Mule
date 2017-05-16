@@ -1,0 +1,27 @@
+{
+  "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vZTYzNjQ2MjAtZGVmMS0xMWU2LWE5ODYtMzNjNjk4NGEyY2M1",
+  "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+  "status": "ACTIVE",
+  "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ZDE3OTViNC02MWE0LTQ2ZTQtYTZjOC04YTBkMDUwYmRkYTQ",
+  "configJson": {
+    "webhook_id": 314765793561296,
+    "notifications": [
+      "incomplete",
+      "attachment",
+      "taskcopied",
+      "markduplicate"
+    ],
+    "project_id": "260817453394690",
+    "team_id": "214681741682163",
+    "organization_id": "9433177677643",
+    "displayName": "",
+    "asana_user_id": 211495747884480
+  },
+  "messageFormat": "Asana Bot",
+  "instance_id": "13687",
+  "repo_modified": true,
+  "repo_name_old": null,
+  "room_modified": false,
+  "repo_id_old": 314765793561296,
+  "instanceUuid": "f49a0d70-1df1-11e7-be2a-12f1827b42d8"
+}
