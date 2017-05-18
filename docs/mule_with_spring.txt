@@ -1,0 +1,66 @@
+Secure Your Mule Application With Spring JDBC
+------------------------------------------------
+https://dzone.com/articles/secure-your-mule-application-with-spring-jdbc
+
+
+
+package com.test;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class DBInitialization implements InitializingBean {
+	private static final Logger LOG = LogManager.getLogger(DBInitialization.class);
+
+	public void afterPropertiesSet() throws Exception {
+		String dbURL = System.getProperty("url");
+		Connection conn = null;
+		Class.forName(System.getProperty("driverName")).newInstance();
+		// Get a connection
+		conn = DriverManager.getConnection(dbURL);
+		Statement stmt = conn.createStatement();
+		try {
+			int user = stmt.executeUpdate(
+					"if not exists (select * from sysobjects where name='users' and xtype='U')CREATE TABLE users (user_id INTEGER IDENTITY(1,1)NOT NULL PRIMARY KEY,user_name VARCHAR(50) NOT NULL,password VARCHAR(100) NOT NULL,enabled BIT)");
+			int user_roles = stmt.executeUpdate(
+					"if not exists (select * from sysobjects where name='user_roles' and xtype='U')CREATE TABLE user_roles (user_role_id INTEGER IDENTITY(1,1)NOT NULL PRIMARY KEY,user_id INTEGER NOT NULL,authority VARCHAR(45) NOT NULL,FOREIGN KEY (user_id) REFERENCES users (user_id))");
+			if (user_roles == 0 && user == 0) {
+				LOG.info("Table does not exists, creating new table");
+				/* encrypted password inserted into db */
+				stmt.executeUpdate("INSERT INTO users (user_name, password, enabled)VALUES ('Anirban', " + "'"
+						+ encryptPass("pass") + "'" + ", 1)");
+				stmt.executeUpdate("INSERT INTO users (user_name, password, enabled)VALUES ('Ajit', " + "'"
+						+ encryptPass("124pass") + "'" + ", 1)");
+				stmt.executeUpdate("INSERT INTO user_roles (user_id, authority)VALUES (1, 'ROLE_ADMIN')");
+				stmt.executeUpdate("INSERT INTO user_roles (user_id, authority)VALUES (1, 'ROLE_USER')");
+				stmt.executeUpdate("INSERT INTO user_roles (user_id, authority)VALUES (2, 'ROLE_USER')");
+			} else if (user_roles == -1 && user == -1) {
+				LOG.error("Table already exists.. Skipping the db initialization stage");
+			}
+		} catch (java.sql.SQLException sqle) {
+			sqle.printStackTrace();
+			throw sqle;
+		}
+	}
+
+	public static String encryptPass(String password) throws Exception {
+		String cryptedPassword = new BCryptPasswordEncoder().encode(password);
+		return cryptedPassword;
+	}
+}
+
+=========================================================================================================
+Secure Your Mule Application With Spring Java
+------------------------------------------------
+https://dzone.com/articles/secure-your-mule-application-with-spring-java
+
+
+=================================================================================
+Using Spring Beans in Mule
+------------------------------
+https://dzone.com/articles/using-spring-beans-in-mule

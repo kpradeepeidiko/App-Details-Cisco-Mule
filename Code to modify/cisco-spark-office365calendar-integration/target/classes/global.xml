@@ -24,7 +24,7 @@ http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/
         	alias="${key.store.alias}"/>
     </tls:context>
     
-    <http:request-config name="HTTP_Integrations_Runtime_Request_Configuration" protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}" basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration"/>
-    <http:request-config name="HTTP_Integrations_Management_Request_Configuration" protocol="HTTPS" host="${integrations.management.host}" port="${integrations.management.port}" basePath="${integrations.management.path}" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Integrations_Runtime_Request_Configuration" protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}" basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" connectionIdleTimeout="500000"/>
+    <http:request-config name="HTTP_Integrations_Management_Request_Configuration" protocol="HTTPS" host="${integrations.management.host}" port="${integrations.management.port}" basePath="${integrations.management.path}" doc:name="HTTP Request Configuration" connectionIdleTimeout="500000"/>
   
 </mule>

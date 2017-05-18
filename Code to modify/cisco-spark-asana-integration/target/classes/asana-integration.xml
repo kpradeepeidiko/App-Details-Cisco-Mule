@@ -720,7 +720,7 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 												<when expression="#[!(flowVars['storyDetails'].containsKey('errors')) &amp;&amp; flowVars.storyDetails.data.type=='comment']">
 													<expression-component doc:name="Remove Next Line"><![CDATA[flowVars['comt'] = flowVars.storyDetails.data.text.toString().replace('\n','')]]></expression-component>
 													<set-variable variableName="pMsg"
-														value="#['In project ['+flowVars['projectName']+'](https://app.asana.com/0/'+flowVars['ue']['project_id']+'/list), '+flowVars['storyDetails']['data']['created_by']['name']+' commented &quot;'+flowVars['comt']+'&quot; on task ['+flowVars.taskName+'](https://app.asana.com/0/'+flowVars['ue']['project_id']+'/'+flowVars['taskDetails']['data']['id']+')']"
+														value="#['In project ['+flowVars['projectName']+'](https://app.asana.com/0/'+flowVars['ue']['project_id']+'/list), '+flowVars['storyDetails']['data']['created_by']['name']+' commented as &quot;'+flowVars['comt']+'&quot; on task ['+flowVars.taskName+'](https://app.asana.com/0/'+flowVars['ue']['project_id']+'/'+flowVars['taskDetails']['data']['id']+')']"
 														doc:name="Comment Message" />
 													<set-variable variableName="value" value="comment"
 														doc:name="Value" />

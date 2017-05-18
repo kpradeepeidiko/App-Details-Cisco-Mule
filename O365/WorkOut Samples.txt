@@ -1,0 +1,23 @@
+StartTimeC
+EndTimeC
+
+
+
+#[flowVars['isAllDayTrue']==true]
+
+'+flowVars['ADTime1']+' - '+flowVars['ADTime2']+' on '+flowVars['ADDate1']+' ('+flowVars['userTimezone']+')
+
+=========================================================
+
+#[flowVars['MDSC'] == flowVars['MDEC']]
+
+'+flowVars['MDDate1']+' - '+flowVars['MDDate2']+'
+
+postMessage1
+
+reminderMessage
+
+MDSC
+MDEC
+=======================================
+<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
