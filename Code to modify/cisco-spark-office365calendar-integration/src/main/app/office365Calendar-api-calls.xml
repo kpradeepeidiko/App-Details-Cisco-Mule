@@ -270,9 +270,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 	<flow name="AccessTokenAndPageTokenFlow">
 		<vm:inbound-endpoint exchange-pattern="one-way"
 			path="ATPT-flow" connector-ref="VM1" doc:name="AccessToken and PageToken" />
-		<logger
-			message="VM payload=#[payload] ::::::::::::::::userId=#[sessionVars['userId']]==&gt;#[sessionVars.maap.get(sessionVars.userId)]"
-			level="DEBUG" doc:name="Logger" />
+
 		<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration"
 			path="/integrations/{integrationId}/appTokens" method="GET"
 			doc:name="Get O365 Access Token">
@@ -294,9 +292,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 			<dw:set-variable variableName="integrationTokenResponse"
 				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
 		</dw:transform-message>
-		<logger
-			message="token payload of zero =  #[flowVars['integrationTokenResponse'][0]]"
-			level="DEBUG" doc:name="Logger" />
+
 
 		<choice doc:name="Token Response">
 			<when
@@ -322,9 +318,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 								<set-payload
 									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
 									doc:name="Refresh Token Body" />
-								<logger
-									message="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
-									level="DEBUG" doc:name="Logger" />
+
 								<http:request config-ref="HTTP_Access_Token_Request_Configuration"
 									path="${office365Calendar.api.access.token.path}" method="POST"
 									doc:name="GET O365 Access Token">
@@ -335,8 +329,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 									<http:failure-status-code-validator
 										values="500..599" />
 								</http:request>
-								<logger message="#[message.payloadAs(java.lang.String)]"
-									level="DEBUG" doc:name="Logger" />
+
 								<dw:transform-message doc:name="Transform Message To Java">
 									<dw:set-variable variableName="refreshTokenResponse"
 										resource="classpath:dwScripts/fromPayloadToJava.dwl" />
@@ -354,9 +347,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 											<dw:set-payload
 												resource="classpath:dwScripts/buildPutAccessTokenForUserInPollingExample.dwl" />
 										</dw:transform-message>
-										<logger
-											message="put Access Token payload==&gt; RTR=#[flowVars['refreshTokenResponse']] #[flowVars['expires_in']]==#[flowVars['refreshTokenResponse']['expires_in']]++++++++#[flowVars['GDAccessToken']]==#[flowVars['refreshTokenResponse']['access_token']] payload as body = #[message.payloadAs(java.lang.String)] :::::::::::::::: tokenId=#[flowVars['integrationTokenResponse'][0]['tokenId']]:::::::::: intgrId=${office365Calendar.integration.id}"
-											level="DEBUG" doc:name="Logger" />
+
 										<http:request
 											config-ref="HTTP_Integrations_Runtime_Request_Configuration"
 											path="/integrations/{integrationId}/appTokens/{appTokenId}"
@@ -406,9 +397,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 						<choice doc:name="Choice">
 							<when
 								expression="#[flowVars['userTimingsResponse'].toString() != '{message=No Result Found}']">
-								<logger
-									message="DB Time = #[flowVars['userTimingsResponse'][0]['cursorTime']] +++++ org = #[(new org.mule.el.datetime.DateTime(flowVars['userTimingsResponse'][0]['cursorTime']))]"
-									level="DEBUG" doc:name="Logger" />
+
 								<set-variable variableName="forCrUpServerTimeMinusPollingTime"
 									value="#[(new org.mule.el.datetime.DateTime(flowVars['userTimingsResponse'][0]['cursorTime']))]"
 									doc:name="Set User Time From DB" />
@@ -467,7 +456,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 										<dw:set-variable variableName="configJsonValue"
 											resource="classpath:dwScripts/fromPayloadToJava.dwl" />
 									</dw:transform-message>
-                                    <logger message="configJson Values = #[flowVars['configJsonValue']]" level="DEBUG" doc:name="Logger"/>
+
                                     
 									<expression-component doc:name="Set Values"><![CDATA[flowVars['timeBasedValue'] =  flowVars['configJsonValue']['time_base'];
 flowVars['offValue'] = flowVars['configJsonValue']['offset'];
@@ -476,7 +465,7 @@ flowVars['dayTimeBase'] = flowVars['configJsonValue']['utcTime'];
 flowVars['calendar_id'] = flowVars['configJsonValue']['calendar_id'];
 flowVars['timezone1']=flowVars['configJsonValue']['timezone'].toString().split('\\(')[1];
 flowVars['userTimezone']=flowVars['timezone1'].toString().replace(')','')]]></expression-component>
-									<logger message="timeBased = #[flowVars['timeBasedValue']] ++++++++offValue =  #[flowVars['offValue']] +++++++++CName =  #[flowVars['calendarName']] +++++++++DTBased =  #[flowVars['dayTimeBase']] ++++++ Caldr _id = #[flowVars['calendar_id']] +++++++ userTimezone=#[flowVars['userTimezone']]" level="DEBUG" doc:name="Logger"/>
+
 									<set-variable variableName="startDateTime"
 										value="#[(new org.mule.el.datetime.DateTime(server.dateTime)).plusHours(-24)]"
 										doc:name="Set Start Date Time" />
@@ -498,9 +487,7 @@ flowVars['userTimezone']=flowVars['timezone1'].toString().replace(')','')]]></ex
 
 										</http:request-builder>
 									</http:request>
-									<logger
-										message="Events payload for userId = #[sessionVars['userId']] +++  start = #[flowVars['startDateTime']] +++ end = #[flowVars['endDateTime']]  ++++  #[message.payloadAs(java.lang.String)]"
-										level="DEBUG" doc:name="Logger" />
+
 									<dw:transform-message doc:name="Transform Message To Java">
 										<dw:set-variable variableName="GCItemsList"
 											resource="classpath:dwScripts/fromPayloadToJava.dwl" />
@@ -582,7 +569,7 @@ flowVars['startTime'] = (new org.mule.el.datetime.DateTime(flowVars['StartTimeC'
 flowVars['endDate'] = flowVars['EndTimeC'].toString().split('T')[0];
 flowVars['getEndDate'] =  (new org.mule.el.datetime.DateTime(flowVars['endDate'])).format("MMMM d, YYYY");
 flowVars['endTime'] = (new org.mule.el.datetime.DateTime(flowVars['EndTimeC'])).format("h:mm a")]]></expression-component>
-                                                        <logger message="Event  = #[flowVars['eventTitle']]+++StartTimeC = #[flowVars['StartTimeC']]++  EndTimeC = #[flowVars['EndTimeC']] ++++++ startTime = #[flowVars['startDate']] +++++++ date = #[flowVars['getDate']] +++ Start = #[flowVars['startTime']] ++ endDate = #[flowVars['getEndDate']] ++ end = #[flowVars['endTime']]" level="DEBUG" doc:name="Logger"/>
+
                                                         <expression-component doc:name="For All Day"><![CDATA[flowVars['curDT'] = flowVars['StartTimeC'].toString().split('T')[0];
 flowVars['ADT1'] = flowVars.curDT.concat("T00:00:00Z");
 flowVars['ADT2'] = flowVars.curDT.concat("T23:59:59Z");
@@ -1119,9 +1106,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																<set-payload
 																	value="#[{&quot;gcMessage&quot;: flowVars['postMessage'],&quot;value&quot;:flowVars['value']}]"
 																	doc:name="Prepare Message To Management" />
-																<logger
-																	message="crt or up #[message.payloadAs(java.lang.String)]"
-																	level="DEBUG" doc:name="Logger" />
+
 																<http:request
 																	config-ref="HTTP_Integrations_Management_Request_Configuration"
 																	path="/hooks/{instanceUuid}" method="POST"
@@ -1227,9 +1212,7 @@ flowVars['userEndTime'] = (new org.mule.el.datetime.DateTime(flowVars['userEndTi
 
 										</http:request-builder>
 									</http:request>
-									<logger
-										message="Calendarview payload for userId = #[sessionVars['userId']] +++  start = #[flowVars['startDateTime']] +++ end = #[flowVars['endDateTime']]  ++++  #[message.payloadAs(java.lang.String)]"
-										level="DEBUG" doc:name="Logger" />
+
 									<dw:transform-message doc:name="Transform Message To Java">
 										<dw:set-variable variableName="GCItemsList"
 											resource="classpath:dwScripts/fromPayloadToJava.dwl" />
@@ -1315,7 +1298,7 @@ flowVars['startTime'] = (new org.mule.el.datetime.DateTime(flowVars['StartTimeC'
 flowVars['endDate'] = flowVars['EndTimeC'].toString().split('T')[0];
 flowVars['getEndDate'] =  (new org.mule.el.datetime.DateTime(flowVars['endDate'])).format("MMMM d, YYYY");
 flowVars['endTime'] = (new org.mule.el.datetime.DateTime(flowVars['EndTimeC'])).format("h:mm a")]]></expression-component>
-        <logger message="Event  = #[flowVars['eventTitle']]+++StartTimeC = #[flowVars['StartTimeC']]++  EndTimeC = #[flowVars['EndTimeC']] ++++++ startTime = #[flowVars['startDate']] +++++++ date = #[flowVars['getDate']] +++ Start = #[flowVars['startTime']] ++ endDate = #[flowVars['getEndDate']] ++ end = #[flowVars['endTime']]" level="DEBUG" doc:name="Logger"/>
+
         <expression-component doc:name="For All Day"><![CDATA[flowVars['curDT'] = flowVars['StartTimeC'].toString().split('T')[0];
 flowVars['ADT1'] = flowVars.curDT.concat("T00:00:00Z");
 flowVars['ADT2'] = flowVars.curDT.concat("T23:59:59Z");
@@ -1337,9 +1320,7 @@ flowVars.MDDate2 = (new org.mule.el.datetime.DateTime(flowVars.EndTimeC)).format
 																		<set-variable variableName="RTime"
 																			value="#[(new org.mule.el.datetime.DateTime(flowVars['eventStartTime'])).plusMinutes(-15).changeTimeZone('UTC')]"
 																			doc:name="Reduce Start Time To 15 Mins" />
-																		<logger
-																			message="15Mins = for #[flowVars['eventTitle']] ++++++++ condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++++++++++++ Value = #[flowVars['RTime']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]"
-																			level="DEBUG" doc:name="Logger" />
+
 																		<choice doc:name="15 min">
 																			<when
 																				expression="#[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
@@ -1611,9 +1592,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<set-variable variableName="RTime"
 																			value="#[(new org.mule.el.datetime.DateTime(flowVars['eventStartTime'])).plusMinutes(-30).changeTimeZone('UTC')]"
 																			doc:name="Reduce Start Time To 30 Mins" />
-																		<logger
-																			message="30 Min for for #[flowVars['eventTitle']]+++++++++++  condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++++++++++++ Value = #[flowVars['RTime']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]"
-																			level="DEBUG" doc:name="Logger" />
+
 																		<choice doc:name="30 min">
 																			<when
 																				expression="#[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
@@ -1875,9 +1854,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<set-variable variableName="RTime"
 																			value="#[(new org.mule.el.datetime.DateTime(flowVars['eventStartTime'])).plusHours(-1).changeTimeZone('UTC')]"
 																			doc:name="Reduce Start Time To 1 hour" />
-																		<logger
-																			message="1hr for #[flowVars['eventTitle']]+++++ condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++++++++++++ Value = #[flowVars['RTime']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]"
-																			level="DEBUG" doc:name="Logger" />
+
 																		<choice doc:name="1 hr">
 																			<when
 																				expression="#[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
@@ -2151,9 +2128,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<set-variable variableName="RTime"
 																			value="#[(new org.mule.el.datetime.DateTime(flowVars['eventStartTime'])).plusHours(-2).changeTimeZone('UTC')]"
 																			doc:name="Reduce Start Time To 2 hr" />
-																		<logger
-																			message="2 hr for #[flowVars.eventTitle]++++++++ condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++++++++++++ Value = #[flowVars['RTime']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]"
-																			level="DEBUG" doc:name="Logger" />
+
 																		<choice doc:name="2 hrs">
 																			<when
 																				expression="#[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
@@ -2427,9 +2402,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<set-variable variableName="RTime"
 																			value="#[(new org.mule.el.datetime.DateTime(flowVars['eventStartTime'])).plusHours(-4).changeTimeZone('UTC')]"
 																			doc:name="Reduce Start Time To 4 hrs" />
-																		<logger
-																			message="4 hrs for #[flowVars.eventTitle]++++++++++++++ condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++++++++++++ Value = #[flowVars['RTime']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]"
-																			level="DEBUG" doc:name="Logger" />
+
 																		<choice doc:name="4 hrs">
 																			<when
 																				expression="#[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
@@ -2721,9 +2694,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																<set-payload
 																	value="#[{&quot;gcMessage&quot;: flowVars['postMessage1'],&quot;value&quot;:flowVars['TBV']}]"
 																	doc:name="Prepare Message To Management" />
-																<logger
-																	message="Time-based #[message.payloadAs(java.lang.String)]"
-																	level="DEBUG" doc:name="Logger" />
+
 																<http:request
 																	config-ref="HTTP_Integrations_Management_Request_Configuration"
 																	path="/hooks/{instanceUuid}" method="POST"
@@ -2744,10 +2715,6 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 														</choice>
                                                         <expression-component doc:name="Event Start Time"><![CDATA[flowVars['startTimeInUtc'] = (new org.mule.el.datetime.DateTime(flowVars['StartTimeC']))]]></expression-component>
 
-
-														<logger
-															message="Add Array Condition =&gt; eventName = #[flowVars['eventTitle']]   +++++++  condition in choice = #[((flowVars['startTimeInUtc'].isAfter(flowVars['userStartTime'])) &amp;&amp; (flowVars['startTimeInUtc'].isBefore(flowVars['userEndTime'])))] +++++++++++ #[flowVars['startTimeInUtc']] isAfter (#[flowVars['userStartTime']]) &amp;&amp; #[flowVars['startTimeInUtc']]  isBefore (#[flowVars['userEndTime']])"
-															level="DEBUG" doc:name="Add Array Condition" />
 														<choice doc:name="Check PostMessage">
 															<when
 																expression="#[((flowVars['startTimeInUtc'].isAfter(flowVars['userStartTime'])) &amp;&amp; (flowVars['startTimeInUtc'].isBefore(flowVars['userEndTime'])))]">
@@ -3028,9 +2995,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 													<set-variable variableName="dayBasedTimeStamp1"
 														value="#[(new org.mule.el.datetime.DateTime(flowVars['dayBasedTimeStamp']))]"
 														doc:name="Convert DayBased Timestamp From String To Datetime" />
-													<logger
-														message="Day Based ++++ Day_base=#[flowVars['dayTimeBase']] +++ Value==&gt;size = #[flowVars['remainderArray'].size()] ++++++ #[flowVars['dayBasedTimeStamp1']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] &amp;&amp; #[flowVars['dayBasedTimeStamp1']] isBefore #[server.dateTime.changeTimeZone('UTC')]  ++++condition = #[(flowVars.remainderArray != []) &amp;&amp; ((flowVars['dayBasedTimeStamp1'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['dayBasedTimeStamp1'].isBefore(server.dateTime.changeTimeZone('UTC'))))]+++++"
-														level="DEBUG" doc:name="Logger" />
+
 													<choice doc:name="Check Reminder Message">
 														<when
 															expression="#[(flowVars.remainderArray != []) &amp;&amp; (flowVars['remainderArray'].size() &gt;= 2) &amp;&amp; ((flowVars['dayBasedTimeStamp1'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['dayBasedTimeStamp1'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">

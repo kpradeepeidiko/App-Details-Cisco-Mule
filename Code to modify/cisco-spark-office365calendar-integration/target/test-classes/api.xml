@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     
     <apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
     
-    <api-platform-gw:api apiName="${asana.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>
+    <api-platform-gw:api apiName="${office365Calendar.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/> 
     
     <flow name="api-main">
         <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
@@ -23,22 +23,23 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <http:listener config-ref="api-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
         <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
     </flow>
-    
-    <flow name="post:/authDetails:api-config">
-        <flow-ref name="postAuthDetailsFlow" doc:name="postAuthDetailsFlow"/>
-   <choice-exception-strategy doc:name="Choice Exception Strategy">
+    <flow name="O365CalenderAPIPolling">
+        <poll doc:name="Poll">
+            <fixed-frequency-scheduler frequency="${polling.interval}" timeUnit="MINUTES"/>
+            <flow-ref name="startO365CalendarPollingFlow" doc:name="startO365CalendarPollingFlow"/>
+        </poll>
+        <logger level="INFO" doc:name="Logger" message="polling Started"/>
+    <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
                 <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -48,14 +49,48 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    </flow>
+    
+    <flow name="post:/authDetails:api-config">
+        <flow-ref name="postAuthDetailsFlow" doc:name="postAuthDetailsFlow"/>
+   <choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -72,14 +107,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request1.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -90,14 +123,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request1.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -114,14 +145,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request.instanceDetails.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -132,14 +161,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request.instanceDetails.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -148,21 +175,19 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         </choice-exception-strategy>
     </flow>
     <flow name="post:/updateIntegration:api-config">
-        <flow-ref name="updateIntegrationFlow" doc:name="Update Integration Flow Reference"/>
+        <flow-ref name="updateIntegrationFlow" doc:name="updateIntegrationFlow"/>
    <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
                 <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
-                <set-variable variableName="userId" value="#[flowVars.updateRequest.userId]" doc:name="Set User Id"/>
+                <set-variable variableName="userId" value="#[flowVars]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -171,16 +196,13 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <catch-exception-strategy when="#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]" doc:name="HTTP Validator Exception Strategy">
             <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
-                <set-variable variableName="userId" value="#[flowVars.updateRequest.userId]" doc:name="Set UserId"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -197,14 +219,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request2.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -215,14 +235,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.request2.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -239,14 +257,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.deleteRequest.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
 
                 </dw:transform-message>
@@ -257,14 +273,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
                 <set-variable variableName="userId" value="#[flowVars.deleteRequest.userId]" doc:name="Set User Id"/>
                 <dw:transform-message doc:name="Build Logging Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
 
                 </dw:transform-message>
 
                 <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
                 <dw:transform-message doc:name="Build Alert Input Message">
-                	<dw:input-payload mimeType="application/java"/>
                     <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
 
                 </dw:transform-message>

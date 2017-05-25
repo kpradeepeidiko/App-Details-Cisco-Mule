@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     
     <apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
     
-    <!-- <api-platform-gw:api apiName="${asana.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>-->
+    <api-platform-gw:api apiName="${asana.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>
     
     <flow name="api-main">
         <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
