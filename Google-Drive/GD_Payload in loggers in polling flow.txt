@@ -1,0 +1,49 @@
+VM payload=#[payload] ::::::::::::::::userId=#[sessionVars['userId']]==>#[sessionVars.maap.get(sessionVars['userId'])]
+=================================================================================================
+put Access Token payload==> RTR=#[flowVars['refreshTokenResponse']] #[flowVars['expires_in']]==#[flowVars['refreshTokenResponse']['expires_in']]++++++++#[flowVars['GDAccessToken']]==#[flowVars['refreshTokenResponse']['access_token']] payload as body = #[message.payloadAs(java.lang.String)] :::::::::::::::: tokenId=#[flowVars['integrationTokenResponse'][0]['tokenId']]:::::::::: intgrId=${googleDrive.integration.id}
+
+==============================================================================================
+pageToken from DB for user=#[sessionVars['userId']]=====#[flowVars['dbPageToken'][0]]
+===========================================================================================
+new largest changes for userId=#[sessionVars['userId']] == #[message.payloadAs(java.lang.String)]
+
+==========================================================================================
+For MimeType = #[sessionVars['reqPayload']['file']['mimeType']] ==> #[sessionVars['reqPayload']['file']['labels']['trashed']]==false && (parents !=[] == #[sessionVars['reqPayload']['file']['parents'] !=[]])  && #[flowVars['FileCreatedDateForCompare']] isAfter  #[sessionVars['pollingIntervalMinus']] && #[flowVars['FileCreatedDateForCompare']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+
+===============================================================================================
+comments on doc for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+
+comments on spreadSheet for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+comments on slides for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+comments on Docx for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+comments on excel for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+comments on drawings for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+
+comments on pdf for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
+
+===================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+VM payload=#[payload] ::::::::::::::::userId=#[sessionVars['userId']]==>#[sessionVars.maap.get(sessionVars['userId'])]
+============================================================================
+token payload of zero =  #[flowVars['integrationTokenResponse']]
+
+=======================================
+Refresh Token response from http = #[message.payloadAs(java.lang.String)] :::::::::::for tokenId=#[flowVars.integrationTokenResponse[0].tokenId] userId=#[flowVars['integrationTokenResponse'][0]['userId']]=#[sessionVars['userId']]
+
+===========================================================
+put Access Token payload==> RTR=#[flowVars['refreshTokenResponse']] #[flowVars['expires_in']]==#[flowVars['refreshTokenResponse']['expires_in']]++++++++#[flowVars['GCAccessToken']]==#[flowVars['refreshTokenResponse']['access_token']] payload as body = #[message.payloadAs(java.lang.String)] :::::::::::::::: tokenId=#[flowVars['integrationTokenResponse'][0]['tokenId']]==#[flowVars['userAppTokneId']]:::::::::: intgrId=${googleCalender.integration.id}
+=========================================================================
+DB Time  for user ID #[sessionVars['userId']]= #[flowVars['userTimingsResponse'][0]['cursorTime']] +++++ org = #[(new org.mule.el.datetime.DateTime(flowVars['userTimingsResponse'][0]['cursorTime']))]
+================================================================
+Values = Time-basedValue = #[flowVars['timeBasedValue']] +++++++ OffValue = #[flowVars['offValue']] +++++++ dayTimeBase=#[flowVars['dayTimeBase']] +++++++ cal_id=#[flowVars['calendar_id']]
+=========================================================
+calendar payload==>  max = #[flowVars['timeMax']] ++++ min = #[flowVars['timeMin']] #[message.payloadAs(java.lang.String)]++++++++++++
+
+====================================================
+event = #[flowVars.eventTitle] ++++crt_condition=#[((flowVars['crt'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['crt'].isBefore(server.dateTime.changeTimeZone('UTC'))))] +++++++crt_values=#[flowVars['crt']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['crt']] isBefore #[server.dateTime.changeTimeZone('UTC')]++++++++++update_cdtn=#[((flowVars['updt'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['updt'].isBefore(server.dateTime.changeTimeZone('UTC'))))]+++++++++up_values = #[flowVars['updt']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['updt']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+==============================================================
+instance uuid= #[flowVars['instanceUuid']] +++++++++++++++  crt or up  message = #[message.payloadAs(java.lang.String)]
+==================================================================
+15min for event --> #[flowVars.eventTitle] ==  condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] ++++++ value = #[flowVars['RTime']] isAfter  #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+
+=====================================================================================
+30mins for events-->#[flowVars.eventTitle]++++++condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] ++++++ value = #[flowVars['RTime']] isAfter  #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+
+===========================================================
+1 Hr Before event = #[flowVars.eventTitle]+++++ condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] ++++++ value = #[flowVars['RTime']] isAfter  #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+=========================================================================
+2 Hrs Before  event = #[flowVars.eventTitle]+++++++condition = #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] ++++++ value = #[flowVars['RTime']] isAfter  #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+======================================================================================
+4 hrs before event = #[flowVars.eventTitle]+++++++++ condition= #[((flowVars['RTime'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['RTime'].isBefore(server.dateTime.changeTimeZone('UTC'))))] ++++++ value = #[flowVars['RTime']] isAfter  #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['RTime']] isBefore #[server.dateTime.changeTimeZone('UTC')]
+======================================================================================================
+instance uuid= #[flowVars['instanceUuid']] +++++++++++++++  Time-Based message = #[message.payloadAs(java.lang.String)]
+========================================================================
+after time based msg send to mangmt
+----------------------------------------
+Add Array Condition for  Event ==> #[flowVars['itemDetails']['summary']] =>addArrayCondition = #[flowVars['addArrayStartTime'].isAfter(flowVars['userStartTime']) && flowVars['addArrayStartTime'].isBefore(flowVars['userEndTime'])] ++++++++++++#[flowVars['addArrayStartTime']] isAfter #[flowVars['userStartTime']] && #[flowVars['addArrayStartTime']] isBefore #[flowVars['userEndTime']]
+==========================================================================
+In "Check User's Time-Based Value" choice after 2 variables
+--------------------------------------------------------------
+Day Based for user = #[sessionVars.userId]  ++++ Day_base=#[flowVars['dayTimeBase']] +++ Value==>size = #[flowVars['remainderArray'].size()] ++++++ #[flowVars['dayBasedTimeStamp1']] isAfter #[flowVars['forCrUpServerTimeMinusPollingTime']] && #[flowVars['dayBasedTimeStamp1']] isBefore #[server.dateTime.changeTimeZone('UTC')]  ++++condition = #[(flowVars.remainderArray != []) && ((flowVars['dayBasedTimeStamp1'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) && (flowVars['dayBasedTimeStamp1'].isBefore(server.dateTime.changeTimeZone('UTC'))))]+++++
+=========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
