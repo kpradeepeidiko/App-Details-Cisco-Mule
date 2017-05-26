@@ -1,3 +1,5 @@
+MapResult=#[sessionVars['maap']]==>userIdArray=#[flowVars['userIds']]
+=====================================================================================
 VM payload=#[payload] ::::::::::::::::userId=#[sessionVars['userId']]==>#[sessionVars.maap.get(sessionVars['userId'])]
 =================================================================================================
 put Access Token payload==> RTR=#[flowVars['refreshTokenResponse']] #[flowVars['expires_in']]==#[flowVars['refreshTokenResponse']['expires_in']]++++++++#[flowVars['GDAccessToken']]==#[flowVars['refreshTokenResponse']['access_token']] payload as body = #[message.payloadAs(java.lang.String)] :::::::::::::::: tokenId=#[flowVars['integrationTokenResponse'][0]['tokenId']]:::::::::: intgrId=${googleDrive.integration.id}
@@ -13,6 +15,10 @@ For MimeType = #[sessionVars['reqPayload']['file']['mimeType']] ==> #[sessionVar
 ===============================================================================================
 comments on doc for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
 
+Doc value from sub ++++ #[sessionVars.postMessageMap] ============ #[sessionVars.MapKeyArray]
+
+
+==================================================================================
 
 comments on spreadSheet for userId=#[sessionVars.userId]::::::::::#[message.payloadAs(java.lang.String)]
 

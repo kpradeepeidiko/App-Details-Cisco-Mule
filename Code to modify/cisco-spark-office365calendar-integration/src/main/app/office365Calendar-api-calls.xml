@@ -240,9 +240,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 				<set-variable variableName="userIds"
 					value="#[new java.util.ArrayList()]" doc:name="UseId List" />
 				<expression-component doc:name="Expression Set to List"><![CDATA[userIds.addAll(flowVars['userIdSet']);]]></expression-component>
-				<logger
-					message="MapResult=#[sessionVars['maap']]==&gt;userIdArray=#[flowVars['userIds']]"
-					level="DEBUG" doc:name="Logger" />
+
 				<foreach collection="#[flowVars['userIds']]" doc:name="Loop All User Ids">
 					<set-session-variable variableName="userId"
 						value="#[payload]" doc:name="Set UserId" />

@@ -1,3 +1,5 @@
+MapResult=#[sessionVars['maap']]==>userIdArray=#[flowVars['userIds']]
+==================================================================
 From DB
 ------------
 DB Time = #[flowVars['userTimingsResponse'][0]['cursorTime']] +++++ org = #[(new org.mule.el.datetime.DateTime(flowVars['userTimingsResponse'][0]['cursorTime']))]

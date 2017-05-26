@@ -1,3 +1,5 @@
+MapResult=#[sessionVars['maap']]==>userIdArray=#[flowVars['userIds']]
+=================================================================================
 VM payload=#[payload] ::::::::::::::::userId=#[sessionVars['userId']]==>#[sessionVars.maap.get(sessionVars['userId'])]
 ============================================================================
 token payload of zero =  #[flowVars['integrationTokenResponse']]
