@@ -1,0 +1,211 @@
+<script>
+	var mTime = Date.now().toString();
+
+	var alertConfigExist = null;
+	$(document)
+			.ready(
+					function() {
+						$("#qmConfigPage").load(
+								"pages/queueMessageConfig.html", function() {
+
+								});
+						//Gets Queue Config Data from BackEnd
+						$
+								.ajax({
+									type : "GET",
+									contentType : "application/json; charset=utf-8",
+									url : "/MonitoringRestServices/rest/getAlertCfgn?mtime="
+											+ mTime,
+									dataType : "json",
+									headers : getHeadersData(),
+									success : function(responseData) {
+										if (responseData.id != 0) {
+											var sms_flag = JSON
+													.parse(responseData.sms_flag);
+											var email_flag = JSON
+													.parse(responseData.email_flag);
+											var mode = responseData.mode;
+											$('#alertid').val(responseData.id);
+											$(
+													'input[name="smsAlertConfigName"]')
+													.prop('checked', sms_flag);
+											$(
+													'input[name="emailAlertConfigName"]')
+													.prop('checked', email_flag);
+											$("#alertDestinationName")
+													.val(mode);
+
+											$('#smsAlertConfigName').attr(
+													'disabled', true);
+											$('#emailAlertConfigName').attr(
+													'disabled', true);
+											$('#alertDestinationName').attr(
+													'disabled', true);
+
+											$("#formEditBtn").show();
+											$("#formAddBtn").hide();
+											$("#formSubmit").hide();
+											alertConfigExist = true;
+										} else {
+											var html = '<p class="failureMessage">No config data found, add a configuration</p>';
+											$("#alertConfigResult").html(html);
+											$("#alertConfigResult").addClass(
+													"alert alert-danger");
+											$('#smsAlertConfigName')
+													.removeAttr('disabled');
+											$('#emailAlertConfigName')
+													.removeAttr('disabled');
+											$('#alertDestinationName')
+													.removeAttr('disabled');
+											$("#formEditBtn").hide();
+											$("#formSubmit").hide();
+											$("#formAddBtn").show();
+											alertConfigExist = false;
+										}
+									},
+									failure : function(errMsg) {
+										$("#alertConfigForm").hide();
+										var html = '<p class="failureMessage"> Failure: '
+												+ errMsg.toString() + '</p>';
+										$("#alertConfigResult").html(html);
+										$("#alertConfigResult").addClass(
+												"alert alert-danger");
+									}
+								});
+					});
+
+	$('#alertConfigForm').submit(
+			function(event) {
+
+				var id = $("#alertid").val();
+				var alertdata = {};
+				var urlpath = null;
+
+				alertdata.sms_flag = $("#smsAlertConfigName").prop('checked');
+				alertdata.email_flag = $("#emailAlertConfigName").prop(
+						'checked');
+				alertdata.mode = $("#alertDestinationName option:selected")
+						.text();
+
+				if (alertConfigExist) {
+					alertdata.id = $("#alertid").val();
+					urlpath = '/MonitoringRestServices/rest/updateAlertCfg';
+				} else {
+					urlpath = '/MonitoringRestServices/rest/addAlertCfg';
+				}
+
+				$.ajax({
+					type : "POST",
+					contentType : "application/json; charset=utf-8",
+					url : urlpath,
+					data : JSON.stringify(alertdata),
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(msg) {
+						if (msg.code == 200) {
+							var result = '<p class="successMessage">'
+									+ msg.message + '</p>';
+							$("#rightpanel").load(
+									"pages/alertsConfig.html",
+									function() {
+										$("#alertConfigResult").html(result);
+										$("#alertConfigResult").addClass(
+												"alert alert-success");
+										$('#smsAlertConfigName').attr(
+												'disabled', true);
+										$('#emailAlertConfigName').attr(
+												'disabled', true);
+										$('#alertDestinationName').attr(
+												'disabled', true);
+										$("#formEditBtn").hide();
+										$("#formSubmit").show();
+										$("#formAddBtn").hide();
+									});
+						} else {
+							var result = '<p class="failureMessage">'
+									+ msg.message + '</p>';
+							$("#rightpanel").load(
+									"pages/alertsConfig.html",
+									function() {
+										$("#alertConfigResult").html(result);
+										$("#alertConfigResult").addClass(
+												"alert alert-danger");
+										$('#smsAlertConfigName').removeAttr(
+												'disabled');
+										$('#emailAlertConfigName').removeAttr(
+												'disabled');
+										$('#alertDestinationName').removeAttr(
+												'disabled');
+										$("#formEditBtn").hide();
+										$("#formSubmit").show();
+										$("#formAddBtn").hide();
+
+									});
+						}
+					},
+					failure : function(errMsg) {
+						$("#alertConfigForm").hide();
+						var html = '<p class="failureMessage"> Failure: '
+								+ errMsg.toString() + '</p>';
+						$("#alertConfigResult").html(html);
+						$("#alertConfigResult").addClass("alert alert-danger");
+						$('#smsAlertConfigName').removeAttr('disabled');
+						$('#emailAlertConfigName').removeAttr('disabled');
+						$('#alertDestinationName').removeAttr('disabled');
+						$("#formEditBtn").hide();
+						$("#formSubmit").show();
+						$("#formAddBtn").hide();
+					}
+				});
+
+				event.preventDefault();
+			});
+
+	$("#formEditBtn").bind('click', function() {
+		$("#alertConfigResult").html("");
+		$("#alertConfigResult").removeClass("alert alert-success");
+		$("#alertConfigResult").removeClass("alert alert-danger");
+		$('#smsAlertConfigName').removeAttr('disabled');
+		$('#emailAlertConfigName').removeAttr('disabled');
+		$('#alertDestinationName').removeAttr('disabled');
+		$("#formEditBtn").hide();
+		$("#formSubmit").show();
+		$("#formAddBtn").hide();
+	});
+</script>
+
+
+<h2>Alert Configuration</h2>
+<div id="alertConfig">
+	<form id="alertConfigForm" action="" class="form-inline" method="post">
+		<table class="alertConfigData table">
+			<tbody>
+				<tr>
+					<td style="display: none;"><input type="text" name="alertid"
+						value="" id="alertid" class="form-control" /></td>
+					<td><label>SMS</label><input type="checkbox"
+						name="smsAlertConfigName" id="smsAlertConfigName" /></td>
+
+					<td><label>E-mail</label><input type="checkbox"
+						name="emailAlertConfigName" id="emailAlertConfigName" /></td>
+					<td><label>Destination</label> <select
+						name="alertDestinationName" id="alertDestinationName">
+							<option value="Queue">Queue</option>
+							<option value="DataBase">DataBase</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td colspan="3"><input id="formEditBtn" type="button"
+						name="Edit" class="btn btn-primary" value="Edit"
+						style="display: none;" /> <input id="formAddBtn" type="submit"
+						name="Add" class="btn btn-primary" value="Add"
+						style="display: none;" /> <input id="formSubmit" type="submit"
+						name="formSubmit" class="btn btn-primary" value="submit"
+						style="display: none;" /></td>
+				</tr>
+		</table>
+	</form>
+	<div id="alertConfigResult" class="alertConfig"></div>
+</div>
+
+<div id="qmConfigPage"></div>

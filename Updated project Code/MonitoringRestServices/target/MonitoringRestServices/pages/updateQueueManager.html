@@ -1,0 +1,318 @@
+<script>
+	function loadPanel(insertData) {
+		$.each(insertData, function(i, item) {
+			$("#updateqmform").find("#qmID").val(insertData.id);
+			$("#updateqmform").find("#qmName").val(insertData.name);
+			$("#updateqmform").find("#qmHost").val(insertData.host);
+			$("#updateqmform").find("#sqmHost").val(insertData.shost);
+			$("#updateqmform").find("#qmSrvConn").val(insertData.svrConn);
+			$("#updateqmform").find("#qmPort").val(insertData.listnerPort);
+			$("#updateqmform").find("#qmUser").val(insertData.mcaUser);
+
+		});
+	}
+
+	$(function() {
+		$.validator.addMethod("qmHostRegex", function(value, element, regexp) {
+			var re = new RegExp(regexp);
+			// var re2 = new RegExp(validHostnameRegex);
+			return this.optional(element) || re.test(value); //|| re2.test(value)   
+		});
+
+		$.validator.addMethod("qmRegex", function(value, element, regexp) {
+			var re = new RegExp(regexp);
+			return this.optional(element) || re.test(value);
+		});
+
+		$.validator.addMethod("qmUserRegex", function(value, element, regexp) {
+			var re = new RegExp(regexp);
+			return this.optional(element) || re.test(value);
+		});
+
+		$('#updateqmform')
+				.validate(
+						{
+
+							rules : {
+								qmName : {
+									required : true,
+									qmRegex : /^[A-Za-z0-9_-]+$/
+								},
+								qmHost : {
+									required : true,
+								//  qmHostRegex: /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3})$|^((([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]))$/
+								},
+								sqmHost : {
+									required : true,
+								//  qmHostRegex: /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3})$|^((([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]))$/
+								},
+								qmSrvConn : "required",
+								qmPort : {
+									required : true,
+									number : true
+								},
+								qmUser : {
+									required : true,
+									qmUserRegex : /^[A-Za-z0-9_-]+$/
+								},
+							},
+							messages : {
+
+								qmName : {
+									required : "Please Enter Queue Manager Name",
+									qmRegex : "Please Enter Valid Queue Manager Name"
+								},
+								qmHost : {
+									required : "Please Enter  Host Name",
+								// qmHostRegex: "Please Enter Valid  Host Name"  
+								},
+								sqmHost : {
+									required : "Please Secondary Enter  Host Name",
+								// qmHostRegex: "Please Enter Valid  Host Name"  
+								},
+								qmSrvConn : "Please Enter  Server Connection",
+								qmPort : {
+									required : "Please Enter Port Number",
+									number : "Please Enter Numbers only"
+								},
+								qmUser : {
+									required : "Please Enter User Name",
+									qmUserRegex : "Please Enter Valid User Name"
+								},
+							},
+
+							submitHandler : function(form) {
+								var updatedata = {};
+								updatedata.id = $("#qmID").val();
+								updatedata.name = $("#qmName").val();
+								updatedata.host = $("#qmHost").val();
+								updatedata.shost = $("#sqmHost").val();
+								updatedata.svrConn = $("#qmSrvConn").val();
+								updatedata.listnerPort = $("#qmPort").val();
+								updatedata.mcaUser = $("#qmUser").val();
+
+								$
+										.ajax({
+											type : "POST",
+											contentType : "application/json; charset=utf-8",
+											url : '/MonitoringRestServices/rest/updateQueueManager',
+											data : JSON.stringify(updatedata),
+											headers : getHeadersData(),
+											success : function(msg) {
+
+												if (msg.code == 200) {
+
+													var result = '<p class="successMessage">'
+															+ msg.message
+															+ '</p>';
+													$("#rightpanel")
+															.load(
+																	"pages/queueManagerList.html",
+																	function() {
+																		$(
+																				"#qmListResults")
+																				.html(
+																						result);
+																		$(
+																				"#qmListResults")
+																				.removeClass(
+																						"alert alert-danger");
+																		$(
+																				"#qmListResults")
+																				.addClass(
+																						"alert alert-success");
+																	});
+
+												} else {
+
+													var result = '<p class="failureMessage">'
+															+ msg.message
+															+ '</p>';
+													$("#rightpanel")
+															.load(
+																	"pages/queueManagerList.html",
+																	function() {
+																		$(
+																				"#qmListResults")
+																				.html(
+																						result);
+																		$(
+																				"#qmListResults")
+																				.removeClass(
+																						"alert alert-success");
+																		$(
+																				"#qmListResults")
+																				.addClass(
+																						"alert alert-danger");
+																	});
+												}
+
+											},
+											failure : function(xhr) {
+
+												var result = '<p class="failureMessage">'
+														+ xhr.toString()
+														+ '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/queueManagerList.html",
+																function() {
+																	$(
+																			"#qmListResults")
+																			.html(
+																					result);
+																	$(
+																			"#qmListResults")
+																			.removeClass(
+																					"alert alert-success");
+																	$(
+																			"#qmListResults")
+																			.addClass(
+																					"alert alert-danger");
+																});
+											},
+											dataType : "json"
+
+										});
+
+							}
+						});
+	});
+
+	$('#qmdelete')
+			.bind(
+					'click',
+					function() {
+						var deletedata = $("#qmID").val();
+						var isDelete = deleteIt();
+						if (isDelete) {
+							$
+									.ajax({
+										type : "PUT",
+										contentType : "application/json; charset=utf-8",
+										url : '/MonitoringRestServices/rest/deleteQueueManagerDetails/'
+												+ deletedata,
+										headers : getHeadersData(),
+										success : function(msg) {
+											if (msg.code == 200) {
+
+												var result = '<p class="successMessage">'
+														+ msg.message + '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/queueManagerList.html",
+																function() {
+																	$(
+																			"#qmListResults")
+																			.html(
+																					result);
+																	$(
+																			"#qmListResults")
+																			.removeClass(
+																					"alert alert-danger");
+																	$(
+																			"#qmListResults")
+																			.addClass(
+																					"alert alert-success");
+																});
+											} else {
+
+												var result = '<p class="failureMessage">'
+														+ msg.message + '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/queueManagerList.html",
+																function() {
+																	$(
+																			"#qmListResults")
+																			.html(
+																					result);
+																	$(
+																			"#qmListResults")
+																			.removeClass(
+																					"alert alert-success");
+																	$(
+																			"#qmListResults")
+																			.addClass(
+																					"alert alert-danger");
+																});
+											}
+										},
+										failure : function(xhr) {
+											var result = '<p class="failureMessage">'
+													+ xhr.toString() + '</p>';
+											$("#rightpanel")
+													.load(
+															"pages/queueManagerList.html",
+															function() {
+																$(
+																		"#qmListResults")
+																		.html(
+																				result);
+																$(
+																		"#qmListResults")
+																		.removeClass(
+																				"alert alert-success");
+																$(
+																		"#qmListResults")
+																		.addClass(
+																				"alert alert-danger");
+															});
+										}
+
+									});
+						} else {
+							console.log("ELSE....Not deleted");
+						}
+					});
+
+	$("#CancelBtn").bind('click', function() {
+		$("#rightpanel").load("pages/queueManagerList.html");
+	});
+</script>
+
+<h2>Update Queue Managers</h2>
+<div id="updateQM">
+	<form id="updateqmform" class="form-inline" action="" method="post">
+		<table class="t1 table">
+			<tbody>
+				<tr>
+					<td><label>Queue Manager Name</label><br> <input
+						type="text" class="form-control" name="qmName" id="qmName" /></td>
+				</tr>
+				<tr>
+					<td><label>Host Name</label><br> <input type="text"
+						name="qmHost" class="form-control" id="qmHost" /></td>
+				</tr>
+				<tr>
+					<td><label>Secondary Host Name</label><br> <input
+						type="text" name="sqmHost" class="form-control" id="sqmHost" /></td>
+				</tr>
+				<tr>
+					<td><label>Server Connection</label><br> <input
+						type="text" class="form-control" name="qmSrvConn" id="qmSrvConn" /></td>
+				</tr>
+				<tr>
+					<td><label>Listener Port</label><br> <input type="text"
+						name="qmPort" class="form-control" id="qmPort" /></td>
+				</tr>
+				<tr>
+					<td><label>MCA User</label><br> <input type="text"
+						name="qmUser" class="form-control" id="qmUser" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="qmupdate"
+						class="btn btn-primary" id="qmupdate" value="Update" /> <input
+						type="button" name="qmdelete" class="btn btn-danger" id="qmdelete"
+						value="Delete" /> <input type="button" id="CancelBtn"
+						name="CancelBtns" class="btn btn-info" value="Cancel" /></td>
+
+				</tr>
+				<tr style="display: none;">
+					<td><input name="qmID" id="qmID" class="form-control" value="" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>

@@ -1,0 +1,325 @@
+<script>
+	function loadPanel(insertData) {
+		$.each(insertData, function(i, item) {
+			$("#updateuserform").find("#uId").val(insertData.id);
+			$("#updateuserform").find("#uName").val(insertData.name);
+			$("#updateuserform").find("#uEmail").val(insertData.email);
+			$("#updateuserform").find("#uMobile").val(insertData.mobileNo);
+			$('input[name="updateUserSMSPref"]').prop('checked',
+					JSON.parse(insertData.sms_flag));
+			$('input[name="updateUserEmailPref"]').prop('checked',
+					JSON.parse(insertData.email_flag));
+			$("#updateuserform").find("#updateUserPassword").val(
+					insertData.password);
+			$("#updateuserform").find("#update_password_confirm").val(
+					insertData.password);
+		});
+	}
+
+	$(function() {
+		$.validator.addMethod("userRegex", function(value, element, regexp) {
+			var re = new RegExp(regexp);
+			return this.optional(element) || re.test(value);
+		});
+		$('#updateuserform')
+				.validate(
+						{
+							rules : {
+								uName : {
+									required : true,
+									userRegex : /^[A-Za-z0-9_-]+$/
+								},
+								updateUserPassword : {
+									required : true,
+									minlength : 4,
+									userRegex : /^[A-Za-z0-9_-]+$/
+								},
+								update_password_confirm : {
+									required : true,
+									minlength : 4,
+									equalTo : "#updateUserPassword"
+								},
+
+								uEmail : {
+									required : true,
+									email : true
+								},
+								uMobile : {
+									required : true,
+									number : true,
+									minlength : 10,
+									maxlength : 12
+								},
+							},
+							messages : {
+								uName : {
+									required : "Please Enter User Name",
+									userRegex : "Please Enter Valid user name"
+								},
+								updateUserPassword : {
+									required : "Please Enter Password",
+									userRegex : "Please Enter Valid Password"
+								},
+								update_password_confirm : {
+									required : "Please Enter Confirm Password",
+									equalTo : "Please Enter the Same Passwod"
+								},
+								uMobile : {
+									required : "Please Provide a Mobile Number ",
+									minlength : "Your Mobile Number  should be 10 digits",
+									number : "Please Enter Only Numbers",
+									maxlength : "Your Mobile Number  should be 10 digits"
+								},
+								uEmail : {
+									required : "Please Enter a Email Address",
+									email : "Please Enter a Valid Email Address"
+								}
+							},
+
+							submitHandler : function(form) {
+
+								var updateData = {};
+								updateData.id = $("#uId").val();
+								updateData.name = $("#uName").val();
+								updateData.email = $("#uEmail").val();
+								updateData.mobileNo = $("#uMobile").val();
+								updateData.sms_flag = $("#updateUserSMSPref")
+										.prop('checked');
+								updateData.email_flag = $(
+										"#updateUserEmailPref").prop('checked');
+								updateData.password = $("#updateUserPassword")
+										.val();
+								$
+										.ajax({
+											type : "POST",
+											contentType : "application/json; charset=utf-8",
+											url : '/MonitoringRestServices/rest/updateUser',
+											data : JSON.stringify(updateData),
+											headers : getHeadersData(),
+											success : function(msg) {
+												if (msg.code == 200) {
+													var result = '<p class="successMessage">'
+															+ msg.message
+															+ '</p>';
+													$("#rightpanel")
+															.load(
+																	"pages/usersList.html",
+																	function() {
+																		$(
+																				"#userListResults")
+																				.html(
+																						result);
+																		$(
+																				"#userListResults")
+																				.removeClass(
+																						"alert alert-danger");
+																		$(
+																				"#userListResults")
+																				.addClass(
+																						"alert alert-success");
+																	});
+
+												} else {
+
+													var result = '<p class="failureMessage">'
+															+ msg.message
+															+ '</p>';
+													$("#rightpanel")
+															.load(
+																	"pages/usersList.html",
+																	function() {
+																		$(
+																				"#userListResults")
+																				.html(
+																						result);
+																		$(
+																				"#userListResults")
+																				.removeClass(
+																						"alert alert-success");
+																		$(
+																				"#userListResults")
+																				.addClass(
+																						"alert alert-danger");
+																	});
+
+												}
+											},
+											failure : function(xhr) {
+
+												var result = '<p class="failureMessage">'
+														+ xhr.toString()
+														+ '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/usersList.html",
+																function() {
+																	$(
+																			"#userListResults")
+																			.html(
+																					result);
+																	$(
+																			"#userListResults")
+																			.removeClass(
+																					"alert alert-success");
+																	$(
+																			"#userListResults")
+																			.addClass(
+																					"alert alert-danger");
+																});
+
+											},
+											dataType : "json"
+										});
+							}
+
+						});
+	});
+
+	$('#userdelete')
+			.bind(
+					'click',
+					function() {
+						var deleteData = $("#uId").val();
+						var isDelete = deleteIt();
+						if (isDelete) {
+							$
+									.ajax({
+										type : "PUT",
+										contentType : "application/json; charset=utf-8",
+										url : '/MonitoringRestServices/rest/deleteUsersDetails/'
+												+ deleteData,
+										headers : getHeadersData(),
+										success : function(msg) {
+											if (msg.code == 200) {
+
+												var result = '<p class="successMessage">'
+														+ msg.message + '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/usersList.html",
+																function() {
+																	$(
+																			"#userListResults")
+																			.html(
+																					result);
+																	$(
+																			"#userListResults")
+																			.removeClass(
+																					"alert alert-danger");
+																	$(
+																			"#userListResults")
+																			.addClass(
+																					"alert alert-success");
+																});
+
+											} else {
+
+												var result = '<p class="failureMessage">'
+														+ msg.message + '</p>';
+												$("#rightpanel")
+														.load(
+																"pages/usersList.html",
+																function() {
+																	$(
+																			"#userListResults")
+																			.html(
+																					result);
+																	$(
+																			"#userListResults")
+																			.removeClass(
+																					"alert alert-success");
+																	$(
+																			"#userListResults")
+																			.addClass(
+																					"alert alert-danger");
+																});
+
+											}
+										},
+										failure : function(xhr) {
+
+											var result = '<p class="failureMessage">'
+													+ xhr.toString() + '</p>';
+											$("#rightpanel")
+													.load(
+															"pages/usersList.html",
+															function() {
+																$(
+																		"#userListResults")
+																		.html(
+																				result);
+																$(
+																		"#userListResults")
+																		.removeClass(
+																				"alert alert-success");
+																$(
+																		"#userListResults")
+																		.addClass(
+																				"alert alert-danger");
+															});
+										}
+									});
+						} else {
+							console.log("ELSE....Not deleted");
+						}
+
+					});
+
+	//To go back to UserList
+	$("#CancelUserBtn").bind('click', function() {
+		$("#rightpanel").load("pages/usersList.html");
+	});
+</script>
+
+<h2>Update Users</h2>
+<div id="updateUSER">
+	<form id="updateuserform" class="form-inline" action="" method="post">
+		<table class="t1 table">
+			<tbody>
+				<tr style="display: none;">
+					<td><label>User Id</label><br> <input type="text"
+						class="form-control" name="uId" id="uId" /></td>
+				</tr>
+				<tr>
+					<td><label>User Name</label><br> <input type="text"
+						name="uName" class="form-control" id="uName" /></td>
+				</tr>
+				<tr>
+					<td><label>Password</label><br> <input type="password"
+						name="updateUserPassword" class="form-control"
+						id="updateUserPassword" /></td>
+					<td><label>Confirm Password</label><br> <input
+						type="password" name="update_password_confirm"
+						class="form-control" id="update_password_confirm" /></td>
+				</tr>
+				<tr>
+					<td><label>Email</label><br> <input type="text"
+						name="uEmail" class="form-control" id="uEmail" /></td>
+				</tr>
+				<tr>
+					<td><label>Mobile</label><br> <input type="text"
+						name="uMobile" id="uMobile" class="form-control" maxlength="12" /></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="updateUserPref"
+						name="updateUserSMSPref" id="updateUserSMSPref" /> <label>SMS</label>
+
+						<input type="checkbox" class="updateUserPref"
+						name="updateUserEmailPref" id="updateUserEmailPref" /> <label>E-mail</label>
+					</td>
+				</tr>
+				<tr>
+
+					<td><input type="submit" id="userupdate"
+						class="btn btn-primary" name="userupdate" value="Update" /> <input
+						type="button" id="userdelete" class="btn btn-danger"
+						name="userdelete" value="Delete" /> <input type="button"
+						id="CancelUserBtn" name="UserBtn" class="btn btn-info"
+						value="Cancel" /></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+</div>

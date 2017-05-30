@@ -1,0 +1,261 @@
+<script type="text/javascript">
+	var mTime = null;
+	function updateTime() {
+		mTime = Date.now().toString();
+	}
+	$(document).ready(function() {
+		$("#qmRefresh-btn").hide();
+		getQueueManagerListData();
+
+	});
+	function destroyDataTable(id) {
+		var table = $('#' + id).DataTable();
+		console.log("tablee+" + table + "$('#'+id)::" + id);
+		if (table != null) {
+			table.destroy();
+			console.log("Data table destroyed");
+		}
+	}
+	function getQueueManagerListData() {
+		updateTime();
+		console.log("loggedUserID" + loggedUserID);
+		$("#queuemanagerlist").attr("style", "margin: 5.5% 0 0;");
+		destroyDataTable('queuemanagerlist');
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/queuemanagerlist"
+							+ "?mtime=" + mTime,//"/MonitoringRestServices/rest/queuemanagerlistwithstatus"+"?mtime="+mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#queuemanagerlist tbody").html("");
+						if (responseData.length > 0) {
+							console.log("Queue Manage List Success");
+							var status = 'conn-warning';
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												$("#queuemanagerlist tbody")
+														.append(
+																'<tr><td ><a href="#" onclick="updateQM(this);" class="uqmname" id="qmname" name="qmname">'
+																		+ item.name
+																		+ '</a><span><input id="qmstatus" type="button" class="'+status+'" value="status"/><input style="display:none;" type="button" onclick="qmConnectionTest(this);" class="qmtestConnection btn btn-info" value="test"/></span></td>'
+																		+ '<td id="host">'
+																		+ item.host
+																		+ '</td>'
+																		+ '<td id="shost" style="display:none;">'
+																		+ item.shost
+																		+ '</td>'
+																		+ '<td id="svrConn">'
+																		+ item.svrConn
+																		+ '</td>'
+																		+ '<td id="listener_port">'
+																		+ item.listnerPort
+																		+ '</td>'
+																		+ '<td id="mca_user" style="display:none;">'
+																		+ item.mcaUser
+																		+ '</td>'
+																		+ '<td id="id" class="qmtestConnection" style="display:none;">'
+																		+ item.id
+																		+ '</td></tr>');
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#queuemanagerlist').dataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+
+							});
+							$("#queuemanagerlist").attr("style",
+									"margin: 0 0 0;");
+						} else {
+							$("#qmListResults")
+									.html(
+											'<p class="failureMessage">No QueueManagers Added....Add Here</p>');
+							$("#qmListResults").removeClass(
+									"alert alert-success");
+							$("#qmListResults").addClass("alert alert-danger");
+						}
+						$('input, search').placeholder();
+						$("#qmRefresh-btn").show();
+						qmListWithStatus();
+					},
+					failure : function(errMsg) {
+						$("#qmRefresh-btn").show();
+						$("#qmListResults")
+								.html(
+										'<p class="failureMessage">Queue Manager List failed</p>');
+						$("#qmListResults").removeClass("alert alert-success");
+						$("#qmListResults").addClass("alert alert-danger");
+						console.log("Queue Manage List failed");
+					}
+
+				});
+	}
+
+	function qmListWithStatus() {
+		updateTime();
+		console.log("qmListWithStatus");
+		$.ajax({
+			type : "GET",
+			contentType : "application/json; charset=utf-8",
+			url : "/MonitoringRestServices/rest/queuemanagerlistwithstatus"
+					+ "?mtime=" + mTime,
+			dataType : "json",
+			headers : getHeadersData(),
+			success : function(responseData) {
+
+				if (responseData.length > 0) {
+					console.log("Queue Manage List Success");
+					var status = 'conn-warning';
+					var arrConn = new Array();
+					$.each(responseData, function(i, item) {
+						arrConn.push({
+							id : item.id,
+							status : item.status
+						});
+						console.log(item.status);
+					});
+					console.log("arrConn" + JSON.stringify(arrConn));
+					$("#queuemanagerlist tr").each(
+							function() {
+								var qmid = $(this).find("#id").html();
+								for (var i = 0; i < arrConn.length; i++) {
+									if (qmid == arrConn[i].id) {
+										console.log("arr id existed");
+										$(this).find("#qmstatus").removeClass(
+												'conn-warning');
+										if (arrConn[i].status == "true") {
+											$(this).find("#qmstatus").addClass(
+													'conn-success');
+										} else {
+											$(this).find("#qmstatus").addClass(
+													'conn-failure');
+										}
+
+									}
+								}
+								/* if($.inArray( qmid, arrConn )){
+								console.log("arr id existed");
+								$(this).find("#qmstatus").removeClass('conn-warning');
+								} */
+
+							});
+
+				} else {
+				}
+			},
+			failure : function(errMsg) {
+			}
+		});
+	}
+	$("#addqm").bind('click', function() {
+		$("#rightpanel").load("pages/addQueueManager.html");
+	});
+
+	function updateQM(th) {
+		var data2edit = {};
+		data2edit.id = $.trim($(th).closest("tr").find("#id").text());
+		data2edit.name = $.trim($(th).closest("tr").find("#qmname").text());
+		data2edit.host = $.trim($(th).closest("tr").find("#host").text());
+		data2edit.shost = $.trim($(th).closest("tr").find("#shost").text());
+		data2edit.svrConn = $.trim($(th).closest("tr").find("#svrConn").text());
+		data2edit.listnerPort = $.trim($(th).closest("tr").find(
+				"#listener_port").text());
+		data2edit.mcaUser = $
+				.trim($(th).closest("tr").find("#mca_user").text());
+
+		var userId = $.trim($(th).closest("tr").find("#id").text());
+		$("#rightpanel").load("pages/updateQueueManager.html", function() {
+			loadPanel(data2edit);
+		});
+
+		var insertData;
+
+		/*   			 $.ajax({
+		 type : "GET",
+		 data : data2edit,
+		 contentType: "application/json; charset=utf-8",
+		 url : "/MonitoringRestServices/rest/getQueueManager/"+userId,
+		 dataType : "json",
+		 success : function(responseData) {
+		 insertData = responseData;
+		 $("#rightpanel").load("pages/updateQueueManager.html",function() {
+		 loadPanel(insertData);
+		 });
+		
+		 },
+		 failure : function(xhr) {
+		 $("#qmListResults").html('<p class="failureMessage">Updating Queue Manager is Failed</p>');
+		 }
+		
+		
+		 });  */
+	};
+
+	/* $(document).on('click',".qmtestConnection", function(event) { */
+	/* function qmConnectionTest(th){
+	 $('#qmListResults').html("");
+	 $("#testConnectionResult").html("");
+	 qmtestData = $.trim($(th).closest('tr').find('#id').text());
+	 console.log("qmtestData"+qmtestData);
+	 $.ajax({
+	 type : "GET",
+	 contentType: "application/json; charset=utf-8",
+	 url : '/MonitoringRestServices/rest/testConnection/'+qmtestData+"?mtime="+mTime,
+	 success : function(msg) {
+	
+	 if(msg.code == 200) {
+	 var html = '<p class="successMessage">'+msg.message+'</p>';
+	 $("#testConnectionResult").html(html);
+	 } else {
+	 var html = '<p class="failureMessage">Failure:'+msg.message+'</p>';
+	 $("#testConnectionResult").html(html);
+	 }
+	 },
+	 failure : function(xhr) {
+	 var html = '<p class="failureMessage">'+xhr.toString()+'</p>';
+	 $("#testConnectionResult").html(html);
+	 }
+	 }); 
+
+	 }; */
+</script>
+
+<h2>Current Queue Managers</h2>
+<div id="qmRefresh-btn">
+	<input type="button" onclick="getQueueManagerListData();"
+		class="btn btn-primary qmRefresh" value="Refresh" />
+</div>
+<div class="qmtableview">
+	<table id="queuemanagerlist" class="queuemanagerdisplay table"
+		border="1">
+		<thead>
+			<tr>
+				<td>Queue Manager<span><input type="button" id="addqm"
+						class="add-icon" value="Add New Queue Manager" /></span></td>
+				<td>Host Name</td>
+				<td style="display: none;">Secondary Host Name</td>
+				<td>Server Connection</td>
+				<td>Listener Port</td>
+				<td style="display: none;">User</td>
+				<td style="display: none;">Id</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+<div>
+	<div id="qmListResults"></div>
+	<div id="testConnectionResult"></div>
+</div>

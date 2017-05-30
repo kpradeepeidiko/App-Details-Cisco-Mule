@@ -1,0 +1,443 @@
+<script>
+	var mTime = null;
+	function updateTime() {
+
+		mTime = Date.now().toString();
+	}
+	function destroyDataTable(id) {
+		var table = $('#' + id).DataTable();
+		console.log("tablee+" + table + "$('#'+id)::" + id);
+		if (table != null) {
+			table.destroy();
+			console.log("Data table destroyed");
+		}
+	}
+
+	$(document)
+			.ready(
+					function() {
+
+						$('input, text').placeholder();
+						$('input, search').placeholder();
+
+						destroyDataTable('dbapplicationlist');
+						var loggedUserData = {};
+						loggedUserData.id = loggedUserID;
+						loggedUserData.flag = loggedUserFlag;
+						console.log("loggedUserData"
+								+ JSON.stringify(loggedUserData));
+						$
+								.ajax({
+									type : "POST",
+									contentType : "application/json; charset=utf-8",
+									url : "/MonitoringRestServices/rest/applicationList",
+									dataType : "json",
+									data : JSON.stringify(loggedUserData),
+									headers : getHeadersData(),
+									success : function(responseData) {
+										$("#dbapplicationlist tbody").html("");
+										if (responseData.length > 0) {
+											console
+													.log("application List Success");
+											$
+													.each(
+															responseData,
+															function(i, item) {
+																$(
+																		"#dbapplicationlist tbody")
+																		.append(
+																				'<tr><td class="dbappid" style="display: none;">'
+																						+ item.id
+																						+ '</a></td>'
+																						+ '<td><a href="#"  onclick="dbApplicationQEvents(this);" class="dbapp">'
+																						+ item.name
+																						+ '</a></td></tr>');
+															});
+											$.fn.dataTableExt.sErrMode = 'throw';
+											$('#dbapplicationlist')
+													.DataTable(
+															{
+																"searching" : true,
+																"language" : {
+																	search : "_INPUT_",
+																	searchPlaceholder : "Search..."
+																},
+																"pagingType" : "simple",
+																"destroy" : true,
+																"pageLength" : 5,
+																"bLengthChange" : false,
+																"bSort" : true
+															});
+										} else {
+											$("#dbapplicationResult")
+													.html(
+															'<p class="failureMessage">No applications are Added</p>');
+											$("#dbapplicationResult").addClass(
+													"alert alert-danger");
+										}
+										$('input, search').placeholder();
+									},
+									failure : function(errMsg) {
+										$("#dbapplicationResult")
+												.html(
+														'<p class="failureMessage">ApplicationList Failed</p>');
+										$("#dbapplicationResult").addClass(
+												"alert alert-danger");
+										console.log("Application List failed");
+									}
+
+								});
+
+					});
+
+	var dbapplicationName = "";
+	var applicationId = "";
+	function dbApplicationQEvents(t) {
+		//dbAppToggle();
+		applicationId = "";
+		$("#dbapplicationlist tr").removeClass('app-active');
+		$(t).closest('tr').addClass('app-active');
+		applicationId = $.trim($(t).parents('tr').find('.dbappid').text());
+		dbapplicationName = $.trim($(t).parents('tr').find('.dbapp').text());
+		getQueueEventList();
+	};
+
+	function getQueueEventList() {
+		updateTime();
+		var d = new Date();
+		var month = d.getMonth() + 1;
+		var day = d.getDate();
+
+		var today = (('' + day).length < 2 ? '0' : '') + day + '/'
+				+ (('' + month).length < 2 ? '0' : '') + month + '/'
+				+ d.getFullYear();
+		$("#txtFromDate").val("");
+		$("#txtToDate").val("");
+		destroyDataTable('fetchQueueEventsData');
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/dashBoard/alerts/"
+							+ applicationId + "?startDate=" + today
+							+ "&endDate=" + today + "&mtime=" + mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#appEventsDates").show();
+						console.log("MessageQueue Events Success.. ");
+						$("#dbappName").html(
+								"<b>Application:</b> " + dbapplicationName);
+						$("#fetchQueueEventsData tbody").html("");
+						$("#fetchQueueEvents").show();
+						if (responseData.length > 0) {
+							$(".my-legend").show();
+							$("#mqResults").html("");
+							$("#mqResults").removeClass("alert alert-danger");
+							var rowColor = null;
+							var decVar = "";
+							var pathVar = "";
+							$
+									.each(
+											responseData,
+											function(i, item) {
+
+												if (item.eventLevel == 4) {
+													rowColor = 'green';
+												} else if (item.eventLevel == 3) {
+													rowColor = '#eeeba1';
+												} else if (item.eventLevel == 1) {
+													rowColor = 'yellow';
+												} else if (item.eventLevel == 0) {
+													rowColor = 'red';
+												}
+												if (item.eventType == "FileSystemEvents") {
+													decVar = item.fsPath;
+													pathVar = '(' + decVar
+															+ ')';
+												} else if (item.eventType == "processEvents") {
+													pathVar = "";
+												} else {
+													decVar = item.qmgrName;
+													pathVar = '(' + decVar
+															+ ')';
+												}
+
+												$("#fetchQueueEventsData tbody")
+														.append(
+																'<tr style="background:'+rowColor+'"><td class="mqObjType">'
+																		+ item.objectType
+																		+ '</td>'
+																		+ '<td class="mqObjName">'
+																		+ item.objectName
+																		+ pathVar
+																		+ '</td>'
+																		+ '<td id="mqObjStatus">'
+																		+ item.eventDescription
+																		+ '</td>'
+																		+ '<td id="mqObjDate">'
+																		+ item.eventGeneratedDate
+																		+ '</td>'
+																		+ '<td id="mqEventLevel" style="display:none;">'
+																		+ item.eventLevel
+																		+ '</td>'
+																		+ '<td id="mqEventHName">'
+																		+ item.hostName
+																		+ '</td></tr>');
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#fetchQueueEventsData').dataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+						} else {
+							$(".my-legend").hide();
+							$("#mqResults")
+									.html(
+											'<p class="failureMessage">No Events are avaialble</p>');
+							$("#mqResults").addClass("alert alert-danger");
+						}
+						$('input, search').placeholder();
+
+					},
+					failure : function(errMsg) {
+						$("#appEventsDates").hide();
+						$(".my-legend").hide();
+						$("#fetchQueueEvents").hide();
+						$("#mqResults").html(
+								'<p class="failureMessage">Failure:'
+										+ errMsg.toString() + '</p>');
+						$("#mqResults").addClass("alert alert-danger");
+					}
+				});
+
+	}
+
+	/* function dbAppToggle(){
+	 $( "#toggle-button" ).trigger( 'click' ); 
+	 }  */
+
+	$("#toggle-button").click(function() {
+		$(".dbapptableview").toggle("blind");
+		if ($("#toggle-button").hasClass('toggle-collapse')) {
+			$('#toggle-button').removeClass('toggle-collapse');
+			$('#toggle-button').addClass('toggle-expand');
+		} else {
+			$('#toggle-button').removeClass('toggle-expand');
+			$('#toggle-button').addClass('toggle-collapse');
+		}
+	});
+	$(document).ready(function() {
+		$("#txtFromDate").datepicker({
+			numberOfMonths : 1,
+			dateFormat : 'dd/mm/yy',
+			onSelect : function(selected) {
+				$("#txtToDate").datepicker("option", "minDate", selected)
+			}
+		}).keyup(function(e) {
+			if (e.keyCode == 8 || e.keyCode == 46) {
+				$.datepicker._clearDate(this);
+			}
+		});
+		$("#txtToDate").datepicker({
+
+			numberOfMonths : 1,
+			dateFormat : 'dd/mm/yy',
+			onSelect : function(selected) {
+				$("#txtFromDate").datepicker("option", "maxDate", selected)
+			}
+		}).keyup(function(e) {
+			if (e.keyCode == 8 || e.keyCode == 46) {
+				$.datepicker._clearDate(this);
+			}
+		});
+
+	});
+	function getAppQEDates() {
+		updateTime()
+		destroyDataTable('fetchQueueEventsData');
+		var fromDate = $("#txtFromDate").val();
+		var toDate = $("#txtToDate").val();
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/dashBoard/alerts/"
+							+ applicationId + "?startDate=" + fromDate
+							+ "&endDate=" + toDate + "&mtime=" + mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						console.log("MessageQueue Events Success.. ");
+						$("#dbappName").html(
+								"<b>Application:</b> " + dbapplicationName);
+						$("#fetchQueueEventsData tbody").html("");
+						$("#fetchQueueEvents").show();
+						if (responseData.length > 0) {
+							$(".my-legend").show();
+							$("#mqResults").html("");
+							$("#mqResults").removeClass("alert alert-danger");
+							var rowColor = null;
+							var decVar = "";
+							var pathVar = "";
+							$
+									.each(
+											responseData,
+											function(i, item) {
+
+												if (item.eventLevel == 4) {
+													rowColor = 'green';
+												} else if (item.eventLevel == 3) {
+													rowColor = '#eeeba1';
+												} else if (item.eventLevel == 1) {
+													rowColor = 'yellow';
+												} else if (item.eventLevel == 0) {
+													rowColor = 'red';
+												}
+												if (item.eventType == "FileSystemEvents") {
+													decVar = item.fsPath;
+													pathVar = '(' + decVar
+															+ ')';
+												} else if (item.eventType == "processEvents") {
+													pathVar = "";
+												} else {
+													decVar = item.qmgrName;
+													pathVar = '(' + decVar
+															+ ')';
+												}
+
+												$("#fetchQueueEventsData tbody")
+														.append(
+																'<tr style="background:'+rowColor+'"><td class="mqObjType">'
+																		+ item.objectType
+																		+ '</td>'
+																		+ '<td class="mqObjName">'
+																		+ item.objectName
+																		+ pathVar
+																		+ '</td>'
+																		+ '<td id="mqObjStatus">'
+																		+ item.eventDescription
+																		+ '</td>'
+																		+ '<td id="mqObjDate">'
+																		+ item.eventGeneratedDate
+																		+ '</td>'
+																		+ '<td id="mqEventLevel" style="display:none;">'
+																		+ item.eventLevel
+																		+ '</td>'
+																		+ '<td id="mqEventHName">'
+																		+ item.hostName
+																		+ '</td></tr>');
+											});
+
+							$('#fetchQueueEventsData').dataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+						} else {
+							$(".my-legend").hide();
+							$("#mqResults")
+									.html(
+											'<p class="failureMessage">No Events are avaialble</p>');
+							$("#mqResults").addClass("alert alert-danger");
+						}
+						$('input, search').placeholder();
+					},
+					failure : function(errMsg) {
+						$(".my-legend").hide();
+						$("#fetchQueueEvents").hide();
+						$("#mqResults").html(
+								'<p class="failureMessage">Failure:'
+										+ errMsg.toString() + '</p>');
+						$("#mqResults").addClass("alert alert-danger");
+					}
+				});
+
+	}
+</script>
+<h2>ApplicationList</h2>
+<div id="dbapplicationlist-toggle">
+	<input class="toggle-collapse" type="button" id="toggle-button"
+		value="toggle" />
+	<div class="dbapptableview">
+		<table id="dbapplicationlist" class="table applicationdisplay"
+			border="1">
+			<thead>
+				<tr>
+					<td style="display: none;">Application Id</td>
+					<td>Application Name</td>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<div id="dbapplicationResult"></div>
+</div>
+<br>
+<br>
+<div class="" id="fetchQueueEvents" style="display: none;">
+	<div id="dbappName" class="nameSize"></div>
+
+	<div id="appEventsDates" style="display: none;">
+		<div id="refresh-btn">
+			<table>
+				<tr>
+					<td><input type="button" onclick="getQueueEventList();"
+						class="btn btn-primary today " value="Today" /></td>
+					<td class="refresh"><input type="button"
+						onclick="getQueueEventList();" class="btn btn-primary "
+						value="Refresh" /></td>
+				</tr>
+			</table>
+		</div>
+		<table class="appQueueEventsDateFilter">
+			<tr>
+				<td><input type="text" id="txtFromDate" placeholder="From"
+					class="form-control" name="txtStartDate" /></td>
+				<td><input type="text" id="txtToDate" placeholder="To"
+					class="form-control" /></td>
+				<td><input type="button" onclick="getAppQEDates();"
+					class="btn btn-info " value="GO" /></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<table id="fetchQueueEventsData" border="1" class="table">
+		<thead>
+			<tr>
+				<td>Object Type</td>
+				<td>Object Name</td>
+				<td>Description</td>
+				<td>Generated Date</td>
+				<td style="display: none;">MQ Event Level</td>
+				<td>Host Name</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>
+<div class='my-legend' style="display: none;">
+	<div class='legend-scale'>
+		<ul class='legend-labels'>
+			<li><span style='background: green;'></span>Good</li>
+			<li><span style='background: yellow;'></span>Warning</li>
+			<li><span style='background: red;'></span>Risk</li>
+		</ul>
+	</div>
+
+</div>
+<div id="mqResults"></div>

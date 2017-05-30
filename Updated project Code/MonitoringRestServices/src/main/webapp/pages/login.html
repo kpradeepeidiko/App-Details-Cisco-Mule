@@ -1,0 +1,122 @@
+
+<script>
+	$(document)
+			.ready(
+					function() {
+						$("#loginFormId")
+								.validate(
+										{
+											rules : {
+												"userName" : {
+													required : true
+
+												},
+												"userPassword" : {
+													required : true
+												}
+											},
+											messages : {
+												"userName" : {
+													required : "Please Enter User Name"
+												},
+												"userPassword" : {
+													required : "Please Enter Password"
+												}
+											},
+											submitHandler : function(form) {
+												var loginData = {};
+												loginData.name = $("#userName")
+														.val();
+												loginData.password = $(
+														"#userPassword").val();
+												$
+														.ajax({
+															type : "POST",
+															contentType : "application/json; charset=utf-8",
+															url : '/MonitoringRestServices/rest/userAuthentication',
+															data : JSON
+																	.stringify(loginData),
+															dataType : "json",
+															success : function(
+																	msg) {
+																if (msg.id != 0) {
+																	loggedUserID = msg.id;
+																	loggedUserFlag = msg.flag;
+																	$(
+																			"#content-div")
+																			.show();
+																	$(".logout")
+																			.show();
+																	$(
+																			"#loginForm")
+																			.hide();
+																	if (msg.flag == "true") {
+																		$(
+																				".change-password")
+																				.hide();
+																	} else {
+
+																		$(
+																				".resources")
+																				.hide();
+																		$(
+																				".alertActive")
+																				.hide();
+																		//$(".dbQMli").hide();
+																		$(
+																				".change-password")
+																				.show();
+																	}
+
+																} else {
+																	var result = '<p class="failureMessage">Invalid Username and Password</p>';
+																	$(
+																			"#loginResult")
+																			.html(
+																					result);
+																	$(
+																			"#loginResult")
+																			.addClass(
+																					"alert alert-danger");
+																}
+															},
+															failure : function(
+																	errMsg) {
+																var result = '<p class="failureMessage">'
+																		+ msg.message
+																		+ '</p>';
+																$(
+																		"#loginResult")
+																		.html(
+																				result);
+																$(
+																		"#loginResult")
+																		.addClass(
+																				"alert alert-danger");
+
+															}
+														});
+											}
+										});
+					});
+</script>
+<h2>Login Form</h2>
+<div id="loginData">
+	<form class="form" id="loginFormId">
+
+		<div class="form-group">
+			<label for="userName">User Name</label> <input type="text"
+				class="form-control" id="userName" name="userName"
+				placeholder="Enter User Name">
+		</div>
+		<div class="form-group">
+			<label for="userPassword">Password</label> <input type="password"
+				class="form-control" id="userPassword" name="userPassword"
+				placeholder="Enter Password">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="reset" class="btn btn-primary">Reset</button>
+	</form>
+	<div id="loginResult"></div>
+</div>
+

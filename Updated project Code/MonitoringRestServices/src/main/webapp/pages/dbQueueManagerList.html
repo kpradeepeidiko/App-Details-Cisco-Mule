@@ -1,0 +1,561 @@
+<script>
+	var mTime = null;
+	function updateTime() {
+
+		mTime = Date.now().toString();
+	}
+	$(document).ready(function() {
+
+		getQueueManagers();
+		$('input, text').placeholder();
+		$('input, search').placeholder();
+	});
+
+	function destroyDataTable(id) {
+		var table = $('#' + id).DataTable();
+		console.log("tablee+" + table + "$('#'+id)::" + id);
+		if (table != null) {
+			table.destroy();
+			console.log("Data table destroyed");
+		}
+	}
+
+	function getQueueManagers() {
+		destroyDataTable('fetchAllQueueManagerData');
+		var loggedUserData = {};
+		loggedUserData.id = loggedUserID;
+		loggedUserData.flag = loggedUserFlag;
+		$
+				.ajax({
+					type : "POST",
+					contentType : "application/json; charset=utf-8",
+					url : '/MonitoringRestServices/rest/getQueueManagersByUserId/',
+					dataType : "json",
+					headers : getHeadersData(),
+					data : JSON.stringify(loggedUserData),
+					success : function(responseData) {
+						$("#fetchAllQueueManagerData tbody").html("");
+						if (responseData.length > 0) {
+							console.log(" QueuesManager Existed List  Success");
+							$("#fetchAllQueueManagers").show();
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												$(
+														"#fetchAllQueueManagerData tbody")
+														.append(
+																'<tr><td class="queueManagerId" style="display: none;">'
+																		+ item.id
+																		+ '</td>'
+																		+ '<td class="queueManagerName"><a href="#" class="queueMId" onclick="dbQMQueueEvents(this);">'
+																		+ item.name
+																		+ '</a><span><input class="queueStatus" type="button" value="status" data-target="#qm-status" data-toggle="modal" onclick="getQMStatus(this);" style="display:block;"></span></td>'
+																		+ '<td class="ehostid">'
+																		+ item.host
+																		+ '</td>'
+																		+ '<td id="esrvConnid">'
+																		+ item.svrConn
+																		+ '</td>'
+																		+ '<td id="eportid">'
+																		+ item.listnerPort
+																		+ '</td>'
+																		+ '<td id="euserid" style="display:none;">'
+																		+ item.mcaUser
+																		+ '</td></tr>');
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#fetchAllQueueManagerData').DataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"pageLength" : 5,
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+
+						} else {
+							$("#mqQMResults")
+									.html(
+											'<p class="failureMessage">No QueueManagers are Added</p>');
+							$("#mqQMResults").addClass("alert alert-danger");
+						}
+						$('input, search').placeholder();
+					},
+					failure : function(errMsg) {
+
+						$("#mqQMResults")
+								.html(
+										'<p class="failureMessage">QueueManagers List failed</p>');
+						$("#mqQMResults").addClass("alert alert-danger");
+						console.log("QueueManager List failed");
+					}
+				});
+
+	}
+
+	function getQMStatus(th) {
+		updateTime();
+		destroyDataTable('qmStatusData');
+		$("#qmStatusData tbody").html("");
+		var queueManagerId = $.trim($(th).closest('tr').find('.queueManagerId')
+				.text());
+		var qmName = $.trim($(th).closest('tr').find('.queueManagerName')
+				.text());
+		var hostName = $.trim($(th).closest('tr').find('.ehostid').text());
+		var qmData = {};
+		qmData.qmName = qmName;
+		qmData.hostName = hostName;
+		console.log("qmData:" + qmData);
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/getQueueManagerStatus/"
+							+ queueManagerId + "?mtime=" + mTime,///MonitoringRestServices/rest/getQueueManagerStatus/",
+					dataType : "json",
+					//data : JSON.stringify(qmData),
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#qmStatusResult").html("");
+						$("#qmStatusResult").removeClass("alert alert-danger");
+						if (responseData.length > 0) {
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												$("#qmStatusData tbody")
+														.append(
+																'<tr><td>Queue Manager</td><td>'
+																		+ item.qmName
+																		+ '</td></tr>'
+																		+ '<tr><td>Host Name</td><td>'
+																		+ item.hostName
+																		+ '</td></tr>'
+																		+ '<tr><td>Last Up Time</td><td>'
+																		+ item.upTime
+																		+ '</td></tr>'
+																		+ '<tr><td>Last Down Time</td><td>'
+																		+ item.downTime
+																		+ '</td></tr>'
+																		+ '<tr><td>Last Updated Time</td><td>'
+																		+ item.lastUpdatedTime
+																		+ '</td></tr>');
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#qmStatusData').dataTable({
+								"searching" : false,
+								"destroy" : true,
+								"paging" : false,
+								"bLengthChange" : false,
+								"bSort" : false
+							});
+						} else {
+							var html = '<p class="failureMessage">Queue Manager Status is Not Available</p>';
+							$("#qmStatusResult").html(html);
+							$("#qmStatusResult").addClass("alert alert-danger");
+						}
+					},
+					failure : function(errMsg) {
+						$("#qmStatusData tbody").html("");
+						var html = '<p class="failureMessage">Failure: '
+								+ errMsg.toString() + '</p>';
+						$("#qmStatusResult").html(html);
+						$("#qmStatusResult").addClass("alert alert-danger");
+					}
+				});
+	}
+
+	var dbQueueManagerName = "";
+	var QueueManagerId = "";
+	function dbQMQueueEvents(th) {
+		//$( "#toggle-button" ).trigger( 'click' ); 
+		$("#fetchAllQueueManagerData tr").removeClass('app-active');
+		$(th).closest('tr').addClass('app-active');
+
+		QueueManagerId = $.trim($(th).parents('tr').find('.queueManagerId')
+				.text());
+		dbQueueManagerName = $.trim($(th).parents('tr').find(
+				'.queueManagerName').text());
+		console.log("in side Getting Queue Events--" + dbQueueManagerName);
+		console.log("QueueManagerName:" + dbQueueManagerName);
+		getQMQueueEventList();
+	};
+
+	function getQMQueueEventList() {
+		updateTime();
+		var d = new Date();
+
+		var month = d.getMonth() + 1;
+		var day = d.getDate();
+
+		var today = (('' + day).length < 2 ? '0' : '') + day + '/'
+				+ (('' + month).length < 2 ? '0' : '') + month + '/'
+				+ d.getFullYear();
+		$("#txtFromDate").val("");
+		$("#txtToDate").val("");
+		destroyDataTable('fetchQMQueueEventsData');
+		console.log("**************************** ")
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/dashBoard/qmgrAlerts/"
+							+ QueueManagerId + "?startDate=" + today
+							+ "&endDate=" + today + "&mtime=" + mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#queueEventsDates").show();
+						$("#dbqueuemName").html(
+								"<b>Queue Manager:</b> " + dbQueueManagerName);
+						$("#fetchQMQueueEvents").show();
+						console
+								.log("MessageQueue Events for QueueManagers are Success");
+						$("#fetchQMQueueEventsData tbody").html("");
+						if (responseData.length > 0) {
+							$(".my-legend").show();
+							$("#qmQueueEventResults").html("");
+							$("#qmQueueEventResults").removeClass(
+									"alert alert-danger");
+							var dbQMRowColor = null;
+							var dbQMFontColor = null;
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												if (item.eventLevel == 4) {
+													dbQMRowColor = 'green';
+												} else if (item.eventLevel == 3) {
+													dbQMRowColor = '#eeeba1';
+												} else if (item.eventLevel == 1) {
+													dbQMRowColor = 'Orange';
+												} else if (item.eventLevel == 0) {
+													dbQMRowColor = 'red';
+													dbQMFontColor ='white';
+												}
+												/* if(item.reasonCode == 2224 || item.reasonCode == 2053 || item.reasonCode == 2283 ){
+													dbQMRowColor = '#edb2a3';  
+													}
+													else if(item.reasonCode == 2279){
+													dbQMRowColor = '#eeeba1';
+													}
+													else if(item.reasonCode == 2225 || item.reasonCode == 2282){
+													dbQMRowColor = '#ccffcc';
+													}  */
+												$("#fetchQMQueueEventsData")
+														.append(
+																'<tr style="background:'+dbQMRowColor+';color:'+dbQMFontColor+'"><td class="mqQmObjType">'
+																		+ item.mqObjectType
+																		+ '</td>'
+																		+ '<td class="mqQmObjName">'
+																		+ item.mqObjectName
+																		+ '</td>'
+																		+ '<td id="mqQmQmgrName">'
+																		+ item.mqQmgrName
+																		+ '</td>'
+																		+ '<td id="mqQmObjStatus">'
+																		+ item.mqObjectStatus
+																		+ '</td>'
+																		+ '<td id="mqQmObjDate">'
+																		+ item.mqObjectDate
+																		+ '</td>'
+																		+ '<td id="mqQmEventLevel" style="display:none;">'
+																		+ item.eventLevel
+																		+ '</td>'
+																		+ '<td id="mqQmEventHName">'
+																		+ item.mqEventHostName
+																		+ '</td></tr>');
+											});
+							$('#fetchQMQueueEventsData').DataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+
+						} else {
+							$(".my-legend").hide();
+							$("#qmQueueEventResults")
+									.html(
+											'<p class="failureMessage">No Events are avaialble</p>');
+							$("#qmQueueEventResults").addClass(
+									"alert alert-danger");
+						}
+						$('input, search').placeholder();
+					},
+					failure : function(errMsg) {
+						$("#queueEventsDates").hide();
+						$(".my-legend").hide();
+						$("#fetchQMQueueEvents").hide();
+						$("#qmQueueEventResults").html(
+								'<p class="failureMessage"> Failure'
+										+ errMsg.toString() + '</p>');
+						$("#qmQueueEventResults")
+								.addClass("alert alert-danger");
+						console.log("QueueEvents List failed");
+					}
+
+				});
+
+	}
+
+	$("#toggle-button").click(function() {
+		$("#fetchAllQueueManagers").toggle("blind");
+		if ($("#toggle-button").hasClass('toggle-collapse')) {
+			$('#toggle-button').removeClass('toggle-collapse');
+			$('#toggle-button').addClass('toggle-expand');
+		} else {
+			$('#toggle-button').removeClass('toggle-expand');
+			$('#toggle-button').addClass('toggle-collapse');
+		}
+	});
+
+	$(document).ready(function() {
+		$("#txtFromDate").datepicker({
+			numberOfMonths : 1,
+			dateFormat : 'dd/mm/yy',
+			onSelect : function(selected) {
+				$("#txtToDate").datepicker("option", "minDate", selected)
+			}
+		}).keyup(function(e) {
+			if (e.keyCode == 8 || e.keyCode == 46) {
+				$.datepicker._clearDate(this);
+			}
+		});
+		$("#txtToDate").datepicker({
+			numberOfMonths : 1,
+			dateFormat : 'dd/mm/yy',
+			onSelect : function(selected) {
+				$("#txtFromDate").datepicker("option", "maxDate", selected)
+			}
+		}).keyup(function(e) {
+			if (e.keyCode == 8 || e.keyCode == 46) {
+				$.datepicker._clearDate(this);
+			}
+		});
+
+	});
+	function getDates() {
+		updateTime();
+		destroyDataTable('fetchQMQueueEventsData');
+		var fromDate = $("#txtFromDate").val();
+		var toDate = $("#txtToDate").val();
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/dashBoard/qmgrAlerts/"
+							+ QueueManagerId + "?startDate=" + fromDate
+							+ "&endDate=" + toDate + "&mtime=" + mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#queueEventsDates").show();
+						$("#dbqueuemName").html(
+								"<b>Queue Manager:</b> " + dbQueueManagerName);
+						$("#fetchQMQueueEvents").show();
+						console
+								.log("MessageQueue Events for QueueManagers are Success");
+						$("#fetchQMQueueEventsData tbody").html("");
+						if (responseData.length > 0) {
+							$(".my-legend").show();
+							$("#qmQueueEventResults").html("");
+							$("#qmQueueEventResults").removeClass(
+									"alert alert-danger");
+							var dbQMRowColor = null;
+							var dbQMFontColor = null;
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												if (item.eventLevel == 4) {
+													dbQMRowColor = 'green';
+												} else if (item.eventLevel == 3) {
+													dbQMRowColor = '#eeeba1';
+												} else if (item.eventLevel == 1) {
+													dbQMRowColor = 'Orange';
+												} else if (item.eventLevel == 0) {
+													dbQMRowColor = 'red';
+													dbQMFontColor ='white';
+												}
+
+												/*  if(item.reasonCode == 2224 || item.reasonCode == 2053 || item.reasonCode == 2283 ){
+													dbQMRowColor = '#edb2a3';  
+													}
+													else if(item.reasonCode == 2279){
+													dbQMRowColor = '#eeeba1';
+													}
+													else if(item.reasonCode == 2225 || item.reasonCode == 2282){
+													dbQMRowColor = '#ccffcc';
+													}   */
+												$("#fetchQMQueueEventsData")
+														.append(
+																'<tr style="background:'+dbQMRowColor+';color:'+dbQMFontColor+'"><td class="mqQmObjType">'
+																		+ item.mqObjectType
+																		+ '</td>'
+																		+ '<td class="mqQmObjName">'
+																		+ item.mqObjectName
+																		+ '</td>'
+																		+ '<td id="mqQmQmgrName">'
+																		+ item.mqQmgrName
+																		+ '</td>'
+																		+ '<td id="mqQmObjStatus">'
+																		+ item.mqObjectStatus
+																		+ '</td>'
+																		+ '<td id="mqQmObjDate">'
+																		+ item.mqObjectDate
+																		+ '</td>'
+																		+ '<td id="mqQmEventLevel" style="display:none;">'
+																		+ item.eventLevel
+																		+ '</td>'
+																		+ '<td id="mqQmEventHName">'
+																		+ item.mqEventHostName
+																		+ '</td></tr>');
+											});
+							$('#fetchQMQueueEventsData').DataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+						} else {
+							$(".my-legend").hide();
+							$("#qmQueueEventResults")
+									.html(
+											'<p class="failureMessage">No Events are avaialble</p>');
+							$("#qmQueueEventResults").addClass(
+									"alert alert-danger");
+						}
+					},
+					failure : function(errMsg) {
+						$("#fetchQMQueueEvents").hide();
+						$(".my-legend").hide();
+						$("#qmQueueEventResults").html(
+								'<p class="failureMessage"> Failure'
+										+ errMsg.toString() + '</p>');
+						$("#qmQueueEventResults")
+								.addClass("alert alert-danger");
+						console.log("QueueEvents List failed");
+					}
+				});
+		$('input, search').placeholder();
+	}
+</script>
+
+<h2>QueueManagerList</h2>
+<div id="fetchAllQueueManagers-toggle">
+	<input class="toggle-collapse" type="button" id="toggle-button"
+		value="toggle" />
+	<div id="fetchAllQueueManagers">
+		<table id="fetchAllQueueManagerData" border="1" class="table">
+			<thead>
+				<tr>
+					<td style="display: none;">QMGR ID</td>
+					<td>Queue Manager</td>
+					<td>Host Name</td>
+					<td>Server Connection</td>
+					<td>Listener Port</td>
+					<td style="display: none;">User</td>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<div id="mqQMResults"></div>
+</div>
+<br>
+<br>
+
+<div id="fetchQMQueueEvents" style="display: none;">
+	<div id="dbqueuemName" class="nameSize"></div>
+	<div id="queueEventsDates" style="display: none;">
+		<div id="refresh-btn">
+			<table class="queueEventsDateFilter">
+				<tr>
+					<td><input type="button" onclick="getQMQueueEventList();"
+						class="btn btn-primary today " value="Today" /></td>
+					<td><input type="button" onclick="getQMQueueEventList();"
+						class="btn btn-primary " value="Refresh" /></td>
+				</tr>
+			</table>
+
+
+		</div>
+		<table class="queueEventsDateFilter">
+			<tr>
+				<td><input type="text" id="txtFromDate" placeholder="From"
+					class="form-control" name="txtStartDate" /></td>
+
+				<td><input type="text" id="txtToDate" placeholder="To"
+					class="form-control" /></td>
+				<td><input type="button" onclick="getDates();"
+					class="btn btn-primary" value="GO" /></td>
+			</tr>
+		</table>
+	</div>
+
+	<table id="fetchQMQueueEventsData" border="1" class="table">
+		<thead>
+			<tr>
+				<td>MQ Object Type</td>
+				<td>MQ Object Name</td>
+				<td>Queue Manager</td>
+				<td>Description</td>
+				<td>Generated Date</td>
+				<td style="display: none;">MQ Event Level</td>
+				<td>Host Name</td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>
+<div class='my-legend' style="display: none;">
+	<div class='legend-scale'>
+		<ul class='legend-labels'>
+			<li><span style="background-color: green;"></span>Good</li>
+			<li><span style="background-color: Orange;"></span>Warning</li>
+			<li><span style="background-color: red;"></span>Risk</li>
+		</ul>
+	</div>
+</div>
+<div id="qmQueueEventResults"></div>
+
+
+<div id="qm-status" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<h2>Queue Manager Status</h2>
+			<table id="qmStatusData" border="1" class="table">
+				<thead style="display: none;">
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<div id="qmStatusResult"></div>
+
+			<div class="qmStatusBtn">
+				<input type="button" value="Close" data-dismiss="modal"
+					class="canceladduser btn btn-info" name="cancelAppBtn">
+			</div>
+
+		</div>
+	</div>
+</div>

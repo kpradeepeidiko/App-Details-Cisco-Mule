@@ -1,0 +1,387 @@
+<script>
+	var mTime = null;
+	function updateTime() {
+		mTime = Date.now().toString();
+	}
+	var nightlyUserList = [];
+	var dataTableData = null;
+	$(document).ready(function() {
+		getNightlyUserList();
+	});
+	Array.prototype.remove = function(value) {
+		this.splice(this.indexOf(value), 1);
+		return true;
+	};
+
+	Array.prototype.contains = function(element) {
+		return this.indexOf(element) > -1;
+	};
+	function destroyDataTable(id) {
+		var table = $('#' + id).DataTable();
+		if (table != null) {
+			table.destroy();
+		}
+	}
+
+	function getNightlyUserList() {
+		updateTime();
+		destroyDataTable('fetchNightlyBatchUserData');
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/nightlyBatchUser"
+							+ "?mtime=" + mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						nightlyUserList = [];
+						$("#fetchNightlyBatchUserData tbody").html("");
+						//$("#fetchNightlyBatchUser").show();
+						if (responseData.length > 0) {
+							//$('#fetchNightlyBatchUser').show();
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												nightlyUserList.push(item.id);
+												$(
+														"#fetchNightlyBatchUserData tbody")
+														.append(
+																'<tr><td class="nbuserid" style="display: none;">'
+																		+ item.id
+																		+ '</td>'
+																		+ '<td class="nbusername">'
+																		+ item.name
+																		+ '</td>'
+																		+ '<td class="nbumid" style="display: none;">'
+																		+ item.usersMapperId
+																		+ '</td>'
+																		+ '<td><input type="button" onclick="removeNBUsers(this);" class="userremove" value="Remove"/></td></tr>');
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#fetchNightlyBatchUserData').dataTable({
+								"searching" : true,
+								"destroy" : true,
+								"language" : {
+									search : "_INPUT_",
+									searchPlaceholder : "Search..."
+								},
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+						} else {
+							var html = '<p class="failureMessage">No Users are Added to Nightly Batches</p>';
+							$("#nightlyBatchUserResult").html(html);
+							$("#nightlyBatchUserResult").removeClass(
+									"alert alert-success");
+							$("#nightlyBatchUserResult").addClass(
+									"alert alert-danger");
+						}
+					},
+					failure : function(errMsg) {
+						$("#fetchNightlyBatchUserData tbody").html("");
+						var html = '<p class="failureMessage">Failure: '
+								+ errMsg.toString() + ' </p>';
+						$("#nightlyBatchUserResult").html(html);
+						$("#nightlyBatchUserResult").removeClass(
+								"alert alert-success");
+						$("#nightlyBatchUserResult").addClass(
+								"alert alert-danger");
+					}
+				});
+	}
+
+	function removeNBUsers(th) {
+		$("#nightlyBatchUserResult").html("");
+		$("#nightlyBatchUserResult").removeClass("alert alert-success");
+		$("#nightlyBatchUserResult").removeClass("alert alert-danger");
+		var isDelete = deleteIt();
+		if (isDelete) {
+			var NBUserRemove = $(th).closest("tr");
+			var USER_ID = $.trim(NBUserRemove.find(".nbumid ").text());
+			$
+					.ajax({
+						type : "PUT",
+						contentType : "application/json; charset=utf-8",
+						url : "/MonitoringRestServices/rest/deleteUserNightlyBatchMapper/"
+								+ USER_ID,
+						dataType : "json",
+						headers : getHeadersData(),
+						success : function(msg) {
+							nightlyUserList.remove(parseInt(USER_ID));
+							NBUserRemove.remove();
+							var NBUserRowCount = $("#fetchNightlyBatchUserData tbody tr").length;
+							getNightlyUserList();
+							if (NBUserRowCount == 0) {
+								var html = '<p class="failureMessage">No Users are Added to Nightly Batches...Add Users Here</p>';
+								$("#nightlyBatchUserResult").html(html);
+								$("#nightlyBatchUserResult").addClass(
+										"alert alert-danger");
+							}
+							if (msg.code == 200) {
+								var html = '<p class="successMessage">'
+										+ msg.message + '</p>';
+								$("#nightlyBatchUserResult").html(html);
+								$("#nightlyBatchUserResult").addClass(
+										"alert alert-success");
+							} else {
+								var html = '<p class="failureMessage">'
+										+ msg.message + '</p>';
+								$("#nightlyBatchUserResult").html(html);
+								$("#nightlyBatchUserResult").addClass(
+										"alert alert-danger");
+							}
+						},
+						failure : function(xhr) {
+							var html = '<p class="failureMessage">Failure: '
+									+ xhr.toString() + '</p>';
+							$("#nightlyBatchUserResult").html(html);
+							$("#nightlyBatchUserResult").addClass(
+									"alert alert-danger");
+						}
+					});
+		} else {
+			console.log("ELSE....Not deleted");
+		}
+	};
+
+	$("#getAllUsers").on("click", function() {
+		nightlyUserids = [];
+		getAllUserList();
+		$('.adduser.btn.btn-primary').show();
+	});
+
+	var nightlyUserids = [];
+	$('#fetchExistedNightlyBatchUserData tbody').on(
+			'click',
+			'input:checked',
+			function() {
+				var nightlyUserid = $(this).closest('tr').find('.existuserid')
+						.text();
+				nightlyUserids.push(nightlyUserid);
+				console.log("nightlyUserids" + JSON.stringify(nightlyUserids));
+			});
+
+	$('#fetchExistedNightlyBatchUserData tbody').on(
+			'click',
+			'input:unchecked',
+			function() {
+				var nightlyUCUserid = $(this).closest('tr')
+						.find('.existuserid').text();
+				for (var i = 0; i < nightlyUserids.length; i++) {
+					if (nightlyUCUserid == nightlyUserids[i]) {
+						nightlyUserids.splice(i, 1);
+						console.log("nightlyUserids_current "
+								+ JSON.stringify(nightlyUserids));
+					}
+				}
+			});
+	//adding Users to Mapped Users List
+	$(".adduser")
+			.click(
+					function(event) {
+						$("#nightlyBatchUserResult").html("");
+						$("#nightlyBatchUserResult").removeClass(
+								"alert alert-success");
+						$("#nightlyBatchUserResult").removeClass(
+								"alert alert-danger");
+						var nightlyUserData = {};
+						nightlyUserData.nightlyUserid = nightlyUserids;
+						$
+								.ajax({
+									type : "POST",
+									contentType : "text/html; charset=utf-8",
+									url : '/MonitoringRestServices/rest/userNightlyBatchMapper',
+									data : JSON.stringify(nightlyUserData),
+									dataType : "json",
+									headers : getHeadersData(),
+									success : function(msg) {
+										var removeUsersCount = 0;
+										$("#nightlyBatchUserResult").html("");
+										$(
+												"#fetchExistedNightlyBatchUserData input:checked")
+												.each(
+														function() {
+															$(this).closest(
+																	'tr')
+																	.remove();
+															removeUsersCount++;
+														});
+										console.log("removeUsersCount:"
+												+ removeUsersCount);
+										getNightlyUserList();
+										if (msg.code == 200) {
+											if (removeUsersCount > 0) {
+												var html = '<p class="successMessage">'
+														+ msg.message + '</p>';
+												$("#nightlyBatchUserResult")
+														.html(html);
+												$("#nightlyBatchUserResult")
+														.addClass(
+																"alert alert-success");
+											} else {
+												var html = '<p class="successMessage">No Users are Added</p>';
+												$("#nightlyBatchUserResult")
+														.html(html);
+												$("#nightlyBatchUserResult")
+														.addClass(
+																"alert alert-success");
+											}
+										} else {
+											var html = '<p class="failureMessage">'
+													+ msg.message + '</p>';
+											$("#nightlyBatchUserResult").html(
+													html);
+											$("#nightlyBatchUserResult")
+													.addClass(
+															"alert alert-danger");
+										}
+
+									},
+									failure : function(errMsg) {
+										var html = '<p class="failureMessage">failure : '
+												+ errMsg.toString() + '</p>';
+										$("#nightlyBatchUserResult").html(html);
+										$("#nightlyBatchUserResult").addClass(
+												"alert alert-danger");
+									}
+								});
+
+					});
+
+	function getAllUserList() {
+		updateTime();
+		destroyDataTable('fetchExistedNightlyBatchUserData');
+		$("#nightlyBatchUserResult").html("");
+		$("#nightlyBatchUserResult").removeClass("alert alert-success");
+		$("#nightlyBatchUserResult").removeClass("alert alert-danger");
+		$
+				.ajax({
+					type : "GET",
+					contentType : "application/json; charset=utf-8",
+					url : "/MonitoringRestServices/rest/userList" + "?mtime="
+							+ mTime,
+					dataType : "json",
+					headers : getHeadersData(),
+					success : function(responseData) {
+						$("#fetchExistedNightlyBatchUserData tbody").html("");
+						if (responseData.length > 0) {
+							$("#ExistednightlyBatchUsersResult").html("");
+							$("#ExistednightlyBatchUsersResult").removeClass(
+									"alert alert-success");
+							$("#ExistednightlyBatchUsersResult").removeClass(
+									"alert alert-danger");
+							$
+									.each(
+											responseData,
+											function(i, item) {
+												if (!nightlyUserList
+														.contains(item.id)) {
+													$(
+															"#fetchExistedNightlyBatchUserData tbody")
+															.append(
+																	'<tr><td class="existuserid" style="display: none;">'
+																			+ item.id
+																			+ '</td>'
+																			+ '<td class="existusername">'
+																			+ item.name
+																			+ '</td>'
+																			+ '<td id="existemailid" style="display: none;">'
+																			+ item.email
+																			+ '</td>'
+																			+ '<td id="existmobileid" style="display: none;">'
+																			+ item.mobileno
+																			+ '</td>'
+																			+ '<td><input type="checkbox"  id="usercheck" /></td></tr>');
+												}
+											});
+							$.fn.dataTableExt.sErrMode = 'throw';
+							$('#fetchExistedNightlyBatchUserData').dataTable({
+								"searching" : false,
+								"destroy" : true,
+								"pagingType" : "simple",
+								"bLengthChange" : false,
+								"bSort" : true
+							});
+							var no_data = $("#fetchExistedNightlyBatchUserData")
+									.find('.dataTables_empty').text();
+							if (no_data == 'No data available in table') {
+								$('.adduser.btn.btn-primary').hide();
+								var html = '<p class="failureMessage">No Users are available to add</p>';
+								$("#ExistednightlyBatchUsersResult").html(html);
+								$("#ExistednightlyBatchUsersResult")
+										.removeClass("alert alert-success");
+								$("#ExistednightlyBatchUsersResult").addClass(
+										"alert alert-danger");
+							}
+
+						} else {
+							$('.adduser.btn.btn-primary').hide();
+							var html = '<p class="failureMessage">No Users are available to add</p>';
+							$("#ExistednightlyBatchUsersResult").html(html);
+							$("#ExistednightlyBatchUsersResult").removeClass(
+									"alert alert-success");
+							$("#ExistednightlyBatchUsersResult").addClass(
+									"alert alert-danger");
+						}
+					},
+					failure : function(errMsg) {
+						$("#fetchExistedNightlyBatchUserData tbody").html("");
+						var html = '<p class="failureMessage">Failure: '
+								+ errMsg.toString() + '</p>';
+						$("#ExistednightlyBatchUsersResult").html(html);
+						$("#ExistednightlyBatchUsersResult").removeClass(
+								"alert alert-success");
+						$("#ExistednightlyBatchUsersResult").addClass(
+								"alert alert-danger");
+					}
+				});
+	}
+</script>
+<h2>Nightly Batch Users</h2>
+<div class="nightlyBatch-user-view col-md-5">
+	<div class=" " id="fetchNightlyBatchUser">
+		<table id="fetchNightlyBatchUserData" border="1" class="table">
+			<thead>
+				<tr>
+					<td style="display: none;">ID</td>
+					<td>User Name <span><input type="button"
+							id="getAllUsers" data-toggle="modal"
+							data-target="#fetchExitedNightlyBatchUsers" value="GetAllUsers"
+							class="add-icon" /></span></td>
+					<td style="display: none;">UserMapperId</td>
+					<td>Remove</td>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+	<div id="nightlyBatchUserResult"></div>
+
+	<div id="fetchExitedNightlyBatchUsers" class="modal fade" role="dialog">
+		<div class="modal-dialog ndUserData">
+			<div class="modal-content">
+				<table id="fetchExistedNightlyBatchUserData" border="1"
+					class="table">
+					<thead>
+						<tr>
+							<td style="display: none;">ID</td>
+							<td>User Name</td>
+							<td style="display: none;">Email</td>
+							<td style="display: none;">MobileNo</td>
+							<td>Add</td>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<input type="button" class="adduser btn btn-primary"
+					value="Add Users" data-dismiss="modal" /> <input type="button"
+					value="Cancel" data-dismiss="modal"
+					class="canceladduser btn btn-info" name="cancelAppBtn">
+				<div id="ExistednightlyBatchUsersResult"></div>
+			</div>
+		</div>
+	</div>
+</div>

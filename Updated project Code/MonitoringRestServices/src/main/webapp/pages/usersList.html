@@ -1,0 +1,142 @@
+
+<script type="text/javascript">
+	var mTime = null;
+	function updateTime() {
+		mTime = Date.now().toString();
+	}
+	$(document)
+			.ready(
+					function() {
+						updateTime();
+						$
+								.ajax({
+									type : "GET",
+									contentType : "application/json; charset=utf-8",
+									url : "/MonitoringRestServices/rest/userList"
+											+ "?mtime=" + mTime,
+									dataType : "json",
+									headers : getHeadersData(),
+									success : function(responseData) {
+										$("#userlist tbody").html("");
+										if (responseData.length > 0) {
+											$
+													.each(
+															responseData,
+															function(i, item) {
+																var sms_flag = JSON
+																		.parse(item.sms_flag);
+																var email_flag = JSON
+																		.parse(item.email_flag);
+																$(
+																		"#userlist tbody")
+																		.append(
+																				'<tr><td id="uid" style="display:none;">'
+																						+ item.id
+																						+ '</td><td id="uname"><a href="#" onclick="userUpdate(this);" class="userName" id="uName" >'
+																						+ item.name
+																						+ '</a></td>'
+																						+ '<td id="uemail">'
+																						+ item.email
+																						+ '</td>'
+																						+ '<td id="umobile">'
+																						+ item.mobileNo
+																						+ '</td>'
+																						+ '<td id="smsPref" style="display:none;">'
+																						+ sms_flag
+																						+ '</td>'
+																						+ '<td id="emailPref" style="display:none;">'
+																						+ email_flag
+																						+ '</td>'
+																						+ '<td id="uPassword" style="display:none;">'
+																						+ item.password
+																						+ '</td></tr>');
+															});
+											$.fn.dataTableExt.sErrMode = 'throw';
+											$('#userlist')
+													.dataTable(
+															{
+																"searching" : true,
+																"destroy" : true,
+																"language" : {
+																	search : "_INPUT_",
+																	searchPlaceholder : "Search..."
+																},
+																"pagingType" : "simple",
+																"bLengthChange" : false,
+																"bSort" : true
+
+															});
+										} else {
+											$("#userListResults")
+													.html(
+															'<p class="failureMessage">No Users Added....Add Here</p>');
+											$("#userListResults").removeClass(
+													"alert alert-success");
+											$("#userListResults").addClass(
+													"alert alert-danger");
+										}
+										$('input, search').placeholder();
+									},
+									failure : function(xhr) {
+										$("#userListResults")
+												.html(
+														'<p class="failureMessage">Users List Failed</p>');
+										$("#userListResults").removeClass(
+												"alert alert-success");
+										$("#userListResults").addClass(
+												"alert alert-danger");
+									}
+								});
+
+					});
+
+	// Adding User
+
+	$("#adduser").bind('click', function() {
+		$("#rightpanel").load("pages/addUser.html");
+	});
+
+	function userUpdate(th) {
+		var userdataedit = {};
+		userdataedit.id = $.trim($(th).closest("tr").find("#uid").text());
+		userdataedit.name = $.trim($(th).closest("tr").find("#uname").text());
+		userdataedit.email = $.trim($(th).closest("tr").find("#uemail").text());
+		userdataedit.mobileNo = $.trim($(th).closest("tr").find("#umobile")
+				.text());
+		userdataedit.sms_flag = $.trim($(th).closest("tr").find("#smsPref")
+				.text());
+		userdataedit.email_flag = $.trim($(th).closest("tr").find("#emailPref")
+				.text());
+		userdataedit.password = $.trim($(th).closest("tr").find("#uPassword")
+				.text());
+		userdataedit.confirmPassword = $.trim($(th).closest("tr").find(
+				"#uPassword").text());
+		$("#rightpanel").load("pages/updateUser.html", function() {
+			loadPanel(userdataedit);
+		});
+	};
+</script>
+
+<h2>Current Users</h2>
+<div class="usertableview">
+	<table id="userlist" class="userdisplay table" border="1">
+		<thead>
+			<tr>
+				<td style="display: none">User id</td>
+				<td>User Name <span><input type="button"
+						class="add-icon" id="adduser" value="Add New User" /></span></td>
+				<td>Email</td>
+				<td>Mobile</td>
+				<td style="display: none;">SMS</td>
+				<td style="display: none;">EMAIL</td>
+				<td style="display: none;">Password</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+<div>
+	<div id="userListResults"></div>
+
+</div>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<context:component-scan base-package="com.eidiko.monitoring" />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean
+						class="com.eidiko.monitoring.alerts.controller.HibernateAwareObjectMapper" />
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
+	<mvc:interceptors>
+		<bean
+			class="com.eidiko.monitoring.alerts.interceptor.RequestProcessingInterceptor" />
+	</mvc:interceptors>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller">
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller"
+							p:autodetectAnnotations="true" />
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property>
+		<property name="ignoreAcceptHeader" value="true" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2" />
+		<property name="prefix" value="/WEB-INF/jsp" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/qmon" />
+		<!-- <property name="url" value="jdbc:oracle:thin:@172.28.4.164:1521/WMQMON" 
+			/> -->
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<property name="timeBetweenEvictionRunsMillis" value="300000" />
+		<property name="numTestsPerEvictionRun" value="6" />
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<property name="initialSize" value="3" />
+		<property name="maxTotal" value="10" />
+		<property name="maxIdle" value="10" />
+		<property name="maxWaitMillis" value="5000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxOpenPreparedStatements" value="100" />
+	</bean>
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.eidiko.monitoring.alerts.model.QueueManager</value>
+				<value>com.eidiko.monitoring.alerts.model.Application</value>
+				<value>com.eidiko.monitoring.alerts.model.User</value>
+				<value>com.eidiko.monitoring.alerts.model.ApplicationMapper</value>
+				<value>com.eidiko.monitoring.alerts.model.UserApplicationMapper
+				</value>
+				<value>com.eidiko.monitoring.alerts.model.AppObjects</value>
+				<value>com.eidiko.monitoring.alerts.model.MQEvents</value>
+				<value>com.eidiko.monitoring.alerts.model.AlertConfiguration</value>
+				<value>com.eidiko.monitoring.alerts.model.QueueConfiguration</value>
+				<value> com.eidiko.monitoring.alerts.model.Admin </value>
+				<value> com.eidiko.monitoring.alerts.model.AppMQEventsProperties
+				</value>
+				<value> com.eidiko.monitoring.alerts.model.AppMQEventsProperties
+				</value>
+				<value> com.eidiko.monitoring.alerts.model.FileSystem </value>
+				<value> com.eidiko.monitoring.alerts.model.FileSystemAppMapper
+				</value>
+				<value> com.eidiko.monitoring.alerts.model.FSEvents</value>
+				<value>com.eidiko.monitoring.alerts.model.QueueManagerStatus</value>
+				<value>com.eidiko.monitoring.alerts.model.EventWithProperties
+				</value>
+				<value>com.eidiko.monitoring.alerts.model.AppProcessName</value>
+				<value>com.eidiko.monitoring.alerts.model.AppProcess</value>
+				<value>com.eidiko.monitoring.alerts.model.Process</value>
+				<value>com.eidiko.monitoring.alerts.model.ProcessAppMapper</value>
+				<value>com.eidiko.monitoring.alerts.model.FSEvents</value>
+				<value>com.eidiko.monitoring.alerts.model.UserNBMapper</value>
+				<value>com.eidiko.monitoring.alerts.model.AppFileName</value>
+				<value>com.eidiko.monitoring.alerts.model.PSEvents</value>
+				<value>com.eidiko.monitoring.alerts.model.NBErrorMessage</value>
+				<value>com.eidiko.monitoring.alerts.model.NightlyBatch</value>
+				<value>com.eidiko.monitoring.alerts.model.NightlyBatchEvents</value>
+				<value>com.eidiko.monitoring.alerts.model.NBUsers</value>
+				<value>com.eidiko.monitoring.alerts.model.NightlyUsers</value>
+				<value>com.eidiko.monitoring.alerts.model.NightlyBatchErrorLevel</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+				
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean id="baseDao" class="com.eidiko.monitoring.alerts.dao.BaseDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"></ref>
+		</property>
+	</bean>
+
+	<bean id="queueManagerDao" class="com.eidiko.monitoring.alerts.dao.QueueManagerDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="queueManagerService"
+		class="com.eidiko.monitoring.alerts.services.QueueManagerServicesImpl"></bean>
+
+	<bean id="appFileSystemDao" class="com.eidiko.monitoring.alerts.dao.AppFileSystemDaoImp"
+		parent="baseDao"></bean>
+	<bean id="appFileSystemService"
+		class="com.eidiko.monitoring.alerts.services.AppFileSystemServicesImp"></bean>
+
+	<bean id="appProcessDao" class="com.eidiko.monitoring.alerts.dao.AppProcessDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="appProcessService"
+		class="com.eidiko.monitoring.alerts.services.AppProcessServicesImpl"></bean>
+
+	<bean id="applicationDao" class="com.eidiko.monitoring.alerts.dao.ApplicationDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="applicationService"
+		class="com.eidiko.monitoring.alerts.services.ApplicationServicesImpl"></bean>
+
+	<bean id="userDao" class="com.eidiko.monitoring.alerts.dao.UserDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="userService" class="com.eidiko.monitoring.alerts.services.UserServiceImpl"></bean>
+
+	<bean id="userNBDao"
+		class="com.eidiko.monitoring.alerts.dao.UserNightlyBatchMapperDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="userNightlyBatchService"
+		class="com.eidiko.monitoring.alerts.services.UserNightlyBatchServiceImpl"></bean>
+
+	<bean id="applicationMapperDao"
+		class="com.eidiko.monitoring.alerts.dao.ApplicationMapperDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="applicationMapperServices"
+		class="com.eidiko.monitoring.alerts.services.ApplicationMapperServicesImpl"></bean>
+
+	<bean id="appFileSystemMapperDao"
+		class="com.eidiko.monitoring.alerts.dao.FileSystemMapperDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="appFileSystemMapperServices"
+		class="com.eidiko.monitoring.alerts.services.FileSystemMapperServicesImpl"></bean>
+
+
+	<bean id="appprocessMapperDao" class="com.eidiko.monitoring.alerts.dao.ProcessMapperDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="appProcessMapperServices"
+		class="com.eidiko.monitoring.alerts.services.ProcessMapperServicesImpl"></bean>
+
+
+	<bean id="userApplicationDao"
+		class="com.eidiko.monitoring.alerts.dao.UserApplicationMapperDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="userApplicationService"
+		class="com.eidiko.monitoring.alerts.services.UserApplicationMapperServiceImpl"></bean>
+
+	<bean id="appObjectsDao" class="com.eidiko.monitoring.alerts.dao.AppObjectsDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="appObjectsServices"
+		class="com.eidiko.monitoring.alerts.services.AppObjectsServicesImpl"></bean>
+
+	<bean id="alertCfgDao"
+		class="com.eidiko.monitoring.alerts.dao.AlertConfigurationDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="alertCfgService"
+		class="com.eidiko.monitoring.alerts.services.AlertConfigurationServiceImpl"></bean>
+
+	<bean id="queueCfgDao"
+		class="com.eidiko.monitoring.alerts.dao.QueueConfigurationDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="queueCfgService"
+		class="com.eidiko.monitoring.alerts.services.QueueConfigurationServiceImpl"></bean>
+
+	<bean id="AdminDao" class="com.eidiko.monitoring.alerts.dao.AdminDaoImpl"
+		parent="baseDao"></bean>
+	<bean id="qdminService" class="com.eidiko.monitoring.alerts.services.AdminServiceImpl"></bean>
+
+
+
+	<bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+
+</beans>

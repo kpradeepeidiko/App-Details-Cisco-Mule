@@ -1,0 +1,14 @@
+    1.  mvn install:install-file -Dfile=connector.jar -DgroupId=javax.resource     -DartifactId=connector -Dversion=1.0 -Dpackaging=jar
+    2.   mvn install:install-file -Dfile=jta.jar -DgroupId=javax.transaction      -DartifactId=jta  -Dversion=1.0.1B -Dpackaging=jar
+    3.   mvn install:install-file -Dfile=jndi.jar -DgroupId=javax.naming      -DartifactId=jndi  -Dversion=1.2.1 -Dpackaging=jar
+    4.   mvn install:install-file -Dfile=com.ibm.mq.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq  -Dversion=5.3.07 -Dpackaging=jar
+    5.    mvn install:install-file -Dfile=com.ibm.mq.defaultconfig.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq.defaultconfig  -Dversion=7.0.1.5 -Dpackaging=jar
+    6.     mvn install:install-file -Dfile=connector.jar -DgroupId=com.ibm      -DartifactId=connector  -Dversion=5.3.07 -Dpackaging=jar
+    7.      mvn install:install-file -Dfile=com.ibm.mq.pcf.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq.pcf  -Dversion=5.3.07 -Dpackaging=jar
+    8.      mvn install:install-file -Dfile=com.ibm.mq.headers.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq.headers  -Dversion=5.3.07 -Dpackaging=jar
+   9.      mvn install:install-file -Dfile=com.ibm.mq.commonservices.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq.commonservices   -Dversion=5.3.07 -Dpackaging=jar
+ 10.     mvn install:install-file -Dfile=com.ibm.mq.jmqi.jar -DgroupId=com.ibm      -DartifactId=com.ibm.mq.jmqi   -Dversion=5.3.07 -Dpackaging=jar
+ 
+
+
+
