@@ -1,0 +1,20 @@
+{
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vYTIxMzIzOWQtZDM3YS0zMzhiLWE4ZjMtNDU1MzdjZWZjMmEw",
+    "integrationId": "1",
+    "status": "ACTIVE",
+    "repo_modified": true,
+    "instanceId":"483",
+    "repo_name_old": "mavenweb2",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
+    "configJson": {
+        "room_name": "Rakesh",
+        "repo_id": "{021a2c02-fd3a-4cb9-ac08-ce63c655f0ba}",
+        "webhookUuid":"{efb3ce7b-c8b1-4426-ac49-9e53dec0a675}",
+        "repo_name": "new-repo",
+        "user_name": "Surender Reddy Molugu",
+        "owner_name": "tirapa-eidiko",
+        "authenticated_to": "tirapa-eidiko",
+        "displayName": "Bitbucket",
+        "events": ["pullrequest:created", "issue:comment_created", "issue:created", "repo:push"]
+    }
+}

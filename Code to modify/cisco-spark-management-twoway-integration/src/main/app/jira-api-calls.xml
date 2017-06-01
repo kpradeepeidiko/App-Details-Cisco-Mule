@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd">
+<spring:beans>
+         
+        <spring:bean name="ParsingCommands" class="com.org.ParseCommands"/>
+         <spring:bean name="authParamList" class="com.org.AuthParams"/>
+    </spring:beans>
+    
+    
+    <flow name="postCreateIssueUsingAPiFlow">
+        <logger message="#[flowVars.command]" level="INFO" doc:name="create issue flow"/>
+
+                <flow-ref name="getProjectsFlow" doc:name="getProjectsFlow"/>
+
+                <flow-ref name="getPrioritiesFlow" doc:name="getPrioritiesFlow"/>
+
+                <flow-ref name="getIssueTypesFlow" doc:name="getIssueTypesFlow"/>
+
+                <flow-ref name="postCreateIssueFlow" doc:name="postCreateIssueFlow"/>
+        <logger message="after creating issue  #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="issueId" value="Issue #[payload.key] created successfully" doc:name="Variable"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"formatMessage": flowVars.issueId
+	}
+	]]></dw:set-payload>
+        </dw:transform-message>
+
+    </flow>
+    <flow name="getAuthParamsFlow">
+        <http:request config-ref="HTTP_Request_Configuration" path="/integrations/{integrationId}/appTokens" method="GET" doc:name="GET RUNTIME DB CALL">
+            <http:request-builder>
+                <http:query-param paramName="userId" value="Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjY4ZmI1NS1kMjAxLTQ4ZmEtOTU3ZC0yZTQ3ODIwNTFmYmI"/>
+                <http:uri-param paramName="integrationId" value="Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4MDhhY2YzNTA1NjFiNjg5NmNkYWJhOWEzMjg5MDYwYWU2Y2E5YWRmODZmNDVlNGZlMzQ3ZTgxNDY4NWQ2ODA3"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <logger message="Token from DB #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="domainInfo"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+
+        </dw:transform-message>
+        <invoke name="AuthParameters" object-ref="authParamList" method="getAuthParams" methodArguments="#[flowVars['domainInfo'][0]['accessToken']],#[flowVars['domainInfo'][0]['subDomain']],#[flowVars['path']],#[flowVars['Method']]" methodArgumentTypes="java.lang.String,java.lang.String,java.lang.String,java.lang.String" doc:name="Invoke"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <expression-component doc:name="Expression"><![CDATA[payload=payload.replaceAll('\\"key\\":','');
+payload=payload.replaceAll('\\,\\"value\\"','');
+payload=payload.replaceAll('\\{','');
+payload=payload.replaceAll('\\}','');
+payload=payload.replaceAll('\\[','\\{');
+payload=payload.replaceAll('\\]','\\}');
+
+
+
+
+
+]]></expression-component>
+        <json:json-to-object-transformer doc:name="JSON to Object"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="para"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+        </dw:transform-message>
+    </flow>
+    <flow name="postUserCommentFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/issue/'+flowVars.mapObjjjj.issuekey+'/comment']  " doc:name="Variable"/>
+        <logger message="/rest/api/2/issue/#[flowVars.mapObjjjj.issuekey]/comment" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="Method" value="#['POST']" doc:name="Variable"/>
+        <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+        <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+        <dw:transform-message doc:name="Set Comment Body">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"body":flowVars.mapObjjjj.comment
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+        <set-payload value="#[message.payloadAs(java.lang.String)]" mimeType="application/json" doc:name="Set Payload"/>
+        <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="POST" doc:name="POST COMMENT API">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+        <logger message="API call status #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <dw:transform-message doc:name="Transform Response To Java">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    <flow name="postAttachmentFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/issue/{'+flowVars.issueKey[1]+'}/attachments']" doc:name="Variable"/>
+                <set-variable variableName="Method" value="#['POST']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger payload"/>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+            </http:request-builder>
+        </http:request>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+                </dw:transform-message>
+    </flow>
+    <flow name="parsingUserCommandFlow">
+        <expression-component doc:name="Split Expression"><![CDATA[flowVars.command=flowVars.response.sparkResponse.sparkCommand.substring(flowVars.response.sparkResponse.sparkCommand.indexOf('@createIssue')+12,flowVars.command.length());]]></expression-component>
+                <invoke name="Parsingcommand" object-ref="ParsingCommands" method="parsingCommand" methodArguments="#[flowVars.response.sparkResponse.sparkCommand]" methodArgumentTypes="java.lang.String" doc:name="To Parse The Command"/>
+                <set-variable variableName="mapObjjjj" value="#[payload]" doc:name="Set Map Object"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"data":flowVars.mapObjjjj
+}]]></dw:set-payload>
+        </dw:transform-message>
+                <logger message="#[flowVars.mapObjjjj]              " level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-variable variableName="KeyList"><![CDATA[%dw 1.0
+%output application/java
+---
+flowVars.keys
+]]></dw:set-variable>
+                </dw:transform-message>
+                <logger message="AFTER M.E ::::::#[flowVars.mapObjjjj]         " level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="postHelpCommandsListFlow">
+        <set-variable variableName="postMessage" value="#['Hi User, I can help you for below list of actions. \n\n 1.CreateIssue \n\n 2.UpdateIssue \n\n 3.AddComment \n\n 4.AddAttachment']" doc:name="Variable"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"fomatMessage":flowVars.postMessage
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    <flow name="getProjectsFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/project']" doc:name="SET API PATH"/>
+        <set-variable variableName="Method" value="#['GET']" doc:name="SET METHOD"/>
+        <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+        <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+        <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="GET PROJECTS">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+
+            </http:request-builder>
+        </http:request>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getProject"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+
+                </dw:transform-message>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars.mapObjjjj !=null]">
+                <foreach collection="#[flowVars['getProject']]" doc:name="For Each">
+                    <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                    <dw:transform-message doc:name="Transform Message">
+                        <dw:set-variable variableName="projectData"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+                    </dw:transform-message>
+                    <choice doc:name="Choice">
+                        <when expression="#[flowVars.projectData.name.toLowerCase()==flowVars.mapObjjjj.project.toLowerCase()]">
+                            <set-variable variableName="projectId" value="#[flowVars.projectData.id]" doc:name="Variable"/>
+                        </when>
+                        <otherwise>
+                            <logger level="INFO" doc:name="Logger"/>
+                        </otherwise>
+                    </choice>
+                </foreach>
+            </when>
+            <otherwise>
+                <logger message="demo" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+
+    </flow>
+    <flow name="getPrioritiesFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/priority']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <foreach collection="#[payload]" doc:name="For Each">
+                    <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                    <dw:transform-message doc:name="Transform Message">
+                        <dw:set-variable variableName="priorityData"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+                    </dw:transform-message>
+                    <choice doc:name="Choice">
+                        <when expression="#[flowVars.priorityData.name.toLowerCase()==flowVars.mapObjjjj.priority.toLowerCase()]">
+                            <set-variable variableName="priority" value="#[flowVars.priorityData.id]" doc:name="Variable"/>
+                        </when>
+                        <otherwise>
+                            <logger message="default" level="INFO" doc:name="Logger"/>
+                        </otherwise>
+                    </choice>
+                </foreach>
+    </flow>
+    <flow name="getIssueTypesFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/issuetype']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                        <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                        <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                        <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                        <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                        <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                        <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                        <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="issueTypes"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+
+                </dw:transform-message>
+                <foreach collection="#[flowVars.issueTypes]" doc:name="For Each">
+                    <dw:transform-message doc:name="Transform Message">
+                        <dw:set-variable variableName="issuedata"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+                    </dw:transform-message>
+                    <choice doc:name="Choice">
+                        <when expression="#[flowVars.mapObjjjj.issueType.toLowerCase()==flowVars.issuedata.name.toLowerCase()]">
+                            <set-variable variableName="issueType" value="#[flowVars.issuedata.id]" doc:name="Variable"/>
+                        </when>
+                        <otherwise>
+                            <logger message="default" level="INFO" doc:name="Logger"/>
+                        </otherwise>
+                    </choice>
+                </foreach>
+    </flow>
+    <flow name="postCreateIssueFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/issue']" doc:name="Variable"/>
+                <set-variable variableName="Method" value="#['POST']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"fields":{
+	"project":{
+		"id":flowVars.projectId
+		},
+		"summary":flowVars.mapObjjjj.summary,
+		"issuetype":{
+			"id":flowVars.issueType
+		},
+		"priority":{
+			"id":flowVars.priority
+		},
+		"description":flowVars.mapObjjjj.description
+	}
+}
+]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger payload"/>
+                <logger message="oauth_token : #[flowVars.para.oauth_token]" level="INFO" doc:name="Logger oauth"/>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                        <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                        <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                        <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                        <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                        <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                        <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                        <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+                        <http:header headerName="Content-Type" value="application/json"/>
+
+            </http:request-builder>
+        </http:request>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+                </dw:transform-message>
+    </flow>
+    <flow name="putIssueUsingApiFlow">
+        <logger message="Update flow started here" level="INFO" doc:name="Logger"/>
+        <flow-ref name="getPrioritiesFlow" doc:name="getPrioritiesFlow"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+<flow name="updateIssueFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/issue/'+flowVars.mapObjjjj.issuekey+'']" doc:name="Variable"/>
+                <set-variable variableName="Method" value="#['PUT']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"update": {
+		"labels": [{
+			"add": flowVars.mapObjjjj.label
+		}],
+		"summary": [{
+			"set": flowVars.mapObjjjj.summary
+		}],
+		
+		"Priority": [{
+			"set": flowVars.priority
+		}],
+		"Description": [{
+			"set": flowVars.mapObjjjj.description
+		}]
+
+
+	}
+}]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger payload"/>
+                <logger message="oauth_token : #[flowVars.para.oauth_token]" level="INFO" doc:name="Logger oauth"/>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+            </http:request-builder>
+        </http:request>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+                </dw:transform-message>
+    </flow>
+<flow name="getProjectInfoFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/project/'+flowVars.settings.projectId+'']" doc:name="Set Path"/>
+        <set-variable variableName="Method" value="#['GET']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getProject"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getUserInformationFlow">
+        <choice doc:name="Choice">
+            <when expression="#[flowVars.userName != null]">
+                <set-variable variableName="path" value="#['/rest/api/2/user?username='+flowVars.userName[1]+'&amp;expand=groups&amp;expand = applicationRoles']" doc:name="Variable"/>
+            </when>
+            <otherwise>
+                <set-variable variableName="path" value="#['/rest/api/2/myself?expand=groups&amp;expand=applicationRoles']" doc:name="Set Path"/>
+            </otherwise>
+        </choice>
+        <set-variable variableName="Method" value="#['GET']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+            <dw:set-variable variableName="getIssues"><![CDATA[%dw 1.0
+%output application/java
+---
+key: payload.groups.items map
+
+$.name]]></dw:set-variable>
+        </dw:transform-message>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"formatMessage":{
+	"user":payload.name,
+	"email":payload.emailAddress,
+	"groups":flowVars.getIssues.key
+	
+		
+	}
+}
+]]></dw:set-payload>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getIssuesFromProjectFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/search?jql=project='+flowVars.project[1]+'']" doc:name="Set Path"/>
+        <set-variable variableName="Method" value="#['GET']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getIssues"><![CDATA[%dw 1.0
+%output application/json
+---
+key: payload.issues map
+
+$.key]]></dw:set-variable>
+        </dw:transform-message>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getissues"><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"formatMessage":flowVars.getIssues.key
+}
+]]></dw:set-variable>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getListUsersFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/group?groupname='+flowVars.group[1]+'&amp;expand=users']" doc:name="Set Path"/>
+        <set-variable variableName="Method" value="#['GET']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+key: payload.users.items.name map
+
+$.name]]></dw:set-payload>
+        </dw:transform-message>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getissues"><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-variable>
+                </dw:transform-message>
+                <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getIssuesAssignedToUserFlow">
+        <set-variable variableName="path" value="#['/rest/api/2/search?jql=assignee='+flowVars.userName[0]+'']" doc:name="Set Path"/>
+        <set-variable variableName="Method" value="#['GET']" doc:name="Variable"/>
+                <flow-ref name="getAuthParamsFlow" doc:name="getAuthParamsFlow"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.host=flowVars.domainInfo[0].subDomain.toString().split('://')]]></expression-component>
+                <http:request config-ref="HTTP_Request_Configuration2" path="#[flowVars.path]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="oauth_nonce" value="#[flowVars.para.oauth_nonce]"/>
+                <http:query-param paramName="oauth_token" value="#[flowVars.para.oauth_token]"/>
+                <http:query-param paramName="oauth_timestamp" value="#[flowVars.para.oauth_timestamp]"/>
+                <http:query-param paramName="oauth_signature_method" value="#[flowVars.para.oauth_signature_method]"/>
+                <http:query-param paramName="oauth_consumer_key" value="#[flowVars.para.oauth_consumer_key]"/>
+                <http:query-param paramName="oauth_version" value="#[flowVars.para.oauth_version]"/>
+                <http:query-param paramName="oauth_signature" value="#[flowVars.para.oauth_signature]"/>
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="getIssues"><![CDATA[%dw 1.0
+%output application/java
+---
+key: payload.issues  filter ( $.fields.project.name=='Jira2waybot') map
+
+$.key]]></dw:set-variable>
+        </dw:transform-message>
+                <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"formatMessage":flowVars.getIssues.key
+}
+]]></dw:set-payload>
+                </dw:transform-message>
+        <logger message="Issues from script#[flowVars.getIssues]" level="INFO" doc:name="Logger"/>
+    </flow>
+
+</mule>
