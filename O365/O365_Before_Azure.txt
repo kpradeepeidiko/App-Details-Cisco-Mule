@@ -23,7 +23,7 @@ core.services.path=/api
 office365Calendar.api.access.token.host=login.microsoftonline.com
 office365Calendar.api.access.token.port=443
 office365Calendar.api.access.token.base.path=/common
-office365Calendar.api.access.token.path=/oauth2/token
+office365Calendar.api.access.token.path=/oauth2/v2.0/token
 
 ###### Integrations Management API Properties ##
 integrations.management.host=cisco-spark-integration-management-new-dev.cloudhub.io
@@ -31,8 +31,11 @@ integrations.management.port=443
 integrations.management.path=/api
 
 ###### Application(from microsoft) Client ID and Secret ####
-office365Calendar.integration.client.id=77b87c92-999f-4410-92d0-e885a2f5a35b
-office365Calendar.integration.client.secret=T6DZ1SIVfE9XUCbOg128SDhegaoPG+uHi5LL5XGajdQ=
+account.username = pavanvarma@Muleinfo.onmicrosoft.com
+account.password = sarasu@10
+application.url = https://apps.dev.microsoft.com
+office365Calendar.integration.client.id=5cfe24bc-832f-4eee-a572-dc3bba381338
+office365Calendar.integration.client.secret=cMoFX5GozegjbJM7d7z2ESx
 office365Calendar.integration.grantType=authorization_code
 office365Calendar.integration.refresh.grantType=refresh_token
 office365Calendar.integration.redirecr.uri=https://183.82.99.100:8443/CiscoWebcontent/spark1.html
@@ -57,13 +60,13 @@ office365Calendar.discovery.path=/me/services
 
 
 ########### Operation details  ###########
-office365Calendar.api.operations.host=graph.microsoft.com
+office365Calendar.api.operations.host=outlook.office.com
 office365Calendar.api.operations.port=443
-office365Calendar.api.operations.base.path=/v1.0
+office365Calendar.api.operations.base.path=/api/v2.0
 
-office365Calendar.api.user.host=graph.microsoft.com
+office365Calendar.api.user.host=outlook.office.com
 office365Calendar.api.user.port=443
-office365Calendar.api.user.base.path=/v1.0/me
+office365Calendar.api.user.base.path=/api/v2.0
 
 ################ Graph API ###############################
 office365Calendar.graph.api.operations.host=graph.microsoft.com
