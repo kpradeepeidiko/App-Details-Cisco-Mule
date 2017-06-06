@@ -29,7 +29,7 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 
 	<flow name="postoffice365CalendarTokenFlow">
 		<set-payload
-			value="#[{&quot;code&quot;:flowVars.tokenRequest.authSettings.code,&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
+			value="#[{&quot;code&quot;:flowVars.tokenRequest.authSettings.code,&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.grantType}&quot;,&quot;resource&quot;:&quot;https://graph.microsoft.com/&quot;}]"
 			doc:name="Set Payload" />
 		<http:request config-ref="HTTP_Access_Token_Request_Configuration"
 			path="${office365Calendar.api.access.token.path}" method="POST"
@@ -47,7 +47,7 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 	</flow>
 	<flow name="postoffice365CalendarRefreshTokenFlow">
 		<set-payload
-			value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
+			value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;resource&quot;:&quot;https://graph.microsoft.com/&quot;}]"
 			doc:name="Set Payload" />
 		<http:request config-ref="HTTP_Access_Token_Request_Configuration"
 			path="${office365Calendar.api.access.token.path}" method="POST"
@@ -314,7 +314,7 @@ maap.put(payload['userId'],uuidList)]]></expression-component>
 									value="#[flowVars['integrationTokenResponse'][0]['refreshToken']]"
 									doc:name="Set Refresh Token" />
 								<set-payload
-									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
+									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;resource&quot;:&quot;https://graph.microsoft.com/&quot;}]"
 									doc:name="Refresh Token Body" />
 
 								<http:request config-ref="HTTP_Access_Token_Request_Configuration"

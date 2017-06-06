@@ -14,7 +14,8 @@ https://login.microsoftonline.com/common/oauth2/token
 
 body : x-www-form-urlencoded
 
-code , client_id , client_secret, redirect_uri , grant_type : authorization_code , resource : https://graph.microsoft.com/
+code , client_id , client_secret, redirect_uri , grant_type : authorization_code , 
+resource : https://graph.microsoft.com/
 
 response : 
 ---------------------
@@ -32,7 +33,30 @@ response :
   "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImEzUU4wQlpTN3M0bk4tQmRyamJGMFlfTGRNTSIsImtpZCI6ImEzUU4wQlpTN3M0bk4tQmRyamJGMFlfTGRNTSJ9.eyJhdWQiOiJjMDhmODFiYS1mOTBiLTRjOTAtOTU1OC00NTU0MDkwM2Q3MDUiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82N2QzYzc1Yy01ODFhLTQwYWEtODE2NC05YWUxOGFkYmI2MWQvIiwiaWF0IjoxNDkxMjAyNTQwLCJuYmYiOjE0OTEyMDI1NDAsImV4cCI6MTQ5MTIwNjQ0MCwiYW1yIjpbInB3ZCJdLCJmYW1pbHlfbmFtZSI6Ikd1bnRoYSIsImdpdmVuX25hbWUiOiJIYXJpc2giLCJpcGFkZHIiOiIxODMuODIuOTkuMTAwIiwibmFtZSI6IkhhcmlzaCBHdW50aGEiLCJvaWQiOiJkODg4OTI5OS0wZTNiLTRiMWMtODRlOC02ZmFlYzViMDQ2NDgiLCJwbGF0ZiI6IjMiLCJzdWIiOiJvald2TkV5cVZrYlVtRDZXZmxickhGdGZRdXdvbGUwR0V1MUxWU0lWNVM4IiwidGlkIjoiNjdkM2M3NWMtNTgxYS00MGFhLTgxNjQtOWFlMThhZGJiNjFkIiwidW5pcXVlX25hbWUiOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1cG4iOiJoYXJpc2guZ3VudGhhQGVpZGlrby5jb20iLCJ1dGkiOiJfSnpvU2NTVnAwcTdRNkxYaFc0WUFBIiwidmVyIjoiMS4wIn0.kKKadrk3ZJYJ1lQsRsCfkYpRCzcbkEAa98otRM-ikryNHAq-56QlpUhCftM7J11PSDUK4suX3AUhMtFcYS5tU2eCzdbv15ZkrRwnNtYoIjjVCU0WB-L4JnkuHIo4Ri7Ef-Ra66p_8uqp5FOQDO4ZNGf4HrPGasg8RhZAckBvcEGBNc59QBqmfRQPny0y9vXPt11H-r3Tc0-DImIeTNqVrOWUzYp3C4cuHJFoBDu6bg26oaPz3Qp6AgyTl2IWUQ7o0eu5nDUuGxuaLrQZwNV7MJey2CJQT4FWNpvBNGK9bfxZHT-rMZmypP_u0QijQtSZOIASi5sva-FKClItt9vtUg"
 }
 
+=====================================================================================
+To get ACESS TOKEN from REFRESH TOKEN: 
+-----------------------------------------------
+https://login.microsoftonline.com/common/oauth2/token
 
+body : x-www-form-urlencoded
+
+refresh_token , client_id , client_secret, redirect_uri , grant_type : refresh_token , 
+resource : https://graph.microsoft.com/
+
+
+RESPONSE : 
+------------
+{
+  "token_type": "Bearer",
+  "scope": "Calendars.Read Calendars.Read.Shared User.Read",
+  "expires_in": "3599",
+  "ext_expires_in": "0",
+  "expires_on": "1496673963",
+  "not_before": "1496670063",
+  "resource": "https://graph.microsoft.com/",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJub25jZSI6IkFRQUJBQUFBQUFCbmZpRy1tQTZOVGFlN0NkV1c3UWZkV1RvUzA5RzhrUGFhOUdZTHliZVJpanRmdWh0OG1vVkljcS1VX0c4N3lrWE1PZ1dkd2I3TjBfM2RZMHh6czE0bWJ4Y2l0ZjNaQlZXOXVoQXk5c3V4LVNBQSIsImFsZyI6IlJTMjU2IiwieDV0IjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIiwia2lkIjoiejAzOXpkc0Z1aXpwQmZCVksxVG4yNVFIWU8wIn0.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNjhkYWE3ODctMDhlZS00ZjJiLWE3NGMtNzRhYTdhYzhjMTc0LyIsImlhdCI6MTQ5NjY3MDA2MywibmJmIjoxNDk2NjcwMDYzLCJleHAiOjE0OTY2NzM5NjMsImFjciI6IjEiLCJhaW8iOiJBU1FBMi84REFBQUFkYzJWNTVYWHUrcVhlOGNHTzVRVVZEYnR6cGI4N0xoY3ZjU2hiUWd2NUJ3PSIsImFtciI6WyJwd2QiXSwiYXBwX2Rpc3BsYXluYW1lIjoiT2ZmaWNlIDM2NSBDYWxlbmRhciBmb3IgQ2lzY28gU3BhcmtfRGV2IiwiYXBwaWQiOiI3N2I4N2M5Mi05OTlmLTQ0MTAtOTJkMC1lODg1YTJmNWEzNWIiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkthbnVrdW50bGEiLCJnaXZlbl9uYW1lIjoiUHJhZGVlcCIsImlwYWRkciI6IjE4My44Mi45OS4xMDAiLCJuYW1lIjoiUHJhZGVlcCBLYW51a3VudGxhIiwib2lkIjoiMGFhYzE0NmYtMWJlZC00YjNhLTg1OWQtZjI3NzFlYzQxNDhkIiwicGxhdGYiOiIzIiwicHVpZCI6IjEwMDNCRkZEQTBDNzIyNjkiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZCBDYWxlbmRhcnMuUmVhZC5TaGFyZWQgVXNlci5SZWFkIiwic3ViIjoiVk5jSEVWNnNwQnhmOG83X05lLUxXdjJWb240RWY4RENfSXIwa3l4Q1NRayIsInRpZCI6IjY4ZGFhNzg3LTA4ZWUtNGYyYi1hNzRjLTc0YWE3YWM4YzE3NCIsInVuaXF1ZV9uYW1lIjoicHJhZGVlcC5rYW51a3VudGxhQGVpZGlrby5jb20iLCJ1cG4iOiJwcmFkZWVwLmthbnVrdW50bGFAZWlkaWtvLmNvbSIsInV0aSI6IkVIMmJEQjVjUTB5S200Q045a1VnQUEiLCJ2ZXIiOiIxLjAifQ.HUTr0ot_RPV1EtsoGbcwjOhNi1aIamE1ynAEdnW7v-eAkwB_pY3KXo4m-ezEj4DIWOByEh5i8nYZ8JhRLKtwKZMcsYshkEAdZIjyhmRTnmt55f6H41idnbuhtNx1wbZMoOLyG2Bf0MyYEqPyc6RjAVFKnWctPiHi00u6QbuMl3VGs39o81mfIRFt1GZcRDH8E-l8IJ9kUUcBAdbvHXaOD4GaYp17hUjO4w2pquLXXOLdb8NbG1S_pzUgTUb4qT2QTBuBM-E_dZo1q_ObLf9G86iWPXuLjN9n9jD6UWThY01BDsvqgtxlzFDYnWRyU0Q3vBYzMkTQlJ3RBNSt3Ta9zg",
+  "refresh_token": "AQABAAAAAABnfiG-mA6NTae7CdWW7QfdYxyRpAKovxMjoFeXZGG2Ty28-zLILv-lCiY-wvpRjzulKIiwvJGf2tyAgswHJRddowRLEbJx6H8YJ2_8QeQl8TU8LuDEhsaD7GSP8mzB4IkB2tkmdldd3rrTA2x8ugIYuuqI_cj4QeqsUHVpWhNf-DdvQa1CDf8T__lfDEUfJeW6ZgiPIm6UlQ_lANhfbKBsL7mCnEMbfDHQ3J87p9wE90aL9mwvy1deM0j_QAJ9Aj5_SsZkYh2DAQZNzhNZXYwNNbLci7zbChZ6fNK6AJvL5tzH7fZrI2HGLBSzD3UeU7yzuS6w3ltkVR5DwL00Bn4uYnq5DKvC_DBqxFA--KR1BXKNB4BxnP6bnLzBXvCvT_zdE7knRLjTm9edzFgjXkblS1csm-oWY6wDo7i2-oJWhk9ef8S8HACyWOJNpIsI3x7muraPLGpf8eyfJBei12f0oJG10FmMA_91yAa3xzEXBT6OdM-ikv8Rl8WWV7scj-6VdNqR1xkvDdkYBjlGMjJoCJQBxTq7j9xz4WBYsYW8PtaNxQwSL9dUpe3DwPCUHwpLjxfbsjMGlAK_SdQc9CcrWdJfmpvoK5vjCt8C5CYRlq3L7wCYP6Kd-5tAcbP0lixEtREeJKeWhNS2srPNo8ayKhWvFH66mph8xAuLgUD5MvywuXR1N40bcbdX_QVqlnu9rjHEH7xSWC3_xiOglAtFD0BRbNRXqARNHiYFGt29G8j_90wdO5VyzpZOCtKq4joHRwSZWJPRNiljv-EcfNFFXXmHRSbxwNC4_1rJl6cAcyAA"
+}
 =====================================================================================================
 graph API page
 ---------------

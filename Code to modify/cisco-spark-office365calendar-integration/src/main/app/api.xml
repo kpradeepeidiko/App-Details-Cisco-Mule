@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     
     <apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
     
-    <api-platform-gw:api apiName="${office365Calendar.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/> 
+    <!-- <api-platform-gw:api apiName="${office365Calendar.mule.env.raml.title}" version="1" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>--> 
     
     <flow name="api-main">
         <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
@@ -24,10 +24,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
     </flow>
     <flow name="O365CalenderAPIPolling">
-        <poll doc:name="Poll">
-            <fixed-frequency-scheduler frequency="${polling.interval}" timeUnit="MINUTES"/>
-            <flow-ref name="startO365CalendarPollingFlow" doc:name="startO365CalendarPollingFlow"/>
-        </poll>
+        
         <logger level="INFO" doc:name="Logger" message="polling Started"/>
     <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">

@@ -143,7 +143,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 									value="#[flowVars['getIntegrationTokenResponse'][0]['refreshToken']]"
 									doc:name="Set Refresh Token" />
 								<set-payload
-									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
+									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;resource&quot;:&quot;https://graph.microsoft.com/&quot;}]"
 									doc:name="Refresh Token Body" />
 								<logger
 									message="RefreshToken body =  #[message.payloadAs(java.lang.String)]"
@@ -366,7 +366,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 									value="#[flowVars['getIntegrationTokenResponse'][0]['refreshToken']]"
 									doc:name="Set Refresh Token" />
 								<set-payload
-									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;scope&quot;:&quot;${office365Calendar.integration.scopes}&quot;}]"
+									value="#[{&quot;refresh_token&quot;:flowVars['refreshToken'],&quot;client_id&quot;:&quot;${office365Calendar.integration.client.id}&quot;,&quot;client_secret&quot;:&quot;${office365Calendar.integration.client.secret}&quot;,&quot;redirect_uri&quot;:&quot;${office365Calendar.integration.redirecr.uri}&quot;,&quot;grant_type&quot;:&quot;${office365Calendar.integration.refresh.grantType}&quot;,&quot;resource&quot;:&quot;https://graph.microsoft.com/&quot;}]"
 									doc:name="Refresh Token Body" />
 								<logger
 									message="REFRESHTOKEN BODYYYYYYYYYYYY #[payload] and RETOKEN #[flowVars['refreshToken']]"
