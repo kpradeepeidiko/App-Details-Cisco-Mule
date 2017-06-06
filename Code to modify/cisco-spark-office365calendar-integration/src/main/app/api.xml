@@ -24,7 +24,10 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
     </flow>
     <flow name="O365CalenderAPIPolling">
-        
+        <poll doc:name="Poll">
+            <fixed-frequency-scheduler frequency="${polling.interval}" timeUnit="MINUTES"/>
+            <flow-ref name="startO365CalendarPollingFlow" doc:name="startO365CalendarPollingFlow"/>
+        </poll>
         <logger level="INFO" doc:name="Logger" message="polling Started"/>
     <choice-exception-strategy doc:name="Choice Exception Strategy">
             <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
