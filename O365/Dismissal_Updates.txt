@@ -1,0 +1,235 @@
+dismissed for #1, #2, #3
+-----------------------------
+
+{
+	"@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('3ce69d08-bac0-41bd-813c-8cece7acdde2')/calendars('AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3_9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAEGAABEX8XA51ZyTIL3r2LSSQjGAAALb8wZAAA%3D')/events",
+	"value": [{
+		"@odata.etag": "W/\"RF/FwOdWckyC969i0kkIxgAAI+OtlA==\"",
+		"id": "AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3_9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDOAAA=",
+		"createdDateTime": "2017-06-07T06:21:57.3070777Z",
+		"lastModifiedDateTime": "2017-06-07T06:21:57.3227035Z",
+		"changeKey": "RF/FwOdWckyC969i0kkIxgAAI+OtlA==",
+		"categories": [],
+		"originalStartTimeZone": "India Standard Time",
+		"originalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000B90B535D56DFD2010000000000000000100000008AF202CC0EDA374AAF520F6A2015C8D7",
+		"reminderMinutesBeforeStart": 15,
+		"isReminderOn": true,
+		"hasAttachments": false,
+		"subject": "Sample #4",
+		"bodyPreview": "",
+		"importance": "normal",
+		"sensitivity": "normal",
+		"isAllDay": false,
+		"isCancelled": false,
+		"isOrganizer": true,
+		"responseRequested": true,
+		"seriesMasterId": null,
+		"showAs": "busy",
+		"type": "singleInstance",
+		"webLink": "https://outlook.office365.com/owa/?itemid=AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3%2B9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDOAAA%3D&exvsurl=1&path=/calendar/item",
+		"onlineMeetingUrl": null,
+		"responseStatus": {
+			"response": "organizer",
+			"time": "0001-01-01T00:00:00Z"
+		},
+		"body": {
+			"contentType": "html",
+			"content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"start": {
+			"dateTime": "2017-06-07T06:50:00.0000000",
+			"timeZone": "UTC"
+		},
+		"end": {
+			"dateTime": "2017-06-07T07:20:00.0000000",
+			"timeZone": "UTC"
+		},
+		"location": {
+			"displayName": "",
+			"address": {}
+		},
+		"recurrence": null,
+		"attendees": [],
+		"organizer": {
+			"emailAddress": {
+				"name": "AnilKumar Nayak",
+				"address": "anilkumar.nayak@eidikosis.onmicrosoft.com"
+			}
+		}
+	}, {
+		"@odata.etag": "W/\"RF/FwOdWckyC969i0kkIxgAAI+Otlw==\"",
+		"id": "AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3_9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDNAAA=",
+		"createdDateTime": "2017-06-07T06:21:46.4788792Z",
+		"lastModifiedDateTime": "2017-06-07T06:30:25.7636783Z",
+		"changeKey": "RF/FwOdWckyC969i0kkIxgAAI+Otlw==",
+		"categories": [],
+		"originalStartTimeZone": "India Standard Time",
+		"originalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E0080000000038CBDE5656DFD2010000000000000000100000006E50AEA64199204DA9E1D1B62988BEF8",
+		"reminderMinutesBeforeStart": 15,
+		"isReminderOn": false,
+		"hasAttachments": false,
+		"subject": "Sample #3",
+		"bodyPreview": "test",
+		"importance": "normal",
+		"sensitivity": "normal",
+		"isAllDay": false,
+		"isCancelled": false,
+		"isOrganizer": true,
+		"responseRequested": true,
+		"seriesMasterId": null,
+		"showAs": "busy",
+		"type": "singleInstance",
+		"webLink": "https://outlook.office365.com/owa/?itemid=AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3%2B9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDNAAA%3D&exvsurl=1&path=/calendar/item",
+		"onlineMeetingUrl": null,
+		"responseStatus": {
+			"response": "organizer",
+			"time": "0001-01-01T00:00:00Z"
+		},
+		"body": {
+			"contentType": "html",
+			"content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test<br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"start": {
+			"dateTime": "2017-06-07T06:45:00.0000000",
+			"timeZone": "UTC"
+		},
+		"end": {
+			"dateTime": "2017-06-07T07:15:00.0000000",
+			"timeZone": "UTC"
+		},
+		"location": {
+			"displayName": "",
+			"address": {}
+		},
+		"recurrence": null,
+		"attendees": [],
+		"organizer": {
+			"emailAddress": {
+				"name": "AnilKumar Nayak",
+				"address": "anilkumar.nayak@eidikosis.onmicrosoft.com"
+			}
+		}
+	}, {
+		"@odata.etag": "W/\"RF/FwOdWckyC969i0kkIxgAAI+OtlQ==\"",
+		"id": "AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3_9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDMAAA=",
+		"createdDateTime": "2017-06-07T06:21:29.5568889Z",
+		"lastModifiedDateTime": "2017-06-07T06:26:00.4649897Z",
+		"changeKey": "RF/FwOdWckyC969i0kkIxgAAI+OtlQ==",
+		"categories": [],
+		"originalStartTimeZone": "India Standard Time",
+		"originalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000F5B3C84C56DFD2010000000000000000100000002EC052AF52B6B24B9995A628BB327AFA",
+		"reminderMinutesBeforeStart": 15,
+		"isReminderOn": false,
+		"hasAttachments": false,
+		"subject": "Sample #2",
+		"bodyPreview": "",
+		"importance": "normal",
+		"sensitivity": "normal",
+		"isAllDay": false,
+		"isCancelled": false,
+		"isOrganizer": true,
+		"responseRequested": true,
+		"seriesMasterId": null,
+		"showAs": "busy",
+		"type": "singleInstance",
+		"webLink": "https://outlook.office365.com/owa/?itemid=AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3%2B9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDMAAA%3D&exvsurl=1&path=/calendar/item",
+		"onlineMeetingUrl": null,
+		"responseStatus": {
+			"response": "organizer",
+			"time": "0001-01-01T00:00:00Z"
+		},
+		"body": {
+			"contentType": "html",
+			"content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p><br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"start": {
+			"dateTime": "2017-06-07T06:40:00.0000000",
+			"timeZone": "UTC"
+		},
+		"end": {
+			"dateTime": "2017-06-07T07:10:00.0000000",
+			"timeZone": "UTC"
+		},
+		"location": {
+			"displayName": "Eidiko Systems Integrators Private Limited",
+			"address": {
+				"street": "Unit no 1, First Floor, MJR Magnifique, Nanakramgud X Roads, Raidurga Navkhalsa",
+				"city": "Hyderabad",
+				"state": "Telangana",
+				"countryOrRegion": "India",
+				"postalCode": ""
+			}
+		},
+		"recurrence": null,
+		"attendees": [],
+		"organizer": {
+			"emailAddress": {
+				"name": "AnilKumar Nayak",
+				"address": "anilkumar.nayak@eidikosis.onmicrosoft.com"
+			}
+		}
+	}, {
+		"@odata.etag": "W/\"RF/FwOdWckyC969i0kkIxgAAI+Otlg==\"",
+		"id": "AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3_9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDLAAA=",
+		"createdDateTime": "2017-06-07T06:21:13.884906Z",
+		"lastModifiedDateTime": "2017-06-07T06:26:00.4806144Z",
+		"changeKey": "RF/FwOdWckyC969i0kkIxgAAI+Otlg==",
+		"categories": [],
+		"originalStartTimeZone": "India Standard Time",
+		"originalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E00800000000DA1D764356DFD20100000000000000001000000011CC135C059439489EA2687A7AFD89FD",
+		"reminderMinutesBeforeStart": 15,
+		"isReminderOn": false,
+		"hasAttachments": false,
+		"subject": "Sample #1",
+		"bodyPreview": "test",
+		"importance": "normal",
+		"sensitivity": "normal",
+		"isAllDay": false,
+		"isCancelled": false,
+		"isOrganizer": true,
+		"responseRequested": true,
+		"seriesMasterId": null,
+		"showAs": "busy",
+		"type": "singleInstance",
+		"webLink": "https://outlook.office365.com/owa/?itemid=AAMkAGQwY2UwNWM1LWM2NjUtNDY5MS05MmI4LTExMGMxYzc3YWJmMQBGAAAAAADR4V0iAA7eRYVtv3%2B9lzjWBwBEX8XA51ZyTIL3r2LSSQjGAAAAAAENAABEX8XA51ZyTIL3r2LSSQjGAAAj3YDLAAA%3D&exvsurl=1&path=/calendar/item",
+		"onlineMeetingUrl": null,
+		"responseStatus": {
+			"response": "organizer",
+			"time": "0001-01-01T00:00:00Z"
+		},
+		"body": {
+			"contentType": "html",
+			"content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Arial,Helvetica,sans-serif\">\r\n<p>test<br>\r\n</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"start": {
+			"dateTime": "2017-06-07T06:35:00.0000000",
+			"timeZone": "UTC"
+		},
+		"end": {
+			"dateTime": "2017-06-07T07:05:00.0000000",
+			"timeZone": "UTC"
+		},
+		"location": {
+			"displayName": "Eidiko Systems Integrators Private Limited",
+			"address": {
+				"street": "Unit no 1, First Floor, MJR Magnifique, Nanakramgud X Roads, Raidurga Navkhalsa",
+				"city": "Hyderabad",
+				"state": "Telangana",
+				"countryOrRegion": "India",
+				"postalCode": ""
+			}
+		},
+		"recurrence": null,
+		"attendees": [],
+		"organizer": {
+			"emailAddress": {
+				"name": "AnilKumar Nayak",
+				"address": "anilkumar.nayak@eidikosis.onmicrosoft.com"
+			}
+		}
+	}]
+}
