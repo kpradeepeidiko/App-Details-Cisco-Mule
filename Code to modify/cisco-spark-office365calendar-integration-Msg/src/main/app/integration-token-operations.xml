@@ -31,7 +31,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 			<http:failure-status-code-validator
 				values="500..599" />
 		</http:request>
-        <logger message="Token From Runtime = #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
 		<dw:transform-message doc:name="Transform Response to Java">
 			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
 		</dw:transform-message>

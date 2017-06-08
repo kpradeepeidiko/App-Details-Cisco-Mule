@@ -32,8 +32,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 	</flow>
 
 	<flow name="postFormatMessageFlow">
-		<logger message="hook payload = #[message.payloadAs(java.lang.String)]"
-			level="DEBUG" doc:name="Logger" />
 		<object-to-string-transformer doc:name="Object to String" />
 		<json:object-to-json-transformer
 			doc:name="Object to JSON" />
@@ -41,8 +39,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 			<dw:set-variable variableName="request"
 				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
 		</dw:transform-message>
-		<logger message="hook payload to java #[flowVars['request']]"
-			level="DEBUG" doc:name="Logger" />
 		<dw:transform-message doc:name="Convert Process">
 			<dw:set-payload
 				resource="classpath:dwScripts/buildConvertProcessInMesgFormtExample.dwl" />

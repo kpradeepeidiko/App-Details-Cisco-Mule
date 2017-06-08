@@ -832,7 +832,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																	doc:name="Create Value" />
 															</when>
 															<when
-																expression="#[((flowVars['updt'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['updt'].isBefore(server.dateTime.changeTimeZone('UTC'))))]">
+																expression="#[((flowVars['updt'].isAfter(flowVars['forCrUpServerTimeMinusPollingTime'])) &amp;&amp; (flowVars['updt'].isBefore(server.dateTime.changeTimeZone('UTC')))) &amp;&amp; (flowVars['itemDetails']['IsReminderOn'] == true)]">
 																<choice doc:name="Event Update Description And Location Check">
 																	<when
 																		expression="#[flowVars['itemDetails']['BodyPreview'] == empty &amp;&amp; flowVars['itemDetails']['Location']['DisplayName'] == empty]">
