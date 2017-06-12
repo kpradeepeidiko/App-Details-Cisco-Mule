@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+	<flow name="postAuthDetailsFlow">
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['postTokenResponse']]" doc:name="Message Enricher">
+			<flow-ref name="postPagerdutyTokenFlow" doc:name="postPagerdutyTokenFlow" />
+		</enricher>
+		<dw:transform-message doc:name="Build Post Auth Details Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="postFormatMessageFlow">
+		<logger message="input payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message metadata:id="16db4717-7738-482e-a489-7aed77630932"
+			doc:name="Build Post Format Message Request">
+			<dw:input-payload doc:sample="sample_data\json.json" />
+			<dw:set-variable variableName="response"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<dw:transform-message doc:name="Transform User Events To Json">
+			<dw:set-payload resource="classpath:dwScripts/buildUserEventsResponse.dwl" />
+		</dw:transform-message>
+		<set-payload value="#[payload]" mimeType="application/json"
+			doc:name="Change Content Type To Json" />
+		<dw:transform-message doc:name="Transform Message to Java">
+			<dw:set-variable variableName="userEventsVariable"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<logger
+			message="Message Array Size #[flowVars['response']['hookResponse']['messages'].size()]"
+			level="INFO" doc:name="Logger" />
+		<choice doc:name="Check Message Array Size">
+			<when
+				expression="#[flowVars['response']['hookResponse']['messages'].size() == 1]">
+				<choice doc:name="Incident Name">
+					<when
+						expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_summary_data'].containsKey('subject')]">
+
+						<set-variable variableName="subject"
+							value="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_summary_data']['subject']]"
+							doc:name="Set Subject Name" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_summary_data'].containsKey('description')]">
+						<set-variable variableName="subject"
+							value="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_summary_data']['description']]"
+							doc:name="Set Description Name" />
+					</when>
+					<otherwise>
+						<logger level="INFO" doc:name="Logger"
+							message="Got = #[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_summary_data']]" />
+					</otherwise>
+				</choice>
+				<foreach collection="#[flowVars['userEventsVariable']['incidents']]"
+					doc:name="Loop User Selected Incidents">
+					<set-variable variableName="event" value="#[payload]"
+						doc:name="User Incident Type" />
+					<choice doc:name="Routing Notifications Alerts">
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.acknowledge' &amp;&amp; flowVars['event'] =='acknowledge']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Last Status Change user">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_by'] != empty]">
+                                    <choice doc:name="Check Number of Escalations">
+                                        <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                            <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_by']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_by']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Acknowledged Alert"/>
+                                        </when>
+                                        <otherwise>
+                                            <set-variable doc:name="Incident Acknowledged Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_by']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_by']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t |  \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                        </otherwise>
+                                    </choice>
+                                </when>
+                                <otherwise>
+                                    <choice doc:name="Choice">
+                                        <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                            <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') has been '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t |  \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Acknowledged Alert"/>
+                                        </when>
+                                        <otherwise>
+                                            <set-variable doc:name="Incident Acknowledged Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') has been '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t  Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                        </otherwise>
+                                    </choice>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.trigger' &amp;&amp; flowVars['event']=='trigger']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+')  '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') and assigned to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'   \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Trigger Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Trigger Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+')  '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') and assigned to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'   \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.resolve' &amp;&amp; flowVars['event']=='resolve']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Resolve By User Value">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['resolved_by_user'] != empty]">
+                                    <choice doc:name="Check Number Of Escalations">
+                                        <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                            <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['resolved_by_user']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['resolved_by_user']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Resolved Alert"/>
+                                        </when>
+                                        <otherwise>
+                                            <set-variable doc:name="Incident Resolved Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' by ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['resolved_by_user']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['resolved_by_user']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t  | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                        </otherwise>
+                                    </choice>
+                                </when>
+                                <otherwise>
+                                    <choice doc:name="Check Number Of Escalations">
+                                        <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                            <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') has been '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Resolved Alert"/>
+                                        </when>
+                                        <otherwise>
+                                            <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') has been '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['status']+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" doc:name="Incident Resolved Alert"/>
+                                        </otherwise>
+                                    </choice>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.assign' &amp;&amp; flowVars['event']=='assign']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Number Of Escalations">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  assign to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Reassign Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Reassign Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  assign to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.unacknowledge' &amp;&amp; flowVars['event']=='unacknowledge']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+')  from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') unacknowledged due to timeout \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Unacknowledge Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Unacknowledge Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+')  from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+') unacknowledged due to timeout \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0`']" variableName="postMessage"/>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.escalate' &amp;&amp; flowVars['event']=='escalate']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  escalated to '+flowVars.names+'  \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t  Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Escalate Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Escalate Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  escalated to '+flowVars.names+'  \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                </otherwise>
+                            </choice>
+						</when>
+						<when
+							expression="#[flowVars['response']['hookResponse']['messages'][0]['type'] =='incident.delegate' &amp;&amp; flowVars['event']=='delegate']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="postMessage" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  delegated, reassigned to another escalation policy **'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+'** \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t Number Of Escalations : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Delegate Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Delegate Alert" value="#['Incident [# '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['html_url']+') from service ['+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['name']+']('+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['service']['html_url']+')  delegated, reassigned to another escalation policy **'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['escalation_policy']['name']+'** \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['response']['hookResponse']['messages'][0]['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t Number Of Escalations : `0` ']" variableName="postMessage"/>
+                                </otherwise>
+                            </choice>
+						</when>
+						<otherwise>
+							<logger message="incident #[flowVars['event']] Failed"
+								level="DEBUG" doc:name="defaultFlow" />
+						</otherwise>
+					</choice>
+
+				</foreach>
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['messages'].size() &gt; 1]">
+				<set-variable variableName="incidentsArray"
+					value="#[new java.util.ArrayList()]" doc:name="Set An Array" />
+				<foreach collection="#[flowVars['response']['hookResponse']['messages']]"
+					doc:name="Loop Message Array">
+					<dw:transform-message doc:name="Get Each Incident">
+						<dw:input-payload mimeType="application/java"/>
+						<dw:set-variable variableName="msgPayload" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+					</dw:transform-message>
+					<choice doc:name="Incident Name">
+						<when
+							expression="#[flowVars['msgPayload']['data']['incident']['trigger_summary_data'].containsKey('subject')]">
+							<set-variable variableName="subject"
+								value="#[flowVars['msgPayload']['data']['incident']['trigger_summary_data']['subject']]"
+								doc:name="Set Subject Name" />
+						</when>
+						<when
+							expression="#[flowVars['msgPayload']['data']['incident']['trigger_summary_data'].containsKey('description')]">
+							<set-variable variableName="subject"
+								value="#[flowVars['msgPayload']['data']['incident']['trigger_summary_data']['description']]"
+								doc:name="Set Description Name" />
+						</when>
+						<otherwise>
+							<logger level="INFO" doc:name="Logger"
+								message="Got = #[flowVars['msgPayload']['data']['incident']['trigger_summary_data']]" />
+						</otherwise>
+					</choice>
+					<choice doc:name="Choose Incident Type">
+						<when expression="#[flowVars['msgPayload']['type'] == 'incident.trigger']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Number Of Escalations">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+')  '+flowVars['msgPayload']['data']['incident']['status']+' by service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') and assigned to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Trigger Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Trigger Message" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+')  '+flowVars['msgPayload']['data']['incident']['status']+' by service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') and assigned to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t  Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="trigger"
+								doc:name="Value" />
+						</when>
+						<when
+							expression="#[flowVars['msgPayload']['type'] == 'incident.acknowledge']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Number Of Escalations">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') '+flowVars['msgPayload']['data']['incident']['status']+' by ['+flowVars['msgPayload']['data']['incident']['last_status_change_by']['name']+']('+flowVars['msgPayload']['data']['incident']['last_status_change_by']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t  | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Acknowledge Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') '+flowVars['msgPayload']['data']['incident']['status']+' by ['+flowVars['msgPayload']['data']['incident']['last_status_change_by']['name']+']('+flowVars['msgPayload']['data']['incident']['last_status_change_by']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t  | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" doc:name="Acknowledge Message"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="acknowledge"
+								doc:name="Set Value" />
+						</when>
+						<when expression="#[flowVars['msgPayload']['type'] == 'incident.assign']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Number Of Escalations">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  assign to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Reassign Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Reassign Message" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  assign to '+flowVars.names+' \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0`']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="assign"
+								doc:name="Set Value" />
+						</when>
+						<when expression="#[flowVars['msgPayload']['type'] == 'incident.resolve']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Check Number Of Escalations">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  '+flowVars['msgPayload']['data']['incident']['status']+' by ['+flowVars['msgPayload']['data']['incident']['resolved_by_user']['name']+']('+flowVars['msgPayload']['data']['incident']['resolved_by_user']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Resolve Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Resolve Message" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  '+flowVars['msgPayload']['data']['incident']['status']+' by ['+flowVars['msgPayload']['data']['incident']['resolved_by_user']['name']+']('+flowVars['msgPayload']['data']['incident']['resolved_by_user']['html_url']+') \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0` ']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="resolve"
+								doc:name="Set Value" />
+						</when>
+						<when
+							expression="#[flowVars['msgPayload']['type'] == 'incident.unacknowledge']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+')  from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') unacknowledged due to timeout \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Unacknowledge Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Unacknowledge Message" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+')  from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+') unacknowledged due to timeout \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t |  \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0`']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="unacknowledge"
+								doc:name="Set Value" />
+						</when>
+						<when expression="#[flowVars['msgPayload']['type'] == 'incident.escalate']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  escalated to '+flowVars.names+'  \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Incident Escalate Alert"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Incident Escalate Alert" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  escalated to '+flowVars.names+'  \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'`  \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+' \t  | \t  Escalation Policy : '+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+' \t | \t Number Of Escalations : `0`']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="escalate"
+								doc:name="Set Value" />
+						</when>
+						<when expression="#[flowVars['msgPayload']['type'] == 'incident.delegate']">
+							<set-variable variableName="UsersArray"
+								value="#[new java.util.ArrayList()]" doc:name="Set Users Array" />
+							<foreach
+								collection="#[flowVars['msgPayload']['data']['incident']['assigned_to']]"
+								doc:name="For Each">
+								<set-variable variableName="message1"
+									value="[#[payload['object']['name']]](#[payload['object']['html_url']])"
+									doc:name="Set Message" />
+								<expression-component doc:name="Add Message To Array"><![CDATA[UsersArray.add(flowVars['message1'])
+
+
+]]></expression-component>
+							</foreach>
+							<choice doc:name="Choice">
+								<when expression="#[flowVars['UsersArray'].size() &gt; 1]">
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = names1.substring(0,names1.lastIndexOf(","))+" and "+names1.substring(names1.lastIndexOf(",")+1)]]></expression-component>
+								</when>
+								<otherwise>
+									<expression-component doc:name="Remove '[' and ']' rfom Array"><![CDATA[flowVars.names1=flowVars.UsersArray.toString().substring(1,flowVars.UsersArray.toString().length()-1)]]></expression-component>
+									<expression-component doc:name="Add and at last index of ','"><![CDATA[flowVars.names = flowVars.names1]]></expression-component>
+								</otherwise>
+							</choice>
+                            <choice doc:name="Choice">
+                                <when expression="#[flowVars['msgPayload']['data']['incident']['number_of_escalations'] != empty]">
+                                    <set-variable variableName="msg" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  delegated, reassigned to another escalation policy **'+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+'** \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'  \t | \t Number Of Escalations : `'+flowVars['msgPayload']['data']['incident']['number_of_escalations']+'` ']" doc:name="Delegate Message"/>
+                                </when>
+                                <otherwise>
+                                    <set-variable doc:name="Delegate Message" value="#['Incident [# '+flowVars['msgPayload']['data']['incident']['incident_number']+' : '+flowVars['subject']+']('+flowVars['msgPayload']['data']['incident']['html_url']+') from service ['+flowVars['msgPayload']['data']['incident']['service']['name']+']('+flowVars['msgPayload']['data']['incident']['service']['html_url']+')  delegated, reassigned to another escalation policy **'+flowVars['msgPayload']['data']['incident']['escalation_policy']['name']+'** \n * Opened On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['created_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Last Status Change On : '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;MMM dd yyyy&quot;)+'  '+(new org.mule.el.datetime.DateTime(flowVars['msgPayload']['data']['incident']['last_status_change_on'])).format(&quot;hh:mm a&quot;)+' \t | \t Assigned To : '+flowVars.names+' \t | \t Urgency : `'+flowVars['msgPayload']['data']['incident']['urgency']+'` \t | \t Description : '+flowVars['response']['hookResponse']['messages'][0]['data']['incident']['trigger_details_html_url']+'   \t | \t Number Of Escalations : `0`']" variableName="msg"/>
+                                </otherwise>
+                            </choice>
+							<set-variable variableName="value" value="delegate"
+								doc:name="Set Value" />
+						</when>
+						<otherwise>
+							<logger level="DEBUG" doc:name="Logger" message="default"/>
+						</otherwise>
+					</choice>
+					<foreach collection="#[flowVars['userEventsVariable']['incidents']]"
+						doc:name="Loop User Selected Values">
+						<choice doc:name="Select Only User Selected Values">
+							<when
+								expression="#[payload==flowVars['value'] &amp;&amp; flowVars['msg'] != empty]">
+								<expression-component doc:name="Add Msg To Array"><![CDATA[incidentsArray.add(flowVars['msg'])]]></expression-component>
+							</when>
+							<otherwise>
+								<logger level="DEBUG" doc:name="Logger"
+									message="#[payload] = condition not success" />
+							</otherwise>
+						</choice>
+					</foreach>
+					<set-variable variableName="msg" value=""
+						doc:name="Set Msg Value Empty" />
+				</foreach>
+				<set-variable variableName="postMessage"
+					value="#[new java.lang.StringBuffer()]" doc:name="Set BufferSteam" />
+				<foreach collection="#[flowVars['incidentsArray']]"
+					doc:name="For Each">
+					<expression-component doc:name="Append To Buffer Stream"><![CDATA[postMessage.append(payload)]]></expression-component>
+					<expression-component doc:name="Break Line"><![CDATA[postMessage.append('\n\n\n\n\n')]]></expression-component>
+				</foreach>
+			</when>
+			<otherwise>
+				<logger level="INFO" doc:name="Logger"
+					message="message size = #[flowVars['response']['hookResponse']['messages'].size()]" />
+			</otherwise>
+		</choice>
+
+		<dw:transform-message doc:name="Build Post Format Message Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl" />
+		</dw:transform-message>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<logger
+				message="exception in Message format flow  ++++++++ #[flowVars['exception']]"
+				level="INFO" doc:name="Logger" />
+		</catch-exception-strategy>
+	</flow>
+
+	<flow name="postIntegrationSettingsFlow">
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['webhook']]" doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow" />
+		</enricher>
+		<choice doc:name="Check Webhook Url Generated">
+			<when expression="#[flowVars['webhook'] != empty]">
+				<dw:transform-message doc:name="Build Get Integration Settings Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGetIntegrationSettingsResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message
+					doc:name="Build Get Integration Settings Failure Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildPostSettingsFailureResponseExample.dwl" />
+				</dw:transform-message>
+
+			</otherwise>
+		</choice>
+	</flow>
+
+	<flow name="setupIntegrationFlow">
+		<dw:transform-message doc:name="Build Setup Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildSetupIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+	<flow name="updateIntegrationFlow">
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['updateIntegrationResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="updatePagerdutyIntegrationFlow" doc:name="Update Pagerduty Integration Flow Reference" />
+		</enricher>
+		<dw:transform-message doc:name="Transform Update Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildUpdateIntegrationResponseExample.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="tearDownIntegrationFlow">
+		<dw:transform-message doc:name="Build Tear Down Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="healthCheckFlow">
+		<object-to-string-transformer doc:name="Object to String" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-variable variableName="healthChechRequest"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		<set-variable variableName="integrationId"
+			value="#[flowVars['healthChechRequest']['integrationId']]" doc:name="Set Integration Id" />
+		<set-variable variableName="userId"
+			value="#[flowVars['healthChechRequest']['userId']]" doc:name="Set User Id" />
+		<enricher target="#[flowVars['generateWebhookUrlResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow" />
+		</enricher>
+		<http:request config-ref="HTTP_Integration_Runtime_Request_Configuration"
+			path="/integrations/instances" method="GET" doc:name="Get Instance Details">
+			<http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="integrationId" value="#[flowVars.healthChechRequest.integrationId]"/>
+                <http:query-param paramName="userId" value="#[flowVars.healthChechRequest.userId]"/>
+                <http:query-param paramName="status" value="ACTIVE"/>
+
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-variable variableName="instanceDetails" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+		</dw:transform-message>
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars.instanceDetails.toString() != '{message=No results}']">
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload resource="classpath:dwScripts/buildConvertProcessExample.dwl"/>
+				</dw:transform-message>
+				<set-payload value="#[payload]" mimeType="application/json"
+					doc:name="Set Payload" />
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-variable variableName="configJsonDetails" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+				</dw:transform-message>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload resource="classpath:dwScripts/buildHealthCheckResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload resource="classpath:dwScripts/buildHealthCheckResponse.dwl"/>
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload resource="classpath:dwScripts/buildHealthCheckFailureResponse.dwl"/>
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+</mule>

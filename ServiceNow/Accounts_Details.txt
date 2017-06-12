@@ -1,0 +1,81 @@
+ServiceNow
+----------------
+Developer URL
+URL   :   https://developer.servicenow.com
+
+Istabul
+===========
+Developer URL :  https://developer.servicenow.com/app.do#!/dashboard?v=geneva
+URL : https://dev34266.service-now.com/nav_to.do?uri=%2Fhome.do%3F
+rajasekhar.eidiko@gmail.com
+Sarasu@10
+
+admin
+Sarasu@10
+
+
+
+
+Helsinki
+===========
+Developer URL : https://developer.servicenow.com/app.do#!/dashboard?v=helsinki
+URL  : https://dev13212.service-now.com/nav_to.do?uri=%2Fhome.do%3F
+sparktesting229@gmail.com
+Sarasu@10
+
+admin	
+Sarasu@10
+
+
+
+
+Geneva
+===============
+Developer URL :  https://developer.servicenow.com/app.do#!/dashboard?v=istabul
+URL :  https://dev25605.service-now.com/nav_to.do?uri=%2Fhome.do%3F
+sparktesting234@gmail.com
+Sarasu@10
+
+admin
+uxaB7kQb5cKW
+
+==========================================================================================
+API release notes
+Authentication release notes
+Automated Test Framework
+Assessments and Surveys release notes
+Computer telephony integration release notes
+Configuration Management release notes
+Connect release notes
+Core platform release notes
+Dependency Views release notes
+Email Service release notes
+Import and Export release notes
+Knowledge Management release notes
+Mobile release notes
+Notifications release notes
+Platform security release notes
+Service Portal release notes
+User interface (UI) release notes
+Visual Task Boards release notes
+Web services release notes
+Workflow release notes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Activate Email Service
+-----------------------------
+https://docs.servicenow.com/bundle/istanbul-servicenow-platform/page/integrate/inbound-rest/task/activate-email-service.html
+
+
