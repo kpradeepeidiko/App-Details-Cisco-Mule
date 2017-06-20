@@ -1,0 +1,315 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0000000002be21b9, pid=6384, tid=5448
+#
+# JRE version: 7.0_03-b05
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (22.1-b02 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# J  org.apache.http.client.protocol.RequestAddCookies.process(Lorg/apache/http/HttpRequest;Lorg/apache/http/protocol/HttpContext;)V
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.sun.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000008cdd000):  JavaThread "pool-3-thread-2" [_thread_in_Java, id=5448, stack(0x0000000009f60000,0x000000000a060000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x0000003b8ca171ec
+
+Registers:
+RAX=0x0000000771a024f0, RBX=0x0000000000000000, RCX=0x00000000f082c7ae, RDX=0x0000000000000001
+RSP=0x000000000a05e3b0, RBP=0x0000000000000000, RSI=0x0000000771942e40, RDI=0x0000000771942e3c
+R8 =0x0000000000000002, R9 =0x00000007d89193f8, R10=0x0000000000000003, R11=0x0000003b8ca171e0
+R12=0x0000000000000000, R13=0x000000000000000a, R14=0x0000000000000000, R15=0x0000000008cdd000
+RIP=0x0000000002be21b9, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x000000000a05e3b0)
+0x000000000a05e3b0:   01d2a7bb787f89f0 000000000a05e3d8
+0x000000000a05e3c0:   000000000a05e430 00000000027d69de
+0x000000000a05e3d0:   00000007819055c8 ffffffffee2e8e27
+0x000000000a05e3e0:   00000007d88d80d8 00000007d88d8790
+0x000000000a05e3f0:   00000007d8918710 00000007d89193e0
+0x000000000a05e400:   00000007d8918730 00000007d8918730
+0x000000000a05e410:   fb12327f00000003 f082c7ae00000001
+0x000000000a05e420:   0000000200000000 0000000200000003
+0x000000000a05e430:   0000000784163d70 00000007d8918730
+0x000000000a05e440:   0000000781905718 0000000000000002
+0x000000000a05e450:   0000000000000019 00000007d88d80d8
+0x000000000a05e460:   0000000000000006 0000000002b1b3b0
+0x000000000a05e470:   00000007d88d8790 00000007d88d80d8
+0x000000000a05e480:   00000007829e9b38 000000070000000c
+0x000000000a05e490:   000000077365bd48 0000000771746dc8
+0x000000000a05e4a0:   000000000a05e518 00000000027d66e6 
+
+Instructions: (pc=0x0000000002be21b9)
+0x0000000002be2199:   44 8b 5c 24 68 41 83 c3 02 44 89 5c 24 78 4c 63
+0x0000000002be21a9:   5c 24 68 43 8b 4c 99 14 89 4c 24 6c 4d 8d 1c fc
+0x0000000002be21b9:   41 8b 4b 0c 3b 4c 24 70 8b 5c 24 70 0f 4c d9 89
+0x0000000002be21c9:   5c 24 70 44 8b 5c 24 6c 43 8b 4c dc 08 81 f9 c8 
+
+
+Register to memory mapping:
+
+RAX=0x0000000771a024f0 is an oop
+{instance class} 
+ - klass: {other class}
+RBX=0x0000000000000000 is an unknown value
+RCX=0x00000000f082c7ae is an unknown value
+RDX=0x0000000000000001 is an unknown value
+RSP=0x000000000a05e3b0 is pointing into the stack for thread: 0x0000000008cdd000
+RBP=0x0000000000000000 is an unknown value
+RSI=0x0000000771942e40 is an oop
+{instance class} 
+ - klass: {other class}
+RDI=0x0000000771942e3c is an oop
+[[I 
+ - klass: 'java/lang/Object'[]
+ - length: 5
+R8 =0x0000000000000002 is an unknown value
+R9 =0x00000007d89193f8 is an oop
+[Ljava.lang.Object; 
+ - klass: 'java/lang/Object'[]
+ - length: 10
+R10=0x0000000000000003 is an unknown value
+R11=0x0000003b8ca171e0 is an unknown value
+R12=0x0000000000000000 is an unknown value
+R13=0x000000000000000a is an unknown value
+R14=0x0000000000000000 is an unknown value
+R15=0x0000000008cdd000 is a thread
+
+
+Stack: [0x0000000009f60000,0x000000000a060000],  sp=0x000000000a05e3b0,  free space=1016k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J  org.apache.http.client.protocol.RequestAddCookies.process(Lorg/apache/http/HttpRequest;Lorg/apache/http/protocol/HttpContext;)V
+
+[error occurred during error reporting (printing native stack), id 0xc0000005]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000000000b4f6800 JavaThread "DestroyJavaVM" [_thread_blocked, id=4824, stack(0x00000000026d0000,0x00000000027d0000)]
+  0x000000000b4f5800 JavaThread "Mule.app.deployer.monitor.1.thread.1" [_thread_blocked, id=300, stack(0x0000000015b70000,0x0000000015c70000)]
+  0x000000000b4f5000 JavaThread "[cisco-spark-trello-integration].api-httpListenerConfig.worker.01" daemon [_thread_blocked, id=6336, stack(0x00000000159d0000,0x0000000015ad0000)]
+  0x000000000b4f4800 JavaThread "[cisco-spark-trello-integration].processing.time.monitor" daemon [_thread_blocked, id=5476, stack(0x0000000014f80000,0x0000000015080000)]
+  0x000000000b4f3800 JavaThread "[cisco-spark-trello-integration].healthCheckFlow.stage1.01" [_thread_blocked, id=6524, stack(0x0000000015890000,0x0000000015990000)]
+  0x000000000b4f3000 JavaThread "[cisco-spark-trello-integration].tearDownIntegrationFlow.stage1.01" [_thread_blocked, id=5176, stack(0x0000000015760000,0x0000000015860000)]
+  0x000000000b4f2000 JavaThread "[cisco-spark-trello-integration].setupIntegrationFlow.stage1.01" [_thread_blocked, id=4816, stack(0x0000000015660000,0x0000000015760000)]
+  0x000000000b4f1800 JavaThread "[cisco-spark-trello-integration].getRuntimeAccessTokenFlow.stage1.01" [_thread_blocked, id=5840, stack(0x0000000015480000,0x0000000015580000)]
+  0x000000000b4f0800 JavaThread "[cisco-spark-trello-integration].postIntegrationSettingsFlow.stage1.01" [_thread_blocked, id=6640, stack(0x0000000015210000,0x0000000015310000)]
+  0x000000000b4f0000 JavaThread "[cisco-spark-trello-integration].postFormatMessageFlow.stage1.01" [_thread_blocked, id=4792, stack(0x0000000015090000,0x0000000015190000)]
+  0x000000000b4ef000 JavaThread "[cisco-spark-trello-integration].postTrelloHookFlow.stage1.01" [_thread_blocked, id=344, stack(0x0000000014c30000,0x0000000014d30000)]
+  0x000000000b4ee800 JavaThread "[cisco-spark-trello-integration].updateTrelloWebhookFlow.stage1.01" [_thread_blocked, id=6056, stack(0x0000000014e80000,0x0000000014f80000)]
+  0x000000000b4ed800 JavaThread "[cisco-spark-trello-integration].putIntegrationInstanceFlow.stage1.01" [_thread_blocked, id=5152, stack(0x0000000014d40000,0x0000000014e40000)]
+  0x000000000b4ed000 JavaThread "[cisco-spark-trello-integration].deleteTrelloHookFlow.stage1.01" [_thread_blocked, id=5156, stack(0x00000000144f0000,0x00000000145f0000)]
+  0x000000000b4ec800 JavaThread "[cisco-spark-trello-integration].getTrelloUserInformationFlow.stage1.01" [_thread_blocked, id=5144, stack(0x0000000011ed0000,0x0000000011fd0000)]
+  0x000000000b4eb800 JavaThread "[cisco-spark-trello-integration].getTrelloBoardsFlow.stage1.01" [_thread_blocked, id=6552, stack(0x0000000014b30000,0x0000000014c30000)]
+  0x000000000b4eb000 JavaThread "[cisco-spark-trello-integration].getListsFromBoardsFlow.stage1.01" [_thread_blocked, id=3740, stack(0x0000000014910000,0x0000000014a10000)]
+  0x000000000b4ea000 JavaThread "[cisco-spark-trello-integration].post:/updateIntegration:api-config.stage1.01" [_thread_blocked, id=3220, stack(0x0000000014740000,0x0000000014840000)]
+  0x000000000b4e9800 JavaThread "[cisco-spark-trello-integration].post:/healthCheck:api-config.stage1.01" [_thread_blocked, id=4968, stack(0x0000000012a70000,0x0000000012b70000)]
+  0x000000000b4e8800 JavaThread "[cisco-spark-trello-integration].post:/tearDownIntegration:api-config.stage1.01" [_thread_blocked, id=5188, stack(0x0000000014610000,0x0000000014710000)]
+  0x000000000b4e8000 JavaThread "[cisco-spark-trello-integration].post:/formatMessage:api-config.stage1.01" [_thread_blocked, id=6792, stack(0x00000000143d0000,0x00000000144d0000)]
+  0x000000000b4e7000 JavaThread "[cisco-spark-trello-integration].post:/authDetails:api-config.stage1.01" [_thread_blocked, id=984, stack(0x00000000131d0000,0x00000000132d0000)]
+  0x000000000b83d000 JavaThread "[cisco-spark-trello-integration].post:/setupIntegration:api-config.stage1.01" [_thread_blocked, id=6312, stack(0x00000000141d0000,0x00000000142d0000)]
+  0x000000000b83c000 JavaThread "[cisco-spark-trello-integration].post:/settings:api-config.stage1.01" [_thread_blocked, id=5880, stack(0x0000000014030000,0x0000000014130000)]
+  0x000000000b83b800 JavaThread "[cisco-spark-trello-integration].api-console.stage1.01" [_thread_blocked, id=5892, stack(0x0000000013eb0000,0x0000000013fb0000)]
+  0x000000000b83b000 JavaThread "[cisco-spark-trello-integration].api-main.stage1.01" [_thread_blocked, id=6920, stack(0x0000000013d70000,0x0000000013e70000)]
+  0x000000000b83a000 JavaThread "[cisco-spark-trello-integration].coreServicesTrackingFlow.1.01" [_thread_blocked, id=5768, stack(0x0000000013be0000,0x0000000013ce0000)]
+  0x000000000b839800 JavaThread "[cisco-spark-trello-integration].coreServicesTrackingFlow.stage1.01" [_thread_blocked, id=6940, stack(0x0000000013a50000,0x0000000013b50000)]
+  0x000000000b838800 JavaThread "[cisco-spark-trello-integration].coreServicesLoggingFlow.1.01" [_thread_blocked, id=6888, stack(0x0000000013890000,0x0000000013990000)]
+  0x000000000b838000 JavaThread "[cisco-spark-trello-integration].coreServicesLoggingFlow.stage1.01" [_thread_blocked, id=5196, stack(0x0000000012eb0000,0x0000000012fb0000)]
+  0x000000000b837000 JavaThread "[cisco-spark-trello-integration].coreServicesAlertsFlow.1.01" [_thread_blocked, id=1004, stack(0x00000000136b0000,0x00000000137b0000)]
+  0x000000000b836800 JavaThread "[cisco-spark-trello-integration].coreServicesAlertsFlow.stage1.01" [_thread_blocked, id=3272, stack(0x00000000133f0000,0x00000000134f0000)]
+  0x000000000b835800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(8)" daemon [_thread_blocked, id=7032, stack(0x0000000013500000,0x0000000013600000)]
+  0x000000000b835000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(7)" daemon [_thread_blocked, id=6468, stack(0x00000000132d0000,0x00000000133d0000)]
+  0x000000000b834800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(6)" daemon [_thread_blocked, id=5924, stack(0x00000000130c0000,0x00000000131c0000)]
+  0x000000000b833800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(5)" daemon [_thread_blocked, id=6012, stack(0x0000000012fb0000,0x00000000130b0000)]
+  0x000000000b833000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(4)" daemon [_thread_blocked, id=6768, stack(0x0000000012db0000,0x0000000012eb0000)]
+  0x000000000b832000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(3)" daemon [_thread_blocked, id=6912, stack(0x0000000012850000,0x0000000012950000)]
+  0x000000000b831800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(2)" daemon [_thread_blocked, id=5172, stack(0x0000000012c70000,0x0000000012d70000)]
+  0x000000000b830800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration.worker(1)" daemon [_thread_blocked, id=6052, stack(0x0000000012b70000,0x0000000012c70000)]
+  0x000000000b830000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration(4) SelectorRunner" daemon [_thread_in_native, id=6484, stack(0x0000000012960000,0x0000000012a60000)]
+  0x000000000b82f000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration(3) SelectorRunner" daemon [_thread_in_native, id=6668, stack(0x0000000012700000,0x0000000012800000)]
+  0x000000000b82e800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration(2) SelectorRunner" daemon [_thread_in_native, id=2620, stack(0x00000000125c0000,0x00000000126c0000)]
+  0x000000000b82e000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Request_Configuration(1) SelectorRunner" daemon [_thread_in_native, id=900, stack(0x0000000012120000,0x0000000012220000)]
+  0x000000000d867000 JavaThread "connection-pool-delays-thread-pool(1)" daemon [_thread_blocked, id=5588, stack(0x00000000123c0000,0x00000000124c0000)]
+  0x000000000d866800 JavaThread "Grizzly-IdleTimeoutFilter-IdleCheck" daemon [_thread_blocked, id=5256, stack(0x0000000012220000,0x0000000012320000)]
+  0x000000000d865800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(8)" daemon [_thread_blocked, id=6264, stack(0x0000000011fd0000,0x00000000120d0000)]
+  0x000000000d865000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(7)" daemon [_thread_blocked, id=3668, stack(0x0000000011a10000,0x0000000011b10000)]
+  0x000000000d864000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(6)" daemon [_thread_blocked, id=6112, stack(0x0000000011d80000,0x0000000011e80000)]
+  0x000000000d863800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(5)" daemon [_thread_blocked, id=5580, stack(0x0000000011b90000,0x0000000011c90000)]
+  0x000000000d863000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(4)" daemon [_thread_blocked, id=1668, stack(0x0000000011900000,0x0000000011a00000)]
+  0x000000000d862000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(3)" daemon [_thread_blocked, id=5712, stack(0x00000000115d0000,0x00000000116d0000)]
+  0x000000000d861800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(2)" daemon [_thread_blocked, id=5660, stack(0x0000000011760000,0x0000000011860000)]
+  0x000000000d860800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration.worker(1)" daemon [_thread_blocked, id=5996, stack(0x0000000011490000,0x0000000011590000)]
+  0x000000000d860000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration(4) SelectorRunner" daemon [_thread_in_native, id=5464, stack(0x0000000010e30000,0x0000000010f30000)]
+  0x000000000c60c800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration(3) SelectorRunner" daemon [_thread_in_native, id=4412, stack(0x0000000011310000,0x0000000011410000)]
+  0x000000000c60b800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration(2) SelectorRunner" daemon [_thread_in_native, id=6520, stack(0x00000000110a0000,0x00000000111a0000)]
+  0x000000000c60b000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Integrations_Runtime_Request_Configuration(1) SelectorRunner" daemon [_thread_in_native, id=5264, stack(0x00000000111f0000,0x00000000112f0000)]
+  0x000000000c60a800 JavaThread "connection-pool-delays-thread-pool(1)" daemon [_thread_blocked, id=6080, stack(0x0000000010f30000,0x0000000011030000)]
+  0x000000000c609800 JavaThread "Grizzly-IdleTimeoutFilter-IdleCheck" daemon [_thread_blocked, id=5608, stack(0x0000000010d10000,0x0000000010e10000)]
+  0x000000000c609000 JavaThread "pool-13-thread-3" daemon [_thread_blocked, id=6068, stack(0x00000000109b0000,0x0000000010ab0000)]
+  0x000000000c608000 JavaThread "pool-13-thread-2" daemon [_thread_blocked, id=208, stack(0x00000000104d0000,0x00000000105d0000)]
+  0x000000000c607800 JavaThread "pool-13-thread-1" daemon [_thread_blocked, id=2080, stack(0x0000000010bf0000,0x0000000010cf0000)]
+  0x000000000c606800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(8)" daemon [_thread_blocked, id=5316, stack(0x0000000010ad0000,0x0000000010bd0000)]
+  0x000000000c606000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(7)" daemon [_thread_blocked, id=668, stack(0x0000000010760000,0x0000000010860000)]
+  0x000000000c605000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(6)" daemon [_thread_blocked, id=6408, stack(0x0000000010860000,0x0000000010960000)]
+  0x000000000c604800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(5)" daemon [_thread_blocked, id=1388, stack(0x0000000010600000,0x0000000010700000)]
+  0x000000000c604000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(4)" daemon [_thread_blocked, id=4784, stack(0x00000000103d0000,0x00000000104d0000)]
+  0x000000000c603000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(3)" daemon [_thread_blocked, id=4808, stack(0x0000000010230000,0x0000000010330000)]
+  0x000000000c602800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(2)" daemon [_thread_blocked, id=6924, stack(0x0000000010060000,0x0000000010160000)]
+  0x000000000c601800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration.worker(1)" daemon [_thread_blocked, id=5744, stack(0x000000000fed0000,0x000000000ffd0000)]
+  0x000000000c601000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration(4) SelectorRunner" daemon [_thread_in_native, id=6636, stack(0x000000000fbf0000,0x000000000fcf0000)]
+  0x000000000c600000 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration(3) SelectorRunner" daemon [_thread_in_native, id=6580, stack(0x000000000fcf0000,0x000000000fdf0000)]
+  0x000000000c5ff800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration(2) SelectorRunner" daemon [_thread_in_native, id=6624, stack(0x000000000fa10000,0x000000000fb10000)]
+  0x000000000c5fe800 JavaThread "[cisco-spark-trello-integration].http.requester.HTTP_Coreservices_Request_Configuration(1) SelectorRunner" daemon [_thread_in_native, id=5288, stack(0x000000000f530000,0x000000000f630000)]
+  0x000000000c5fe000 JavaThread "connection-pool-delays-thread-pool(1)" daemon [_thread_blocked, id=5552, stack(0x000000000f880000,0x000000000f980000)]
+  0x000000000c5fd800 JavaThread "Grizzly-IdleTimeoutFilter-IdleCheck" daemon [_thread_blocked, id=6380, stack(0x000000000f690000,0x000000000f790000)]
+  0x0000000008cea000 JavaThread "[cisco-spark-trello-integration].http.listener.HttpIdleConnectionCloser.01" [_thread_blocked, id=6932, stack(0x000000000f3c0000,0x000000000f4c0000)]
+  0x0000000008ce9800 JavaThread "[cisco-spark-trello-integration].http.listener.worker(8)" daemon [_thread_blocked, id=4904, stack(0x000000000efb0000,0x000000000f0b0000)]
+  0x0000000008ce9000 JavaThread "[cisco-spark-trello-integration].http.listener.worker(7)" daemon [_thread_blocked, id=3160, stack(0x000000000d5e0000,0x000000000d6e0000)]
+  0x0000000008ce8000 JavaThread "[cisco-spark-trello-integration].http.listener.worker(6)" daemon [_thread_blocked, id=5324, stack(0x000000000f220000,0x000000000f320000)]
+  0x0000000008ce7800 JavaThread "[cisco-spark-trello-integration].http.listener.worker(5)" daemon [_thread_blocked, id=6684, stack(0x000000000f0c0000,0x000000000f1c0000)]
+  0x0000000008ce6800 JavaThread "[cisco-spark-trello-integration].http.listener.worker(4)" daemon [_thread_blocked, id=6948, stack(0x000000000ec70000,0x000000000ed70000)]
+  0x0000000008ce6000 JavaThread "[cisco-spark-trello-integration].http.listener.worker(3)" daemon [_thread_blocked, id=4544, stack(0x000000000ee30000,0x000000000ef30000)]
+  0x0000000008ce5000 JavaThread "[cisco-spark-trello-integration].http.listener.worker(2)" daemon [_thread_blocked, id=4112, stack(0x000000000a170000,0x000000000a270000)]
+  0x0000000008ce4800 JavaThread "[cisco-spark-trello-integration].http.listener.worker(1)" daemon [_thread_blocked, id=2400, stack(0x000000000eb50000,0x000000000ec50000)]
+  0x0000000008ce3800 JavaThread "[cisco-spark-trello-integration].http.listener(5) SelectorRunner" daemon [_thread_in_native, id=6568, stack(0x000000000ea00000,0x000000000eb00000)]
+  0x0000000008ce3000 JavaThread "[cisco-spark-trello-integration].http.listener(4) SelectorRunner" daemon [_thread_in_native, id=6916, stack(0x000000000e860000,0x000000000e960000)]
+  0x0000000008ce2000 JavaThread "[cisco-spark-trello-integration].http.listener(3) SelectorRunner" daemon [_thread_in_native, id=6004, stack(0x000000000d4e0000,0x000000000d5e0000)]
+  0x0000000008ce1800 JavaThread "[cisco-spark-trello-integration].http.listener(2) SelectorRunner" daemon [_thread_in_native, id=6952, stack(0x000000000e750000,0x000000000e850000)]
+  0x0000000008ce1000 JavaThread "[cisco-spark-trello-integration].http.listener(1) SelectorRunner" daemon [_thread_in_native, id=5104, stack(0x000000000c2a0000,0x000000000c3a0000)]
+  0x0000000008cdf800 JavaThread "Log4j2-AsyncLoggerConfig-4" daemon [_thread_blocked, id=6996, stack(0x000000000c410000,0x000000000c510000)]
+  0x0000000008cde000 JavaThread "[cisco-spark-trello-integration].Mule.01" [_thread_blocked, id=6376, stack(0x000000000c160000,0x000000000c260000)]
+=>0x0000000008cdd000 JavaThread "pool-3-thread-2" [_thread_in_Java, id=5448, stack(0x0000000009f60000,0x000000000a060000)]
+  0x0000000008cdc800 JavaThread "pool-3-thread-1" [_thread_blocked, id=6528, stack(0x000000000a850000,0x000000000a950000)]
+  0x0000000008cdb800 JavaThread "I/O dispatcher 4" [_thread_in_native, id=6140, stack(0x000000000aed0000,0x000000000afd0000)]
+  0x0000000008cdb000 JavaThread "I/O dispatcher 3" [_thread_in_native, id=7132, stack(0x000000000ad50000,0x000000000ae50000)]
+  0x0000000008854800 JavaThread "I/O dispatcher 2" [_thread_in_native, id=6908, stack(0x000000000ac40000,0x000000000ad40000)]
+  0x000000000885f000 JavaThread "I/O dispatcher 1" [_thread_in_native, id=6560, stack(0x000000000a630000,0x000000000a730000)]
+  0x0000000008c9d000 JavaThread "pool-7-thread-1" [_thread_in_native, id=608, stack(0x000000000aae0000,0x000000000abe0000)]
+  0x0000000008d5d000 JavaThread "Log4j2-AsyncLoggerConfig-3" daemon [_thread_blocked, id=6756, stack(0x000000000a960000,0x000000000aa60000)]
+  0x0000000008a72000 JavaThread "Log4j2-AsyncLoggerConfig-2" daemon [_thread_blocked, id=2796, stack(0x000000000a750000,0x000000000a850000)]
+  0x00000000086b6800 JavaThread "pool-4-thread-2" [_thread_blocked, id=6000, stack(0x000000000a510000,0x000000000a610000)]
+  0x0000000008678800 JavaThread "pool-4-thread-1" [_thread_blocked, id=2168, stack(0x000000000a400000,0x000000000a500000)]
+  0x0000000008c14000 JavaThread "Thread-2" [_thread_blocked, id=4848, stack(0x000000000a290000,0x000000000a390000)]
+  0x0000000008699800 JavaThread "MapDB writer #2" daemon [_thread_blocked, id=6372, stack(0x000000000a060000,0x000000000a160000)]
+  0x0000000008d2e800 JavaThread "MapDB writer #1" daemon [_thread_blocked, id=4532, stack(0x0000000009c30000,0x0000000009d30000)]
+  0x00000000081d1000 JavaThread "Log4j2-AsyncLoggerConfig-1" daemon [_thread_blocked, id=7056, stack(0x00000000099c0000,0x0000000009ac0000)]
+  0x00000000065c7000 JavaThread "Service Thread" daemon [_thread_blocked, id=5208, stack(0x0000000007520000,0x0000000007620000)]
+  0x00000000065c4000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=3956, stack(0x0000000007410000,0x0000000007510000)]
+  0x00000000065c2800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=6472, stack(0x00000000071a0000,0x00000000072a0000)]
+  0x00000000065c0800 JavaThread "Attach Listener" daemon [_thread_blocked, id=6752, stack(0x0000000006c10000,0x0000000006d10000)]
+  0x00000000065bb000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3512, stack(0x0000000007020000,0x0000000007120000)]
+  0x0000000006531800 JavaThread "Finalizer" daemon [_thread_blocked, id=5308, stack(0x0000000006ea0000,0x0000000006fa0000)]
+  0x0000000006530000 JavaThread "Reference Handler" daemon [_thread_blocked, id=6652, stack(0x0000000006d80000,0x0000000006e80000)]
+
+Other Threads:
+  0x000000000652b800 VMThread [stack: 0x0000000006ab0000,0x0000000006bb0000] [id=3096]
+  0x0000000006642800 WatcherThread [stack: 0x0000000007300000,0x0000000007400000] [id=5504]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 660928K, used 57708K [0x00000007d5560000, 0x0000000800000000, 0x0000000800000000)
+  eden space 626176K, 9% used [0x00000007d5560000,0x00000007d8dbb278,0x00000007fb8e0000)
+  from space 34752K, 0% used [0x00000007fb8e0000,0x00000007fb8e0000,0x00000007fdad0000)
+  to   space 38080K, 0% used [0x00000007fdad0000,0x00000007fdad0000,0x0000000800000000)
+ PSOldGen        total 138688K, used 87410K [0x0000000780000000, 0x0000000788770000, 0x00000007d5560000)
+  object space 138688K, 63% used [0x0000000780000000,0x000000078555cb80,0x0000000788770000)
+ PSPermGen       total 131072K, used 55883K [0x0000000770000000, 0x0000000778000000, 0x0000000780000000)
+  object space 131072K, 42% used [0x0000000770000000,0x0000000773692fe0,0x0000000778000000)
+
+Code Cache  [0x00000000027d0000, 0x0000000002c00000, 0x00000000057d0000)
+ total_blobs=1751 nmethods=1287 adapters=415 free_code_cache=44986Kb largest_free_block=45992960
+
+Dynamic libraries:
+0x000000013fca0000 - 0x000000013fcd3000 	C:\Program Files\Java\jdk1.7.0_03\bin\javaw.exe
+0x0000000077370000 - 0x000000007751b000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077150000 - 0x000000007726f000 	C:\Windows\system32\kernel32.dll
+0x000007fefd890000 - 0x000007fefd8fb000 	C:\Windows\system32\KERNELBASE.dll
+0x000007fefde20000 - 0x000007fefdefb000 	C:\Windows\system32\ADVAPI32.dll
+0x000007feff000000 - 0x000007feff09f000 	C:\Windows\system32\msvcrt.dll
+0x000007fefeed0000 - 0x000007fefeeef000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007feff550000 - 0x000007feff67e000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077270000 - 0x000000007736a000 	C:\Windows\system32\USER32.dll
+0x000007feff0a0000 - 0x000007feff107000 	C:\Windows\system32\GDI32.dll
+0x000007feff370000 - 0x000007feff37e000 	C:\Windows\system32\LPK.dll
+0x000007fefdbd0000 - 0x000007fefdc9a000 	C:\Windows\system32\USP10.dll
+0x000007fefc0b0000 - 0x000007fefc2a4000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7600.16385_none_fa645303170382f6\COMCTL32.dll
+0x000007feff2f0000 - 0x000007feff361000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fefec90000 - 0x000007fefecbe000 	C:\Windows\system32\IMM32.DLL
+0x000007fefeef0000 - 0x000007fefeff9000 	C:\Windows\system32\MSCTF.dll
+0x000000005a7b0000 - 0x000000005a881000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\msvcr100.dll
+0x00000000571a0000 - 0x000000005787a000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\server\jvm.dll
+0x000007fef7610000 - 0x000007fef7619000 	C:\Windows\system32\WSOCK32.dll
+0x000007feff410000 - 0x000007feff45d000 	C:\Windows\system32\WS2_32.dll
+0x000007feff400000 - 0x000007feff408000 	C:\Windows\system32\NSI.dll
+0x000007fefb820000 - 0x000007fefb85b000 	C:\Windows\system32\WINMM.dll
+0x0000000077540000 - 0x0000000077547000 	C:\Windows\system32\PSAPI.DLL
+0x000000006c390000 - 0x000000006c39f000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\verify.dll
+0x000000006a0e0000 - 0x000000006a108000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\java.dll
+0x000000006a120000 - 0x000000006a135000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\zip.dll
+0x000000006c380000 - 0x000000006c38b000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\management.dll
+0x000000006a0c0000 - 0x000000006a0d9000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\net.dll
+0x000007fefd010000 - 0x000007fefd064000 	C:\Windows\system32\mswsock.dll
+0x000007fefd000000 - 0x000007fefd007000 	C:\Windows\System32\wship6.dll
+0x000000006a0a0000 - 0x000000006a0b1000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\nio.dll
+0x000007fefd070000 - 0x000007fefd087000 	C:\Windows\system32\CRYPTSP.dll
+0x000007fefcd70000 - 0x000007fefcdb7000 	C:\Windows\system32\rsaenh.dll
+0x000007fefcb20000 - 0x000007fefcb3e000 	C:\Windows\system32\USERENV.dll
+0x000007fefd7e0000 - 0x000007fefd7ef000 	C:\Windows\system32\profapi.dll
+0x000007fefd6d0000 - 0x000007fefd6df000 	C:\Windows\system32\CRYPTBASE.dll
+0x000007fefb8e0000 - 0x000007fefb8f5000 	C:\Windows\system32\NLAapi.dll
+0x000007fefce90000 - 0x000007fefceeb000 	C:\Windows\system32\DNSAPI.dll
+0x000007fef7190000 - 0x000007fef719b000 	C:\Windows\System32\winrnr.dll
+0x000007fef7170000 - 0x000007fef7185000 	C:\Windows\system32\napinsp.dll
+0x000007fef7150000 - 0x000007fef7169000 	C:\Windows\system32\pnrpnsp.dll
+0x000007fefca70000 - 0x000007fefca97000 	C:\Windows\system32\IPHLPAPI.DLL
+0x000007fefca60000 - 0x000007fefca6b000 	C:\Windows\system32\WINNSI.DLL
+0x000007fefaf30000 - 0x000007fefaf83000 	C:\Windows\System32\fwpuclnt.dll
+0x000007fef7140000 - 0x000007fef7148000 	C:\Windows\system32\rasadhlp.dll
+0x000007fefc090000 - 0x000007fefc09a000 	C:\Users\bandaru\AppData\Local\Temp\jansi-64-2877927340661073095.dll
+0x000007fefaf90000 - 0x000007fefafa1000 	C:\Windows\system32\dhcpcsvc6.DLL
+0x000007fefc960000 - 0x000007fefc978000 	C:\Windows\system32\dhcpcsvc.DLL
+0x000000006a070000 - 0x000000006a094000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\sunec.dll
+0x000007fefc980000 - 0x000007fefc987000 	C:\Windows\System32\wshtcpip.dll
+0x000000006a110000 - 0x000000006a11b000 	C:\Program Files\Java\jdk1.7.0_03\jre\bin\sunmscapi.dll
+0x000007fefd900000 - 0x000007fefda66000 	C:\Windows\system32\CRYPT32.dll
+0x000007fefd880000 - 0x000007fefd88f000 	C:\Windows\system32\MSASN1.dll
+0x000007fef71a0000 - 0x000007fef72c5000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -XX:PermSize=128M -XX:MaxPermSize=256M -Dmule.home=C:\Users\bandaru\AnypointStudio\workspace\ciscoproject\.mule -Djava.endorsed.dirs=C:\Anypointstudio6\AnypointStudio\AnypointStudio\plugins\org.mule.tooling.server.3.8.0.ee_6.1.0.201608231735\mule\lib\endorsed -Djava.net.preferIPv4Stack=TRUE -Dmvel2.disable.jit=TRUE -Dosgi.dev=true -Dmule.verbose.exceptions=true -Dmule.plugins.dir=C:\Anypointstudio6\AnypointStudio\AnypointStudio\plugins\org.mule.tooling.server.3.8.0.ee_6.1.0.201608231735\mule\plugins -Dmule.agent.enabled=false -Dmule.forceConsoleLog -Dlog4j.debug=true -Danypoint.platform.gatekeeper=false -Dosgi.instance.area=file:\C:\Users\bandaru\AnypointStudio\workspace\ciscoproject -Dmule.env=dev -Danypoint.platform.client_id=bdd7b4ae33084e8684aa3862e123b7a6 -Danypoint.platform.client_secret=417cad8af93041bd9E2D92401C24DF3E -Danypoint.platform.platform_base_uri=https://anypoint.mulesoft.com/apiplatform -Danypoint.platform.coreservice_base_uri=https://anypoint.mulesoft.com/accounts -Danypoint.platform.analytics_base_uri=https://analytics-ingest.anypoint.mulesoft.com -Danypoint.platform.contracts_base_uri=https://anypoint.mulesoft.com/apigateway/ccs -Dfile.encoding=Cp1252 
+java_command: org.mule.tooling.server.application.ApplicationDeployer
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.7.0_03
+CLASSPATH=.;C:\PROGRA~1\IBM\SQLLIB\java\db2java.zip;C:\PROGRA~1\IBM\SQLLIB\java\db2jcc.jar;C:\PROGRA~1\IBM\SQLLIB\java\sqlj.zip;C:\PROGRA~1\IBM\SQLLIB\java\db2jcc_license_cu.jar;C:\PROGRA~1\IBM\SQLLIB\bin;C:\PROGRA~1\IBM\SQLLIB\java\common.jar;C:\Program Files (x86)\IBM\WebSphere MQ\java\lib\com.ibm.mqjms.jar;C:\Program Files (x86)\IBM\WebSphere MQ\java\lib\com.ibm.mq.jar
+PATH=C:\Program Files (x86)\IBM\WebSphere MQ\java\lib;C:\Program Files (x86)\IBM\WebSphere MQ\java\lib64;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Windows\system32\windowspowershell\v1.0\;c:\program files\ibm\gsk8\lib64;c:\program files (x86)\ibm\gsk8\lib;C:\PROGRA~1\IBM\SQLLIB\BIN;C:\PROGRA~1\IBM\SQLLIB\FUNCTION;C:\PROGRA~1\IBM\SQLLIB\SAMPLES\REPL;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\IBM\WebSphere MQ\bin64;C:\Program Files (x86)\IBM\WebSphere MQ\bin;C:\Program Files (x86)\IBM\WebSphere MQ\tools\c\samples\bin;C:\Program Files\apache-maven-3.3.9\bin;C:\Program Files\Java\jdk1.7.0_03\bin;C:\Program Files\Git\cmd;C:\Users\bandaru\Documents\apache-maven-3.3.9\bin;C:\Program Files\nodejs\;C:\Python27;C:\Users\bandaru\AppData\Roaming\npm
+USERNAME=bandaru
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 94 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7600 
+
+CPU:total 4 (4 cores per cpu, 1 threads per core) family 6 model 94 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt
+
+Memory: 4k page, physical 8388152k(1033548k free), swap 9413192k(1284384k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (22.1-b02) for windows-amd64 JRE (1.7.0_03-b05), built on Feb  3 2012 20:43:56 by "java_re" with unknown MS VC++:1600
+
+time: Tue Mar 28 17:34:37 2017
+elapsed time: 10817 seconds
+

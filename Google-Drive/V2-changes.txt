@@ -2,7 +2,18 @@ search functionality
 ---------------------
 https://www.googleapis.com/drive/v2/files?q=title='Folder 4-35'
 
+=========================================================================
+childres from folder
+-----------------------
+https://www.googleapis.com/drive/v2/files/0B67R--HNWuQad0VZMlFVU3B5am8(folder_Id)/children
 
+====================================
+get file by id
+----------------
+https://www.googleapis.com/drive/v2/files/1Ax6p3XDHPfw6QIgzWCCJp_njZWfRNADADIE8dXOUbJE
+
+
+============================================================================
 https://www.googleapis.com/drive/v2/changes
 ------------------------------------------
 {

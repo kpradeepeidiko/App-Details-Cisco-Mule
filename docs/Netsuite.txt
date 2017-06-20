@@ -20,7 +20,7 @@ Connector Credentials
 ====================================================================================
 netsuiteAccount=TSTDRV1512015
 netsuiteEmail=pradeep.kanukuntla@eidiko.com	
-netsuitePassword=Kpmahija12
+netsuitePassword=Kpm12
 netsuiteRoleId=3
 netsuiteApplicationId=6EBA066B-B22A-4248-A035-FB3CCFE14582
 

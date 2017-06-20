@@ -1,0 +1,140 @@
+{
+	"@odata.context": "https://outlook.office.com/api/v2.0/$metadata#Me/Calendars('AQMkADdmOTEwYTYyLTY3YTItNGM5MS05OQBlZi1iZGYyNTFhMmQ3NTYARgAAAwS0hENnmexJloVXuk_fAqsHAAk3sfeK1hFPvB0LZ3yHZFEAAAIBBgAAAAk3sfeK1hFPvB0LZ3yHZFEAAAIU-gAAAA%3D%3D')/Events",
+	"value": [{
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Events('AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWBAAA=')",
+		"@odata.etag": "W/\"CTex94rWEU+8HQtnfIdkUQAABIjq7A==\"",
+		"Id": "AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWBAAA=",
+		"CreatedDateTime": "2017-06-20T04:59:57.6646026Z",
+		"LastModifiedDateTime": "2017-06-20T04:59:57.711478Z",
+		"ChangeKey": "CTex94rWEU+8HQtnfIdkUQAABIjq7A==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E0080000000085ED5B1082E9D201000000000000000010000000C5FBE1A9FC3038458A970C51950CC4FC",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "My Event",
+		"BodyPreview": "hello",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": true,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWBAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Helvetica,sans-serif\">\r\n<p>hello</p>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-06-20T05:20:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-06-20T05:50:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Eider Motors",
+			"Address": {
+				"Type": "Unknown",
+				"Street": "1 St Floor, Tresorie, The Park Building, 22, Raj Bhavan Road, Somajiguda",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.4235,
+				"Longitude": 78.4624
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "ajaykumar suvarapu",
+				"Address": "ajay@eidiko372.onmicrosoft.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Calendars('AQMkADdmOTEwYTYyLTY3YTItNGM5MS05OQBlZi1iZGYyNTFhMmQ3NTYARgAAAwS0hENnmexJloVXuk_fAqsHAAk3sfeK1hFPvB0LZ3yHZFEAAAIBBgAAAAk3sfeK1hFPvB0LZ3yHZFEAAAIU-gAAAA==')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Calendars('AQMkADdmOTEwYTYyLTY3YTItNGM5MS05OQBlZi1iZGYyNTFhMmQ3NTYARgAAAwS0hENnmexJloVXuk_fAqsHAAk3sfeK1hFPvB0LZ3yHZFEAAAIBBgAAAAk3sfeK1hFPvB0LZ3yHZFEAAAIU-gAAAA==')"
+	}, {
+		"@odata.id": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Events('AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWAAAA=')",
+		"@odata.etag": "W/\"CTex94rWEU+8HQtnfIdkUQAABIjq6w==\"",
+		"Id": "AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWAAAA=",
+		"CreatedDateTime": "2017-06-20T04:55:07.6892518Z",
+		"LastModifiedDateTime": "2017-06-20T04:59:37.8675999Z",
+		"ChangeKey": "CTex94rWEU+8HQtnfIdkUQAABIjq6w==",
+		"Categories": [],
+		"OriginalStartTimeZone": "India Standard Time",
+		"OriginalEndTimeZone": "India Standard Time",
+		"iCalUId": "040000008200E00074C5B7101A82E008000000006633856381E9D20100000000000000001000000088AF1BE3FF732A41931B3510CD1AA8CF",
+		"ReminderMinutesBeforeStart": 15,
+		"IsReminderOn": true,
+		"HasAttachments": false,
+		"Subject": "Test Event",
+		"BodyPreview": "hi all updated",
+		"Importance": "Normal",
+		"Sensitivity": "Normal",
+		"IsAllDay": false,
+		"IsCancelled": false,
+		"IsOrganizer": true,
+		"ResponseRequested": false,
+		"SeriesMasterId": null,
+		"ShowAs": "Busy",
+		"Type": "SingleInstance",
+		"WebLink": "https://outlook.office365.com/owa/?itemid=AAMkADdmOTEwYTYyLTY3YTItNGM5MS05OWVmLWJkZjI1MWEyZDc1NgBGAAAAAAAEtIRDZ5nsSZaFV7pPnwKrBwAJN7H3itYRT7wdC2d8h2RRAAAAAAENAAAJN7H3itYRT7wdC2d8h2RRAAAEiDWAAAA%3D&exvsurl=1&path=/calendar/item",
+		"OnlineMeetingUrl": null,
+		"ResponseStatus": {
+			"Response": "Organizer",
+			"Time": "0001-01-01T00:00:00Z"
+		},
+		"Body": {
+			"ContentType": "HTML",
+			"Content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n<meta content=\"text/html; charset=us-ascii\">\r\n<style type=\"text/css\" style=\"display:none\">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir=\"ltr\">\r\n<div id=\"divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:#000000; font-family:Calibri,Helvetica,sans-serif\">\r\n<div class=\"rps_44a5\">\r\n<div>\r\n<div dir=\"ltr\">\r\n<div id=\"x_divtagdefaultwrapper\" dir=\"ltr\" style=\"font-size:12pt; color:rgb(0,0,0); font-family:Calibri,Helvetica,sans-serif,EmojiFont,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoji,&quot;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols\">\r\n<p>hi all updated</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+		},
+		"Start": {
+			"DateTime": "2017-06-20T05:15:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"End": {
+			"DateTime": "2017-06-20T05:45:00.0000000",
+			"TimeZone": "UTC"
+		},
+		"Location": {
+			"DisplayName": "Eidiko Systems Integrators Private Limited",
+			"Address": {
+				"Type": "Unknown",
+				"Street": "Unit no 1, First Floor, MJR Magnifique, Nanakramgud X Roads, Raidurga Navkhalsa",
+				"City": "Hyderabad",
+				"State": "Telangana",
+				"CountryOrRegion": "India",
+				"PostalCode": ""
+			},
+			"Coordinates": {
+				"Latitude": 17.4225,
+				"Longitude": 78.3823
+			}
+		},
+		"Recurrence": null,
+		"Attendees": [],
+		"Organizer": {
+			"EmailAddress": {
+				"Name": "ajaykumar suvarapu",
+				"Address": "ajay@eidiko372.onmicrosoft.com"
+			}
+		},
+		"Calendar@odata.associationLink": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Calendars('AQMkADdmOTEwYTYyLTY3YTItNGM5MS05OQBlZi1iZGYyNTFhMmQ3NTYARgAAAwS0hENnmexJloVXuk_fAqsHAAk3sfeK1hFPvB0LZ3yHZFEAAAIBBgAAAAk3sfeK1hFPvB0LZ3yHZFEAAAIU-gAAAA==')/$ref",
+		"Calendar@odata.navigationLink": "https://outlook.office.com/api/v2.0/Users('56dd6337-599a-4b81-93aa-e04254ec29da@3da61eb9-7725-4795-a1b9-428b974fd9eb')/Calendars('AQMkADdmOTEwYTYyLTY3YTItNGM5MS05OQBlZi1iZGYyNTFhMmQ3NTYARgAAAwS0hENnmexJloVXuk_fAqsHAAk3sfeK1hFPvB0LZ3yHZFEAAAIBBgAAAAk3sfeK1hFPvB0LZ3yHZFEAAAIU-gAAAA==')"
+	}]
+}

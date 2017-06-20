@@ -1,0 +1,528 @@
+Create Board
+---------------
+POST : https://trello.com/1/boards?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+
+body
+------
+{
+	"name":"Any_Name"
+}
+
+Response
+--------------
+{
+    "id": "59439f4749af0a668c332628",
+    "name": "Two_Way Board",
+    "desc": "",
+    "descData": null,
+    "closed": false,
+    "idOrganization": null,
+    "pinned": false,
+    "url": "https://trello.com/b/60GmuxdQ/twoway-board",
+    "shortUrl": "https://trello.com/b/60GmuxdQ",
+    "prefs": {
+        "permissionLevel": "private",
+        "voting": "disabled",
+        "comments": "members",
+        "invitations": "members",
+        "selfJoin": true,
+        "cardCovers": true,
+        "cardAging": "regular",
+        "calendarFeedEnabled": false,
+        "background": "blue",
+        "backgroundImage": null,
+        "backgroundImageScaled": null,
+        "backgroundTile": false,
+        "backgroundBrightness": "dark",
+        "backgroundColor": "#0079BF",
+        "canBePublic": true,
+        "canBeOrg": true,
+        "canBePrivate": true,
+        "canInvite": true
+    },
+    "labelNames": {
+        "green": "",
+        "yellow": "",
+        "orange": "",
+        "red": "",
+        "purple": "",
+        "blue": "",
+        "sky": "",
+        "lime": "",
+        "pink": "",
+        "black": ""
+    }
+}
+
+=====================================================================
+Members on board
+-----------------
+GET : https://trello.com/1/boards/uIgWdMG7/members?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+Response
+-----------
+[
+    {
+        "id": "574c4093391ef6e2032e73c9",
+        "fullName": "pradeep kanukuntla",
+        "username": "kpradeep_eidiko"
+    },
+    {
+        "id": "574c402243f5fe2957b59a10",
+        "fullName": "ravindra.j",
+        "username": "ravindraj"
+    }
+]
+
+=====================================================
+Get "Lists" on board
+----------------------
+GET : https://trello.com/1/boards/uIgWdMG7/lists?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+Response
+----------------
+[
+    {
+        "id": "574c447c529a3d5eb1b58ab3",
+        "name": "eidiko on trello",
+        "closed": false,
+        "idBoard": "574c42a4bc9cbcc301ef5273",
+        "pos": 65535,
+        "subscribed": false
+    },
+    {
+        "id": "574c4552d69fea97b6979977",
+        "name": "hai",
+        "closed": false,
+        "idBoard": "574c42a4bc9cbcc301ef5273",
+        "pos": 131071,
+        "subscribed": false
+    }
+]
+
+========================================
+Get cards by listId
+------------------------
+GET : https://trello.com/1/lists/574c447c529a3d5eb1b58ab3/cards?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+
+Response
+-----------
+[
+    {
+        "id": "574c448d6d9f6ccef1690a3c",
+        "checkItemStates": null,
+        "closed": false,
+        "dateLastActivity": "2017-06-16T09:14:01.520Z",
+        "desc": "",
+        "descData": null,
+        "idBoard": "574c42a4bc9cbcc301ef5273",
+        "idList": "574c447c529a3d5eb1b58ab3",
+        "idMembersVoted": [],
+        "idShort": 1,
+        "idAttachmentCover": null,
+        "manualCoverAttachment": false,
+        "idLabels": [
+            "574c42a45b9b3323fb392732"
+        ],
+        "name": "any one online",
+        "pos": 65535,
+        "shortLink": "gtdyEWpe",
+        "badges": {
+            "votes": 0,
+            "viewingMemberVoted": false,
+            "subscribed": false,
+            "fogbugz": "",
+            "checkItems": 0,
+            "checkItemsChecked": 0,
+            "comments": 0,
+            "attachments": 0,
+            "description": false,
+            "due": null,
+            "dueComplete": false
+        },
+        "dueComplete": false,
+        "due": null,
+        "idChecklists": [],
+        "idMembers": [],
+        "labels": [
+            {
+                "id": "574c42a45b9b3323fb392732",
+                "idBoard": "574c42a4bc9cbcc301ef5273",
+                "name": "",
+                "color": "purple",
+                "uses": 2
+            }
+        ],
+        "shortUrl": "https://trello.com/c/gtdyEWpe",
+        "subscribed": false,
+        "url": "https://trello.com/c/gtdyEWpe/1-any-one-online"
+    },
+    {
+        "id": "574c4657ab2d26291af16624",
+        "checkItemStates": null,
+        "closed": false,
+        "dateLastActivity": "2016-05-30T13:55:35.922Z",
+        "desc": "",
+        "descData": null,
+        "idBoard": "574c42a4bc9cbcc301ef5273",
+        "idList": "574c447c529a3d5eb1b58ab3",
+        "idMembersVoted": [],
+        "idShort": 2,
+        "idAttachmentCover": null,
+        "manualCoverAttachment": false,
+        "idLabels": [
+            "574c42a45b9b3323fb392732"
+        ],
+        "name": "members",
+        "pos": 131071,
+        "shortLink": "Nm9ODNaP",
+        "badges": {
+            "votes": 0,
+            "viewingMemberVoted": false,
+            "subscribed": true,
+            "fogbugz": "",
+            "checkItems": 0,
+            "checkItemsChecked": 0,
+            "comments": 0,
+            "attachments": 0,
+            "description": false,
+            "due": null,
+            "dueComplete": false
+        },
+        "dueComplete": false,
+        "due": null,
+        "idChecklists": [],
+        "idMembers": [
+            "574c4093391ef6e2032e73c9",
+            "574c402243f5fe2957b59a10"
+        ],
+        "labels": [
+            {
+                "id": "574c42a45b9b3323fb392732",
+                "idBoard": "574c42a4bc9cbcc301ef5273",
+                "name": "",
+                "color": "purple",
+                "uses": 2
+            }
+        ],
+        "shortUrl": "https://trello.com/c/Nm9ODNaP",
+        "subscribed": true,
+        "url": "https://trello.com/c/Nm9ODNaP/2-members"
+    }
+]
+
+=======================================================
+Comment on card by card id
+--------------------------------
+POST : https://trello.com/1/cards/574c4657ab2d26291af16624/actions/comments?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+x-www-form-urlencoded
+
+key : text | value: your comment
+
+Response
+----------
+{
+    "id": "5943a578f277587d7aaab03f",
+    "idMemberCreator": "574c4093391ef6e2032e73c9",
+    "data": {
+        "text": "hi hello 2 way",
+        "textData": {
+            "emoji": {}
+        },
+        "card": {
+            "id": "574c4657ab2d26291af16624",
+            "name": "members",
+            "idShort": 2,
+            "shortLink": "Nm9ODNaP"
+        },
+        "board": {
+            "id": "574c42a4bc9cbcc301ef5273",
+            "name": "pradeeps_board",
+            "shortLink": "uIgWdMG7"
+        },
+        "list": {
+            "id": "574c447c529a3d5eb1b58ab3",
+            "name": "eidiko on trello"
+        }
+    },
+    "type": "commentCard",
+    "date": "2017-06-16T09:31:36.532Z",
+    "memberCreator": {
+        "id": "574c4093391ef6e2032e73c9",
+        "avatarHash": null,
+        "fullName": "pradeep kanukuntla",
+        "initials": "K",
+        "username": "kpradeep_eidiko"
+    },
+    "entities": [
+        {
+            "type": "member",
+            "id": "574c4093391ef6e2032e73c9",
+            "username": "kpradeep_eidiko",
+            "text": "pradeep kanukuntla"
+        },
+        {
+            "type": "text",
+            "text": "on",
+            "hideIfContext": true,
+            "idContext": "574c4657ab2d26291af16624"
+        },
+        {
+            "type": "card",
+            "hideIfContext": true,
+            "shortLink": "Nm9ODNaP",
+            "id": "574c4657ab2d26291af16624",
+            "text": "members"
+        },
+        {
+            "type": "comment",
+            "text": "hi hello 2 way"
+        }
+    ],
+    "display": {
+        "translationKey": "action_comment_on_card",
+        "entities": {
+            "contextOn": {
+                "type": "translatable",
+                "translationKey": "action_on",
+                "hideIfContext": true,
+                "idContext": "574c4657ab2d26291af16624"
+            },
+            "card": {
+                "type": "card",
+                "hideIfContext": true,
+                "shortLink": "Nm9ODNaP",
+                "id": "574c4657ab2d26291af16624",
+                "text": "members"
+            },
+            "comment": {
+                "type": "comment",
+                "text": "hi hello 2 way"
+            },
+            "memberCreator": {
+                "type": "member",
+                "id": "574c4093391ef6e2032e73c9",
+                "username": "kpradeep_eidiko",
+                "text": "pradeep kanukuntla"
+            }
+        }
+    }
+}
+==============================================================
+Attachment to card by cardId by url
+----------------------------------------
+POST : https://trello.com/1/cards/574c4657ab2d26291af16624/attachments?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836&url=http://www.rotoscopers.com/wp-content/uploads/2015/04/25646.jpg&name=xyz.txt
+
+
+Response
+----------
+{
+    "id": "5943ac117adc79ff97a8ad9e",
+    "bytes": 232127,
+    "date": "2017-06-16T09:59:45.018Z",
+    "edgeColor": "#8e2411",
+    "idMember": "574c4093391ef6e2032e73c9",
+    "isUpload": true,
+    "mimeType": null,
+    "name": "25646.jpg",
+    "previews": [
+        {
+            "bytes": 7400,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/70x50/eabb70ff22259f15c05a789c8f5389e0/25646.jpg.png",
+            "height": 50,
+            "width": 70,
+            "_id": "5943ac1388b3e9a644afa216",
+            "scaled": false
+        },
+        {
+            "bytes": 77380,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/250x150/6d33b0052e31ffa1d33099ea0aaf96b7/25646.jpg.png",
+            "height": 150,
+            "width": 250,
+            "_id": "5943ac1388b3e9a644afa215",
+            "scaled": false
+        },
+        {
+            "bytes": 4006,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/150x84/2e0a8cf73dadf79e32fd7b3f046b3458/25646.jpg",
+            "height": 84,
+            "width": 150,
+            "_id": "5943ac1388b3e9a644afa214",
+            "scaled": true
+        },
+        {
+            "bytes": 12147,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/300x169/5a7eb047d0b32ca4807cc02e44a808cc/25646.jpg",
+            "height": 169,
+            "width": 300,
+            "_id": "5943ac1388b3e9a644afa213",
+            "scaled": true
+        },
+        {
+            "bytes": 37800,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/600x338/f850cd94b82f7ba48f1a8deb4b176d8c/25646.jpg",
+            "height": 338,
+            "width": 600,
+            "_id": "5943ac1388b3e9a644afa212",
+            "scaled": true
+        },
+        {
+            "bytes": 114676,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c4657ab2d26291af16624/1200x675/2180947f40e6fb9fa14535016d0bf046/25646.jpg",
+            "height": 675,
+            "width": 1200,
+            "_id": "5943ac1388b3e9a644afa211",
+            "scaled": true
+        },
+        {
+            "bytes": 232127,
+            "height": 1080,
+            "width": 1920,
+            "url": "https://trello-attachments.s3.amazonaws.com/574c42a4bc9cbcc301ef5273/574c4657ab2d26291af16624/4b5dbbd3b33c246ba385b91daeaeee24/25646.jpg",
+            "_id": "5943ac1388b3e9a644afa210",
+            "scaled": true
+        }
+    ],
+    "url": "https://trello-attachments.s3.amazonaws.com/574c42a4bc9cbcc301ef5273/574c4657ab2d26291af16624/4b5dbbd3b33c246ba385b91daeaeee24/25646.jpg",
+    "pos": 16384
+}
+==========================================================================
+Attachment for card by cardId by file
+------------------------------------------
+POST : https://trello.com/1/cards/574c4657ab2d26291af16624/attachments?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836&file=@[C:\file_folder\pydev_eclipse.txt]&name=xyz.txt
+
+Response
+------------
+{
+    "id": "5943d3884efab95fe421cd84",
+    "bytes": 35,
+    "date": "2017-06-16T12:48:08.346Z",
+    "edgeColor": null,
+    "idMember": "574c4093391ef6e2032e73c9",
+    "isUpload": true,
+    "mimeType": null,
+    "name": "Upload",
+    "previews": [],
+    "url": "https://trello-attachments.s3.amazonaws.com/574c42a4bc9cbcc301ef5273/574c4657ab2d26291af16624/3f0239e1ed6cb017650de09582dbe4be/Upload",
+    "pos": 49152
+}
+
+=========================================================================================
+Change Due date for card
+---------------------------
+PUT : https://trello.com/1/cards/574c4657ab2d26291af16624/due?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836&value=6/18/2017
+
+Response
+-------------
+{
+    "id": "574c4657ab2d26291af16624",
+    "badges": {
+        "votes": 0,
+        "viewingMemberVoted": false,
+        "subscribed": true,
+        "fogbugz": "",
+        "checkItems": 0,
+        "checkItemsChecked": 0,
+        "comments": 1,
+        "attachments": 4,
+        "description": false,
+        "due": "2017-06-18T04:00:00.000Z",
+        "dueComplete": false
+    },
+    "checkItemStates": [],
+    "closed": false,
+    "dateLastActivity": "2017-06-16T13:00:32.824Z",
+    "desc": "",
+    "descData": null,
+    "due": "2017-06-18T04:00:00.000Z",
+    "dueComplete": false,
+    "email": null,
+    "idBoard": "574c42a4bc9cbcc301ef5273",
+    "idChecklists": [],
+    "idLabels": [
+        "574c42a45b9b3323fb392732"
+    ],
+    "idList": "574c447c529a3d5eb1b58ab3",
+    "idMembers": [
+        "574c4093391ef6e2032e73c9",
+        "574c402243f5fe2957b59a10"
+    ],
+    "idShort": 2,
+    "idAttachmentCover": "5943ac117adc79ff97a8ad9e",
+    "manualCoverAttachment": false,
+    "labels": [
+        {
+            "id": "574c42a45b9b3323fb392732",
+            "idBoard": "574c42a4bc9cbcc301ef5273",
+            "name": "",
+            "color": "purple",
+            "uses": 2
+        }
+    ],
+    "name": "members",
+    "pos": 131071,
+    "shortUrl": "https://trello.com/c/Nm9ODNaP",
+    "url": "https://trello.com/c/Nm9ODNaP/2-members"
+}
+======================================================================================
+Get Checklists for card
+----------------------------
+GET : https://trello.com/1/cards/574c4657ab2d26291af16624/checklists?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+Response
+----------
+[
+    {
+        "id": "594761f552e8b1c275b5f33b",
+        "name": "My_Sample_CheckList",
+        "idBoard": "574c42a4bc9cbcc301ef5273",
+        "idCard": "574c4657ab2d26291af16624",
+        "pos": 16384,
+        "checkItems": []
+    }
+]
+=======================================================================================================
+Delete checklist
+-------------------
+DELETE : https://trello.com/1/cards/574c4657ab2d26291af16624/checklists/594761f552e8b1c275b5f33b?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+
+Response
+----------
+[]
+
+================================================================================================
+Post check list
+------------------
+POST : https://trello.com/1/cards/574c4657ab2d26291af16624/checklists?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+form params
+--------------
+name(key) my_checklist(value)
+
+Response
+----------
+{
+    "id": "594763a94a15b86562ac344c",
+    "name": "my_checklist",
+    "idBoard": "574c42a4bc9cbcc301ef5273",
+    "idCard": "574c4657ab2d26291af16624",
+    "pos": 16384,
+    "checkItems": []
+}
+================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+

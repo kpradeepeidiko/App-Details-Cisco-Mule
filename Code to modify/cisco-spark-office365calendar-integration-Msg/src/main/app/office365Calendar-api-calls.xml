@@ -478,11 +478,6 @@ flowVars['userTimezone']=flowVars['timezone1'].toString().replace(')','')]]></ex
                                             <http:query-param paramName="startDateTime" value="#[flowVars['startDateTime']]"/>
                                             <http:query-param paramName="endDateTime" value="#[flowVars['endDateTime']]"/>
                                             <http:header headerName="Authorization" value="Bearer #[flowVars['GCAccessToken']]"/>
-
-
-
-
-
 										</http:request-builder>
 									</http:request>
 
@@ -615,9 +610,14 @@ flowVars['updt'] = (new org.mule.el.datetime.DateTime(flowVars['itemDetails']['L
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
+
                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
                                                                                         <expression-component doc:name="Expression"><![CDATA[StringBuffer buffer = new StringBuffer(flowVars.address);
@@ -732,9 +732,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -859,9 +863,14 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+
+]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -985,9 +994,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -996,10 +1009,10 @@ flowVars.address = buffer.reverse().toString().replaceFirst(",","");
 flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></expression-component>
                                                                                     </when>
                                                                                     <when expression="#[flowVars['address'] == empty]">
-                                                                                        <logger level="DEBUG" doc:name="Logger" message="address empty"/>
+                                                                                        <logger level="DEBUG" doc:name="Logger" message="address empty = #[flowVars.address]"/>
                                                                                     </when>
                                                                                     <otherwise>
-                                                                                        <logger level="DEBUG" doc:name="Logger" message="default"/>
+                                                                                        <logger level="DEBUG" doc:name="Logger" message="default "/>
                                                                                     </otherwise>
                                                                                 </choice>
 																				<choice doc:name="Choice">
@@ -1348,9 +1361,12 @@ flowVars.MDDate2 = (new org.mule.el.datetime.DateTime(flowVars.EndTimeC)).format
 
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1474,9 +1490,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																						<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
                                                                                                <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1619,9 +1638,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1740,9 +1762,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																						<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1887,9 +1913,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2014,9 +2044,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																						<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2161,9 +2195,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2288,9 +2326,13 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																						<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')
+]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2435,9 +2477,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2562,9 +2607,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																						<expression-component doc:name="Remove '\r\n' from Description Preview"><![CDATA[flowVars['SamplePreview'] = flowVars['itemDetails']['BodyPreview'].toString().replace('\r\n',' ')]]></expression-component>
 																						<choice doc:name="Check Address Field">
 																							<when expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+                                                                                                <expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2741,9 +2789,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2864,9 +2915,12 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 																		<choice doc:name="Check Address Field">
 																			<when
 																				expression="#[flowVars['itemDetails']['Location'].containsKey('Address')]">
-																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+																				<expression-component doc:name="Get Address"><![CDATA[flowVars['address'] = flowVars['itemDetails']['Location']['Address'].toString().replace('{',' ').replace('}',' ').replace('Type=',' ').replace('Street=',' ').replace('City=',' ').replace('State=',' ').replace('CountryOrRegion=',' ').replace(', PostalCode=',' ');
+flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
-flowVars.address = flowVars.address.replace('    ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('    ','');
+flowVars.address = flowVars.address.replace('   ','');
+flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">

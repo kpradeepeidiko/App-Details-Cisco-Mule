@@ -1,0 +1,17 @@
+{
+	"sparkResponse": {
+		"id": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvZWY1NDEwODAtNGYzZS0xMWU3LTlhZmMtN2IyMDczYjRiOWQx",
+		"roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vMzkyZjM0YjAtMGIwMC0xMWU3LWFmNmUtYzcxNGI4YjU3Y2Y2",
+		"roomType": "group",
+		"text": "jiradevbot createIssue | project:Jira2way | summary:working on two way | issuetype:bug | priority:low | description:implementing two way | components:component1 | labels:label1 | environment:production | duedate:2017-07-11 | originalestimate:10 | remainingestimate:5 | securitylevel:level1 | assignee :harish.eidiko | affectedversion : version1 | fixversion: verion2",
+		"personId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjY4ZmI1NS1kMjAxLTQ4ZmEtOTU3ZC0yZTQ3ODIwNTFmYmI",
+		"personEmail": "harish.eidiko@gmail.com",
+		"html": "vbsdfbvskjdfnvsjdfvdg",
+		"mentionedPeople": [
+			"Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mZWM0ODM0YS03NTNhLTQxNjktOGM2My0yN2RjNGZiNDI3Y2Y"
+		],
+		"created": "2017-06-12T07:15:37.992Z"
+	},
+	"intgerationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4MDhhY2YzNTA1NjFiNjg5NmNkYWJhOWEzMjg5MDYwYWU2Y2E5YWRmODZmNDVlNGZlMzQ3ZTgxNDY4NWQ2ODA3",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjY4ZmI1NS1kMjAxLTQ4ZmEtOTU3ZC0yZTQ3ODIwNTFmYmI"
+}

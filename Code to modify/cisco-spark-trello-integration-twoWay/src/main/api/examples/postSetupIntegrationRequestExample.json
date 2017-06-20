@@ -1,0 +1,17 @@
+{
+	"roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vNzYzNGY5NjAtMWU3Yy0xMWU2LWI0MTktMDEzYTg5NjQ1ODFj",
+	"integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL2RhOGI1MTYxLWNmZTgtNGNmOS1iNGI3LTQwOGNiN2E3NjYyNA",
+	"sparkToken": "OTdiMTBlYjQtODdmYS00MGJiLTkzYzMtNjAxZDdmNGI3NGIzZDUzMjU3Y2ItZTZi",
+	"userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjY4ZmI1NS1kMjAxLTQ4ZmEtOTU3ZC0yZTQ3ODIwNTFmYmI",
+	"instanceId":"3137",
+	"configJson": {
+		"room_name": "Practice",
+		"boardId": "5773d192223f67a752a8f3a9",
+		"board_name": "Harish",
+		"user_name": "Harish",
+		"notifications": {
+			"boardandlistnotifications": ["list-created", "list-moved-to-board"],
+			"cardnotifications": "card-created"
+		}
+	}
+}

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:Trello="http://www.mulesoft.org/schema/mule/Trello" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/Trello http://www.mulesoft.org/schema/mule/Trello/current/mule-Trello.xsd">
+  	
+  
+    <Trello:config name="Trello__Configuration"   doc:name="Trello: Configuration"/>
+    <flow name="getListsFromBoardsFlow">
+        <Trello:get-all-lists-under-board config-ref="Trello__Configuration" boardId="#[flowVars['boardId']]" token="#[flowVars['accessToken']]" doc:name="Trello"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger message=" Lists #[payload]" level="DEBUG" doc:name="Logger"/>
+        <dw:transform-message doc:name="Transform Message">
+        <dw:input-payload mimeType="application/json"/>
+            <dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl" variableName="listResponse"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="getTrelloBoardsFlow">
+        <logger message="/1/members/me/boards?key=${app-key}&amp;token=#[flowVars.accessToken]" level="INFO" doc:name="Logger"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/1/members/me/boards?key=${app-key}&amp;token=#[flowVars.accessToken]" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Content-Type" value="application/Json"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger level="INFO" doc:name="Logger" message="#[message.payloadAs(java.lang.String)]"/>
+        <dw:transform-message doc:name="Transform Message">
+        <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="getTrelloUserInformationFlow">
+        <logger message="#[flowVars['accessToken']]" level="INFO" doc:name="Logger"/>
+        <Trello:get-member-by-id-or-username config-ref="Trello__Configuration" token="#[flowVars['accessToken']]" doc:name="Trello" idOrUserName="me"/>
+
+        <dw:transform-message doc:name="Transform Message">
+        <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="deleteTrelloHookFlow">
+        <Trello:delete-webhook-by-id config-ref="Trello__Configuration" idWebhook="#[flowVars['hookId']]" token="#[flowVars['accessToken']]" doc:name="Trello"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <logger message="delete payload #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="putIntegrationInstanceFlow">
+        <logger message="Intiail payload in update flow#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <dw:transform-message doc:name="TranformRequest        ToJava">
+        <dw:input-payload mimeType="application/json"/>
+            <dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl" variableName="settingsResponse"/>
+</dw:transform-message>
+        <logger message="update floe#[flowVars['settingsResponse']] &amp;&amp; #[flowVars['settingsResponse']['instanceUuid']]" level="DEBUG" doc:name="Logger"/>
+        <logger message="#[flowVars['settingsResponse']['instanceUuid']]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="integrationId" value="#[flowVars['settingsResponse']['integrationId']]" doc:name=" Set Integration Id"/>
+        <set-variable variableName="instanceUuid" value="#[flowVars['settingsResponse']['instanceUuid']]" doc:name="Variable"/>
+        <set-variable variableName="userId" value="#[flowVars['settingsResponse']['userId']]" doc:name="userId"/>
+        <set-variable variableName="hookId" value="#[flowVars['settingsResponse']['configJson']['webhook_id']]" doc:name="Set Hook Id"/>
+        <logger message=" PUT flow InsId#[flowVars['settingsResponse']['instance_id']] &amp;&amp; instanceUuid: #[flowVars['settingsResponse']['instanceUuid']]" level="INFO" doc:name="Logger"/>
+        <set-variable variableName="boardId" value="#[flowVars['settingsResponse']['configJson']['board_id']]" doc:name="Variable"/>
+        <flow-ref name="getRuntimeAccessTokenFlow" doc:name="getRuntimeAccessTokenFlow"/>
+        <set-variable variableName="token" value="#[flowVars['accessToken']]" doc:name="Set Trello Token"/>
+        <logger message="#[flowVars.settingsResponse.repo_modified =='true'] " level="INFO" doc:name="Logger"/>
+        <choice doc:name="Choice">
+            <when expression="#[flowVars.settingsResponse.repo_modified =='true']">
+                <logger message="Enter into repomodified flow" level="INFO" doc:name="Logger"/>
+                <enricher target="#[flowVars['y']]" doc:name="Message Enricher">
+                    <flow-ref name="deleteTrelloHookFlow" doc:name="deleteTrelloHookFlow"/>
+                </enricher>
+                <enricher target="#[flowVars['hookResponse']]" doc:name="Message Enricher">
+                    <flow-ref name="postTrelloHookFlow" doc:name="postTrelloHookFlow"/>
+                </enricher>
+                <choice doc:name="Choice">
+                    <when expression="#[flowVars.hookResponse.id != empty]">
+                        <dw:transform-message doc:name="Transform ReponseToJson">
+                            <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationResponse.dwl"/>
+                        </dw:transform-message>
+                    </when>
+                    <when expression="#[flowVars.hookResponse.id != empty]">
+                        <logger level="INFO" doc:name="Logger"/>
+                        <dw:transform-message doc:name="Transform Message">
+                            <dw:set-payload resource="classpath:dwScripts/buildWebhookFailedResponse.dwl"/>
+                        </dw:transform-message>
+                    </when>
+                    <otherwise>
+                        <logger message="Default" level="INFO" doc:name="Logger"/>
+                    </otherwise>
+                </choice>
+                <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="HTTP">
+                    <http:request-builder>
+                        <http:uri-param paramName="instanceId" value="#[flowVars['settingsResponse']['instance_id']]"/>
+
+                    </http:request-builder>
+                </http:request>
+                <dw:transform-message doc:name="Transform Response To Json">
+                    <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationHttpResponse.dwl"/>
+                </dw:transform-message>
+            </when>
+            <otherwise>
+                <logger message="Enter into prevoius repo flow   #[flowVars.hookId]" level="INFO" doc:name="Logger"/>
+                <expression-component doc:name="Expression"><![CDATA[flowVars.hookId = flowVars.hookId.toString()]]></expression-component>
+
+                <enricher target="#[flowVars.x]" doc:name="Message Enricher">
+                    <flow-ref name="updateTrelloWebhookFlow" doc:name="updateTrelloWebhookFlow"/>
+                </enricher>
+            </otherwise>
+        </choice>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="updateTrelloWebhookFlow">
+        <logger message=" ID:::: #[flowVars.hookId]  &amp;&amp;   #[flowVars.token]" level="INFO" doc:name="Logger"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/1/webhooks/#[flowVars.hookId]?key=9338edc094283fd8e41a086bad98aaf9&amp;token=#[flowVars.accessToken]" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="#[flowVars.accessToken]"/>
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <logger message="update webhook Response #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <logger message="update webhook payload  #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="postTrelloHookFlow">
+
+        <set-variable variableName="url" value="https://${trello.webhook.domain}/api/hooks/#[flowVars.instanceUuid]" doc:name="URL"/>
+        <Trello:post-webhook config-ref="Trello__Configuration" token="#[flowVars.token]" doc:name="Trello">
+            <Trello:webhooks-post-req description="webhook" callbackURL="#[flowVars.url]" idModel="#[flowVars.boardId]"/>
+        </Trello:post-webhook>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <logger message="hook creation fl;ow #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        
+        <dw:transform-message doc:name="Transform Response to Java">
+        
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+
+</mule>

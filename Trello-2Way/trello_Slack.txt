@@ -1,0 +1,65 @@
+/trello commands
+
+Hi! Here are the commands you can use with Trello. If you need more help you can always reach us with /trello feedback.
+
+
+1)Add a card
+	/trello add [teammates] [card name] 
+	Example: /trello add @john @jessica Finish blog post
+
+	
+2)Search
+	/trello search [terms] 
+	Example: /trello search meeting agenda
+
+	
+3)Link a channel to a board 
+	/trello link [search term or board url] 
+	Example: /trello link Project Awesome or /trello link https://trello.com/b/nCQJJoZ/project-awesome
+
+	
+4)Change list cards are added to 
+	/trello set-list
+	
+5)Show details of a card or a board 
+	/trello [url] 
+	Example: /trello https://trello.com/b/nC8JJoZ/project-awesome
+
+	
+6)Send us feedback 
+	/trello feedback I love tacos!
+	
+7)View the linked board information for a channel 
+	/trello info 
+
+	
+8)Unlink Trello and Slack teams 
+	/trello unlink-team 
+	Note - You have to be an admin of either the Slack team or the linked Trello team to use this command. Your entire team will no longer be able to use Trello inside Slack. You will no longer be able to use /trello, buttons or view details of Trello items inside of Slack.
+
+	
+9)Unlink a channel from a Trello board
+	/trello unlink
+
+
+10)Remove and deauthorize linked Trello user account
+	/trello reset
+
+
+11)Verify linked Trello user account and team membership
+	/trello setup
+
+	Note: The commands below will update the last card shown by @trello or added through /trello add
+
+
+12)Assign teammates to a card 
+	/trello assign @john @jessica
+
+	
+13)Add a comment to a card 
+	/trello comment [comment text] 
+	Example: /trello comment That’s awesome!
+
+	
+14)Add a due date 
+	/trello set-due next Friday at 5pm or /trello set-due today
