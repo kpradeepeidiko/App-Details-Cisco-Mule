@@ -614,8 +614,7 @@ flowVars['updt'] = (new org.mule.el.datetime.DateTime(flowVars['itemDetails']['L
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -736,8 +735,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
@@ -867,8 +865,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 
 ]]></expression-component>
 
@@ -998,9 +995,8 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
-]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
+
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1365,8 +1361,7 @@ flowVars.MDDate2 = (new org.mule.el.datetime.DateTime(flowVars.EndTimeC)).format
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1494,8 +1489,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
                                                                                                <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1642,8 +1636,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -1766,8 +1759,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -1917,8 +1909,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -2048,8 +2039,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -2199,8 +2189,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -2330,8 +2319,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')
+flowVars.address = flowVars.address.replace('   ','')
 ]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
@@ -2481,8 +2469,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2611,8 +2598,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
                                                                                                 <choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2793,8 +2779,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
@@ -2919,8 +2904,7 @@ flowVars.address = new StringBuffer(flowVars.address).reverse().toString()]]></e
 flowVars.address = flowVars.address.replace('Unknown',' ');
 flowVars.address = flowVars.address.replace(' , ','');
 flowVars.address = flowVars.address.replace('    ','');
-flowVars.address = flowVars.address.replace('   ','');
-flowVars.address = flowVars.address.replace('  ','')]]></expression-component>
+flowVars.address = flowVars.address.replace('   ','')]]></expression-component>
 
 																				<choice doc:name="Check Addres empty or Contains ','">
                                                                                     <when expression="#[flowVars['address'] != empty &amp;&amp; flowVars['address'].toString().endsWith(',')]">
