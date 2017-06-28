@@ -1,3 +1,264 @@
+Get All Boards
+----------------
+GET : https://trello.com/1/members/me/boards?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+
+Response
+-----------
+[
+    {
+        "name": "Two_Way Board",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "60GmuxdQ",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "59439f4749af0a668c332628",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/60GmuxdQ/twoway-board",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "Test_Label",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "dateLastView": "2017-06-28T06:44:15.604Z",
+        "shortUrl": "https://trello.com/b/60GmuxdQ",
+        "memberships": [
+            {
+                "id": "59439f4749af0a668c33262c",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "Welcome Board",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "ZXAVtOGZ",
+        "powerUps": [],
+        "dateLastActivity": "2016-05-30T13:30:59.681Z",
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "574c4093391ef6e2032e73ca",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/ZXAVtOGZ/welcome-board",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "dateLastView": "2017-06-16T09:08:29.420Z",
+        "shortUrl": "https://trello.com/b/ZXAVtOGZ",
+        "memberships": [
+            {
+                "id": "574c4093391ef6e2032e73ce",
+                "idMember": "4e6a7fad05d98b02ba00845c",
+                "memberType": "normal",
+                "unconfirmed": false,
+                "deactivated": false
+            },
+            {
+                "id": "574c4093391ef6e2032e73cf",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "pradeeps_board",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "uIgWdMG7",
+        "powerUps": [],
+        "dateLastActivity": "2017-06-16T13:02:54.821Z",
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "574c42a4bc9cbcc301ef5273",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/uIgWdMG7/pradeepsboard",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": false,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "dateLastView": "2017-06-19T06:22:16.692Z",
+        "shortUrl": "https://trello.com/b/uIgWdMG7",
+        "memberships": [
+            {
+                "id": "574c42a4bc9cbcc301ef5274",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            },
+            {
+                "id": "574c44c337162f7e179220c2",
+                "idMember": "574c402243f5fe2957b59a10",
+                "memberType": "normal",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    }
+]
+
+====================================================================
+Get Board By Id
+-------------------
+GET : https://trello.com/1/boards/59439f4749af0a668c332628?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+Response
+-----------
+{
+    "id": "59439f4749af0a668c332628",
+    "name": "Two_Way Board",
+    "desc": "",
+    "descData": null,
+    "closed": false,
+    "idOrganization": null,
+    "pinned": false,
+    "url": "https://trello.com/b/60GmuxdQ/twoway-board",
+    "shortUrl": "https://trello.com/b/60GmuxdQ",
+    "prefs": {
+        "permissionLevel": "private",
+        "voting": "disabled",
+        "comments": "members",
+        "invitations": "members",
+        "selfJoin": true,
+        "cardCovers": true,
+        "cardAging": "regular",
+        "calendarFeedEnabled": false,
+        "background": "blue",
+        "backgroundImage": null,
+        "backgroundImageScaled": null,
+        "backgroundTile": false,
+        "backgroundBrightness": "dark",
+        "backgroundColor": "#0079BF",
+        "canBePublic": true,
+        "canBeOrg": true,
+        "canBePrivate": true,
+        "canInvite": true
+    },
+    "labelNames": {
+        "green": "Test_Label",
+        "yellow": "",
+        "orange": "",
+        "red": "",
+        "purple": "",
+        "blue": "",
+        "sky": "",
+        "lime": "",
+        "pink": "",
+        "black": ""
+    }
+}
+
+======================================================
 Create Board
 ---------------
 POST : https://trello.com/1/boards?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836

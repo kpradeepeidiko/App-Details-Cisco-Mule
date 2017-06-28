@@ -1,0 +1,47 @@
+Bot Access Token
+--------------------
+Bearer ZTU0MDViN2EtYTJjOS00Y2EyLWI4YTYtMDlkMzNmNGIxYzQ1NTNhODBhYTctMjA2
+
+
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY",
+	"emails": [
+		"trello_spark@sparkbot.io"
+	],
+	"displayName": "Trello",
+	"avatar": "https://c74213ddaf67eb02dabb-04de5163e3f90393a9f7bb6f7f0967f1.ssl.cf1.rackcdn.com/V1~4c3b980d0a78505bc5e2346b61ec7f56~EIJ-8-zIRC-ERZJ7xab2HA==~80",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"created": "2017-06-27T10:59:21.001Z",
+	"type": "bot"
+}
+
+
+webhook_url
+--------------
+https://f6c90de3.ngrok.io/test/trello/bot
+
+
+create webhook response
+-------------------------
+{
+	"name": "Trello",
+	"targetUrl": "https://f6c90de3.ngrok.io/test/trello/bot",
+	"resource": "messages",
+	"event": "created",
+	"filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY"
+}
+
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDAxYzc5ZGYtMTI1ZC00NmE5LTk3YjItZDgwZWJiYzJmYjg5",
+	"name": "Trello",
+	"targetUrl": "https://f6c90de3.ngrok.io/test/trello/bot",
+	"resource": "messages",
+	"event": "created",
+	"filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY",
+	"appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+	"ownedBy": "creator",
+	"status": "active",
+	"created": "2017-06-27T11:07:39.311Z"
+}
