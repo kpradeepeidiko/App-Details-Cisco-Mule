@@ -1,7 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.8.0"
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <flow name="List-Cards-On-List-By-ListId">
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/cards" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="List-Board-On-List-By-ListId">
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/board" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="Change-List-Name">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"value": flowVars['listName']
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/name" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="Add-Card-To-List-By-ListId">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"name": flowVars['cardName']
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/cards" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="Move-All-Cards-To-List-By-ListId">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"idBoard": flowVars['boardId'],
+	"idList": flowVars['listId']
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/moveAllCards" method="POST" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="Move-List-To-Another-Board-ListId">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"value": flowVars['boardId']
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Trello_Api" path="/lists/#[flowVars['listId']]/idBoard" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="key" value="b9c58b0395595589e09277852cc88329"/>
+                <http:query-param paramName="token" value="17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836"/>
+            </http:request-builder>
+            <http:success-status-code-validator values="200..500"/>
+        </http:request>
+        <set-variable variableName="httpStatus" value="#[message.inboundProperties.'http.status']" doc:name="Set Http Status"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	"statusFromAPI": flowVars.httpStatus,
+	"APIResponse":payload
+}
+]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    
+    
+</mule>

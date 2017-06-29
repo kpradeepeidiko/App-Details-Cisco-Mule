@@ -7,6 +7,312 @@ Response
 -----------
 [
     {
+        "name": "Eidiko_Test@12346",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "G1Gz72F6",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "59539276e602477a46d55234",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/G1Gz72F6/eidikotest12346",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "shortUrl": "https://trello.com/b/G1Gz72F6",
+        "memberships": [
+            {
+                "id": "59539276e602477a46d55238",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "Pradeep_Test@12346",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "1ZxPHIqJ",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "5953920af97be3e548a85762",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/1ZxPHIqJ/pradeeptest12346",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "shortUrl": "https://trello.com/b/1ZxPHIqJ",
+        "memberships": [
+            {
+                "id": "5953920af97be3e548a85766",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "Sample_Test",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "5Fp0rTYk",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "59538de8dec13d5e0c083b5a",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/5Fp0rTYk/sampletest",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "dateLastView": "2017-06-29T06:41:57.805Z",
+        "shortUrl": "https://trello.com/b/5Fp0rTYk",
+        "memberships": [
+            {
+                "id": "59538de8dec13d5e0c083b5e",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "Sample_Test@123",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "71gYK3vo",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "59538eb112a17a5e2116216c",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/71gYK3vo/sampletest123",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "shortUrl": "https://trello.com/b/71gYK3vo",
+        "memberships": [
+            {
+                "id": "59538eb112a17a5e21162170",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
+        "name": "Sample_Test@12346",
+        "desc": "",
+        "descData": null,
+        "closed": false,
+        "idOrganization": null,
+        "pinned": null,
+        "invitations": null,
+        "shortLink": "QJUNCLFf",
+        "powerUps": [],
+        "dateLastActivity": null,
+        "idTags": [],
+        "datePluginDisable": null,
+        "id": "59538f51fb6b837aa5ad27e8",
+        "invited": false,
+        "starred": false,
+        "url": "https://trello.com/b/QJUNCLFf/sampletest12346",
+        "prefs": {
+            "permissionLevel": "private",
+            "voting": "disabled",
+            "comments": "members",
+            "invitations": "members",
+            "selfJoin": true,
+            "cardCovers": true,
+            "cardAging": "regular",
+            "calendarFeedEnabled": false,
+            "background": "blue",
+            "backgroundImage": null,
+            "backgroundImageScaled": null,
+            "backgroundTile": false,
+            "backgroundBrightness": "dark",
+            "backgroundColor": "#0079BF",
+            "canBePublic": true,
+            "canBeOrg": true,
+            "canBePrivate": true,
+            "canInvite": true
+        },
+        "subscribed": false,
+        "labelNames": {
+            "green": "",
+            "yellow": "",
+            "orange": "",
+            "red": "",
+            "purple": "",
+            "blue": "",
+            "sky": "",
+            "lime": "",
+            "pink": "",
+            "black": ""
+        },
+        "shortUrl": "https://trello.com/b/QJUNCLFf",
+        "memberships": [
+            {
+                "id": "59538f51fb6b837aa5ad27ec",
+                "idMember": "574c4093391ef6e2032e73c9",
+                "memberType": "admin",
+                "unconfirmed": false,
+                "deactivated": false
+            }
+        ]
+    },
+    {
         "name": "Two_Way Board",
         "desc": "",
         "descData": null,
@@ -56,7 +362,7 @@ Response
             "pink": "",
             "black": ""
         },
-        "dateLastView": "2017-06-28T06:44:15.604Z",
+        "dateLastView": "2017-06-29T06:34:05.490Z",
         "shortUrl": "https://trello.com/b/60GmuxdQ",
         "memberships": [
             {
@@ -337,6 +643,21 @@ Response
 ]
 
 =====================================================
+Is Board Stared
+-------------------
+GET : https://trello.com/1/boards/59439f4749af0a668c332628/boardStars?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
+
+Response
+-----------
+[
+    {
+        "_id": "595490860a1b34335542ce24",
+        "idBoard": "59439f4749af0a668c332628",
+        "pos": 16384
+    }
+]
+
+====================================================
 Get "Lists" on board
 ----------------------
 GET : https://trello.com/1/boards/uIgWdMG7/lists?key=b9c58b0395595589e09277852cc88329&token=17d3f230d8863ed87691c877b577d35881f709e86ccc48c58909582898415836
