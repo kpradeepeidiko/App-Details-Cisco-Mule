@@ -522,5 +522,8 @@ payload filter ($.name == flowVars.boardName) map $.id]]></dw:set-payload>
             </otherwise>
         </choice>
     </flow>
+    <flow name="List-Cards-On-List-By-ListId-Action">
+        <set-variable variableName="listId" value="" doc:name="Set List Id"/>
+    </flow>
     
 </mule>

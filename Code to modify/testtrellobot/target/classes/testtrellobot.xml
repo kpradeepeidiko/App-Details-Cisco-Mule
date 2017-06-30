@@ -21,7 +21,7 @@ payload]]></dw:set-variable>
 System.out.println("fields = " + fields);
 flowVars.fields=flowVars.fields.split(" \\| ");
 System.out.println("Next fields = " + fields);]]></expression-component>
-        <logger message="#[message.payloadAs(java.lang.String)] ++++++#[flowVars.fields[0]]+++++#[flowVars.fields[1]]+++++++#[flowVars.fields[2]]" level="INFO" doc:name="Logger"/>
+        <logger message="#[message.payloadAs(java.lang.String)] +++++#[flowVars.fields.size()] +++#[flowVars.fields[0]]+++++#[flowVars.fields[1]]+++++++#[flowVars.fields[2]]" level="INFO" doc:name="Logger"/>
         <flow-ref name="Delete-Member-From-Board-Action" doc:name="Delete-Member-From-Board-Action"/>
         <logger message="complete" level="INFO" doc:name="Logger"/>
     </flow>

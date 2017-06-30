@@ -1,24 +1,17 @@
 <metadata__cache__entry>
   <version>5.2.0.0</version>
-  <connectorName>Trello__Configuration</connectorName>
+  <connectorName>CiscoSpark__Configuration</connectorName>
   <metadataIo class="tree-map">
     <entry>
-      <string>http://www.mulesoft.org/schema/mule/Trello/get-boards</string>
+      <string>http://www.mulesoft.org/schema/mule/CiscoSpark/post-messages</string>
       <map>
         <entry>
           <string>__default__</string>
           <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
             <output class="org.mule.common.metadata.DefaultMetaData">
-              <payload class="org.mule.common.metadata.DefaultListMetaDataModel">
-                <dataType>LIST</dataType>
-                <metaDataModelPropertiesManager>
-                  <properties/>
-                </metaDataModelPropertiesManager>
-                <model class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
-                  <connectorName>Trello__Configuration</connectorName>
-                  <typeId>org.mule.modules.trello.bean.MembersBoardsGetResponse</typeId>
-                </model>
-                <isArray>false</isArray>
+              <payload class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
+                <connectorName>CiscoSpark__Configuration</connectorName>
+                <typeId>org.mule.modules.spark.bean.MessagesPostResponse</typeId>
               </payload>
               <properties>
                 <entry>

@@ -21,7 +21,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
         <dw:transform-message doc:name="Transform Message To Java">
             <dw:set-variable variableName="response" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
         </dw:transform-message>
-        <logger message="Data Value ::::::::::::::  #[flowVars['response']['hookResponse']['data']]" level="INFO" doc:name="Logger"/>
         <set-payload value="#[flowVars['response']['hookResponse']['data']]" doc:name="Set Payload"/>
         <choice doc:name="Choosing Event Type">
             <when expression="flowVars['response']['hookResponse']['event']=='new_ticket'">
