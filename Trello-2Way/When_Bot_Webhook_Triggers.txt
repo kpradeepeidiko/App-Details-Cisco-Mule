@@ -1,0 +1,24 @@
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZDAxYzc5ZGYtMTI1ZC00NmE5LTk3YjItZDgwZWJiYzJmYjg5",
+	"name": "Trello",
+	"targetUrl": "https://3ae202ad.ngrok.io/trello/bot",
+	"resource": "messages",
+	"event": "created",
+	"filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY",
+	"appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+	"ownedBy": "creator",
+	"status": "active",
+	"created": "2017-06-27T11:07:39.311Z",
+	"actorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+	"data": {
+		"id": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvM2NiN2M2ZDAtNWZkMS0xMWU3LWIzNDItNzM2OTFiZDAzMGY4",
+		"roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vZmFmNGRiZTAtNWIyOC0xMWU3LWFlYTItMzU0YTQwMGNkMWIz",
+		"roomType": "group",
+		"personId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+		"personEmail": "pradeep.kanukuntla@eidiko.com",
+		"mentionedPeople": ["Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZmYzZTg3Ny1mNjVmLTQyYjktOGQzZi02NDdhOGMwM2M5YzY"],
+		"created": "2017-07-03T09:23:12.957Z"
+	}
+}

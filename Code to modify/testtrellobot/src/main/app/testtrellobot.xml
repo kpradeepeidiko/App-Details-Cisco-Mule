@@ -10,15 +10,15 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8845" doc:name="HTTP Listener Configuration"/>
     <flow name="TestTrelloBotFlow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/test/trello/bot" doc:name="HTTP"/>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/trello/bot" doc:name="HTTP"/>
         <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
-        <flow-ref name="Delete-Member-From-Board-Action" doc:name="Delete-Member-From-Board-Action"/>
         <logger message="complete" level="INFO" doc:name="Logger"/>
     </flow>
     
     
     <flow name="SplitCommads">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/test/commands" doc:name="HTTP"/>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/test/trello/bot" doc:name="HTTP"/>
+        <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
         <dw:transform-message doc:name="Transform Message">
             <dw:set-variable variableName="req"><![CDATA[%dw 1.0
 %output application/java
