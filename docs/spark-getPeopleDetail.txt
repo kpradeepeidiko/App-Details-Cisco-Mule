@@ -39,6 +39,101 @@ GET ROOMS
 {
 	"items": [
 		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vODA5OWYzZjAtNjJlNy0xMWU3LThmNTctY2JiMTFmYThiYmI3",
+			"title": "NewTeamForJIRA",
+			"type": "group",
+			"isLocked": true,
+			"lastActivity": "2017-07-07T11:18:40.303Z",
+			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vODA5OWYzZjAtNjJlNy0xMWU3LThmNTctY2JiMTFmYThiYmI3",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83YmQ0MDY4Ni1lMzY4LTQ4ZGMtOTgzYi02OTNkNzVkMjA0ODk",
+			"created": "2017-07-07T07:40:09.263Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vNjcwODhjNjAtNjI2Mi0xMWU3LWIyNmEtZTU2N2JkMjdmMDU0",
+			"title": "Bitbucket Cloud Notification Room",
+			"type": "group",
+			"isLocked": true,
+			"lastActivity": "2017-07-06T21:20:22.260Z",
+			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vNjcwODhjNjAtNjI2Mi0xMWU3LWIyNmEtZTU2N2JkMjdmMDU0",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wZmY5ZjlmYS01OTM1LTQ3MzMtYTJkZS1lY2M4MzM5MjgwM2E",
+			"created": "2017-07-06T15:47:23.302Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vOWExNWM1NzAtNjI2MC0xMWU3LThhZWYtNzM4YzgwZmE4YTQ2",
+			"title": "Bitbucket Server Notification Room",
+			"type": "group",
+			"isLocked": true,
+			"lastActivity": "2017-07-06T21:20:05.925Z",
+			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vOWExNWM1NzAtNjI2MC0xMWU3LThhZWYtNzM4YzgwZmE4YTQ2",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wZmY5ZjlmYS01OTM1LTQ3MzMtYTJkZS1lY2M4MzM5MjgwM2E",
+			"created": "2017-07-06T15:34:29.959Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vOGVjNTAyNjAtNjI0OS0xMWU3LWJiYzItNDllOTkyMDUwYTcx",
+			"title": "MyTeam",
+			"type": "group",
+			"isLocked": true,
+			"lastActivity": "2017-07-07T10:00:29.977Z",
+			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vOGVjNTAyNjAtNjI0OS0xMWU3LWJiYzItNDllOTkyMDUwYTcx",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83YmQ0MDY4Ni1lMzY4LTQ4ZGMtOTgzYi02OTNkNzVkMjA0ODk",
+			"created": "2017-07-06T12:49:32.550Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vNmM2NzZlZjAtMDNhMS0zODVkLWIyNTAtODg5NTQ5MjYyZmQ2",
+			"title": "AshokShiva",
+			"type": "direct",
+			"isLocked": false,
+			"lastActivity": "2017-07-05T11:17:05.916Z",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hYjZhYWU3OS01NDdhLTRmYzUtOTJiZS0wNGQ4NjBlMzQ5OGU",
+			"created": "2017-07-05T11:16:46.461Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vODA0MmY1OGUtNTkzZi0zMTVhLTg0MjItMjZhNzM0ZmY3OGE2",
+			"title": "Harish Pitta",
+			"type": "direct",
+			"isLocked": false,
+			"lastActivity": "2017-07-05T06:47:38.299Z",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84NmIxN2M1OS04YTE3LTRhNmItYWM5YS1iMDU3ZTQ1M2QyOTU",
+			"created": "2017-07-03T06:37:48.070Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vMTRlODIyZTAtNWRiOS0xMWU3LWJjMDAtNDcwYmM1MzZjMTNj",
+			"title": "Bitbucket Server & Bitbucket Cloud Notification Room",
+			"type": "group",
+			"isLocked": true,
+			"lastActivity": "2017-07-06T15:04:02.724Z",
+			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vMTRlODIyZTAtNWRiOS0xMWU3LWJjMDAtNDcwYmM1MzZjMTNj",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lZTZhMzdhNi04YjQ3LTQ0ODctODNmOS04NTBjYTg3OTI1M2Y",
+			"created": "2017-06-30T17:25:15.918Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vZmFmNGRiZTAtNWIyOC0xMWU3LWFlYTItMzU0YTQwMGNkMWIz",
+			"title": "Test Trello Bot",
+			"type": "group",
+			"isLocked": false,
+			"lastActivity": "2017-07-03T09:23:12.957Z",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+			"created": "2017-06-27T11:08:42.526Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vYTVhN2YyZTYtZjUyYi0zZDhiLWJkMTgtYTdmMTVhYTlhNmUy",
+			"title": "Rebecca Amato",
+			"type": "direct",
+			"isLocked": false,
+			"lastActivity": "2017-06-23T04:52:16.566Z",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+			"created": "2017-06-22T15:06:03.261Z"
+		},
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vN2IwYWQ2MDAtOTU5MC0zNzk2LTk1Y2MtNjBlMDc3ZDQxYjM0",
+			"title": "Venkatasiva",
+			"type": "direct",
+			"isLocked": false,
+			"lastActivity": "2017-07-05T14:59:58.577Z",
+			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+			"created": "2017-06-21T11:05:26.896Z"
+		},
+		{
 			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vZjcwNjg0YzAtMzg3OC0xMWU3LTg4ZDEtM2RmNTZlZTM1ODdk",
 			"title": "POLL - IPL",
 			"type": "group",
@@ -52,7 +147,7 @@ GET ROOMS
 			"title": "OneNote Notifications Room",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-22T15:29:08.160Z",
+			"lastActivity": "2017-06-14T14:04:49.999Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2017-04-21T09:02:56.508Z"
 		},
@@ -79,7 +174,7 @@ GET ROOMS
 			"title": "Pagerduty Depot Notifications Room",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-16T06:38:35.477Z",
+			"lastActivity": "2017-06-13T14:53:01.442Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
 			"created": "2017-04-13T06:29:54.106Z"
 		},
@@ -88,7 +183,7 @@ GET ROOMS
 			"title": "O365 Calendar Notifications",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-18T18:22:43.940Z",
+			"lastActivity": "2017-07-03T13:26:07.842Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
 			"created": "2017-04-07T13:20:43.535Z"
 		},
@@ -97,7 +192,7 @@ GET ROOMS
 			"title": "Santosh Suryawamshi",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-04-06T13:17:51.220Z",
+			"lastActivity": "2017-07-07T05:46:07.690Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2017-04-06T13:12:40.938Z"
 		},
@@ -115,7 +210,7 @@ GET ROOMS
 			"title": "Test User",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-10T05:04:25.136Z",
+			"lastActivity": "2017-05-26T05:25:04.654Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yZTdjMWRjMy05ZTVjLTRkODctOGM4Mi1hMjAzYTg2OWI1Y2U",
 			"created": "2017-04-04T12:57:45.439Z"
 		},
@@ -124,7 +219,7 @@ GET ROOMS
 			"title": "Lokesh Bellana",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-04-20T12:38:18.036Z",
+			"lastActivity": "2017-06-28T09:51:12.837Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xMTVkMWVhOC0xNDg1LTRjMjItYTkwYS05M2E5MDI3NTkwOTM",
 			"created": "2017-04-04T08:51:34.315Z"
 		},
@@ -242,7 +337,7 @@ GET ROOMS
 			"title": "AJAY",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-03-23T13:59:12.715Z",
+			"lastActivity": "2017-07-07T06:21:53.481Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84NTcxOTBlYy01OWMzLTQ4YWYtOGQ0Mi1kNTdiMjY0Mzk5ZDI",
 			"created": "2017-02-16T06:06:12.327Z"
 		},
@@ -251,7 +346,7 @@ GET ROOMS
 			"title": "Kamal",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-08T05:31:11.387Z",
+			"lastActivity": "2017-06-14T11:28:02.806Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lZTZhMzdhNi04YjQ3LTQ0ODctODNmOS04NTBjYTg3OTI1M2Y",
 			"created": "2017-02-13T13:45:46.153Z"
 		},
@@ -260,7 +355,7 @@ GET ROOMS
 			"title": "githubCommitsMessages",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-22T05:05:02.053Z",
+			"lastActivity": "2017-07-06T13:06:07.002Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2017-02-09T11:05:22.874Z"
 		},
@@ -269,7 +364,7 @@ GET ROOMS
 			"title": "googleCalendarTest",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T03:34:28.068Z",
+			"lastActivity": "2017-07-07T11:15:25.681Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2017-02-09T11:04:13.267Z"
 		},
@@ -287,7 +382,7 @@ GET ROOMS
 			"title": "xMatters_Testing_Room",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-03-28T12:46:12.550Z",
+			"lastActivity": "2017-07-07T10:17:46.360Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2017-01-27T05:22:39.248Z"
 		},
@@ -296,7 +391,7 @@ GET ROOMS
 			"title": "Room 2",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T06:43:51.714Z",
+			"lastActivity": "2017-07-07T11:27:39.450Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2017-01-20T09:22:01.218Z"
 		},
@@ -305,7 +400,7 @@ GET ROOMS
 			"title": "Rakesh Sharma",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-12T06:59:11.582Z",
+			"lastActivity": "2017-06-21T11:45:34.215Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mZjNiZTJjYS04Y2I2LTRlOTctYTJhMS1jODViMWZmMTdhMWY",
 			"created": "2017-01-12T09:05:39.966Z"
 		},
@@ -342,7 +437,7 @@ GET ROOMS
 			"title": "kiran avvaru",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-04-12T23:01:39.029Z",
+			"lastActivity": "2017-07-06T14:46:41.401Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wZmY5ZjlmYS01OTM1LTQ3MzMtYTJkZS1lY2M4MzM5MjgwM2E",
 			"created": "2016-12-21T19:56:09.739Z"
 		},
@@ -351,7 +446,7 @@ GET ROOMS
 			"title": "Support Team",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-24T07:54:55.740Z",
+			"lastActivity": "2017-07-07T05:40:52.063Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vNzAyYjY0YzAtYzZhZS0xMWU2LWIyOTctNTM1YTcwNzY5Mjll",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZTRmNzg1OS05MDExLTRlMGEtYmQwYS03NmJhZGU4NjVhYWI",
 			"created": "2016-12-20T12:18:38.988Z"
@@ -361,7 +456,7 @@ GET ROOMS
 			"title": "Sri Revathi",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T05:09:27.997Z",
+			"lastActivity": "2017-06-29T12:51:48.542Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wYmQ5MGZjNS0wODZhLTRhZmUtOTI0YS03NzUyOWZiM2U1NTc",
 			"created": "2016-12-20T11:30:30.982Z"
 		},
@@ -463,7 +558,7 @@ GET ROOMS
 			"title": "Healthcheck Success Response",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T06:47:04.239Z",
+			"lastActivity": "2017-07-07T11:32:28.220Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vMzlmNDdiZjAtYjJkOS0xMWU2LTg2NDctOGQzNWExNDk1YWNj",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZTRmNzg1OS05MDExLTRlMGEtYmQwYS03NmJhZGU4NjVhYWI",
 			"created": "2016-11-25T06:34:33.135Z"
@@ -473,7 +568,7 @@ GET ROOMS
 			"title": "Healthcheck Failure Response",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T04:52:22.452Z",
+			"lastActivity": "2017-07-07T10:45:06.673Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vNGZhNGY2YjAtYjJkOC0xMWU2LTg3ZmQtOWQyN2MzYTcyN2Zj",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZTRmNzg1OS05MDExLTRlMGEtYmQwYS03NmJhZGU4NjVhYWI",
 			"created": "2016-11-25T06:28:00.027Z"
@@ -483,7 +578,7 @@ GET ROOMS
 			"title": "TestJiraTicketIssue",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T03:34:27.069Z",
+			"lastActivity": "2017-07-07T11:15:23.715Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2016-11-23T14:51:46.965Z"
 		},
@@ -492,7 +587,7 @@ GET ROOMS
 			"title": "sandhya sudharshan",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-16T09:35:55.131Z",
+			"lastActivity": "2017-07-03T09:05:42.381Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2016-11-23T07:13:49.045Z"
 		},
@@ -501,7 +596,7 @@ GET ROOMS
 			"title": "Automated Testing - Notifications Room",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T06:43:47.052Z",
+			"lastActivity": "2017-07-07T11:25:54.390Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vNzg4MTE4NTAtYWZiMC0xMWU2LWIyNzMtM2RlNDhkYjdiMjFm",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2016-11-21T06:05:15.221Z"
@@ -511,7 +606,7 @@ GET ROOMS
 			"title": "Surendra",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T09:45:47.682Z",
+			"lastActivity": "2017-07-07T06:41:56.726Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2016-11-16T23:02:51.736Z"
 		},
@@ -520,7 +615,7 @@ GET ROOMS
 			"title": "Runtime Update notifications Room",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T06:40:38.369Z",
+			"lastActivity": "2017-07-07T04:10:50.443Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vMGFiNTMyMDAtYWMxMC0xMWU2LWEyY2EtZjU5YzNmNDM3NTIy",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2016-11-16T15:19:18.048Z"
@@ -530,7 +625,7 @@ GET ROOMS
 			"title": "Eidiko - Configuration Room",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-24T23:06:04.961Z",
+			"lastActivity": "2017-07-06T14:24:11.327Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vYjg2NmNjYjAtYTgwMC0xMWU2LTkyMWYtNTFhYTMwMjA2OTBl",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2016-11-11T11:19:32.859Z"
@@ -540,7 +635,7 @@ GET ROOMS
 			"title": "Eidiko - Frequent Notifications Room",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T04:06:13.412Z",
+			"lastActivity": "2017-07-07T04:08:03.220Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vZWM5ZGFmNDAtYTY2YS0xMWU2LWJlYTUtNmZjNGViMGVkMGY3",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2016-11-09T10:54:44.788Z"
@@ -550,7 +645,7 @@ GET ROOMS
 			"title": "Depot (prod) Native Integrations - Notifications testing",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T05:53:11.505Z",
+			"lastActivity": "2017-07-06T23:32:17.295Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yZTdjMWRjMy05ZTVjLTRkODctOGM4Mi1hMjAzYTg2OWI1Y2U",
 			"created": "2016-10-29T21:56:26.410Z"
 		},
@@ -559,7 +654,7 @@ GET ROOMS
 			"title": "Anil Kumar",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-02T06:57:26.690Z",
+			"lastActivity": "2017-06-27T09:11:36.205Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83MjU0NzFlYi05ZDI0LTRkOTItYmQxMy1mMzU4ODJkY2U0NTE",
 			"created": "2016-10-25T15:00:56.335Z"
 		},
@@ -568,7 +663,7 @@ GET ROOMS
 			"title": "Ashok Shiva Palaki",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-22T13:45:56.816Z",
+			"lastActivity": "2017-07-05T11:25:06.426Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYzQxNTI2Zi01ODliLTQ5MGYtYTBkMC03YjM4ZTQ2YTFiNTI",
 			"created": "2016-10-14T15:09:09.559Z"
 		},
@@ -577,7 +672,7 @@ GET ROOMS
 			"title": "Eidiko/Depot Alerts monitoring ",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-22T17:51:22.805Z",
+			"lastActivity": "2017-07-06T02:13:02.593Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jYzU0ZmVlZC04OTZmLTRkZTQtOGYxZC0yMGVjOWUzMGVjYzk",
 			"created": "2016-10-13T19:12:34.021Z"
 		},
@@ -586,7 +681,7 @@ GET ROOMS
 			"title": "Mule Application Exceptions",
 			"type": "group",
 			"isLocked": true,
-			"lastActivity": "2017-05-25T04:15:05.010Z",
+			"lastActivity": "2017-07-07T09:11:32.142Z",
 			"teamId": "Y2lzY29zcGFyazovL3VzL1RFQU0vNWQ1ZmY0YjAtOTA0ZC0xMWU2LWFhZDQtZmJlOTdhNTQ2MTY0",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZTRmNzg1OS05MDExLTRlMGEtYmQwYS03NmJhZGU4NjVhYWI",
 			"created": "2016-10-12T07:27:43.483Z"
@@ -596,7 +691,7 @@ GET ROOMS
 			"title": "Chennakesavulu",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T13:49:00.477Z",
+			"lastActivity": "2017-07-06T06:15:50.871Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
 			"created": "2016-10-03T11:18:45.238Z"
 		},
@@ -605,7 +700,7 @@ GET ROOMS
 			"title": "Eidiko - JIRA - ISSUE TRACKER",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T17:41:10.756Z",
+			"lastActivity": "2017-07-06T13:40:53.237Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lMmRiNWMwOS04MGQ1LTQxYjYtYjU0NS1hZDNlMTkzNWRkMjA",
 			"created": "2016-09-30T09:53:17.413Z"
 		},
@@ -614,7 +709,7 @@ GET ROOMS
 			"title": "satya",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-16T06:36:41.396Z",
+			"lastActivity": "2017-06-12T13:24:02.198Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2016-09-30T04:58:09.997Z"
 		},
@@ -650,7 +745,7 @@ GET ROOMS
 			"title": "Rajasekhar",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-09T04:43:43.529Z",
+			"lastActivity": "2017-06-12T13:27:33.171Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS83NzcyOTRkNy03NWZmLTQ5YmEtYjE5Yy02NzcyMTExMGYwMjM",
 			"created": "2016-09-27T03:42:20.353Z"
 		},
@@ -668,7 +763,7 @@ GET ROOMS
 			"title": "Eidiko - Discussion",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T07:52:14.334Z",
+			"lastActivity": "2017-07-07T07:14:29.040Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lNDM0OTVkNC1mNDFiLTQzNDQtYWIwOC03NjE0Y2U5YTVmNzk",
 			"created": "2016-09-16T10:33:33.301Z"
 		},
@@ -695,7 +790,7 @@ GET ROOMS
 			"title": "Ranjith",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-23T09:23:16.290Z",
+			"lastActivity": "2017-07-07T11:05:49.505Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
 			"created": "2016-09-07T17:11:57.283Z"
 		},
@@ -713,7 +808,7 @@ GET ROOMS
 			"title": "Cisco PM + Eidiko team - Project Conversations ",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T21:24:24.271Z",
+			"lastActivity": "2017-07-06T22:00:08.467Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jYzU0ZmVlZC04OTZmLTRkZTQtOGYxZC0yMGVjOWUzMGVjYzk",
 			"created": "2016-08-25T16:43:11.850Z"
 		},
@@ -722,7 +817,7 @@ GET ROOMS
 			"title": "Eidiko only - Integrations Testing ",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T04:45:44.901Z",
+			"lastActivity": "2017-07-04T18:03:12.483Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jYzU0ZmVlZC04OTZmLTRkZTQtOGYxZC0yMGVjOWUzMGVjYzk",
 			"created": "2016-08-23T05:17:54.968Z"
 		},
@@ -731,7 +826,7 @@ GET ROOMS
 			"title": "SPARK TESTING SPACE- EIDIKO",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T04:06:30.206Z",
+			"lastActivity": "2017-07-07T10:14:30.372Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lMmRiNWMwOS04MGQ1LTQxYjYtYjU0NS1hZDNlMTkzNWRkMjA",
 			"created": "2016-08-22T07:56:09.237Z"
 		},
@@ -758,7 +853,7 @@ GET ROOMS
 			"title": "GoogleDriveTest",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T03:30:43.800Z",
+			"lastActivity": "2017-06-21T05:09:58.649Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
 			"created": "2016-08-17T13:47:39.934Z"
 		},
@@ -785,7 +880,7 @@ GET ROOMS
 			"title": "Rakesh Reddy",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-10T06:22:09.791Z",
+			"lastActivity": "2017-07-04T05:59:04.432Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jMjg2NGRlZS0yODdiLTQyMjktOWI1Ni03Y2ExYWJkMGJkMTE",
 			"created": "2016-08-04T06:55:43.546Z"
 		},
@@ -794,7 +889,7 @@ GET ROOMS
 			"title": "Salesforce Integration Room",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2016-08-30T04:24:00.645Z",
+			"lastActivity": "2017-06-12T10:01:39.515Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85MGQ5MzYzNy1jNzlmLTQ0MDAtYTBjNC1mZGQ5MjgwMjJhNmU",
 			"created": "2016-07-26T06:31:49.797Z"
 		},
@@ -803,7 +898,7 @@ GET ROOMS
 			"title": "Tirapa Reddy Tondapu",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-24T15:57:55.418Z",
+			"lastActivity": "2017-07-06T13:38:40.294Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kZTRmNzg1OS05MDExLTRlMGEtYmQwYS03NmJhZGU4NjVhYWI",
 			"created": "2016-07-21T13:18:15.638Z"
 		},
@@ -812,7 +907,7 @@ GET ROOMS
 			"title": "Eidiko/Depot",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-05T15:49:14.079Z",
+			"lastActivity": "2017-06-21T01:49:01.897Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lMmRiNWMwOS04MGQ1LTQxYjYtYjU0NS1hZDNlMTkzNWRkMjA",
 			"created": "2016-07-21T11:20:34.971Z"
 		},
@@ -821,7 +916,7 @@ GET ROOMS
 			"title": "Ravi Varma",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-19T08:54:00.628Z",
+			"lastActivity": "2017-07-04T09:50:35.225Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wZDFhODAwMi00YzI2LTQzYTktOGFjMS0wNWMxZDNmMGYyNjc",
 			"created": "2016-07-13T09:22:26.602Z"
 		},
@@ -830,7 +925,7 @@ GET ROOMS
 			"title": "Vikas",
 			"type": "direct",
 			"isLocked": false,
-			"lastActivity": "2017-05-23T09:59:42.466Z",
+			"lastActivity": "2017-06-27T09:59:36.203Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS85MGQ5MzYzNy1jNzlmLTQ0MDAtYTBjNC1mZGQ5MjgwMjJhNmU",
 			"created": "2016-07-13T06:12:38.077Z"
 		},
@@ -858,81 +953,9 @@ GET ROOMS
 			"title": "Room 1",
 			"type": "group",
 			"isLocked": false,
-			"lastActivity": "2017-05-25T06:43:33.869Z",
+			"lastActivity": "2017-07-07T11:35:49.425Z",
 			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI",
 			"created": "2016-06-14T09:48:26.025Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vZjY0OWQ2MTAtMmZiYy0xMWU2LTkyODQtZmI2ZDExOTlmZTM3",
-			"title": "webhookTestingRoom",
-			"type": "group",
-			"isLocked": false,
-			"lastActivity": "2017-04-28T07:25:26.217Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
-			"created": "2016-06-11T10:12:11.377Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vNzYzNGY5NjAtMWU3Yy0xMWU2LWI0MTktMDEzYTg5NjQ1ODFj",
-			"title": "Practice",
-			"type": "group",
-			"isLocked": false,
-			"lastActivity": "2017-05-19T05:49:12.974Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xYjY4ZmI1NS1kMjAxLTQ4ZmEtOTU3ZC0yZTQ3ODIwNTFmYmI",
-			"created": "2016-05-20T11:17:38.934Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vZThmNTM5NDAtMWU3OS0xMWU2LWE4YmMtNTM4MmIyNzc4MmM3",
-			"title": "Mule ESB",
-			"type": "group",
-			"isLocked": false,
-			"lastActivity": "2017-04-20T09:02:22.969Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9jZjU2ZTMxMC0xODFmLTQ1N2EtYWVjZC0yZGVmZmQxMWIzZjk",
-			"created": "2016-05-20T10:59:22.964Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vMjQzMzY4OWYtYjAwZC0zN2NmLWE2ZGQtZmRiZmEwMjA4ZDlm",
-			"title": "Harish",
-			"type": "direct",
-			"isLocked": false,
-			"lastActivity": "2017-05-24T06:18:31.743Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
-			"created": "2016-05-20T06:31:16.007Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vOGVhMDJkODEtMjAxMi0zZDNkLThiNjEtMzliZjEzZTE2YzJi",
-			"title": "Anil Pani",
-			"type": "direct",
-			"isLocked": false,
-			"lastActivity": "2017-05-23T14:26:34.414Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
-			"created": "2016-05-20T06:30:38.437Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vYjY3ZmJmMDMtZmRmMy0zZjRjLWJiM2MtZjZmY2U5Yzc5ODcy",
-			"title": "ravi",
-			"type": "direct",
-			"isLocked": false,
-			"lastActivity": "2017-05-23T13:47:09.092Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
-			"created": "2016-05-20T06:30:11.032Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vMzE2YmZlOTAtMmVlYi0zNjM5LTgwN2MtY2MzNTgyMmRlZDU5",
-			"title": "ravivarma",
-			"type": "direct",
-			"isLocked": false,
-			"lastActivity": "2017-04-21T19:30:26.300Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9kNmZiZGJkMy01OTU2LTQ1NzQtYTQ4MS1jZTM5Y2IzNDUzODU",
-			"created": "2016-05-20T06:24:26.568Z"
-		},
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1JPT00vZDJmZGUwOTAtOWQwYy0xMWU1LWFlZWQtMjE3NmZkY2Q4YTU4",
-			"title": "#spark4dev - Public Support for Cisco Spark API",
-			"type": "group",
-			"isLocked": true,
-			"lastActivity": "2017-05-25T04:21:30.438Z",
-			"creatorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mNWIzNjE4Ny1jOGRkLTQ3MjctOGIyZi1mOWM0NDdmMjkwNDY",
-			"created": "2015-12-07T18:03:30.969Z"
 		}
 	]
 }
