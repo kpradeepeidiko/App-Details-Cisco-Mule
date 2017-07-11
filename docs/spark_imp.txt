@@ -6,3 +6,9 @@ https://communities.cisco.com/community/developer/spark/blog/2016/07/18/spark-bo
 Integrations (OAuth)
 --------------------
 https://developer.ciscospark.com/authentication.html
+
+================================================================================================
+
+File Upload To Spark
+---------------------
+https://developer.ciscospark.com/blog/blog-details-8129.html
