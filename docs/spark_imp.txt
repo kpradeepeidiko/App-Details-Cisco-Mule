@@ -1,0 +1,8 @@
+Spark Bot Demo
+----------------
+https://communities.cisco.com/community/developer/spark/blog/2016/07/18/spark-bot-demo
+================================================================================================
+
+Integrations (OAuth)
+--------------------
+https://developer.ciscospark.com/authentication.html

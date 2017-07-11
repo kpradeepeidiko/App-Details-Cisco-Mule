@@ -1,0 +1,59 @@
+<html> 
+<head> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+var countryName = "";
+var cities = "";
+
+function getCities(){
+		$('#cities_dropdown').html('');
+		console.log("in cities!!!!!!!!!");
+		countryName = document.getElementById("countryDropDown").value;
+		console.log("cname = " + countryName);
+		$.ajax({url: "https://e5b5ed6f.ngrok.io/test?cname="+countryName,
+			async:true,
+			dataType: "json",
+			success: function(result){	
+				console.log("result!!" + JSON.stringify(result));
+				cities = result.successResult;
+				console.log("Len :: "+cities.length);
+				for(var i = 0;i < cities.length; i++){
+					console.log("city :: "+cities[i]);
+					$('#cities_dropdown').append($('<option>').text(cities[i]).attr('value',cities[i]));
+				}
+
+				$('#result').show();
+			},
+			error: function(error) {
+			   
+					alert("We've experienced some difficulty. Try again.");
+			}
+		});
+		
+	}
+</script>
+</head>
+<body>  
+	<div>
+	<center>  
+	Country name : 
+	<select id="countryDropDown" onchange="getCities()">
+		<option value="">select</option>
+		<option value="india">india</option>
+		<option value="america">america</option>
+		<option value="pakistan">pakistan</option>
+		<option value="germany">germany</option>
+	</select>
+	<br></br>
+	</div>
+	
+	<div id="result" style="display:none">
+		<center>
+		<br></br>
+		Cities List : <select id="cities_dropdown" ></select>
+		</center>
+	</div>
+</form> 
+</body>  
+<center>
+</html>  
