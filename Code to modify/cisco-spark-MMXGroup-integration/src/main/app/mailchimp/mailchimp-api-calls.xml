@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:mailchimp="http://www.mulesoft.org/schema/mule/mailchimp"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/mailchimp http://www.mulesoft.org/schema/mule/mailchimp/current/mule-mailchimp.xsd">
+
+	<http:request-config name="HTTP_Access_Token_Mailchimp_Request_Configuration"
+		protocol="HTTPS" host="${mailchimp.api.access.token.host}" port="${mailchimp.api.access.token.port}"
+		doc:name="HTTP Request Configuration" tlsContext-ref="tls.context" />
+
+	<http:request-config name="HTTP_Operations_Mailchimp_Request_Configuration"
+		protocol="HTTPS" host="${mailchimp.api.operations.host}" port="${mailchimp.api.operations.port}"
+		basePath="${mailchimp.api.operations.base.path}" doc:name="HTTP Request Configuration"
+		tlsContext-ref="tls.context" />
+	<validation:config name="Validation_Configuration"
+		doc:name="Validation Configuration" />
+	<http:request-config name="HTTP_Request_Configuration7"
+		protocol="HTTPS" host="login.mailchimp.com" port="443"
+		doc:name="HTTP Request Configuration" />
+
+	<flow name="postMailchimpTokenFlow">
+		<dw:transform-message doc:name="Build Post Mailchimp Token Request">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostMailchimpTokenRequest.dwl" />
+		</dw:transform-message>
+
+
+		<http:request config-ref="HTTP_Access_Token_Mailchimp_Request_Configuration"
+			path="${mailchimp.api.access.token.path}" method="POST" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Content-Type" value="application/x-form-urlencoded" />
+
+
+			</http:request-builder>
+			<http:failure-status-code-validator
+				values="500..599" />
+		</http:request>
+		<flow-ref name="checkResponseStatusCodeFlow" doc:name="checkResponseStatusCodeFlow" />
+
+		<dw:transform-message doc:name="Transform Response to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="getMailchimpUserFlow">
+		<http:request config-ref="HTTP_Request_Configuration7"
+			path="/oauth2/metadata" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Authorization" value="OAuth #[flowVars['Token']]" />
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Metadata">
+			<dw:set-variable variableName="metadata"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<logger message="#[flowVars['Token']]-#[flowVars['metadata']['dc']]"
+			level="DEBUG" doc:name="apikey" />
+		<set-variable variableName="apiKey"
+			value="#[flowVars['Token']]-#[flowVars['metadata']['dc']]" doc:name="apiKey" />
+		<logger
+			message="getMailchimpUserFlow Before Connector : #[flowVars['apiKey']] :::::::::OAUTH #[flowVars['Token']]"
+			level="DEBUG" doc:name="Logger" />
+		<mailchimp:get-user-information 
+			config-ref="Mailchimp__Configuration" token="OAUTH #[flowVars['Token']]" doc:name="Mailchimp" apiKey="#[flowVars['apiKey']]" />
+		<logger message="after connectors #[payload]" level="DEBUG"
+			doc:name="Logger" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<logger message="after json object #[payload]" level="DEBUG"
+			doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Response to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<set-variable variableName="failedResponse"
+				value="#[message.payloadAs(java.lang.String)]" doc:name="Failed Response Payload" />
+			<logger
+				message="In GetMailchimpUser Flow : exception = #[flowVars['exception']] ++++++++ payload = #[flowVars['failedResponse']]"
+				level="INFO" doc:name="Logger" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildGetUsersFlowExceptionFlowExample.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+
+	<flow name="getMailchimpRepositoriesFlow">
+		<http:request config-ref="HTTP_Operations_Mailchimp_Request_Configuration"
+			path="/repositories/{user}" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:uri-param paramName="user" value="#[flowVars['user']]" />
+				<http:header headerName="Authorization" value="Bearer #[flowVars['token']]" />
+			</http:request-builder>
+		</http:request>
+
+		<dw:transform-message doc:name="Transform Response to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="postMailchimpHookFlow">
+		<dw:transform-message doc:name="Build Post Mailchimp Hook Request">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostHookResponceConfigJson.dwl" />
+		</dw:transform-message>
+		<foreach doc:name="For Each"
+			collection="#[flowVars['Request1']['configJson']['events']]">
+			<logger message="#[payload]" level="DEBUG" doc:name="Logger" />
+			<set-variable variableName="#[payload]" value="#[payload]"
+				doc:name="Variable" />
+		</foreach>
+		<set-variable variableName="instanceUuid"
+			value="#[flowVars['Request1']['instanceUuid']]" doc:name="Generating Instance Uuid" />
+		<http:request config-ref="HTTP_Request_Configuration7"
+			path="/oauth2/metadata" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Authorization" value="OAuth #[flowVars['Token']]" />
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Metadata">
+			<dw:set-variable variableName="metadata"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="apiKey"
+			value="#[flowVars['Token']]-#[flowVars['metadata']['dc']]" doc:name="apiKey" />
+		<logger
+			message="https://${mailchimp.webhook.domain}/api/hooks/#[flowVars['instanceUuid']]"
+			level="DEBUG" doc:name="Logger" />
+		<logger message="#[flowVars['apiKey']]" level="DEBUG" doc:name="Logger" />
+		<logger message="#[flowVars['ListId']]" level="DEBUG" doc:name="Logger" />
+		<logger message="OAUTH #[flowVars['Token']]" level="DEBUG"
+			doc:name="Logger" />
+        <mailchimp:create-webhook config-ref="Mailchimp__Configuration" apiKey="#[flowVars['apiKey']]" listId="#[flowVars['ListId']]" token="OAUTH #[flowVars['Token']]" doc:name="Mailchimp">
+            <mailchimp:request url="https://${mailchimp.webhook.domain}/api/hooks/#[flowVars['instanceUuid']]">
+                <mailchimp:events upemail="#[flowVars['upemail'] !=empty]" subscribe="#[flowVars['subscribe'] !=empty]" cleaned="#[flowVars['cleaned'] !=empty]" campaign="#[flowVars['campaign'] !=empty]" unsubscribe="#[flowVars['unsubscribe'] !=empty]" profile="#[flowVars['profile'] !=empty]"/>
+                <mailchimp:sources admin="true" api="true" user="true"/>
+            </mailchimp:request>
+        </mailchimp:create-webhook>
+
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<logger message="#[payload]" level="DEBUG" doc:name="Logger" />
+		<dw:transform-message doc:name="Build Post Mailchimp Hook Response">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<flow-ref name="checkResponseStatusCodeFlow" doc:name="checkResponseStatusCodeFlow" />
+
+	</flow>
+	<flow name="putMailchimpHookFlow">
+		<dw:transform-message doc:name="Build Put Mailchimp Hook Request">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPutMailchimpHookRequest.dwl" />
+		</dw:transform-message>
+		<foreach doc:name="For Each"
+			collection="#[flowVars['Request1']['configJson']['events']]">
+			<logger message="#[payload]" level="DEBUG" doc:name="Logger" />
+			<set-variable variableName="#[payload]" value="#[payload]"
+				doc:name="Variable" />
+		</foreach>
+		<set-variable variableName="instanceUuid" value="#[function:uuid]"
+			doc:name="Generating Instance Uuid" />
+		<mailchimp:create-webhook config-ref="Mailchimp__Configuration"
+			listId="#[flowVars['ListId']]" token="OAUTH #[flowVars['Token']]"
+			doc:name="Mailchimp">
+			<mailchimp:request
+				url="https://${mailchimp.webhook.domain}/api/hooks/#[flowVars['instanceUuid']]">
+				<mailchimp:events upemail="#[flowVars['upemail'] !=empty]"
+					subscribe="#[flowVars['subscribe'] !=empty]" cleaned="#[flowVars['cleaned'] !=empty]"
+					campaign="#[flowVars['campaign'] !=empty]" unsubscribe="#[flowVars['unsubscribe'] !=empty]"
+					profile="#[flowVars['profile'] !=empty]" />
+				<mailchimp:sources admin="true" api="true" user="true" />
+			</mailchimp:request>
+		</mailchimp:create-webhook>
+		<flow-ref name="checkResponseStatusCodeFlow" doc:name="checkResponseStatusCodeFlow" />
+		<dw:transform-message doc:name="Build Post Mailchimp Hook Response">
+			<dw:set-variable variableName="hookResponce"
+				resource="classpath:dwScripts/buildPutMailchimpRequestExample.dwl" />
+		</dw:transform-message>
+		<object-to-string-transformer doc:name="Object to String" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+	</flow>
+
+
+	<flow name="deleteMailchimpHookFlow">
+		<http:request config-ref="HTTP_Request_Configuration7"
+			path="/oauth2/metadata" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Authorization" value="OAuth #[flowVars['Token']]" />
+
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Metadata">
+			<dw:set-variable variableName="metadata"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="apiKey"
+			value="#[flowVars['Token']]-#[flowVars['metadata']['dc']]" doc:name="apiKey" />
+
+		<mailchimp:delete-web-hook config-ref="Mailchimp__Configuration"
+			listId="#[flowVars['ListId']]" token="OAUTH #[flowVars['Token']]"
+			webHookId="#[flowVars['WebHookId']]" doc:name="Mailchimp" apiKey="#[flowVars['apiKey']]" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<flow-ref name="checkResponseStatusCodeFlow" doc:name="checkResponseStatusCodeFlow" />
+
+
+		<dw:transform-message doc:name="Transform Response to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<logger
+				message="Exception in deleteMailChimpHook Flow = #[flowVars['exception']] ++++++++ payload = #[message.payloadAs(java.lang.String)]"
+				level="INFO" doc:name="Logger" />
+			<dw:transform-message doc:name="delete exception response">
+				<dw:set-payload resource="classpath:dwScripts/buildFailedToDeleteHookResponse.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+
+	</flow>
+	<flow name="GetMailchimpIntegrationListFlow">
+		<enricher target="#[flowVars['listresponce']]" doc:name="Message Enricher">
+			<flow-ref name="GetMailchimpListFlow" doc:name="GetMailchimpListFlow" />
+		</enricher>
+
+		<dw:transform-message doc:name="Build GetMailchimp List Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGetMailChimpListFlowResponseExample.dwl" />
+		</dw:transform-message>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<set-variable variableName="failedResponse"
+				value="#[message.payloadAs(java.lang.String)]" doc:name="Failed Response Payload" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildGetMailchimpListFlowExceptionExample.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+	<flow name="GetMailchimpListFlow">
+		<http:request config-ref="HTTP_Request_Configuration7"
+			path="oauth2/metadata" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Authorization" value="OAuth #[flowVars['Token']]" />
+
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Build GetMailchimp List Request">
+			<dw:set-variable variableName="metadataMailchimp"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<logger
+			message="GetMailChimpListFlow = #[flowVars['Token']]-#[flowVars['metadataMailchimp']['dc']]"
+			level="DEBUG" doc:name="Logger" />
+		<set-variable variableName="apiKey"
+			value="#[flowVars['Token']]-#[flowVars['metadataMailchimp']['dc']]"
+			doc:name="apiKey" />
+
+		<mailchimp:get-lists config-ref="Mailchimp__Configuration"
+			token="OAUTH #[flowVars['Token']]" doc:name="Mailchimp" apiKey="#[flowVars['apiKey']]" />
+		<logger message="GetMailChimpListFlow : after connectors #[payload]"
+			level="DEBUG" doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Message">
+			<dw:input-payload mimeType="application/java" />
+			<dw:set-payload resource="classpath:dwScripts/payloadToJson.dwl" />
+		</dw:transform-message>
+
+		<object-to-string-transformer doc:name="Object to String" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<logger message="after json object #[message.payloadAs(java.lang.String)]"
+			level="DEBUG" doc:name="Logger" />
+
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<set-variable variableName="failedResponse"
+				value="#[message.payloadAs(java.lang.String)]" doc:name="Failed Response Payload" />
+			<logger
+				message="In GetMailchimpList Flow : Exception = #[flowVars['exception']] +++++++ payload = #[flowVars['failedResponse']]"
+				level="INFO" doc:name="Logger" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildGetMailchimpListExceptionExample.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+
+	<flow name="checkResponseStatusCodeFlow">
+		<validation:is-true config-ref="Validation_Configuration"
+			expression="#[message.inboundProperties.'http.status' != 401 &amp;&amp; message.inboundProperties.'http.status' != 429]"
+			doc:name="Validation" />
+	</flow>
+
+	<flow name="updateMailchimpIntegrationFlow">
+		<set-variable variableName="newlistId"
+			value="#[flowVars['Request']['configJson']['list_id']]" doc:name="set List Id" />
+		<foreach collection="#[flowVars['Request']['configJson']['events']]"
+			doc:name="For Each">
+			<logger message="in For Loop #[payload]" level="DEBUG"
+				doc:name="Logger" />
+			<set-variable variableName="#[payload]" value="#[payload]"
+				doc:name="Variable" />
+		</foreach>
+		<set-variable variableName="uuid"
+			value="#[flowVars['Request']['instanceUuid']]" doc:name="Generate Uuid" />
+		<http:request config-ref="HTTP_Request_Configuration7"
+			path="/oauth2/metadata" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:header headerName="Authorization" value="OAuth #[flowVars['Token']]" />
+
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-variable variableName="metadata"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="apiKey"
+			value="#[flowVars['Token']]-#[flowVars['metadata']['dc']]" doc:name="apiKey" />
+
+
+		<mailchimp:create-webhook config-ref="Mailchimp__Configuration"
+			listId="#[flowVars['newlistId']]" token="OAUTH #[flowVars['Token']]"
+			doc:name="Mailchimp" apiKey="#[flowVars['apiKey']]">
+			<mailchimp:request
+				url="https://${mailchimp.webhook.domain}/api/hooks/#[flowVars['uuid']]">
+				<mailchimp:events subscribe="#[flowVars['subscribe'] !=empty]"
+					cleaned="#[flowVars['cleaned'] !=empty]" campaign="#[flowVars['campaign'] !=empty]"
+					unsubscribe="#[flowVars['unsubscribe'] !=empty]" profile="#[flowVars['profile'] !=empty]"
+					upemail="#[flowVars['upemail'] !=empty]" />
+				<mailchimp:sources admin="true" api="true" user="true" />
+			</mailchimp:request>
+		</mailchimp:create-webhook>
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<dw:transform-message doc:name="Build Update Mailchimp Integration Response">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+
+	</flow>
+
+
+</mule>

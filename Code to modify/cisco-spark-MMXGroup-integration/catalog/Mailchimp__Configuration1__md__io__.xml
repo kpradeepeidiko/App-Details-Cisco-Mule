@@ -1,0 +1,24 @@
+<metadata__cache__entry>
+  <version>5.2.0.0</version>
+  <connectorName>Mailchimp__Configuration1</connectorName>
+  <metadataIo class="tree-map">
+    <entry>
+      <string>http://www.mulesoft.org/schema/mule/mailchimp/create-webhook</string>
+      <map>
+        <entry>
+          <string>__default__</string>
+          <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry/>
+        </entry>
+      </map>
+    </entry>
+    <entry>
+      <string>http://www.mulesoft.org/schema/mule/mailchimp/get-user-information</string>
+      <map>
+        <entry>
+          <string>__default__</string>
+          <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry/>
+        </entry>
+      </map>
+    </entry>
+  </metadataIo>
+</metadata__cache__entry>

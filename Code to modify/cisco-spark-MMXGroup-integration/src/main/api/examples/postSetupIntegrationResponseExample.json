@@ -1,0 +1,14 @@
+{
+    "channelId": "Y2lzY29zcGFyazovL3VzL1JPT00vYTIxMzIzOWQtZDM3YS0zMzhiLWE4ZjMtNDU1MzdjZWZjMmEw",
+    "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzAyM2RmYmMwLTQ5MjUtNDc1NC05ZDJiLTdkMjE0NmY4ZDllMg",
+    "status": "ACTIVE",
+    "instanceId":"483",
+    "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMGU2OWMzYi1lMzU4LTQ3ZTUtODQyYy02MWMxMmRlNTVhY2Q",
+    "configJson": {
+        "room_name": "Rakesh",
+        "user_name": "Surender Reddy Molugu",
+        "owner_name": "tirapa-eidiko",
+        "authenticated_to": "tirapa-eidiko",
+        "displayName": "App Name"
+    }
+}

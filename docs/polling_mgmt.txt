@@ -1,0 +1,25 @@
+#[flowVars['listAction'] != empty && (flowVars['listAction'] == 'list' || flowVars['listAction'] == 'LIST')]
+
+<flow name="refreshSparkTokenPolling">
+		<poll doc:name="Poll">
+			<fixed-frequency-scheduler frequency="23"
+				timeUnit="HOURS" />
+			<logger
+				message="#['....................................................\n...Started Refreshing Spark Token Polling...\n.....................................................']"
+				level="INFO" doc:name="Logger" />
+		</poll>
+		
+=================================================================================================
+<flow name="healthCheckPolling">
+		<poll doc:name="Poll">
+			<fixed-frequency-scheduler frequency="5"
+				timeUnit="MINUTES" />
+			<logger message="Started health check Polling.....!!!!!"
+				level="INFO" doc:name="Logger" />
+		</poll>
+=================================================================================================
+<flow name="googleDriveAPIPolling">
+        <poll doc:name="Poll">
+            <fixed-frequency-scheduler frequency="${polling.interval}" timeUnit="MINUTES"/>
+            <flow-ref name="startGoogleDrivePollingFlow" doc:name="startGoogleDrivePollingFlow"/>
+        </poll>

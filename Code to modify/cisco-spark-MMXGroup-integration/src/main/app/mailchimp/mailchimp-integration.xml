@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:mailchimp="http://www.mulesoft.org/schema/mule/mailchimp"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/mailchimp http://www.mulesoft.org/schema/mule/mailchimp/current/mule-mailchimp.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<http:request-config name="HTTP_Request_Configuration"
+		protocol="HTTPS" host="login.mailchimp.com" port="443"
+		doc:name="HTTP Request Configuration" tlsContext-ref="tls.context" />
+
+	<http:request-config name="HTTP_Request_Configuration1"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration2"
+		protocol="HTTPS" host="login.mailchimp.com" port="443"
+		doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration3"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration4"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration5"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration6"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" tlsContext-ref="tls.context"
+		doc:name="HTTP Request Configuration" />
+	<http:request-config name="HTTP_Request_Configuration8"
+		protocol="HTTPS" host="#[flowVars.metadata.dc].api.mailchimp.com"
+		port="443" basePath="/3.0" doc:name="HTTP Request Configuration" />
+    <mailchimp:config name="Mailchimp__Configuration" doc:name="Mailchimp: Configuration"/>
+
+	<flow name="postAuthDetailsFlow2">
+		<enricher target="#[flowVars['access_token']]" doc:name="Message Enricher">
+			<flow-ref name="postAuthDetailsImplementationFlow" doc:name="postAuthDetailsImplementationFlow" />
+		</enricher>
+		<dw:transform-message doc:name="Build Post Auth Details Response">
+
+			<dw:set-payload
+				resource="classpath:dwScripts/buildMailchimpPostAuthDetailsResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+	<flow name="postAuthDetailsImplementationFlow">
+		<object-to-string-transformer doc:name="Object to String" />
+		<dw:transform-message doc:name="Build Post AuthDetails Request">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+
+		<set-variable variableName="code"
+			value="#[payload['authSettings']['code']]" doc:name="code" />
+		<set-variable variableName="grant_type" value="${mailchimp.app.grant_type}"
+			doc:name="grant_type" />
+		<set-variable variableName="client_id" value="${mailchimp.app.client_id}"
+			doc:name="client_id" />
+		<set-variable variableName="client_secret"
+			value="${mailchimp.app.client_secret}" doc:name="client_secret" />
+		<set-variable variableName="redirect_uri"
+			value="${mailchimp.app.redirect_uri}" doc:name="redirect_uri" />
+		<logger
+			message="#[{'grant_type':flowVars['grant_type'], 'client_id':flowVars['client_id'],'client_secret':flowVars['client_secret'],'code':flowVars['code'],'redirect_uri':flowVars['redirect_uri']}]"
+			level="DEBUG" doc:name="Logger" />
+		<set-payload
+			value="#[{'grant_type':flowVars['grant_type'], 'client_id':flowVars['client_id'],'client_secret':flowVars['client_secret'],'code':flowVars['code'],'redirect_uri':flowVars['redirect_uri']}]"
+			doc:name="Set Payload" />
+		<http:request config-ref="HTTP_Request_Configuration"
+			path="/oauth2/token" method="POST" doc:name="HTTP Mailchimp ACCESS TOKEN"
+			host="login.mailchimp.com" port="443">
+			<http:request-builder>
+				<http:header headerName="Content-Type"
+					value="application/x-www-form-urlencoded" />
+
+			</http:request-builder>
+			<http:success-status-code-validator
+				values="0..599" />
+		</http:request>
+		<dw:transform-message doc:name="Build Post AuthDetails Response">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+
+
+	</flow>
+	<flow name="postIntegrationSettingsFlow2">
+		<logger
+			message="Settings = initial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<dw:transform-message doc:name="Build Post Integration Settings Request">
+			<dw:set-variable variableName="Request"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		<logger message="Settings = input to java #[flowVars['Request']]"
+			level="DEBUG" doc:name="Logger" />
+
+
+		<set-variable variableName="integrationId"
+			value="#[flowVars['Request']['integrationId']]" doc:name="SetIntegrationId" />
+		<set-variable variableName="userId"
+			value="#[flowVars['Request']['userId']]" doc:name="SetUserId" />
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+		</enricher>
+		<logger
+			message="settingsFlow Token : #[flowVars['getIntegrationTokenResponse']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars.getIntegrationTokenResponse.toString() != 'No results']">
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse']['accessToken'] !=empty]">
+						<logger message="#[flowVars['getIntegrationTokenResponse']]"
+							level="DEBUG" doc:name="Logger" />
+						<set-variable variableName="Token"
+							value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							doc:name="SetToken" />
+						<logger
+							message="userTokenSettingsFlow :  #[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							level="DEBUG" doc:name="Token" />
+						<enricher target="#[flowVars['userResponse']]" doc:name="Message Enricher">
+							<flow-ref name="getMailchimpUserFlow" doc:name="getMailchimpUserFlow" />
+						</enricher>
+						<set-variable variableName="user"
+							value="#[flowVars['userResponse']]" doc:name="Set Mailchimp User" />
+						<enricher target="#[flowVars['GetList']]" doc:name="Message Enricher">
+							<flow-ref name="GetMailchimpIntegrationListFlow"
+								doc:name="GetMailchimpIntegrationListFlow" />
+						</enricher>
+						<choice doc:name="Choice">
+							<when
+								expression="#[flowVars['userResponse'].containsKey('failedResponse') &amp;&amp; flowVars['GetList'].containsKey('failedResponse') ]">
+								<dw:transform-message doc:name="Build Token Revoke Response">
+									<dw:set-payload
+										resource="classpath:dwScripts/buildTokenRevokeResponseExample.dwl" />
+								</dw:transform-message>
+							</when>
+							<otherwise>
+								<dw:transform-message metadata:id="eb3dc316-c163-4660-9c3e-01a38cfdaa28"
+									doc:name="Build Post Integration Settings Response">
+									<dw:set-payload
+										resource="classpath:dwScripts/buildGetMailchimpIntegrationListRequest.dwl" />
+								</dw:transform-message>
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTokenResultEmptyInSettingsFlowExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildTokenResultEmptyInSettingsFlowExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<set-variable variableName="getPayload"
+				value="#[message.payloadAs(java.lang.String)]" doc:name="Get Payload" />
+			<logger
+				message="In settings Flow : Exception = #[flowVars['exception']] +++++++ Payload = #[flowVars['getPayload']]"
+				level="INFO" doc:name="Logger" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildSettingsExceptionExample.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+
+	</flow>
+
+
+	<flow name="postFormatMessageFlow2">
+		<logger
+			message="Msg formt = initial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<dw:transform-message metadata:id="7990b9d9-d635-4529-a0af-a9534b5ed335"
+			doc:name="Build Post Format Message Request">
+			<dw:input-payload doc:sample="sample_data\json.json" />
+			<dw:set-variable variableName="response"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="userId"
+			value="#[flowVars['response']['instanceDetails']['userId']]"
+			doc:name="userId" />
+		<set-variable variableName="integrationId"
+			value="#[flowVars['response']['instanceDetails']['integrationId']]"
+			doc:name="integrationId" />
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+		</enricher>
+		<logger message="#[flowVars['getIntegrationTokenResponse']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['getIntegrationTokenResponse'].toString() != 'No results']">
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse']['accessToken'] != empty]">
+						<set-variable variableName="Token"
+							value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							doc:name="SetToken" />
+						<http:request config-ref="HTTP_Request_Configuration7"
+							path="/oauth2/metadata" method="GET" doc:name="HTTP">
+							<http:request-builder>
+								<http:header headerName="Authorization"
+									value="OAuth  #[flowVars['Token']]" />
+							</http:request-builder>
+						</http:request>
+						<dw:transform-message doc:name="Metadata">
+							<dw:set-variable variableName="metadata"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+						</dw:transform-message>
+						<set-variable variableName="dc"
+							value="#[flowVars['metadata']['dc']]" doc:name="DC" />
+						<set-variable variableName="EventStatus"
+							value="#[flowVars['response']['hookResponse']['type']]" doc:name="EventStatus" />
+						<dw:transform-message doc:name="userEvents">
+							<dw:set-payload resource="classpath:dwScripts/buildUserEventResponse.dwl" />
+						</dw:transform-message>
+						<set-payload value="#[payload]" mimeType="application/json"
+							doc:name="Set Payload" />
+						<dw:transform-message doc:name="ConfigJsonValue">
+							<dw:set-variable variableName="configJsonValue"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+						</dw:transform-message>
+						<logger message="#[flowVars['configJsonValue']]" level="DEBUG"
+							doc:name="Logger" />
+						<set-variable variableName="list_id"
+							value="#[flowVars['configJsonValue']['list_id']]" doc:name="list_id" />
+						<logger
+							message="Accesstoken: #[flowVars['Token']]  Dc: #[flowVars['dc']] Before Generic ::::::: https://#[flowVars['dc']].api.mailchimp.com/3.0/lists/#[flowVars['list_id']]?apikey=#[flowVars['Token']]-#[flowVars['dc']]"
+							level="DEBUG" doc:name="Logger" />
+						<set-variable variableName="apikey"
+							value="#[flowVars['Token']]-#[flowVars['dc']]" doc:name="apiKey" />
+						<mailchimp:get-list-by-id config-ref="Mailchimp__Configuration"
+							apiKey="#[flowVars['apikey']]" listId="#[flowVars['list_id']]"
+							token="OAuth #[flowVars['Token']]" doc:name="Mailchimp" />
+						<json:object-to-json-transformer
+							doc:name="Object to JSON" />
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-variable variableName="ListNameResponse"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+						</dw:transform-message>
+						<logger message="#[flowVars['ListNameResponse']['name']]"
+							level="DEBUG" doc:name="Logger" />
+						<foreach collection="#[flowVars['configJsonValue']['events']]"
+							doc:name="Loop_User_Selected_Notifications">
+							<set-variable variableName="event" value="#[payload]"
+								doc:name="UserNotoficationsType" />
+							<choice doc:name="Routing Notifications">
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='subscribe' &amp;&amp; payload=='subscribe']">
+									<logger message="subscribe" level="INFO" doc:name="subscribe" />
+									<set-variable variableName="Url"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists/members/view?id=#[flowVars['response']['hookResponse']['data[web_id]']]"
+										doc:name="Url" />
+									<set-variable variableName="PostMessage"
+										value="#[flowVars['response']['hookResponse']['data[merges][FNAME]']] #[flowVars['response']['hookResponse']['data[merges][LNAME]']] #[flowVars['response']['hookResponse']['data[email]']]  subscribed to list  [#[flowVars['ListNameResponse']['name']]](#[flowVars['Url']])"
+										doc:name="PostMessage" />
+								</when>
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='unsubscribe' &amp;&amp; payload=='unsubscribe']">
+									<logger message="unsubscribe" level="INFO" doc:name="unsubscribe" />
+									<set-variable variableName="Url"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists"
+										doc:name="Url" />
+									<set-variable variableName="PostMessage"
+										value="#[flowVars['response']['hookResponse']['data[merges][FNAME]']]  #[flowVars['response']['hookResponse']['data[merges][LNAME]']] #[flowVars['response']['hookResponse']['data[email]']]  unsubscribed from list  [#[flowVars['ListNameResponse']['name']]](#[flowVars['Url']])"
+										doc:name="PostMessage" />
+								</when>
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='campaign' &amp;&amp; payload=='campaign']">
+									<logger message="campaign" level="INFO" doc:name="campaign" />
+									<set-variable variableName="CampaignUrl"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/campaigns"
+										doc:name="CampaignUrl" />
+									<set-variable variableName="ListUrl"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists"
+										doc:name="ListUrl" />
+									<set-variable variableName="PostMessage"
+										value="Campaign  named  [#[flowVars['response']['hookResponse']['data[subject]']]](#[flowVars['CampaignUrl']])  was  #[flowVars['response']['hookResponse']['data[status]']] to list  [#[flowVars['ListNameResponse']['name']]](#[flowVars['ListUrl']]) "
+										doc:name="PostMessage" />
+								</when>
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='profile' &amp;&amp; payload=='profile']">
+									<logger message="profile" level="INFO" doc:name="profile" />
+									<set-variable variableName="Url"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists/members/view?id=#[flowVars['response']['hookResponse']['data[web_id]']]"
+										doc:name="Url" />
+									<set-variable variableName="PostMessage"
+										value="Profile updated for #[flowVars['response']['hookResponse']['data[merges][FNAME]']]  #[flowVars['response']['hookResponse']['data[merges][LNAME]']] #[flowVars['response']['hookResponse']['data[email]']]  in list  [#[flowVars['ListNameResponse']['name']]](#[flowVars['Url']])"
+										doc:name="PostMessage" />
+								</when>
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='upemail' &amp;&amp; payload=='upemail']">
+									<logger message="upemail" level="INFO" doc:name="upemail" />
+									<set-variable variableName="Url"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists"
+										doc:name="Url" />
+									<set-variable variableName="PostMessage"
+										value="Email changed from #[flowVars['response']['hookResponse']['data[old_email]']] to #[flowVars['response']['hookResponse']['data[new_email]']]   in list  [#[flowVars['ListNameResponse']['name']]](#[flowVars['Url']])"
+										doc:name="PostMessage" />
+								</when>
+								<when
+									expression="#[flowVars['response']['hookResponse']['type']=='cleaned' &amp;&amp; payload=='cleaned']">
+									<logger message="cleaned" level="INFO" doc:name="cleaned" />
+									<set-variable variableName="Url"
+										value="https://#[flowVars['dc']].admin.mailchimp.com/lists"
+										doc:name="Url" />
+									<set-variable variableName="PostMessage"
+										value="Cleaned invalid address  #[flowVars['response']['hookResponse']['data[email]']]  from list   [#[flowVars['ListNameResponse']['name']]](#[flowVars['Url']])"
+										doc:name="PostMessage" />
+								</when>
+								<otherwise>
+									<logger level="DEBUG" doc:name="Logger" message="default Logger" />
+								</otherwise>
+							</choice>
+						</foreach>
+						<dw:transform-message doc:name="Build Post Format Message Responce">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl" />
+						</dw:transform-message>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTokenResultInMesgFormtEmptyExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildTokenResultInMesgFormtEmptyExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+	</flow>
+
+	<flow name="setupIntegrationFlow2">
+		<logger
+			message="SET Up initial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<dw:transform-message doc:name="Build Setup Integration Request">
+			<dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl"
+				variableName="Request1" />
+		</dw:transform-message>
+		<logger message="#[flowVars['Request1']]" level="DEBUG"
+			doc:name="Logger" />
+
+		<set-variable variableName="integrationId"
+			value="#[flowVars['Request1']['integrationId']]" doc:name="SetIntegrationId" />
+		<set-variable variableName="userId"
+			value="#[flowVars['Request1']['userId']]" doc:name="SetUserId" />
+		<set-variable variableName="ListId"
+			value="#[flowVars['Request1']['configJson']['list_id']]" doc:name="SetListId" />
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+		</enricher>
+		<logger message="setup Token: #[flowVars['getIntegrationTokenResponse']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars.getIntegrationTokenResponse.toString() != 'No results']">
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse']['accessToken'] != empty]">
+						<set-variable variableName="Token"
+							value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							doc:name="SetToken" />
+						<set-variable variableName="instanceId"
+							value="#[flowVars['Request1']['instanceId']]" doc:name="instanceId" />
+						<enricher target="#[flowVars['postHookResponse']]"
+							doc:name="Message Enricher">
+							<flow-ref name="postMailchimpHookFlow" doc:name="postMailchimpHookFlow" />
+						</enricher>
+						<logger message="#[flowVars['postHookResponse']]   +++++++++++ #[flowVars['postHookResponse']['id']]"
+							level="DEBUG" doc:name="Logger" />
+						<set-variable variableName="WebHookId"
+							value="#[flowVars['postHookResponse']['id']]" doc:name="Set WebHookId" />
+						<set-variable variableName="status"
+							value="#[(flowVars['WebHookId'] != empty &amp;&amp; flowVars['WebHookId'] != null) ? 'ACTIVE':'DISABLED']"
+							doc:name="Set a Ternary operator" />
+						<choice doc:name="Choice">
+							<when expression="#[flowVars['status'] == 'ACTIVE']">
+								<dw:transform-message metadata:id="1615641b-76a1-4a31-9fec-323bb50a27a8"
+									doc:name="Build Setup Integration Response">
+									<dw:input-variable variableName="postHookResponse" />
+									<dw:set-payload resource="classpath:dwScripts/buildPostHookResponse.dwl" />
+								</dw:transform-message>
+								<enricher target="#[flowVars['updateInstanceResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="updateinruntime" doc:name="updateinruntime" />
+								</enricher>
+								<dw:transform-message doc:name="Build Setup Integration Success Response">
+									<dw:input-payload mimeType="application/java"/>
+									<dw:set-payload
+										resource="classpath:dwScripts/buildSetupIntegrationSuccessResponse.dwl" />
+								</dw:transform-message>
+							</when>
+							<otherwise>
+								<dw:transform-message doc:name="Build Setup Integration Response">
+									
+									<dw:set-payload
+										resource="classpath:dwScripts/buildStatusDisableResponseExample.dwl" />
+								</dw:transform-message>
+								<enricher target="#[flowVars['updateInstanceResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="updateinruntime" doc:name="updateinruntime" />
+								</enricher>
+								<dw:transform-message doc:name="Build Setup Integration Failure Response">
+									<dw:input-payload mimeType="application/java"/>
+									<dw:set-payload
+										resource="classpath:dwScripts/buildSetupIntegrationFailureResponse.dwl" />
+								</dw:transform-message>
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTokenResultEmptyInSetupFlowExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildTokenResultEmptyInSetupFlowExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<logger
+				message="Exception in SetUp Integration = #[flowVars['exception']] ++++++++ payload = #[message.payloadAs(java.lang.String)]"
+				level="INFO" doc:name="Logger" />
+
+		</catch-exception-strategy>
+
+	</flow>
+	<flow name="updateinruntime">
+		<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration"
+			path="/integrations/instances/#[flowVars.instanceId]" method="PUT"
+			doc:name="Update Integration Instance" />
+
+	</flow>
+
+
+
+
+
+	<flow name="updateIntegrationFlow2">
+		<logger
+			message="update Initial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+
+
+		<dw:transform-message doc:name="Build Update Integration Request">
+
+			<dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl"
+				variableName="Request" />
+
+		</dw:transform-message>
+
+
+		<choice doc:name="Choice">
+
+
+			<when
+				expression="#[flowVars['Request']['configJson']['list_modified']==true || flowVars['Request']['configJson']['events_modified']==true]">
+
+				<set-variable doc:name="SetIntegrationId"
+					value="#[flowVars['Request']['integrationId']]" variableName="integrationId" />
+				<set-variable variableName="instanceId"
+					value="#[flowVars['Request']['instance_id']]" doc:name="Set InstanceId" />
+
+				<set-variable doc:name="SetUserId"
+					value="#[flowVars['Request']['userId']]" variableName="userId" />
+
+
+				<enricher doc:name="Message Enricher"
+					target="#[flowVars['getIntegrationTokenResponse']]">
+
+					<flow-ref doc:name="getIntegrationTokenFlow" name="getIntegrationTokenFlow" />
+
+				</enricher>
+				<logger
+					message="Update integration Token: #[flowVars['getIntegrationTokenResponse']]"
+					level="DEBUG" doc:name="Logger" />
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse'].toString() != 'No results']">
+						<choice doc:name="Choice">
+							<when
+								expression="#[flowVars['getIntegrationTokenResponse']['accessToken']!=empty]">
+								<set-variable variableName="Token"
+									value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+									doc:name="SetToken" />
+								<set-variable variableName="ListId"
+									value="#[flowVars['Request']['configJson']['old_listId']]"
+									doc:name="Set Old List Id" />
+								<set-variable variableName="WebHookId"
+									value="#[flowVars['Request']['configJson']['WebHookId']]"
+									doc:name="SetWebHookId" />
+								<enricher target="#[flowVars['deleteHookResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="deleteMailchimpHookFlow" doc:name="deleteMailchimpHookFlow" />
+								</enricher>
+								<enricher
+									target="#[flowVars['updateMailchimpIntegrationFlowResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="updateMailchimpIntegrationFlow"
+										doc:name="updateMailchimpIntegrationFlow" />
+								</enricher>
+								<set-variable variableName="WebHookId"
+									value="#[flowVars['updateMailchimpIntegrationFlowResponse']['id']]"
+									doc:name="Set WebHookId" />
+								<set-variable variableName="status"
+									value="#[(flowVars['WebHookId'] != empty &amp;&amp; flowVars['WebHookId'] != null) ? 'ACTIVE':'DISABLED']"
+									doc:name="Set Ternary Operator" />
+								<choice doc:name="Choice">
+									<when expression="#[flowVars['status'] == 'ACTIVE']">
+										<dw:transform-message doc:name="Build Put Mailchimp Hook Body">
+											<dw:set-payload
+												resource="classpath:dwScripts/buildPutMailchimpHookBodyExample.dwl" />
+										</dw:transform-message>
+										<enricher target="#[flowVars['updateIntegrationResponse']]"
+											doc:name="Message Enricher">
+											<flow-ref name="updateinruntime" doc:name="updateinruntime" />
+										</enricher>
+										<dw:transform-message
+											doc:name="Build Update Integration Success Response">
+											<dw:set-payload
+												resource="classpath:dwScripts/buildUpdateIntegrationSuccessResponse.dwl" />
+										</dw:transform-message>
+									</when>
+									<otherwise>
+										<dw:transform-message doc:name="Build Put Mailchimp Hook Body">
+											<dw:set-payload
+												resource="classpath:dwScripts/buildStatusDisableResponseExample.dwl" />
+										</dw:transform-message>
+										<enricher target="#[flowVars['updateIntegrationResponse']]"
+											doc:name="Message Enricher">
+											<flow-ref name="updateinruntime" doc:name="updateinruntime" />
+										</enricher>
+										<dw:transform-message
+											doc:name="Build Update Integration Failure Response">
+											<dw:set-payload
+												resource="classpath:dwScripts/buildUpdateIntegrationFailureResponse.dwl" />
+										</dw:transform-message>
+									</otherwise>
+								</choice>
+
+							</when>
+							<otherwise>
+								<dw:transform-message doc:name="Transform Message">
+									<dw:set-payload
+										resource="classpath:dwScripts/buildTokenResultEmptyInUpdateExample.dwl" />
+								</dw:transform-message>
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTokenResultEmptyInUpdateExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+
+
+
+
+			</when>
+
+
+			<otherwise>
+
+
+				<dw:transform-message doc:name="Update When Detail">
+
+					<dw:set-payload resource="classpath:dwScripts/buildUpdateResponseWhenListModifiedFalse.dwl" />
+
+				</dw:transform-message>
+
+			</otherwise>
+
+		</choice>
+
+	</flow>
+	<flow name="tearDownIntegrationFlow2">
+		<logger
+			message="Tear down = initial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+
+		<dw:transform-message doc:name="Build Tear Down Integration Request">
+			<dw:set-variable variableName="TearDownResponse"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+
+		</dw:transform-message>
+
+		<set-variable variableName="IntegrationId"
+			value="#[flowVars['TearDownResponse']['integrationId']]" doc:name="SetIntegrationId" />
+		<set-variable variableName="UserId"
+			value="#[flowVars['TearDownResponse']['userId']]" doc:name="SetUserId" />
+		<dw:transform-message doc:name="Tear Down Integration Response ConfigJson">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildConvertProcessInTearDownExample.dwl" />
+		</dw:transform-message>
+
+		<set-variable variableName="ListId" value="#[json:list_id]"
+			doc:name="SetListId" />
+		<set-variable variableName="WebHookId" value="#[json:WebHookId]"
+			doc:name="SetWebHookId" />
+
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+		</enricher>
+		<logger message="Teardown Token: #[flowVars['getIntegrationTokenResponse']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['getIntegrationTokenResponse'].toString() != 'No results']">
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse']['accessToken']!=empty]">
+						<set-variable variableName="Token"
+							value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							doc:name="SetToken" />
+						<set-variable variableName="instance_id"
+							value="#[flowVars['TearDownResponse']['instanceId']]" doc:name="instance_id" />
+						<enricher target="#[flowVars.deleteHookResponse]"
+							doc:name="Message Enricher">
+							<flow-ref name="deleteMailchimpHookFlow" doc:name="deleteMailchimpHookFlow" />
+						</enricher>
+						<dw:transform-message doc:name="Build Tear Down Integration Response">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl" />
+						</dw:transform-message>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildTokenResultEmptyInTearDownFlowExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildTokenResultEmptyInTearDownFlowExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+
+	</flow>
+
+
+
+	<flow name="healthCheckFlow2">
+		<logger message="HC = lnitial payload #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<object-to-string-transformer doc:name="Object to String" />
+
+		<dw:transform-message doc:name="Build Post Integration Settings Request">
+			<dw:set-variable variableName="Request"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		<logger message="input to java #[flowVars['Request']]" level="DEBUG"
+			doc:name="Logger" />
+
+
+
+		<set-variable variableName="integrationId"
+			value="#[flowVars['Request']['integrationId']]" doc:name="SetIntegrationId" />
+
+		<set-variable variableName="userId"
+			value="#[flowVars['Request']['userId']]" doc:name="SetUserId" />
+
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+		</enricher>
+		<logger message="settings Token : #[flowVars['getIntegrationTokenResponse']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Choice">
+			<when
+				expression="#[flowVars['getIntegrationTokenResponse'].toString() != 'No results']">
+				<choice doc:name="Choice">
+					<when
+						expression="#[flowVars['getIntegrationTokenResponse']['accessToken'] != empty]">
+						<logger message="#[flowVars['getIntegrationTokenResponse']]"
+							level="DEBUG" doc:name="Logger" />
+						<set-variable variableName="Token"
+							value="#[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							doc:name="SetToken" />
+						<logger
+							message="Token:  #[flowVars['getIntegrationTokenResponse']['accessToken']]"
+							level="DEBUG" doc:name="Token" />
+						<enricher target="#[flowVars['userResponse']]" doc:name="Message Enricher">
+							<flow-ref name="getMailchimpUserFlow" doc:name="getMailchimpUserFlow" />
+						</enricher>
+						<set-variable variableName="user"
+							value="#[flowVars['userResponse']]" doc:name="Set Mailchimp User" />
+						<enricher target="#[flowVars['GetList']]" doc:name="Message Enricher">
+							<flow-ref name="GetMailchimpIntegrationListFlow"
+								doc:name="GetMailchimpIntegrationListFlow" />
+						</enricher>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildMailchimpHealthCheckResponse.dwl" />
+						</dw:transform-message>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Transform Message">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildMailchimpHealthCheckResponse.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Transform Message">
+					<dw:set-payload resource="classpath:dwScripts/buildMailchimpHealthCheckResponse.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<dw:transform-message doc:name="Transform Message">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildMailchimpHealthCheckFailureResponse.dwl" />
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+</mule>
