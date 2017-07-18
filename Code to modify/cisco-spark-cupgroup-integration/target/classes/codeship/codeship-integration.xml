@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:CiscoSpark="http://www.mulesoft.org/schema/mule/CiscoSpark" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd">
+      
+    <flow name="postAuthDetailsFlow2">
+       <dw:transform-message doc:name="Transform Payload to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <enricher target="#[flowVars['postTokenResponse']]" doc:name="Message Enricher">
+            <flow-ref name="postCodeshipTokenFlow" doc:name="postCodeshipTokenFlow"/>
+        </enricher>
+        <dw:transform-message doc:name="Build Post Auth Details Response">
+            <dw:set-payload resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+
+	<flow name="postFormatMessageFlow2">
+        <dw:transform-message metadata:id="7990b9d9-d635-4529-a0af-a9534b5ed335" doc:name="Build Post Format Message Request">
+            <dw:input-payload doc:sample="sample_data\json.json"/>
+<dw:set-variable variableName="response" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <set-variable variableName="Buildstatus" value="#[flowVars['response']['hookResponse']['build']['status']]" doc:name="Build Status"/>
+        <dw:transform-message doc:name="Transform User Notifications">
+            <dw:set-payload resource="classpath:dwScripts/buildUserEventsResponse.dwl"/>
+        </dw:transform-message>
+        <foreach collection="#[json:notifications]" doc:name="Loop_User_Selected_Notifications">
+            <set-variable variableName="event" value="#[payload]" doc:name="UserNotoficationsType"/>
+           <choice doc:name="Routing Notifications">
+            <when expression="#[flowVars['Buildstatus']=='success' &amp;&amp; flowVars['event']=='success']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is successful  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='error' &amp;&amp; flowVars['event']=='error']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) has failed  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='testing' &amp;&amp; flowVars['event']=='testing']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is in testing status  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='stopped' &amp;&amp; flowVars['event']=='stopped']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is #[flowVars['response']['hookResponse']['build']['status']] for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='waiting' &amp;&amp; flowVars['event']=='waiting']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is in wait status  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='ignored' &amp;&amp; flowVars['event']=='ignored']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is #[flowVars['response']['hookResponse']['build']['status']] for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+            <when expression="#[flowVars['Buildstatus']=='infrastructure_failure' &amp;&amp; flowVars['event']=='infrastructure_failure']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) has infrastructure_failure status  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+            </when>
+                <when expression="#[flowVars['Buildstatus']=='blocked' &amp;&amp; flowVars['event']=='blocked']">
+                    <set-variable variableName="BuildName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Build Name"/>
+                    <set-variable variableName="CommitName" value="#[flowVars['response']['hookResponse']['build']['project_name']]" doc:name="Commit Name"/>
+                    <expression-component doc:name="Expression"><![CDATA[flowVars['BuildName']=flowVars.BuildName.toString().split('/')[0];
+flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></expression-component>
+                    <set-variable variableName="postMessage" value="On Project [#[flowVars['response']['hookResponse']['build']['project_name']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]) build [#[flowVars['BuildName']]](https://codeship.com/projects/#[flowVars['response']['hookResponse']['build']['project_id']]/builds/#[flowVars['response']['hookResponse']['build']['build_id']]) is #[flowVars['response']['hookResponse']['build']['status']]  for commit name [#[flowVars['CommitName']]](#[flowVars['response']['hookResponse']['build']['commit_url']])" doc:name="PostMessage"/>
+                </when>
+            <otherwise>
+                    <logger  level="INFO" doc:name="Logger" message="Default Flow"/>
+            </otherwise>
+        </choice> 
+            
+        </foreach>
+        
+        <dw:transform-message doc:name="Build Post Format Message Responce">
+            <dw:set-payload resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+        
+    <flow name="postIntegrationSettingsFlow2">
+        <logger message="#[flowVars['webhookUrl']]" level="INFO" doc:name="Logger"/>
+    	<dw:transform-message doc:name="Transform Payload to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <enricher target="#[flowVars['webhook']]" doc:name="Message Enricher">
+            <flow-ref name="generateWebhookUrlFlow2" doc:name="generateWebhookUrlFlow2"/>
+        </enricher>
+        
+        <dw:transform-message doc:name="Build Get Integration Settings Response">
+            <dw:set-payload resource="classpath:dwScripts/buildGetIntegrationSettingsResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="setupIntegrationFlow2">
+        <dw:transform-message doc:name="Build Setup Integration Response">
+            <dw:set-payload resource="classpath:dwScripts/buildSetupIntegrationResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    <flow name="updateIntegrationFlow2">
+        <dw:transform-message doc:name="Transform Message To Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <enricher target="#[flowVars['updateIntegrationResponse']]" doc:name="Message Enricher">
+            <flow-ref name="updateCodeshipIntegrationFlow" doc:name="updateCodeshipIntegrationFlow"/>
+        </enricher>
+        <dw:transform-message doc:name="Transform Update Integration Response">
+            <dw:set-payload resource="classpath:dwScripts/buildUpdateIntegrationResponseExample.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="tearDownIntegrationFlow2">
+        <dw:transform-message doc:name="Build Tear Down Integration Response">
+            <dw:set-payload resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="healthCheckFlow2">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-variable variableName="healthChechRequest" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+        <set-variable variableName="integrationId" value="#[flowVars['healthChechRequest']['integrationId']]" doc:name="Set Integration Id"/>
+        <set-variable variableName="userId" value="#[flowVars['healthChechRequest']['userId']]" doc:name="Set User Id"/>
+        <enricher target="#[flowVars['generateWebhookUrlResponse']]" doc:name="Message Enricher">
+            <flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow"/>
+        </enricher>
+        <dw:transform-message doc:name="Build Health Check Response">
+            <dw:set-payload resource="classpath:dwScripts/buildCodeshipHealthCheckResponse.dwl"/>
+        </dw:transform-message>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <set-variable variableName="exception" value="#[exception.message]" doc:name="exception"/>
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload resource="classpath:dwScripts/buildCodeshipHealthCheckFailureResponse.dwl"/>
+            </dw:transform-message>
+        </catch-exception-strategy>
+    </flow>
+</mule>
