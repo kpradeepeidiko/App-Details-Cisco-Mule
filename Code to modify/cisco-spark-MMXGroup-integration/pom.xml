@@ -3,10 +3,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft</groupId>
-	<artifactId>cisco-spark-MMXGroup-integration</artifactId>
+	<artifactId>cisco-spark-mmxgroup-integration</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule</packaging>
-	<name>Mule cisco-spark-MMXGroup-integration Application</name>
+	<name>Mule cisco-spark-mmxgroup-integration Application</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
