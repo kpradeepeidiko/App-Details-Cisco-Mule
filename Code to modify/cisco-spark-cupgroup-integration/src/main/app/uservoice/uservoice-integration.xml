@@ -17,7 +17,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     </flow>
 
 	<flow name="postFormatMessageFlow1">
-        <logger message="MSg_Formt PAYLOAD :::::::: #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
         <dw:transform-message doc:name="Transform Message To Java">
             <dw:set-variable variableName="response" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
         </dw:transform-message>
@@ -154,29 +153,31 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
         <dw:transform-message doc:name="Transform Message To Java">
             <dw:set-variable variableName="healthCheckRequest" resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
         </dw:transform-message>
+        <expression-component doc:name="Expression"><![CDATA[flowVars['integrationId'] = flowVars.healthCheckRequest.integrationId;
+flowVars['userId'] = flowVars.healthCheckRequest.userId]]></expression-component>
 
         <logger message="#[flowVars['healthCheckRequest']]" level="INFO" doc:name="Logger"/>
-       <enricher target="#[flowVars['webhookResponse']]" doc:name="Message Enricher">
-           <flow-ref name="postIntegrationSettingsFlow" doc:name="postIntegrationSettingsFlow"/>
-       </enricher>
         <logger message="#[flowVars['webhookResponse']]" level="INFO" doc:name="Logger"/>
 
        <choice doc:name="Choice">
-            <when expression="#[flowVars['webhookResponse'] != empty]">
+            <when expression="#[flowVars['healthCheckRequest'] != empty]">
                 <dw:transform-message doc:name="Build Health Check Response">
+                	<dw:input-payload mimeType="application/json"/>
                     <dw:set-payload resource="classpath:dwScripts/buildUservoiceHealthCheckSuccessResponse.dwl"/>
                 </dw:transform-message>
             </when>
 
            <otherwise>
                <dw:transform-message doc:name="HCS Response">
+               		<dw:input-payload mimeType="application/json"/>
                     <dw:set-payload resource="classpath:dwScripts/buildUservoiceHealthCheckSuccessResponse.dwl"/>
                 </dw:transform-message>
            </otherwise>
        </choice>
-       <catch-exception-strategy doc:name="Catch Exception Strategy">
+       <catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
             <set-variable variableName="exception" value="#[exception.message]" doc:name="exception"/>
             <dw:transform-message doc:name="HCF Response">
+            	<dw:input-payload mimeType="application/java"/>
                 <dw:set-payload resource="classpath:dwScripts/buildUservoiceHealthCheckFailureResponse.dwl"/>
             </dw:transform-message>
         </catch-exception-strategy>

@@ -288,7 +288,7 @@ payload]]>
 				</dw:transform-message>
 			</otherwise>
 		</choice>
-		<catch-exception-strategy doc:name="Catch Exception Strategy">
+		<catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
 			<set-variable variableName="healthCheckException" value="#[exception.message]"
 				doc:name="HealthCheckException" />
 			<dw:transform-message doc:name="Transform Message">

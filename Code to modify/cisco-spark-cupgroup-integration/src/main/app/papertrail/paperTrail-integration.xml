@@ -206,7 +206,7 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 				</dw:transform-message>
 			</otherwise>
 		</choice>
-		<catch-exception-strategy doc:name="Catch Exception Strategy">
+		<catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
 			<set-variable variableName="exception" value="#[exception.message]"
 				doc:name="exception" />
 			<dw:transform-message doc:name="Transform Message">

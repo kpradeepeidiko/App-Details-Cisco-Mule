@@ -148,12 +148,12 @@ flowVars['CommitName']=flowVars.CommitName.toString().split('/')[1];]]></express
         <set-variable variableName="integrationId" value="#[flowVars['healthChechRequest']['integrationId']]" doc:name="Set Integration Id"/>
         <set-variable variableName="userId" value="#[flowVars['healthChechRequest']['userId']]" doc:name="Set User Id"/>
         <enricher target="#[flowVars['generateWebhookUrlResponse']]" doc:name="Message Enricher">
-            <flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow"/>
+            <flow-ref name="generateWebhookUrlFlow2" doc:name="generateWebhookUrlFlow2"/>
         </enricher>
         <dw:transform-message doc:name="Build Health Check Response">
             <dw:set-payload resource="classpath:dwScripts/buildCodeshipHealthCheckResponse.dwl"/>
         </dw:transform-message>
-        <catch-exception-strategy doc:name="Catch Exception Strategy">
+        <catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
             <set-variable variableName="exception" value="#[exception.message]" doc:name="exception"/>
             <dw:transform-message doc:name="Transform Message">
                 <dw:set-payload resource="classpath:dwScripts/buildCodeshipHealthCheckFailureResponse.dwl"/>
