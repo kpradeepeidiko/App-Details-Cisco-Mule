@@ -1,0 +1,12 @@
+{
+  "integration_id": 1,
+  "settings_id": 1,
+  "integration_type": "\"Hook\"",
+  "host": "cisco-spark-bitbucket-integration.cloudhub.io",
+  "port": "443",
+  "base_path": "/api",
+  "api_version": "1",
+  "setup_page_uri": "https://cdn.ciscospark.com/pages/bitbucket_setup.html",
+  "edit_page_uri": "https://cdn.ciscospark.com/pages/bitbucket_edit.html",
+  "delete_page_uri": "https://cdn.ciscospark.com/pages/bitbucket_delete.html"
+}

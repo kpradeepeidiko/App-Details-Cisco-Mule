@@ -159,5 +159,8 @@ http://www.mulesoft.org/schema/mule/Trello http://www.mulesoft.org/schema/mule/T
             <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
         </dw:transform-message>
     </flow>
+    <flow name="TrelloBoardsAPI"/>
+    <flow name="TrelloListAPI"/>
+    <flow name="TrelloCardsAPI"/>
 
 </mule>

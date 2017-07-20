@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+
+
+	<flow name="trackingDetailsFlow">
+		<choice doc:name="Choice">
+			<when expression="#[flowVars.trackingId != empty]">
+				<set-variable variableName="maap" value="#[new java.util.HashMap()]"
+					doc:name="Set map" />
+				<set-variable variableName="requestType" value=""
+					doc:name="Set Request Type" />
+				<set-variable variableName="params" value="" doc:name="Set Params" />
+				<foreach
+					collection="[&quot;integrationId&quot;,&quot;userId&quot;,&quot;trackingId&quot;,&quot;statusCode&quot;,&quot;requestType&quot;,&quot;statusMessage&quot;,&quot;params&quot;]"
+					doc:name="For Each">
+					<choice doc:name="Choice">
+						<when expression="#[flowVars[payload] != empty]">
+							<expression-component doc:name="Expression"><![CDATA[maap.put(payload,flowVars[payload]);]]></expression-component>
+						</when>
+						<otherwise>
+							<logger level="INFO" doc:name="Logger" message="Tracking-details (in for loop) : paload is empty = #[payload]"/>
+						</otherwise>
+					</choice>
+				</foreach>
+				<set-payload value="#[flowVars.maap]" mimeType="application/json"
+					doc:name="Set Payload" />
+				<json:object-to-json-transformer
+					doc:name="Object to JSON" />
+				<enricher target="#[flowVars['trackingDetailsResult']]"
+					doc:name="Message Enricher">
+					<flow-ref name="postTrackingDetailsFlow" doc:name="Post Tracking Details" />
+				</enricher>
+			</when>
+			<otherwise>
+				<logger message="Tracking details not found" level="INFO"
+					doc:name="Logger" />
+			</otherwise>
+		</choice>
+
+	</flow>
+
+
+	<flow name="postTrackingDetailsFlow">
+		<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration"
+			path="/trackingDetails/1" method="POST" doc:name="HTTP Post Tracking Details">
+		</http:request>
+		<dw:transform-message doc:name="Saved successfully">
+			<dw:set-payload resource="classpath:dwScripts/buildTrackingDetailsSavedExample.dwl"/>
+		</dw:transform-message>
+	</flow>
+</mule>

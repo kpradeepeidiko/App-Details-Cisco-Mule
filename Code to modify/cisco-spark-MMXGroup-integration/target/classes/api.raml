@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: cisco-spark-MMXGroup-integration
+title: cisco-spark-MailchimpMarketoXmattersGroup-integration
 version: 1.0
 
 baseUri: https://${mmxgroup.mule.env.raml.baseuri}/api
@@ -107,7 +107,7 @@ traits:
 /healthCheck:
   post:
     description: Checks wether this integration is running correctly or not.
-#    is: [client-id-required]
+    #is: [client-id-required]
     is: [controllerMethod]
     body:
       application/json:
