@@ -191,7 +191,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 	<flow name="postFormatMessageFlow2">
 		<logger
 			message="Msg formt = initial payload #[message.payloadAs(java.lang.String)]"
-			level="INFO" doc:name="Logger" />
+			level="DEBUG" doc:name="Logger" />
 		<object-to-string-transformer doc:name="Object to String" />
 		<dw:transform-message metadata:id="7990b9d9-d635-4529-a0af-a9534b5ed335"
 			doc:name="Build Post Format Message Request">
