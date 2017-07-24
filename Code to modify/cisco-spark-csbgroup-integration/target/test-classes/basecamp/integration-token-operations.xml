@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <http:request-config name="HTTP_Integrations_Runtime_Request_Configuration" protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}" basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration"/>
+
+	<flow name="getIntegrationTokenFlow" >
+        <logger message="UID :::#[flowVars.userId] &amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; IID::#[flowVars.integrationId]" level="INFO" doc:name="Logger"/>
+    	<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}/appTokens" method="GET" doc:name="HTTP">
+        	<http:request-builder>
+                <http:query-param paramName="userId" value="#[flowVars.userId]"/>
+                <http:uri-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+
+            </http:request-builder>
+        </http:request>
+        <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJavaOneResult.dwl"/>
+        </dw:transform-message>
+        <choice doc:name="Choice">
+            <when expression="#[payload.toString() !='{message=No results}']">
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload
+]]></dw:set-payload>
+                </dw:transform-message>
+            </when>
+            <otherwise>
+                <logger message="No Tokens presented" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+       </flow>
+    
+
+      <flow name="putIntegrationTokenOperationFlow">
+        <logger message=" #[flowVars.refreshResult] REFRESHHHHHHHHHHHHHHH #[flowVars.refreshResult.expires_in]" level="INFO" doc:name="Logger"/>
+
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload resource="classpath:dwScripts/refreshToken.dwl"/>
+
+
+        </dw:transform-message>
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}/appTokens/{appTokenId}" method="PUT" doc:name="Update Basecamp Token">
+            <http:request-builder>
+                <http:uri-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+                <http:uri-param paramName="appTokenId" value="#[flowVars.appTokenId]"/>
+
+
+            </http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    <flow name="putIntegrationInstance">
+        <logger message="#[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload resource="classpath:dwScripts/configJson.dwl"/>
+
+        </dw:transform-message>
+        <logger message="update instance #[message.payloadAs(java.lang.String)]" level="INFO" doc:name="Logger"/>
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:uri-param paramName="instanceId" value="#[flowVars.instanceId]"/>
+                <http:header headerName="Content-Type" value="application/json"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+        </dw:transform-message>
+        
+    </flow>
+    
+
+</mule>

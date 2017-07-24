@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+           
+    <flow name="getIntegrationsFlow">
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations" method="GET" doc:name="HTTP">
+        	<http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+
+             
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationFlow">
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationSettingsFlow">
+    	<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}/settings" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+
+
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationInstanceFlow">
+
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="integration_id" value="#[message.inboundProperties.'http.query.params'.integrationId]"/>
+                <http:query-param paramName="user_id" value="#[message.inboundProperties.'http.query.params'.userId]"/>
+                <http:uri-param paramName="instanceId" value="#[flowVars.instanceId]"/>
+
+
+            </http:request-builder>
+        </http:request>
+         <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationInstancesFlow">
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+				<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="integrationId" value="#[flowVars.integrationId]"/>
+                <http:query-param paramName="userId" value="#[flowVars.userId]"/>
+                <http:query-param paramName="status" value="#[flowVars.status]"/>
+
+
+
+            </http:request-builder>
+        </http:request>
+         <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getApplicationFlow" >
+    	<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/applications/{applicationId}" method="GET" doc:name="HTTP">
+        	<http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+<http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="applicationId" value="#[flowVars.applicationId]"/>
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="putIntegrationInstanceFlow">
+
+        <dw:transform-message doc:name="Build Put Integration Request">
+            <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload resource="classpath:dwScripts/buildPutIntegrationRequest.dwl"/>
+        </dw:transform-message>
+
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances/{instanceId}" method="PUT" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:uri-param paramName="instanceId" value="#[flowVars['instanceId']]"/>
+
+			</http:request-builder>
+            <http:failure-status-code-validator values="500..599"/>
+        </http:request>
+        <object-to-string-transformer doc:name="Object to String"/>
+
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-payload value="#[{&quot;message&quot;:&quot;Operation Executed Successfully&quot;}]"  doc:name="Set Message"/>
+		<dw:transform-message doc:name="Transform Response to Java">
+            <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationInstancesByUserIdandIntegrationIdandSpaceIdFlow">
+        <logger message="getBySapceIdToo ==&gt;intge = #[flowVars.integrationId] ++++++ userId = #[flowVars.userId] ++++++++ roomId = #[flowVars.roomId]" level="INFO" doc:name="Logger"/>
+        <http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/instances" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="integrationId" value="#[flowVars['integrationId']]"/>
+                <http:query-param paramName="userId" value="#[flowVars['userId']]"/>
+                <http:query-param paramName="spaceId" value="#[flowVars['roomId']]"/>
+                <http:query-param paramName="status" value="#['ACTIVE']"/>
+
+
+
+
+            </http:request-builder>
+        </http:request>
+
+         <dw:transform-message doc:name="Transform Response to Java">
+            <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+    
+    <flow name="getIntegrationTokenFlow" >
+        <logger message="getIntegrationTokenFlow : integrationId=#[flowVars['integrationId']]   AND  userId=#[flowVars['userId']]" level="DEBUG" doc:name="Logger"/>
+    	<http:request config-ref="HTTP_Integrations_Runtime_Request_Configuration" path="/integrations/{integrationId}/appTokens" method="GET" doc:name="HTTP">
+        	<http:request-builder>
+                <http:query-param paramName="client_id" value="${runtime.clientidenforcement.id}"/>
+                <http:query-param paramName="client_secret" value="${runtime.clientidenforcement.secret}"/>
+                <http:query-param paramName="userId" value="#[flowVars['userId']]"/>
+                <http:uri-param paramName="integrationId" value="#[flowVars['integrationId']]"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <dw:transform-message doc:name="Transform Response to Java">
+            <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl"/>
+        </dw:transform-message>
+    </flow>
+
+</mule>

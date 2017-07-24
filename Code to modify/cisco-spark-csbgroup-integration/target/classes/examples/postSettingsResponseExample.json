@@ -1,0 +1,12 @@
+{
+	"settings" : {
+		"userDetails": {
+			"detail1":"value1",
+			"detail2":"value2"
+		}
+		"repositories": {
+			"repo1":"value1",
+			"repo2":"value2"
+		}	
+	}
+}

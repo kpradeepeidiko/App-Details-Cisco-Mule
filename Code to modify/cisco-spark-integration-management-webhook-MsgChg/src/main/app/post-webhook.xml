@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mule/CiscoSpark/current/mule-CiscoSpark.xsd">
 	<http:request-config name="HTTP_Request_mangmt_webhook"
-		protocol="HTTPS" host="cisco-spark-integration-management-new-dev.cloudhub.io"
+		protocol="HTTPS" host="cisco-spark-integration-management.cloudhub.io"
 		port="443" basePath="api" doc:name="HTTP Request Configuration" />
 	<flow name="getMessageformatFlow">
 		<set-variable variableName="integrationId"
@@ -50,17 +50,21 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 							mimeType="application/json" doc:name="Set ConfigJosn value" />
 						<dw:transform-message doc:name="Convert ConfigJson To Java">
 							<dw:input-payload mimeType="application/json" />
-                            <dw:set-variable resource="classpath:dwScripts/buildConvertConfigJsonInPostWebhookFlowToJava.dwl" variableName="configJsonValue"/>
-
+							<dw:set-variable
+								resource="classpath:dwScripts/buildConvertConfigJsonInPostWebhookFlowToJava.dwl"
+								variableName="configJsonValue" />
 						</dw:transform-message>
 						<set-variable variableName="privateMessage"
-							value="#[flowVars['configJsonValue']['private_message']]" doc:name="Set Private Messge or not" />
-						<set-variable variableName="isTwoWay" value="#[flowVars['configJsonValue']['twoway']]"
-							doc:name="Check Two Way" />
+							value="#[flowVars['configJsonValue']['private_message']]"
+							doc:name="Set Private Messge or not" />
+						<set-variable variableName="isTwoWay"
+							value="#[flowVars['configJsonValue']['twoway']]" doc:name="Check Two Way" />
 						<logger
 							message="#[flowVars.configJson] AND  PRIVAEMESSAGE #[flowVars.privateMessage]"
 							level="DEBUG" doc:name="Logger" />
-                        <set-payload value="#['{&quot;oneWayHookResponse&quot;:&quot;Successfully message posted to spark space&quot;}']" doc:name="Set Final Response"/>
+						<set-payload
+							value="#['{&quot;oneWayHookResponse&quot;:&quot;Successfully message posted to spark space&quot;}']"
+							doc:name="Set Final Response" />
 						<choice doc:name="Check Integration Status">
 							<when expression="#[flowVars['integrationId'] != empty]">
 								<enricher target="#[flowVars['integrationSettings']]"
@@ -81,7 +85,7 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 										<set-variable variableName="userId"
 											value="#[flowVars['integrationsInstanceResponse'][0]['userId']]"
 											doc:name="Get User Id" />
-											
+
 										<set-variable variableName="personIdForSpark"
 											value="#[flowVars['integrationsInstanceResponse'][0]['userId']]"
 											doc:name="Set Person Id" />
@@ -139,32 +143,48 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 																				level="INFO" doc:name="Logger" />
 																			<choice doc:name="Check Html For Twitter">
 																				<when expression="#[payload['html'] == null]">
-                                                                                    <choice doc:name="Check Room Id Value">
-                                                                                        <when expression="#[flowVars['roomId'] != 0]">
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="Post By Room Id">
-                                                                                                <CiscoSpark:messages-post-request roomId="#[flowVars['roomId']]" text="#[payload['text']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </when>
-                                                                                        <otherwise>
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" doc:name="Post By User Id" token="Bearer #[flowVars['sparkToken']]">
-                                                                                                <CiscoSpark:messages-post-request text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </otherwise>
-                                                                                    </choice>
+																					<choice doc:name="Check Room Id Value">
+																						<when expression="#[flowVars['roomId'] != 'isPrivate']">
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]"
+																								doc:name="Post By Room Id">
+																								<CiscoSpark:messages-post-request
+																									roomId="#[flowVars['roomId']]" text="#[payload['text']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</when>
+																						<otherwise>
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" doc:name="Post By User Id"
+																								token="Bearer #[flowVars['sparkToken']]">
+																								<CiscoSpark:messages-post-request
+																									text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</otherwise>
+																					</choice>
 																				</when>
 																				<otherwise>
 																					<choice doc:name="Check Room Id Value">
-                                                                                        <when expression="#[flowVars['roomId'] != 0]">
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="Post By Room Id">
-                                                                                                <CiscoSpark:messages-post-request roomId="#[flowVars['roomId']]" text="#[payload['text']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </when>
-                                                                                        <otherwise>
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" doc:name="Post By User Id" token="Bearer #[flowVars['sparkToken']]">
-                                                                                                <CiscoSpark:messages-post-request text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </otherwise>
-                                                                                    </choice>
+																						<when expression="#[flowVars['roomId'] != 'isPrivate']">
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]"
+																								doc:name="Post By Room Id">
+																								<CiscoSpark:messages-post-request
+																									roomId="#[flowVars['roomId']]" text="#[payload['text']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</when>
+																						<otherwise>
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" doc:name="Post By User Id"
+																								token="Bearer #[flowVars['sparkToken']]">
+																								<CiscoSpark:messages-post-request
+																									text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</otherwise>
+																					</choice>
 																				</otherwise>
 																			</choice>
 																		</when>
@@ -174,37 +194,54 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 																			<choice doc:name="Check Html For Twitter">
 																				<when expression="#[payload['html'] == null]">
 																					<choice doc:name="Check Room Id Value">
-                                                                                        <when expression="#[flowVars['roomId'] != 0]">
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="Post By Room Id">
-                                                                                                <CiscoSpark:messages-post-request roomId="#[flowVars['roomId']]" text="#[payload['text']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </when>
-                                                                                        <otherwise>
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" doc:name="Post By User Id" token="Bearer #[flowVars['sparkToken']]">
-                                                                                                <CiscoSpark:messages-post-request text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </otherwise>
-                                                                                    </choice>
+																						<when expression="#[flowVars['roomId'] != 'isPrivate']">
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]"
+																								doc:name="Post By Room Id">
+																								<CiscoSpark:messages-post-request
+																									roomId="#[flowVars['roomId']]" text="#[payload['text']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</when>
+																						<otherwise>
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" doc:name="Post By User Id"
+																								token="Bearer #[flowVars['sparkToken']]">
+																								<CiscoSpark:messages-post-request
+																									text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</otherwise>
+																					</choice>
 																				</when>
 																				<otherwise>
 																					<choice doc:name="Check Room Id Value">
-                                                                                        <when expression="#[flowVars['roomId'] != 0]">
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]" doc:name="Post By Room Id">
-                                                                                                <CiscoSpark:messages-post-request roomId="#[flowVars['roomId']]" text="#[payload['text']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </when>
-                                                                                        <otherwise>
-                                                                                            <CiscoSpark:post-messages config-ref="CiscoSpark__Configuration" doc:name="Post By User Id" token="Bearer #[flowVars['sparkToken']]">
-                                                                                                <CiscoSpark:messages-post-request text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]" markdown="#[payload['markDown']]" html="#[payload['html']]"/>
-                                                                                            </CiscoSpark:post-messages>
-                                                                                        </otherwise>
-                                                                                    </choice>
+																						<when expression="#[flowVars['roomId'] != 'isPrivate']">
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" token="Bearer #[flowVars['sparkToken']]"
+																								doc:name="Post By Room Id">
+																								<CiscoSpark:messages-post-request
+																									roomId="#[flowVars['roomId']]" text="#[payload['text']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</when>
+																						<otherwise>
+																							<CiscoSpark:post-messages
+																								config-ref="CiscoSpark__Configuration" doc:name="Post By User Id"
+																								token="Bearer #[flowVars['sparkToken']]">
+																								<CiscoSpark:messages-post-request
+																									text="#[payload['text']]" toPersonId="#[flowVars['personIdForSpark']]"
+																									markdown="#[payload['markDown']]" html="#[payload['html']]" />
+																							</CiscoSpark:post-messages>
+																						</otherwise>
+																					</choice>
 																				</otherwise>
 																			</choice>
 																		</otherwise>
 																	</choice>
-                                                                    <set-payload value="#[message.payloadAs(java.lang.String)]" doc:name="Set Payload"/>
-                                                                    <async doc:name="Async">
+																	<set-payload value="#[message.payloadAs(java.lang.String)]"
+																		doc:name="Set Payload" />
+																	<async doc:name="Async">
 																		<set-variable variableName="trackingId"
 																			value="#[payload.trackingID]" doc:name="Set Traking Id" />
 																		<set-variable variableName="statusCode"
@@ -214,11 +251,11 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 																		<flow-ref name="trackingDetailsFlow"
 																			doc:name="trackingDetailsFlow" />
 																	</async>
-                                                                    <dw:transform-message doc:name="One Way Hook Response">
-                                                                    	<dw:input-payload mimeType="application/java" />
-                                                                        <dw:set-payload resource="classpath:dwScripts/buildOneWayHookFinalResponseExample.dwl"/>
-                                                                    </dw:transform-message>
-
+																	<dw:transform-message doc:name="One Way Hook Response">
+																		<dw:input-payload mimeType="application/java" />
+																		<dw:set-payload
+																			resource="classpath:dwScripts/buildOneWayHookFinalResponseExample.dwl" />
+																	</dw:transform-message>
 																</when>
 																<otherwise>
 																	<logger
@@ -388,6 +425,9 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 						<set-variable variableName="sparkToken"
 							value="#[flowVars['getClientTokenResponse'][0]['accessToken']]"
 							doc:name="Set Bot Token" />
+						<set-variable variableName="integrationName"
+							value="#[flowVars['getClientTokenResponse'][0]['integrationName']]"
+							doc:name="Set Integration Name" />
 						<set-variable variableName="messageId"
 							value="#[flowVars['botHookResponse']['data']['id']]" doc:name="MessageId" />
 						<enricher target="#[flowVars['getMessageById']]"
@@ -518,7 +558,7 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 									<when
 										expression="#[flowVars['botHookResponse']['data']['roomType'] == 'group']">
 										<set-variable variableName="messageToSpark"
-											value="#[' Hi &lt;@personId:'+flowVars['userId']+'&gt;, Looks like you are not authenticated. For authentication, please [click here](${twoWay.app.authenticated.url})']"
+											value="#[' Hi &lt;@personId:'+flowVars['userId']+'&gt;, looks like I don&#8217;t have your '+flowVars['integrationName']+' Authentication. Please visit the Spark Depot to authenticate your '+flowVars['integrationName']+' Account. ']"
 											doc:name="Set Authenticated Message" />
 										<enricher target="#[flowVars['sparkPostMessageResponse']]"
 											doc:name="Message Enricher">
@@ -528,7 +568,7 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 									</when>
 									<otherwise>
 										<set-variable doc:name="Set Authenticated Message"
-											value="#['Looks like you are not authenticated. For authentication, please [click here](${twoWay.app.authenticated.url})']"
+											value="#['Hi, looks like I don&#8217;t have your '+flowVars['integrationName']+' Authentication. Please visit the Spark Depot to authenticate your '+flowVars['integrationName']+' Account.']"
 											variableName="messageToSpark" />
 										<enricher target="#[flowVars['sparkPostMessageResponse']]"
 											doc:name="Message Enricher">
@@ -554,37 +594,79 @@ http://www.mulesoft.org/schema/mule/CiscoSpark http://www.mulesoft.org/schema/mu
 					message="entered in choice ==&gt; Resource == memberships" />
 				<set-variable variableName="privateMessage" value="#['true']"
 					doc:name="Set Private Message" />
+                <set-variable variableName="userId" value="#[flowVars['botHookResponse']['actorId']]" doc:name="Set UserId"/>
+
 				<enricher target="#[flowVars['getClientTokenResponse']]"
 					doc:name="Get Bot Client Token">
 					<flow-ref name="getBotClientTokenFlow" doc:name="getBotClientTokenFlow" />
 				</enricher>
+				<enricher target="#[flowVars['getIntegrationTokenFlowResponse']]"
+					doc:name="Get Integration Token Flow">
+					<flow-ref name="getIntegrationTokenFlow" doc:name="getIntegrationTokenFlow" />
+				</enricher>
 				<choice doc:name="Check Bot Token Response">
 					<when
-						expression="#[flowVars['getClientTokenResponse'].toString() != '{message=No results}']">
+						expression="#[(flowVars['getClientTokenResponse'].toString() != '{message=No results}') &amp;&amp; (flowVars['getIntegrationTokenFlowResponse'].toString() !='{message=No results}')]">
 						<set-variable variableName="sparkToken"
 							value="#[flowVars['getClientTokenResponse'][0]['accessToken']]"
 							doc:name="Set Bot Token" />
-                        <set-variable variableName="integrationName" value="#[flowVars['getClientTokenResponse'][0]['integrationName']]" doc:name="Set Integration Name"/>
+						<set-variable variableName="integrationName"
+							value="#[flowVars['getClientTokenResponse'][0]['integrationName']]"
+							doc:name="Set Integration Name" />
 						<set-variable variableName="userId"
 							value="#[flowVars['botHookResponse']['actorId']]" doc:name="Set UserId" />
 						<enricher target="#[flowVars['twoWayAddProcessResponse']]"
 							doc:name="Integration Settings">
 							<flow-ref name="twoWayAddProcess" doc:name="twoWayAddProcess" />
 						</enricher>
-                        <choice doc:name="Check Actor Id And Person Id">
-                            <when expression="#[flowVars['userId'] != flowVars['botHookResponse']['data']['personId']]">
-                                <set-variable variableName="messageToSpark" value="#[' Hi &lt;@personId:'+flowVars['userId']+'&gt;, thank you for adding me ('+flowVars['integrationName']+' bot) to this space, Your configuration has been set-up. For a list of commands I can perform for you, type &quot;@'+flowVars['integrationName']+' help&quot;. Please visit the Spark Depot to authenticate and/or add/edit/delete notification configurations. ']" doc:name="Set Message To Spark"/>
-                                <enricher target="#[flowVars['postMessageSparkResponse']]" doc:name="Message Enricher">
-                                    <flow-ref name="postSparkMessageFlow" doc:name="postSparkMessageFlow"/>
-                                </enricher>
-                                <set-variable variableName="twoWayWebhookResponse" value="#[flowVars['postMessageSparkResponse']]" doc:name="Set Two Way Webhook Response"/>
-                            </when>
-                            <otherwise>
-                                <set-variable variableName="twoWayWebhookResponse" value="#['one to one messages']" doc:name="Set Two Way Webhook Response"/>
-                            </otherwise>
-                        </choice>
+						<choice doc:name="Check Actor Id And Person Id">
+							<when
+								expression="#[flowVars['userId'] != flowVars['botHookResponse']['data']['personId']]">
+								<set-variable variableName="messageToSpark"
+									value="#[' Hi &lt;@personId:'+flowVars['userId']+'&gt;, thank you for adding me to this space. For a list of commands I can perform for you, type &quot;@'+flowVars['integrationName']+' help&quot;. Please visit the Spark Depot to add/edit/delete notification configurations. ']"
+									doc:name="Set Message To Spark" />
+								<enricher target="#[flowVars['postMessageSparkResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="postSparkMessageFlow" doc:name="postSparkMessageFlow" />
+								</enricher>
+								<set-variable variableName="twoWayWebhookResponse"
+									value="#[flowVars['postMessageSparkResponse']]" doc:name="Set Two Way Webhook Response" />
+							</when>
+							<otherwise>
+								<set-variable variableName="twoWayWebhookResponse"
+									value="#['one to one messages']" doc:name="Set Two Way Webhook Response" />
+							</otherwise>
+						</choice>
 
-
+					</when>
+					<when
+						expression="#[(flowVars['getClientTokenResponse'].toString() != '{message=No results}') &amp;&amp; (flowVars['getIntegrationTokenFlowResponse'].toString() =='{message=No results}')]">
+                        
+                        <set-variable variableName="sparkToken"
+							value="#[flowVars['getClientTokenResponse'][0]['accessToken']]"
+							doc:name="Set Bot Token" />
+						<set-variable variableName="integrationName"
+							value="#[flowVars['getClientTokenResponse'][0]['integrationName']]"
+							doc:name="Set Integration Name" />
+						<logger level="INFO" doc:name="App Unauthorised" message="App Unauthorized"/>
+						<choice doc:name="Check Actor Id And Person Id">
+							<when
+								expression="#[flowVars['userId'] != flowVars['botHookResponse']['data']['personId']]">
+								<set-variable variableName="messageToSpark"
+									value="#[' Hi &lt;@personId:'+flowVars['userId']+'&gt;, thank you for adding me to this space. Looks like I don&#8217;t have your '+flowVars['integrationName']+' Authentication. Please visit the Spark Depot to authenticate your '+flowVars['integrationName']+' Account.']"
+									doc:name="Set Message To Spark" />
+								<enricher target="#[flowVars['postMessageSparkResponse']]"
+									doc:name="Message Enricher">
+									<flow-ref name="postSparkMessageFlow" doc:name="postSparkMessageFlow" />
+								</enricher>
+								<set-variable variableName="twoWayWebhookResponse"
+									value="#[flowVars['postMessageSparkResponse']]" doc:name="Set Two Way Webhook Response" />
+							</when>
+							<otherwise>
+								<set-variable variableName="twoWayWebhookResponse"
+									value="#['one to one messages']" doc:name="Set Two Way Webhook Response" />
+							</otherwise>
+						</choice>
 					</when>
 					<otherwise>
 						<set-variable variableName="twoWayWebhookResponse"

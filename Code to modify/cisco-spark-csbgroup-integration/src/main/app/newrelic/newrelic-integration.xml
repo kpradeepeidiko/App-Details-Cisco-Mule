@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<http:request-config name="HTTP_RunTime_Request_Configuration"
+		protocol="HTTPS" host="${integrations.runtime.host}" port="${integrations.runtime.port}"
+		basePath="${integrations.runtime.path}" doc:name="HTTP Request Configuration" />
+
+	<flow name="postAuthDetailsFlow2">
+		<logger message="in authDetails#[payload]" level="INFO"
+			doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<dw:transform-message doc:name="Build Post Auth Details Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="postFormatMessageFlow2">
+		<logger message="HOOKRESPONSE #[message.payloadAs(java.lang.String)]"
+			level="DEBUG" doc:name="Logger" />
+		<dw:transform-message metadata:id="16db4717-7738-482e-a489-7aed77630932"
+			doc:name="Build Post Format Message Request">
+			<dw:input-payload doc:sample="sample_data\json.json" />
+			<dw:set-variable variableName="response"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<set-variable variableName="userId"
+			value="#[flowVars['response']['instanceDetails']['userId']]"
+			doc:name="UserId" />
+		<choice doc:name="Choice">
+			<when expression="#[flowVars['response']['hookResponse']['deployment']!=empty]">
+				<logger message="The sample Payload from Newrelic" level="INFO"
+					doc:name="Logger" />
+			</when>
+			<otherwise>
+				<set-payload value="#[flowVars['response']['hookResponse']['alert']]"
+					doc:name="Set Payload" />
+				<choice doc:name="For Test Message Or Format Message">
+					<when expression="#[json:alert_policy_name!=empty]">
+						<choice doc:name="For Application policies or Server policies">
+							<when expression="#[json:application_name!=empty]">
+								<set-variable variableName="desc"
+									value="#[json:long_description]" doc:name="Set Long Description" />
+								<expression-component doc:name="Expression"><![CDATA[flowVars.desc=flowVars.desc.toString().split(":")[0].split(" ")[1]]]></expression-component>
+								<set-variable variableName="policy"
+									value="#[json:alert_policy_name]" doc:name="Set policyName" />
+								<set-variable variableName="mess" value="#[json:message]"
+									doc:name="Set Message" />
+								<set-variable variableName="url" value="#[json:alert_url]"
+									doc:name="Set Url" />
+								<choice doc:name="Choice">
+									<when expression="#[flowVars['desc']!='canceled']">
+										<logger message="Application Alert Opened Flow" level="INFO"
+											doc:name="Logger" />
+										<set-variable variableName="app_name"
+											value="#[json:long_description]" doc:name="Set Application Name" />
+										<expression-component doc:name="Expression"><![CDATA[flowVars.app_name=flowVars.app_name.toString().toString().split("involved:")[1];]]></expression-component>
+										<set-variable variableName="postMessage"
+											value="#['Alert for ['+flowVars.policy+']('+flowVars.url+') policy: \n - Message:'+flowVars.mess+'\n - Application :'+flowVars.app_name+' \n - For more details, click here '+flowVars.url]"
+											doc:name="postMessage" />
+									</when>
+									<otherwise>
+										<set-variable variableName="short_desc"
+											value="#[json:short_description]" doc:name="Set Mesage" />
+										<set-variable variableName="app_name"
+											value="#[json:long_description]" doc:name="Set Application Name" />
+										<expression-component doc:name="Expression"><![CDATA[flowVars.app_name=flowVars.app_name.toString().toString().split("--")[1].split(":")[1];
+flowVars.short_desc=flowVars.short_desc.toString().split(":")[1]]]></expression-component>
+										<set-variable variableName="postMessage"
+											value="#['Alert for ['+flowVars.policy+']('+flowVars.url+') policy: \n - Message:'+flowVars.short_desc+'\n - Application :'+flowVars.app_name+'\n - For more details, click here '+flowVars.url]"
+											doc:name="postMessage" />
+									</otherwise>
+								</choice>
+							</when>
+							<otherwise>
+								<set-variable variableName="desc"
+									value="#[json:long_description]" doc:name="Set Long Description" />
+								<expression-component doc:name="Expression"><![CDATA[flowVars.desc=flowVars.desc.toString().split(":")[0].split(" ")[1]]]></expression-component>
+								<set-variable variableName="policy"
+									value="#[json:alert_policy_name]" doc:name="Set Policy Name" />
+								<set-variable variableName="desc"
+									value="#[json:long_description]" doc:name="Set Description" />
+								<set-variable variableName="url" value="#[json:alert_url]"
+									doc:name="Set Url" />
+								<set-variable variableName="server1" value="#[json:servers[0]]"
+									doc:name="Set Server" />
+								<logger
+									message="IN server policy flow [#[json:alert_policy_name]](#[json:alert_url])::::#[json:long_description]====#[json:servers[0]]"
+									level="INFO" doc:name="Logger" />
+								<choice doc:name="Choice">
+									<when expression="#[flowVars['desc']!='canceled']">
+
+										<set-variable variableName="postMessage"
+											value="#['Alert for ['+flowVars.policy+']('+flowVars.url+') policy: \n - Message:'+flowVars.desc+'\n - Server :'+flowVars.server1+'\n - For more details, click here '+flowVars.url]"
+											doc:name="postMessage" />
+									</when>
+									<otherwise>
+
+										<set-variable variableName="short_desc"
+											value="#[json:short_description]" doc:name="Set Message Value" />
+										<expression-component doc:name="Expression"><![CDATA[flowVars.short_desc=flowVars.short_desc.toString().split(":")[1]]]></expression-component>
+										<set-variable variableName="postMessage"
+											value="#['Alert for ['+flowVars.policy+']('+flowVars.url+') policy: \n - Message:'+flowVars.short_desc+' \n - Server :'+flowVars.server1+' \n - For more details, click here '+flowVars.url]"
+											doc:name="postMessage" />
+									</otherwise>
+								</choice>
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<logger message="Webhook configured" level="INFO" doc:name="Logger" />
+					</otherwise>
+				</choice>
+			</otherwise>
+		</choice>
+		<logger message="Messages to spark room is #[flowVars['postMessage']]"
+			level="INFO" doc:name="Logger" />
+
+		<dw:transform-message doc:name="Build Post Format Message Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl" />
+		</dw:transform-message>
+
+
+	</flow>
+
+	<flow name="postIntegrationSettingsFlow2">
+		<logger message="The input to for the settings flow is #[payload]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message doc:name="Transform Payload to Java">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['webhook']]" doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow" doc:name="generateWebhookUrlFlow" />
+		</enricher>
+
+
+		<dw:transform-message doc:name="Build Get Integration Settings Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildGetIntegrationSettingsResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="setupIntegrationFlow2">
+		<dw:transform-message doc:name="Build Setup Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildSetupIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+	<flow name="updateIntegrationFlow2">
+
+		<dw:transform-message doc:name="Transform Update Integration Response">
+			<dw:set-payload resource="classpath:dwScripts/fromPayloadToJson.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="tearDownIntegrationFlow2">
+		<dw:transform-message doc:name="Build Tear Down Integration Response">
+			<dw:set-payload
+				resource="classpath:dwScripts/buildTearDownIntegrationResponse.dwl" />
+		</dw:transform-message>
+	</flow>
+
+	<flow name="healthCheckFlow2">
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-variable variableName="healthCheckToken"><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-variable>
+		</dw:transform-message>
+		<set-payload
+			value="{&quot;hookResponse&quot;:{&quot;alert&quot;:&quot;{\&quot;created_at\&quot;:\&quot;2016-10-05T22:18:08-07:00\&quot;,\&quot;servers\&quot;:[\&quot;bandaru-PC\&quot;],\&quot;account_name\&quot;:\&quot;ESI-HYD\&quot;,\&quot;alert_policy_name\&quot;:\&quot;Default server alert policy\&quot;,\&quot;severity\&quot;:\&quot;critical\&quot;,\&quot;message\&quot;:\&quot;CPU &gt;3%\&quot;,\&quot;short_description\&quot;:\&quot;New alert on bandaru-PC\&quot;,\&quot;long_description\&quot;:\&quot;Alert opened: CPU &gt;3%\&quot;,\&quot;alert_url\&quot;:\&quot;https://rpm.newrelic.com/accounts/1405014/incidents/23481860\&quot;,\&quot;server_events\&quot;:[{\&quot;server\&quot;:\&quot;bandaru-P\&quot;,\&quot;created_at\&quot;:\&quot;2016-10-05T22:18:08-07:00\&quot;,\&quot;message\&quot;:\&quot;Fullest disk &gt; 15%\&quot;},{\&quot;server\&quot;:\&quot;bandaru-PC\&quot;,\&quot;created_at\&quot;:\&quot;2016-10-05T22:18:08-07:00\&quot;,\&quot;message\&quot;:\&quot;Fullest disk &gt; 30%\&quot;},{\&quot;server\&quot;:\&quot;bandaru-PC\&quot;,\&quot;created_at\&quot;:\&quot;2016-10-05T22:18:08-07:00\&quot;,\&quot;message\&quot;:\&quot;CPU &gt; 2%\&quot;},{\&quot;server\&quot;:\&quot;bandaru-PC\&quot;,\&quot;created_at\&quot;:\&quot;2016-10-05T22:18:08-07:00\&quot;,\&quot;message\&quot;:\&quot;CPU &gt; 3%\&quot;},{\&quot;server\&quot;:\&quot;bandaru-PC\&quot;,\&quot;created_at\&quot;:\&quot;2016-10-05T09:39:23-07:00\&quot;,\&quot;message\&quot;:\&quot;Server Not Reporting &gt; 5 minutes\&quot;}]}&quot;},&quot;userEvents&quot;:&quot;{\&quot;displayName\&quot;:\&quot;Newrelic\&quot;,\&quot;webhookUrl\&quot;:\&quot;https://cisco-spark-integration-management-new-dev.cloudhub.io/api/hooks/c4a0c4f0-8b94-11e6-bf73-06c0ab8e4229\&quot;}&quot;,&quot;instanceDetails&quot;:{&quot;instanceId&quot;:6055,&quot;integrationId&quot;:&quot;Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OLzM2YmRiYzk5LTE3YzEtNDI1Ny05YzQyLTkwMDQzN2VjN2RiMg&quot;,&quot;userId&quot;:&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS8yYTA0YzVkMy0yNGJjLTQ1ZWItYmQzYS05ZDU1OGRmMmZhMjI&quot;,&quot;updatedDate&quot;: &quot;2016-10-06T07:17:18&quot;,&quot;messageFormat&quot;: &quot;NewRelic Bot :Hello...User&quot;,&quot;createdDate&quot;: &quot;2016-10-06T07:17:18&quot;,&quot;status&quot;: &quot;ACTIVE&quot;,&quot;channelId&quot;:&quot;Y2lzY29zcGFyazovL3VzL1JPT00vZTMwNDFjNTAtNjgzZC0xMWU2LTgxYmYtYjEzZjcwZDM3N2Ri&quot;,&quot;configJson&quot;:&quot;{\&quot;displayName\&quot;:\&quot;Newrelic\&quot;,\&quot;webhookUrl\&quot;:\&quot;https://cisco-spark-integration-management-new-dev.cloudhub.io/api/hooks/c4a0c4f0-8b94-11e6-bf73-06c0ab8e4229\&quot;}&quot;,&quot;instanceUuid&quot;: &quot;c4a0c4f0-8b94-11e6-bf73-06c0ab8e4229&quot;}}"
+			doc:name="Set Payload" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<json:object-to-json-transformer
+			doc:name="Object to JSON" />
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-variable resource="classpath:dwScripts/buildHealthCheckRequest.dwl"
+				variableName="healthCheckRequest" />
+		</dw:transform-message>
+		<enricher target="#[flowVars['instances']]" doc:name="Message Enricher">
+			<flow-ref name="ActiveInstances" doc:name="ActiveInstances" />
+
+		</enricher>
+		<enricher target="#[flowVars['getIntegrationTokenResponse']]"
+			doc:name="Message Enricher">
+			<flow-ref name="generateWebhookUrlFlow2" doc:name="generateWebhookUrlFlow2" />
+		</enricher>
+		<set-payload value="#[flowVars['instances']]" doc:name="Set Payload" />
+		<choice doc:name="Choice">
+			<when expression="#[payload[0]!=empty]">
+				<set-variable variableName="TokenDetails1" value="#[payload]"
+					doc:name="Variable" />
+				<set-payload value="#[flowVars['getIntegrationTokenResponse']]"
+					doc:name="Set Payload" />
+				<object-to-string-transformer doc:name="Object to String" />
+				<logger
+					message="TOken details#[payload]====#[flowVars['getIntegrationTokenResponse']]"
+					level="INFO" doc:name="Logger" />
+				<set-variable variableName="getIntegrationTokenResponse"
+					value="#[payload]" doc:name="GetIntegrationTokenResponse" />
+				<set-payload value="#[flowVars.healthCheckRequest]"
+					doc:name="Set Payload" />
+				<logger message="Token details #[flowVars['getIntegrationTokenResponse']]"
+					level="INFO" doc:name="Logger" />
+				<enricher target="#[flowVars['getIntegrationFormat']]"
+					doc:name="Message Enricher">
+					<flow-ref name="postFormatMessageFlow" doc:name="postFormatMessageFlow" />
+				</enricher>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildNewRelicHealthCheckSuccessResponseExample.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message doc:name="Build Health Check Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildNewRelicHealthCheckSuccessResponseExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+		<catch-exception-strategy doc:name="Catch Exception Strategy" enableNotifications="false" logException="false">
+			<set-variable variableName="healthCheckException" value="#[exception.message]"
+				doc:name="HealthCheckException" />
+			<dw:transform-message doc:name="Transform Message">
+
+				<dw:set-payload resource="classpath:dwScripts/buildNewRelicHealthCheckFailureResponseExample.dwl" />
+
+			</dw:transform-message>
+		</catch-exception-strategy>
+	</flow>
+	<flow name="ActiveInstances">
+		<logger level="INFO" doc:name="Logger"
+			message="#[flowVars.healthCheckToken.integrationId].....#[flowVars.healthCheckToken.userId]..${integrations.runtime.host}===${integrations.runtime.port}==${integrations.runtime.path}" />
+		<http:request config-ref="HTTP_RunTime_Request_Configuration"
+			path="/integrations/instances" method="GET" doc:name="HTTP">
+			<http:request-builder>
+				<http:query-param paramName="integrationId"
+					value="#[flowVars.healthCheckToken.integrationId]" />
+				<http:query-param paramName="userId"
+					value="#[flowVars.healthCheckToken.userId]" />
+				<http:query-param paramName="status" value="ACTIVE" />
+
+			</http:request-builder>
+		</http:request>
+		<dw:transform-message doc:name="Transform Message">
+			<dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload]]></dw:set-payload>
+		</dw:transform-message>
+		<logger message="#[payload]" level="DEBUG" doc:name="Logger" />
+	</flow>
+</mule>
