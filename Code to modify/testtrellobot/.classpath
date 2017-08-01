@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="con" path="MULE_RUNTIME/org.mule.tooling.server.3.8.0.ee"/>
 	<classpathentry kind="src" path="src/main/app"/>
 	<classpathentry kind="src" path="src/main/java"/>
@@ -11,5 +11,8 @@
 	<classpathentry kind="src" path="src/main/wsdl"/>
 	<classpathentry kind="src" path="src/test/munit"/>
 	<classpathentry kind="con" path="MULE_LIB/Trello/org.mule.tooling.ui.contribution.Trello.3.7.2"/>
+	<classpathentry kind="lib" path="C:/Users/db2admin.bandaru-PC/Downloads/New folder/New folder/Folder1/spark-java-sdk-master/target/ciscospark-client-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/db2admin.bandaru-PC/Downloads/imp files jar files/Json Jars/javax.json-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/db2admin.bandaru-PC/Downloads/imp files jar files/Json Jars/javax.json-api-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
