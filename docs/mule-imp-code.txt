@@ -212,6 +212,39 @@ MimeType was not resolved '*/*' delegating to Java.
 ======================================================================================================
 health _check flow
 -----------------------
-token_response = message=No results
-		
+token_response => message=No results
 
+===================================================================================================================
+%dw 1.0
+%output application/json
+---
+payload mapObject {
+	'$$': $ when '$$' != 'bookId' otherwise 'pradeep@123'
+}		
+ 
+ 
+when
+----
+{
+	"name":"pradeep",
+	"designation":"ASE",
+	"bookId":"kp"
+}
+===========================================================================================================
+%dw 1.0
+%output application/json skipNullOn="everywhere"
+---
+payload.sprakRooms.items map (
+ 	$ when ($.title == flowVars.roomTitle) otherwise null
+)
+
+
+when
+-------
+{
+	"items":[{},
+	{},
+	{}]
+}
+
+=========================================================

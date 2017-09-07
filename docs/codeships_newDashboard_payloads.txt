@@ -1,0 +1,37 @@
+{
+	"build": {
+		"build_url": "https://app.codeship.com/projects/243077/builds/28077273",
+		"commit_url": "https://github.com/kpradeepeidiko/SVNRepo/commit/283952650c95106677d2eada749f027e379075dc",
+		"project_id": 243077,
+		"build_id": 28077273,
+		"status": "initiated",
+		"project_name": "kpradeepeidiko/SVNRepo",
+		"project_full_name": "kpradeepeidiko/SVNRepo",
+		"commit_id": "283952650c95106677d2eada749f027e379075dc",
+		"short_commit_id": "28395",
+		"message": "deleted a file",
+		"committer": "surender-eidiko",
+		"branch": "master",
+		"started_at": "2017-08-31 10:17:54 UTC",
+		"finished_at": null
+	}
+}
+======================================================================================
+{
+	"build": {
+		"build_url": "https://app.codeship.com/projects/243077/builds/28077273",
+		"commit_url": "https://github.com/kpradeepeidiko/SVNRepo/commit/283952650c95106677d2eada749f027e379075dc",
+		"project_id": 243077,
+		"build_id": 28077273,
+		"status": "success",
+		"project_name": "kpradeepeidiko/SVNRepo",
+		"project_full_name": "kpradeepeidiko/SVNRepo",
+		"commit_id": "283952650c95106677d2eada749f027e379075dc",
+		"short_commit_id": "28395",
+		"message": "deleted a file",
+		"committer": "surender-eidiko",
+		"branch": "master",
+		"started_at": "2017-08-31 10:17:54 UTC",
+		"finished_at": "2017-08-31 10:18:18 UTC"
+	}
+}
