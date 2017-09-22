@@ -4,8 +4,8 @@ Visual Studio Team Service
 build.complete
 ---------------
 {
-	"subscriptionId": "00000000-0000-0000-0000-000000000000",
-	"notificationId": 2,
+	"subscriptionId": "a4667792-f6f5-4427-a61e-7c68ad3da5d1",
+	"notificationId": 1,
 	"id": "4a5d99d6-1c75-4e53-91b9-ee80057d4ce3",
 	"eventType": "build.complete",
 	"publisherId": "tfs",
@@ -88,5 +88,720 @@ build.complete
 			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
 		}
 	},
-	"createdDate": "2017-09-18T09:04:31.3236994Z"
+	"createdDate": "2017-09-22T06:50:34.8934644Z"
 }
+==============================================================================================================
+Code pushed
+-------------
+{
+	"subscriptionId": "26e2024e-7997-4c57-94c5-dac7f3ec8e48",
+	"notificationId": 2,
+	"id": "03c164c2-8912-4d5e-8009-3707d5f83734",
+	"eventType": "git.push",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Jamal Hartnett pushed updates to Fabrikam-Fiber-Git:master.",
+		"html": "Jamal Hartnett pushed updates to Fabrikam-Fiber-Git:master.",
+		"markdown": "Jamal Hartnett pushed updates to `Fabrikam-Fiber-Git`:`master`."
+	},
+	"detailedMessage": {
+		"text": "Jamal Hartnett pushed a commit to Fabrikam-Fiber-Git:master.\n - Fixed bug in web.config file 33b55f7c",
+		"html": "Jamal Hartnett pushed a commit to <a href=\"https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/\">Fabrikam-Fiber-Git</a>:<a href=\"https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/#version=GBmaster\">master</a>.\n<ul>\n<li>Fixed bug in web.config file <a href=\"https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/33b55f7cb7e7e245323987634f960cf4a6e6bc74\">33b55f7c</a>\n</ul>",
+		"markdown": "Jamal Hartnett pushed a commit to [Fabrikam-Fiber-Git](https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/):[master](https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/#version=GBmaster).\n* Fixed bug in web.config file [33b55f7c](https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/33b55f7cb7e7e245323987634f960cf4a6e6bc74)"
+	},
+	"resource": {
+		"commits": [{
+			"commitId": "33b55f7cb7e7e245323987634f960cf4a6e6bc74",
+			"author": {
+				"name": "Jamal Hartnett",
+				"email": "fabrikamfiber4@hotmail.com",
+				"date": "2015-02-25T19:01:00Z"
+			},
+			"committer": {
+				"name": "Jamal Hartnett",
+				"email": "fabrikamfiber4@hotmail.com",
+				"date": "2015-02-25T19:01:00Z"
+			},
+			"comment": "Fixed bug in web.config file",
+			"url": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git/commit/33b55f7cb7e7e245323987634f960cf4a6e6bc74"
+		}],
+		"refUpdates": [{
+			"name": "refs/heads/master",
+			"oldObjectId": "aad331d8d3b131fa9ae03cf5e53965b51942618a",
+			"newObjectId": "33b55f7cb7e7e245323987634f960cf4a6e6bc74"
+		}],
+		"repository": {
+			"id": "278d5cd2-584d-4b63-824a-2ba458937249",
+			"name": "Fabrikam-Fiber-Git",
+			"url": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249",
+			"project": {
+				"id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"name": "Fabrikam-Fiber-Git",
+				"url": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"state": "wellFormed",
+				"visibility": "unchanged"
+			},
+			"defaultBranch": "refs/heads/master",
+			"remoteUrl": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_git/Fabrikam-Fiber-Git"
+		},
+		"pushedBy": {
+			"id": "00067FFED5C7AF52@Live.com",
+			"displayName": "Jamal Hartnett",
+			"uniqueName": "Windows Live ID\\fabrikamfiber4@hotmail.com"
+		},
+		"pushId": 14,
+		"date": "2014-05-02T19:17:13.3309587Z",
+		"url": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/git/repositories/278d5cd2-584d-4b63-824a-2ba458937249/pushes/14"
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T06:51:38.0347554Z"
+}
+========================================================================================================
+Team Room Message posted
+---------------------------
+{
+	"subscriptionId": "03cbce45-09d9-41d4-9ae2-bb5c8d12c79d",
+	"notificationId": 1,
+	"id": "daae438c-296b-4512-b08e-571910874e9b",
+	"eventType": "message.posted",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room\r\nHello",
+		"html": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room\r\nHello",
+		"markdown": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room\r\nHello"
+	},
+	"detailedMessage": {
+		"text": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room\r\nHello",
+		"html": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room<p>Hello</p>",
+		"markdown": "Jamal Hartnett posted a message to Fabrikam-Fiber-Git Team Room\r\nHello"
+	},
+	"resource": {
+		"id": 0,
+		"content": "Hello",
+		"messageType": "normal",
+		"postedTime": "2014-05-02T19:17:13.3309587Z",
+		"postedRoomId": 1,
+		"postedBy": {
+			"id": "00067FFED5C7AF52@Live.com",
+			"displayName": "Jamal Hartnett",
+			"uniqueName": "Windows Live ID\\fabrikamfiber4@hotmail.com"
+		}
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T06:52:43.8423622Z"
+}
+========================================================================================
+Work Item Created
+-------------------
+{
+	"subscriptionId": "1c491e9d-e386-4239-9446-4c6cf5bf1981",
+	"notificationId": 1,
+	"id": "d2d46fb1-dba5-403c-9373-427583f19e8c",
+	"eventType": "workitem.created",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Bug #5 (Some great new idea!) created by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) created by Jamal Hartnett.",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) created by Jamal Hartnett."
+	},
+	"detailedMessage": {
+		"text": "Bug #5 (Some great new idea!) created by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)\r\n\r\n- Area: FabrikamCloud\r\n- Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n- State: New\r\n- Assigned to: \r\n- Comment: \r\n- Severity: 3 - Medium\r\n",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) created by Jamal Hartnett.<ul>\r\n<li>Area: FabrikamCloud</li>\r\n<li>Iteration: FabrikamCloud\\Release 1\\Sprint 1</li>\r\n<li>State: New</li>\r\n<li>Assigned to: </li>\r\n<li>Comment: </li>\r\n<li>Severity: 3 - Medium</li></ul>",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) created by Jamal Hartnett.\r\n\r\n* Area: FabrikamCloud\r\n* Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n* State: New\r\n* Assigned to: \r\n* Comment: \r\n* Severity: 3 - Medium\r\n"
+	},
+	"resource": {
+		"id": 5,
+		"rev": 1,
+		"fields": {
+			"System.AreaPath": "FabrikamCloud",
+			"System.TeamProject": "FabrikamCloud",
+			"System.IterationPath": "FabrikamCloud\\Release 1\\Sprint 1",
+			"System.WorkItemType": "Bug",
+			"System.State": "New",
+			"System.Reason": "New defect reported",
+			"System.CreatedDate": "2014-07-15T17:42:44.663Z",
+			"System.CreatedBy": "Jamal Hartnett",
+			"System.ChangedDate": "2014-07-15T17:42:44.663Z",
+			"System.ChangedBy": "Jamal Hartnett",
+			"System.Title": "Some great new idea!",
+			"Microsoft.VSTS.Common.Severity": "3 - Medium",
+			"WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": "New"
+		},
+		"_links": {
+			"self": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+			},
+			"workItemUpdates": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates"
+			},
+			"workItemRevisions": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/revisions"
+			},
+			"workItemType": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/ea830882-2a3c-4095-a53f-972f9a376f6e/workItemTypes/Bug"
+			},
+			"fields": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/fields"
+			}
+		},
+		"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T06:54:27.8582918Z"
+}
+=====================================================================================================
+Work item updated
+-------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 18,
+	"id": "27646e0e-b520-4d2b-9411-bba7524947cd",
+	"eventType": "workitem.updated",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Bug #5 (Some great new idea!) updated by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) updated by Jamal Hartnett.",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) updated by Jamal Hartnett."
+	},
+	"detailedMessage": {
+		"text": "Bug #5 (Some great new idea!) updated by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)\r\n\r\n- New State: Approved\r\n",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) updated by Jamal Hartnett.<ul>\r\n<li>New State: Approved</li></ul>",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) updated by Jamal Hartnett.\r\n\r\n* New State: Approved\r\n"
+	},
+	"resource": {
+		"id": 2,
+		"workItemId": 0,
+		"rev": 2,
+		"revisedBy": null,
+		"revisedDate": "0001-01-01T00:00:00",
+		"fields": {
+			"System.Rev": {
+				"oldValue": "1",
+				"newValue": "2"
+			},
+			"System.AuthorizedDate": {
+				"oldValue": "2014-07-15T16:48:44.663Z",
+				"newValue": "2014-07-15T17:42:44.663Z"
+			},
+			"System.RevisedDate": {
+				"oldValue": "2014-07-15T17:42:44.663Z",
+				"newValue": "9999-01-01T00:00:00Z"
+			},
+			"System.State": {
+				"oldValue": "New",
+				"newValue": "Approved"
+			},
+			"System.Reason": {
+				"oldValue": "New defect reported",
+				"newValue": "Approved by the Product Owner"
+			},
+			"System.AssignedTo": {
+				"newValue": "Jamal Hartnet"
+			},
+			"System.ChangedDate": {
+				"oldValue": "2014-07-15T16:48:44.663Z",
+				"newValue": "2014-07-15T17:42:44.663Z"
+			},
+			"System.Watermark": {
+				"oldValue": "2",
+				"newValue": "5"
+			},
+			"Microsoft.VSTS.Common.Severity": {
+				"oldValue": "3 - Medium",
+				"newValue": "2 - High"
+			}
+		},
+		"_links": {
+			"self": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates/2"
+			},
+			"parent": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+			},
+			"workItemUpdates": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates"
+			}
+		},
+		"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates/2",
+		"revision": {
+			"id": 5,
+			"rev": 2,
+			"fields": {
+				"System.AreaPath": "FabrikamCloud",
+				"System.TeamProject": "FabrikamCloud",
+				"System.IterationPath": "FabrikamCloud\\Release 1\\Sprint 1",
+				"System.WorkItemType": "Bug",
+				"System.State": "New",
+				"System.Reason": "New defect reported",
+				"System.CreatedDate": "2014-07-15T16:48:44.663Z",
+				"System.CreatedBy": "Jamal Hartnett",
+				"System.ChangedDate": "2014-07-15T16:48:44.663Z",
+				"System.ChangedBy": "Jamal Hartnett",
+				"System.Title": "Some great new idea!",
+				"Microsoft.VSTS.Common.Severity": "3 - Medium",
+				"WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": "New"
+			},
+			"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/revisions/2"
+		}
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T07:00:14.7750722Z"
+}
+=======================================================================================================
+Work Item Deleted
+------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 19,
+	"id": "72da0ade-0709-40ee-beb7-104287bf7e84",
+	"eventType": "workitem.deleted",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Bug #5 (Some great new idea!) deleted by Jamal Hartnett.",
+		"html": "Bug #5 (Some great new idea!) deleted by Jamal Hartnett.",
+		"markdown": "[Bug #5] (Some great new idea!) deleted by Jamal Hartnett."
+	},
+	"detailedMessage": {
+		"text": "Bug #5 (Some great new idea!) deleted by Jamal Hartnett.\r\n\r\n- Area: FabrikamCloud\r\n- Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n- State: New\r\n",
+		"html": "Bug #5 (Some great new idea!) deleted by Jamal Hartnett.<ul>\r\n<li>Area: FabrikamCloud</li>\r\n<li>Iteration: FabrikamCloud\\Release 1\\Sprint 1</li>\r\n<li>State: New</li></ul>",
+		"markdown": "[Bug #5] (Some great new idea!) deleted by Jamal Hartnett.\r\n\r\n* Area: FabrikamCloud\r\n* Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n* State: New\r\n"
+	},
+	"resource": {
+		"id": 5,
+		"rev": 1,
+		"fields": {
+			"System.AreaPath": "FabrikamCloud",
+			"System.TeamProject": "FabrikamCloud",
+			"System.IterationPath": "FabrikamCloud\\Release 1\\Sprint 1",
+			"System.WorkItemType": "Bug",
+			"System.State": "New",
+			"System.Reason": "New defect reported",
+			"System.CreatedDate": "2014-07-15T17:42:44.663Z",
+			"System.CreatedBy": "Jamal Hartnett",
+			"System.ChangedDate": "2014-07-15T17:42:44.663Z",
+			"System.ChangedBy": "Jamal Hartnett",
+			"System.Title": "Some great new idea!",
+			"Microsoft.VSTS.Common.Severity": "3 - Medium",
+			"WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": "New"
+		},
+		"_links": {
+			"self": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/recyclebin/5"
+			},
+			"workItemType": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/ea830882-2a3c-4095-a53f-972f9a376f6e/workItemTypes/Bug"
+			},
+			"fields": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/fields"
+			}
+		},
+		"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/recyclebin/5"
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T07:01:58.1426914Z"
+}
+===================================================================================================
+Work Item Resored
+--------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 20,
+	"id": "1ca023d6-6cff-49dd-b3d1-302b69311810",
+	"eventType": "workitem.restored",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Bug #5 (Some great new idea!) restored by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) restored by Jamal Hartnett.",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) restored by Jamal Hartnett."
+	},
+	"detailedMessage": {
+		"text": "Bug #5 (Some great new idea!) restored by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)\r\n\r\n- Area: FabrikamCloud\r\n- Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n- State: New\r\n- Severity: 3 - Medium\r\n",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) restored by Jamal Hartnett.<ul>\r\n<li>Area: FabrikamCloud</li>\r\n<li>Iteration: FabrikamCloud\\Release 1\\Sprint 1</li>\r\n<li>State: New</li>Severity: 3 - Medium</li></ul>",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) restored by Jamal Hartnett.\r\n\r\n* Area: FabrikamCloud\r\n* Iteration: FabrikamCloud\\Release 1\\Sprint 1\r\n* State: New\r\n* Severity: 3 - Medium\r\n"
+	},
+	"resource": {
+		"id": 5,
+		"rev": 1,
+		"fields": {
+			"System.AreaPath": "FabrikamCloud",
+			"System.TeamProject": "FabrikamCloud",
+			"System.IterationPath": "FabrikamCloud\\Release 1\\Sprint 1",
+			"System.WorkItemType": "Bug",
+			"System.State": "New",
+			"System.Reason": "New defect reported",
+			"System.CreatedDate": "2014-07-15T17:42:44.663Z",
+			"System.CreatedBy": "Jamal Hartnett",
+			"System.ChangedDate": "2014-07-15T17:42:44.663Z",
+			"System.ChangedBy": "Jamal Hartnett",
+			"System.Title": "Some great new idea!",
+			"Microsoft.VSTS.Common.Severity": "3 - Medium",
+			"WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": "New"
+		},
+		"_links": {
+			"self": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+			},
+			"workItemUpdates": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates"
+			},
+			"workItemRevisions": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/revisions"
+			},
+			"workItemType": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/ea830882-2a3c-4095-a53f-972f9a376f6e/workItemTypes/Bug"
+			},
+			"fields": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/fields"
+			},
+			"html": {
+				"href": "https://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=d81542e4-cdfa-4333-b082-1ae2d6c3ad16&id=5"
+			},
+			"workItemHistory": {
+				"href": "https://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/history"
+			}
+		},
+		"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T07:04:09.3521411Z"
+}
+=================================================================================================
+Work Item Commented
+--------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 21,
+	"id": "fb2617ed-60df-4518-81fa-749faa6c5cd6",
+	"eventType": "workitem.commented",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Bug #5 (Some great new idea!) commented on by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) commented on by Jamal Hartnett.",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) commented on by Jamal Hartnett."
+	},
+	"detailedMessage": {
+		"text": "Bug #5 (Some great new idea!) commented on by Jamal Hartnett.\r\n(http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5)\r\nThis is a great new idea",
+		"html": "<a href=\"http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&amp;id=5\">Bug #5</a> (Some great new idea!) commented on by Jamal Hartnett.<br/>This is a great new idea",
+		"markdown": "[Bug #5](http://fabrikam-fiber-inc.visualstudio.com/web/wi.aspx?pcguid=74e918bf-3376-436d-bd20-8e8c1287f465&id=5) (Some great new idea!) commented on by Jamal Hartnett.\r\nThis is a great new idea"
+	},
+	"resource": {
+		"id": 5,
+		"rev": 4,
+		"fields": {
+			"System.AreaPath": "FabrikamCloud",
+			"System.TeamProject": "FabrikamCloud",
+			"System.IterationPath": "FabrikamCloud\\Release 1\\Sprint 1",
+			"System.WorkItemType": "Bug",
+			"System.State": "New",
+			"System.Reason": "New defect reported",
+			"System.CreatedDate": "2014-07-15T17:42:44.663Z",
+			"System.CreatedBy": "Jamal Hartnett",
+			"System.ChangedDate": "2014-07-15T17:42:44.663Z",
+			"System.ChangedBy": "Jamal Hartnett",
+			"System.Title": "Some great new idea!",
+			"Microsoft.VSTS.Common.Severity": "3 - Medium",
+			"WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": "New",
+			"System.History": "This is a great new idea"
+		},
+		"_links": {
+			"self": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+			},
+			"workItemUpdates": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/updates"
+			},
+			"workItemRevisions": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5/revisions"
+			},
+			"workItemType": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/ea830882-2a3c-4095-a53f-972f9a376f6e/workItemTypes/Bug"
+			},
+			"fields": {
+				"href": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/fields"
+			}
+		},
+		"url": "http://fabrikam-fiber-inc.visualstudio.com/DefaultCollection/_apis/wit/workItems/5"
+	},
+	"resourceVersion": "1.0",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T07:12:42.3619681Z"
+}
+==================================================================================================
+Pull Request Created
+-----------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 16,
+	"id": "2ab4e3d3-b7a6-425e-92b1-5a9982c1269e",
+	"eventType": "git.pullrequest.created",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Jamal Hartnett created a new pull request",
+		"html": "Jamal Hartnett created a new pull request",
+		"markdown": "Jamal Hartnett created a new pull request"
+	},
+	"detailedMessage": {
+		"text": "Jamal Hartnett created a new pull request\r\n\r\n- Merge status: Succeeded\r\n- Merge commit: eef717(https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72)\r\n",
+		"html": "Jamal Hartnett created a new pull request\r\n<ul>\r\n<li>Merge status: Succeeded</li>\r\n<li>Merge commit: <a href=\"https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72\">eef717</a></li>\r\n</ul>",
+		"markdown": "Jamal Hartnett created a new pull request\r\n\r\n+ Merge status: Succeeded\r\n+ Merge commit: [eef717](https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72)\r\n"
+	},
+	"resource": {
+		"repository": {
+			"id": "4bc14d40-c903-45e2-872e-0462c7748079",
+			"name": "Fabrikam",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079",
+			"project": {
+				"id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"name": "Fabrikam",
+				"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"state": "wellFormed",
+				"visibility": "unchanged"
+			},
+			"defaultBranch": "refs/heads/master",
+			"remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam"
+		},
+		"pullRequestId": 1,
+		"status": "active",
+		"createdBy": {
+			"id": "54d125f7-69f7-4191-904f-c5b96b6261c8",
+			"displayName": "Jamal Hartnett",
+			"uniqueName": "fabrikamfiber4@hotmail.com",
+			"url": "https://fabrikam.vssps.visualstudio.com/_apis/Identities/54d125f7-69f7-4191-904f-c5b96b6261c8",
+			"imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=54d125f7-69f7-4191-904f-c5b96b6261c8"
+		},
+		"creationDate": "2014-06-17T16:55:46.589889Z",
+		"title": "my first pull request",
+		"description": " - test2\r\n",
+		"sourceRefName": "refs/heads/mytopic",
+		"targetRefName": "refs/heads/master",
+		"mergeStatus": "succeeded",
+		"mergeId": "a10bb228-6ba6-4362-abd7-49ea21333dbd",
+		"lastMergeSourceCommit": {
+			"commitId": "53d54ac915144006c2c9e90d2c7d3880920db49c",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/53d54ac915144006c2c9e90d2c7d3880920db49c"
+		},
+		"lastMergeTargetCommit": {
+			"commitId": "a511f535b1ea495ee0c903badb68fbc83772c882",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/a511f535b1ea495ee0c903badb68fbc83772c882"
+		},
+		"lastMergeCommit": {
+			"commitId": "eef717f69257a6333f221566c1c987dc94cc0d72",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72"
+		},
+		"reviewers": [{
+			"reviewerUrl": null,
+			"vote": 0,
+			"id": "2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"displayName": "[Mobile]\\Mobile Team",
+			"uniqueName": "vstfs:///Classification/TeamProject/f0811a3b-8c8a-4e43-a3bf-9a049b4835bd\\Mobile Team",
+			"url": "https://fabrikam.vssps.visualstudio.com/_apis/Identities/2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"isContainer": true
+		}],
+		"commits": [{
+			"commitId": "53d54ac915144006c2c9e90d2c7d3880920db49c",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/53d54ac915144006c2c9e90d2c7d3880920db49c"
+		}],
+		"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/pullRequests/1",
+		"_links": {
+			"web": {
+				"href": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam/pullrequest/1#view=discussion"
+			},
+			"statuses": {
+				"href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/pullRequests/1/statuses"
+			}
+		}
+	},
+	"resourceVersion": "1.0-preview.1",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T06:55:38.5687651Z"
+}
+
+====================================================================================================
+pull request updated
+----------------------
+{
+	"subscriptionId": "00000000-0000-0000-0000-000000000000",
+	"notificationId": 17,
+	"id": "af07be1b-f3ad-44c8-a7f1-c4835f2df06b",
+	"eventType": "git.pullrequest.updated",
+	"publisherId": "tfs",
+	"message": {
+		"text": "Jamal Hartnett marked the pull request as completed",
+		"html": "Jamal Hartnett marked the pull request as completed",
+		"markdown": "Jamal Hartnett marked the pull request as completed"
+	},
+	"detailedMessage": {
+		"text": "Jamal Hartnett marked the pull request as completed\r\n\r\n- Merge status: Succeeded\r\n- Merge commit: eef717(https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72)\r\n",
+		"html": "Jamal Hartnett marked the pull request as completed\r\n<ul>\r\n<li>Merge status: Succeeded</li>\r\n<li>Merge commit: <a href=\"https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72\">eef717</a></li>\r\n</ul>",
+		"markdown": "Jamal Hartnett marked the pull request as completed\r\n\r\n+ Merge status: Succeeded\r\n+ Merge commit: [eef717](https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72)\r\n"
+	},
+	"resource": {
+		"repository": {
+			"id": "4bc14d40-c903-45e2-872e-0462c7748079",
+			"name": "Fabrikam",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079",
+			"project": {
+				"id": "6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"name": "Fabrikam",
+				"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/projects/6ce954b1-ce1f-45d1-b94d-e6bf2464ba2c",
+				"state": "wellFormed",
+				"visibility": "unchanged"
+			},
+			"defaultBranch": "refs/heads/master",
+			"remoteUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam"
+		},
+		"pullRequestId": 1,
+		"status": "completed",
+		"createdBy": {
+			"id": "54d125f7-69f7-4191-904f-c5b96b6261c8",
+			"displayName": "Jamal Hartnett",
+			"uniqueName": "fabrikamfiber4@hotmail.com",
+			"url": "https://fabrikam.vssps.visualstudio.com/_apis/Identities/54d125f7-69f7-4191-904f-c5b96b6261c8",
+			"imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=54d125f7-69f7-4191-904f-c5b96b6261c8"
+		},
+		"creationDate": "2014-06-17T16:55:46.589889Z",
+		"closedDate": "2014-06-30T18:59:12.3660573Z",
+		"title": "my first pull request",
+		"description": " - test2\r\n",
+		"sourceRefName": "refs/heads/mytopic",
+		"targetRefName": "refs/heads/master",
+		"mergeStatus": "succeeded",
+		"mergeId": "a10bb228-6ba6-4362-abd7-49ea21333dbd",
+		"lastMergeSourceCommit": {
+			"commitId": "53d54ac915144006c2c9e90d2c7d3880920db49c",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/53d54ac915144006c2c9e90d2c7d3880920db49c"
+		},
+		"lastMergeTargetCommit": {
+			"commitId": "a511f535b1ea495ee0c903badb68fbc83772c882",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/a511f535b1ea495ee0c903badb68fbc83772c882"
+		},
+		"lastMergeCommit": {
+			"commitId": "eef717f69257a6333f221566c1c987dc94cc0d72",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/eef717f69257a6333f221566c1c987dc94cc0d72"
+		},
+		"reviewers": [{
+			"reviewerUrl": null,
+			"vote": 0,
+			"id": "2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"displayName": "[Mobile]\\Mobile Team",
+			"uniqueName": "vstfs:///Classification/TeamProject/f0811a3b-8c8a-4e43-a3bf-9a049b4835bd\\Mobile Team",
+			"url": "https://fabrikam.vssps.visualstudio.com/_apis/Identities/2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"imageUrl": "https://fabrikam.visualstudio.com/DefaultCollection/_api/_common/identityImage?id=2ea2d095-48f9-4cd6-9966-62f6f574096c",
+			"isContainer": true
+		}],
+		"commits": [{
+			"commitId": "53d54ac915144006c2c9e90d2c7d3880920db49c",
+			"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/commits/53d54ac915144006c2c9e90d2c7d3880920db49c"
+		}],
+		"url": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/pullRequests/1",
+		"_links": {
+			"web": {
+				"href": "https://fabrikam.visualstudio.com/DefaultCollection/_git/Fabrikam/pullrequest/1#view=discussion"
+			},
+			"statuses": {
+				"href": "https://fabrikam.visualstudio.com/DefaultCollection/_apis/git/repositories/4bc14d40-c903-45e2-872e-0462c7748079/pullRequests/1/statuses"
+			}
+		}
+	},
+	"resourceVersion": "1.0-preview.1",
+	"resourceContainers": {
+		"collection": {
+			"id": "c12d0eb8-e382-443b-9f9c-c52cba5014c2"
+		},
+		"account": {
+			"id": "f844ec47-a9db-4511-8281-8b63f4eaf94e"
+		},
+		"project": {
+			"id": "be9b3917-87e6-42a4-a549-2bc06a7a878f"
+		}
+	},
+	"createdDate": "2017-09-22T06:56:50.7118433Z"
+}
+===================================================================================
