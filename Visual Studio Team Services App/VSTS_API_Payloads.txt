@@ -1,0 +1,52 @@
+Get Projects
+============
+GET https://pk455375outlook.visualstudio.com/DefaultCollection/_apis/projects?api-version=1.0
+
+Headers
+------------
+Authorization    Bearer {Access Token}
+
+Response
+------------
+{
+    "count": 2,
+    "value": [
+        {
+            "id": "f0390e8a-7e31-447b-a744-afb6f2d6b2c8",
+            "name": "MyFirstProject",
+            "url": "https://pk455375outlook.visualstudio.com/DefaultCollection/_apis/projects/f0390e8a-7e31-447b-a744-afb6f2d6b2c8",
+            "state": "wellFormed",
+            "revision": 8,
+            "visibility": "private"
+        },
+        {
+            "id": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+            "name": "Sample_Eidiko_Proj",
+            "description": "Sample eidiko project to test API.",
+            "url": "https://pk455375outlook.visualstudio.com/DefaultCollection/_apis/projects/f5172329-2c9c-4e3c-bada-943c92bb54c3",
+            "state": "wellFormed",
+            "revision": 17,
+            "visibility": "private"
+        }
+    ]
+}
+=============================================================
+Get Profile
+============
+GET : https://app.vssps.visualstudio.com/_apis/profile/profiles/me?api-version=1.0
+
+Herders
+---------
+Authorization   Bearer {Access Token}
+
+Response
+---------
+{
+    "displayName": "pradeep kanukuntla",
+    "publicAlias": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+    "emailAddress": "pk455375@outlook.com",
+    "coreRevision": 574179,
+    "timeStamp": "2017-09-22T09:52:36.173+00:00",
+    "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+    "revision": 574179
+}

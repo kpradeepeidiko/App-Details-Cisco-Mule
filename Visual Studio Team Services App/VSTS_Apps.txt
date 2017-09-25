@@ -1,0 +1,64 @@
+Application Settings
+========================
+App ID: F566DBB0-1F79-47CA-B517-F048A1463BD7
+
+App Secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs
+
+Client Secret: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJjaWQiOiJmNTY2ZGJiMC0xZjc5LTQ3Y2EtYjUxNy1mMDQ4YTE0NjNiZDciLCJjc2kiOiI2MmFiNjMzZC04YjRlLTQxNTEtYWNlOS05ZWRiNmMxOTM5NDIiLCJuYW1laWQiOiI2MTM0ODU3ZC01N2M4LTQyOWQtOThhOC1lMjI2NzUxN2RhNTkiLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MDczMDY0LCJleHAiOjE2NjM4Mzk0NjR9.4O7Nrb_oC-3THpcqmISLk8PPxEAyQuHA639aMffAYxuDYPi6RIwwQt2w5xvNnqDwcx9mnAZIEADsa_0YaGiSZkQZ5H4kYl2KjiY237YGQpl1xVMj1f6mA62pdUD0YM7cwImt6cV8QzFqv_YHgrg4bORGI7wMaP3_77hZuDO2R0ec3nkmEGzd1IUr-34R7dk06xV8I4eiQ0yt4I4KGrEfzA5xQPSKnbpraLHa6-7QUsyAxkrXDMEwwKO8pLvQelLuPHUKGMMR-j2o4HWpY-J2a6e_zvIphscBd01om8U5lBbcCV6RcaTaPgn2pDZw-7JB3snKHc3eCmD-x84JCAE1rg
+
+Call Back Url: https://depot.ciscospark.com/
+
+Authorize URL: https://app.vssps.visualstudio.com/oauth2/authorize
+
+Access Token URL: https://app.vssps.visualstudio.com/oauth2/token
+
+
+Authorized Scopes:
+vso.agentpools_manage vso.build vso.code vso.codesearch vso.dashboards vso.entitlements vso.extension.data vso.extension_manage vso.identity vso.loadtest vso.notification vso.project vso.release vso.serviceendpoint_manage vso.taskgroups vso.test vso.wiki vso.work vso.workitemsearch
+======================================================================================================================
+Authorize your app
+====================
+https://app.vssps.visualstudio.com/oauth2/authorize
+        ?client_id={app ID}
+        &response_type=Assertion
+        &state={state}
+        &scope={scope}
+        &redirect_uri={callback URL}
+		
+		
+Code generation process
+-------------------------
+https://app.vssps.visualstudio.com/oauth2/authorize?client_id=F566DBB0-1F79-47CA-B517-F048A1463BD7&response_type=Assertion&state=user1&scope=vso.agentpools_manage%20vso.build%20vso.code%20vso.codesearch%20vso.dashboards%20vso.entitlements%20vso.extension.data%20vso.extension_manage%20vso.identity%20vso.loadtest%20vso.notification%20vso.project%20vso.release%20vso.serviceendpoint_manage%20vso.taskgroups%20vso.test%20vso.wiki%20vso.work%20vso.workitemsearch&redirect_uri=https://depot.ciscospark.com/
+
+
+
+
+
+
+https://depot.ciscospark.com/?code=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJhdWkiOiI3NDY5MWYzNC0xYzY2LTRmY2MtYWE1My0wNTVkYWNlOTI2YzYiLCJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2ggdnNvLmF1dGhvcml6YXRpb25fZ3JhbnQiLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzIyNzg2LCJleHAiOjE1MDYzMjM2ODZ9.SqDIjOkC88WD1yF1JPMiw1ZuObc1KT2j5osAc2V1odyUPM5FraP1glM9anZfqxNOMU5li7dInIY_XvVvfKVSSXjqQQGcSvzb7EgR-DrQ3WwA8zfeBYB5MfljCsvY-Vz9OHOj1bWAdzNBvLpD6l05yaMz6CAnY8h5tcr7Di6xFnbvR3kK1qpHqiCHyTjD4nClNA1waSceDmUxZHLSJoSPUr9NMrFT-ebrX5xE4Je6NzP_XirsQkhG1ZQkHbl9e4UX7K5Yb6J1y58boUClyiZATG7FUtURzPNEh4agO5MDl3HR0e8tLK0tGXirvYBwIVShdZ8b2-I4aRDAhlCHr8Taig&state=user1
+
+
+======================================================================================================================
+Get an access and refresh token for the user
+==============================================
+HTTP request headers
+-----------------------------
+Header			Value
+----------		-------
+Content-Type	application/x-www-form-urlencoded
+
+
+HTTP request body
+-----------------
+client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion={1}&redirect_uri={2}
+
+
+Response
+-------------
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2giLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzIyODI0LCJleHAiOjE1MDYzMjY0MjR9.gkuGakDOR79ozVPw0xh9U1teUF7_W3PJtKU-TMjgebcvGE8vCiK5NzShpp3JYyf0MbYixKo9BRRTrPKQTlbAKIjNtFlqtgY6kSqf1pZRJ1c3s-oPSDBy55tA7MzRJyAkAvN8noVJm9KYigebz-dMX6-yyMQGhBU4Ax4QbG-KKTQmK9ls9s4lJjulDtFXxkeki-NueboTFpBsQHBYmByK0DJZSiyeIE60HaXqT8kJZq9KgMTd85OG7QlKddPN3X_jPcvbD7oe0TYsiMNSz0-bj0F8erPSVkQ5xIf-GLWxnoBj_D2AY5zyoEsZ-4lQGlIy6b-DLvVPwVvJTwSjVW9sIA",
+    "token_type": "jwt-bearer",
+    "expires_in": "3599",
+    "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJhY2kiOiI0NDc2MWZhZi04OTkxLTQ2YjUtOGRlMC0yNjMxNTBlOGNkMzMiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2giLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzIyODI0LCJleHAiOjE1Mzc4NTg4MjR9.qZqcYq0LstmHwntb5TOoWjeSnYxTsDyu_y6C3cqRofic9U52Wn6yCZEaJ2JaGS9S9xTmfbi4ZvtZP8TPUAjypAMOO_MIG_fXT-QK6I1XsMW8twkwST8n6axJUuO6ze104AK4YoSq97uSSiMf-epjlWi1o9ZOKwFS-CJBi81Y51gCI0UQIh2wdGuDD1NXbw4alRMTzkR1-oPfSx6x9UPOSEU1LQGcBD6r_ivy1tT7n69SwH8naDB6lI7yT2rTQuVybZh19Ti2cMU6AqFY8PYEl2aHaONxmNtv14FyWYRoauOAtBvaeoU_l7VO1VRtEGgNjNdXsN3_D0lq4UiVbPTpaA",
+    "scope": "vso.agentpools_manage vso.build vso.code vso.codesearch vso.dashboards vso.entitlements vso.extension.data vso.extension_manage vso.identity vso.loadtest vso.notification vso.project vso.release vso.serviceendpoint_manage vso.taskgroups vso.test vso.wiki vso.work vso.workitemsearch vso.authorization_grant"
+}
