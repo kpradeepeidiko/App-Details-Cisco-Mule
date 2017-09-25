@@ -39,7 +39,7 @@ https://depot.ciscospark.com/?code=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6I
 
 
 ======================================================================================================================
-Get an access and refresh token for the user
+Get an access token for the user
 ==============================================
 HTTP request headers
 -----------------------------
@@ -52,6 +52,11 @@ HTTP request body
 -----------------
 client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion={1}&redirect_uri={2}
 
+Replace the placeholder values in the sample request body above:
+{0}: URL encoded client secret acquired when the app was registered
+{1}: URL encoded "code" provided via the code query parameter to your callback URL
+{2}: callback URL registered with the app
+
 
 Response
 -------------
@@ -62,3 +67,37 @@ Response
     "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJhY2kiOiI0NDc2MWZhZi04OTkxLTQ2YjUtOGRlMC0yNjMxNTBlOGNkMzMiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2giLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzIyODI0LCJleHAiOjE1Mzc4NTg4MjR9.qZqcYq0LstmHwntb5TOoWjeSnYxTsDyu_y6C3cqRofic9U52Wn6yCZEaJ2JaGS9S9xTmfbi4ZvtZP8TPUAjypAMOO_MIG_fXT-QK6I1XsMW8twkwST8n6axJUuO6ze104AK4YoSq97uSSiMf-epjlWi1o9ZOKwFS-CJBi81Y51gCI0UQIh2wdGuDD1NXbw4alRMTzkR1-oPfSx6x9UPOSEU1LQGcBD6r_ivy1tT7n69SwH8naDB6lI7yT2rTQuVybZh19Ti2cMU6AqFY8PYEl2aHaONxmNtv14FyWYRoauOAtBvaeoU_l7VO1VRtEGgNjNdXsN3_D0lq4UiVbPTpaA",
     "scope": "vso.agentpools_manage vso.build vso.code vso.codesearch vso.dashboards vso.entitlements vso.extension.data vso.extension_manage vso.identity vso.loadtest vso.notification vso.project vso.release vso.serviceendpoint_manage vso.taskgroups vso.test vso.wiki vso.work vso.workitemsearch vso.authorization_grant"
 }
+
+
+============================================================================================================================
+get Access token from refresh token for a user
+------------------------------------------------
+POST   https://app.vssps.visualstudio.com/oauth2/token
+
+
+Header				Value
+------				-----------------
+Content-Type		application/x-www-form-urlencoded
+
+
+
+HTTP request body
+-----------------
+client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion={0}&grant_type=refresh_token&assertion={1}&redirect_uri={2}
+
+
+Replace the placeholder values in the sample request body above:
+{0}: URL encoded client secret acquired when the app was registered
+{1}: URL encoded refresh token for the user
+{2}: callback URL registered with the app
+
+Response
+---------
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2giLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzI5MDQ0LCJleHAiOjE1MDYzMzI2NDR9.ow3G4hz5VZRZnXOeO2hP9C3yMcQD845VyDWZyTM_nWH4aLzh44vRKhLekBI4Xc_25T70jtRzYy_Gy9GdLgGV85eGYY3va5YfSPZIPnm7egRtl1X6ZkxQo4mfpDxwnQSc0XcCo0DNg3y4CtjbTjl24IwIjpgkQhx4H6fVpE9xnbxVlMTbxMFs5mb5TlaKK1lpWDZBAz1UcNmViBmxAhhuQ3Muor22jWDmXQkI8IDNqLWNc6NxjhlNvWTrCjr6N7q_DcMDR-LGCYUS3fb8tTU3FBk2Ij3mOEh06CS8ughrHlFt6CZbXfGnxZP7b1dzgwAfmCFYdknJXW4MZX4A7t_2yw",
+    "token_type": "jwt-bearer",
+    "expires_in": "3599",
+    "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im9PdmN6NU1fN3AtSGpJS2xGWHo5M3VfVjBabyJ9.eyJuYW1laWQiOiI5ZjVhZjVkOS02YTljLTZhZWMtYWM4Yi1mYjc2OTBmM2JhNDgiLCJhY2kiOiJiZTgxYTI5Ny0xNTkzLTRkM2ItYjMyNy03Y2UwMmExNzM5YjYiLCJzY3AiOiJ2c28uYWdlbnRwb29sc19tYW5hZ2UgdnNvLmJ1aWxkIHZzby5jb2RlIHZzby5jb2Rlc2VhcmNoIHZzby5kYXNoYm9hcmRzIHZzby5lbnRpdGxlbWVudHMgdnNvLmV4dGVuc2lvbi5kYXRhIHZzby5leHRlbnNpb25fbWFuYWdlIHZzby5pZGVudGl0eSB2c28ubG9hZHRlc3QgdnNvLm5vdGlmaWNhdGlvbiB2c28ucHJvamVjdCB2c28ucmVsZWFzZSB2c28uc2VydmljZWVuZHBvaW50X21hbmFnZSB2c28udGFza2dyb3VwcyB2c28udGVzdCB2c28ud2lraSB2c28ud29yayB2c28ud29ya2l0ZW1zZWFyY2giLCJpc3MiOiJhcHAudnNzcHMudmlzdWFsc3R1ZGlvLmNvbSIsImF1ZCI6ImFwcC52c3Nwcy52aXN1YWxzdHVkaW8uY29tIiwibmJmIjoxNTA2MzI5MDQ0LCJleHAiOjE1Mzc4NjUwNDR9.Gh6JUse80bMZtO0rLZblP6lh7-Sc2cdB8ZqUQywP-nRhWSb3ohgASIuD3gHKKAjdxFE76tv1f8ScHOeRl7d0cAhB3pnnJ78hs67wMyEUvMzNC33yUqHhTDscxa0jqnMHaNlnmWuCclQSNRZMuhcEHC49jHSEMKKmRKjsnBSepp_x4kapY7VKMbcSV4iZw-11hDjTHjHT4zC9wzswVujzy3En18mog3CGmPxaUBi_0Kl4CdARtLvNFPsI6V916Yns9sWbCoi9FKDpvY4Bl56nJX22fJNFBgOZQRT5W3Wj7AfM4KvG_7RC2-9QOFLGYl5zda1_vBd_O19xbNuDVrNRdA",
+    "scope": "vso.agentpools_manage vso.build vso.code vso.codesearch vso.dashboards vso.entitlements vso.extension.data vso.extension_manage vso.identity vso.loadtest vso.notification vso.project vso.release vso.serviceendpoint_manage vso.taskgroups vso.test vso.wiki vso.work vso.workitemsearch"
+}
+==============================================================================================================
