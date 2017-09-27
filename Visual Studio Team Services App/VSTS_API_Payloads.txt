@@ -9,6 +9,20 @@ users details
 -----------------
 https://docs.microsoft.com/en-us/vsts/accounts/add-account-users-assign-access-levels
 
+VSTS & TFS
+----------------
+https://docs.microsoft.com/en-us/vsts/integrate/concepts/dotnet-client-libraries
+https://docs.microsoft.com/en-us/vsts/tfs-server/architecture/extend-vs-for-alm
+
+
+REST API's details
+----------------------
+https://www.visualstudio.com/en-us/docs/integrate/api/overview
+
+Diff Between VSTS & TFS
+-------------------------------
+https://docs.microsoft.com/en-us/vsts/user-guide/about-vsts-tfs
+
 =================================================================================================
 Get Projects
 ============
@@ -2263,3 +2277,374 @@ Response
     ]
 }
 ===========================================================================================================
+Get webhooks
+----------------
+GET https://pk455375outlook.visualstudio.com/DefaultCollection/_apis/hooks/subscriptions/?api-version=1.0
+
+Header
+---------
+Authorization    Bearer {Access_Token}
+
+{
+    "count": 7,
+    "value": [
+        {
+            "id": "1f6298ea-0fd6-4f5d-a8ea-c7a768d32811",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/1f6298ea-0fd6-4f5d-a8ea-c7a768d32811",
+            "publisherId": "tfs",
+            "eventType": "build.complete",
+            "subscriber": null,
+            "resourceVersion": "1.0",
+            "eventDescription": "Any completed build.",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:31:52.753Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:31:52.753Z",
+            "publisherInputs": {
+                "buildStatus": "",
+                "definitionName": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "tfsSubscriptionId": "7e6bcaf3-7064-44e3-8887-dcabcff7f207"
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/1f6298ea-0fd6-4f5d-a8ea-c7a768d32811"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/1f6298ea-0fd6-4f5d-a8ea-c7a768d32811/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "d3f718a1-e5f2-4542-91a5-43485cb5937a",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/d3f718a1-e5f2-4542-91a5-43485cb5937a",
+            "publisherId": "tfs",
+            "eventType": "git.pullrequest.created",
+            "subscriber": null,
+            "resourceVersion": "1.0-preview.1",
+            "eventDescription": "Any branch on any repository.",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:32:29.757Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:32:29.757Z",
+            "publisherInputs": {
+                "branch": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "pullrequestCreatedBy": "",
+                "pullrequestReviewersContains": "",
+                "repository": "",
+                "tfsSubscriptionId": "911c7e7e-413b-444e-8844-039761937bab"
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/d3f718a1-e5f2-4542-91a5-43485cb5937a"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/d3f718a1-e5f2-4542-91a5-43485cb5937a/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "035479e0-8329-4c25-a2ed-a9497f7215be",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/035479e0-8329-4c25-a2ed-a9497f7215be",
+            "publisherId": "tfs",
+            "eventType": "git.pullrequest.merged",
+            "subscriber": null,
+            "resourceVersion": "1.0-preview.1",
+            "eventDescription": "Any branch on any repository.",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T10:46:24.45Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T10:46:24.45Z",
+            "publisherInputs": {
+                "branch": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "pullrequestCreatedBy": "",
+                "pullrequestReviewersContains": "",
+                "repository": "",
+                "tfsSubscriptionId": "d528cc0a-8729-46b1-a1e2-bb8bc1186232"
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/035479e0-8329-4c25-a2ed-a9497f7215be"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/035479e0-8329-4c25-a2ed-a9497f7215be/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "fa38131d-9929-4d4f-ba5b-11fcbc7ea61e",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/fa38131d-9929-4d4f-ba5b-11fcbc7ea61e",
+            "publisherId": "tfs",
+            "eventType": "git.push",
+            "subscriber": null,
+            "resourceVersion": "1.0",
+            "eventDescription": "Any branch on any repository.",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:32:12.023Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:32:12.023Z",
+            "publisherInputs": {
+                "branch": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "pushedBy": "",
+                "repository": "",
+                "tfsSubscriptionId": "74de5627-f2cb-476c-8e4c-7a52ee6a86ea"
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/fa38131d-9929-4d4f-ba5b-11fcbc7ea61e"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/fa38131d-9929-4d4f-ba5b-11fcbc7ea61e/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "54acc374-db43-4d8a-a760-db07a8591320",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/54acc374-db43-4d8a-a760-db07a8591320",
+            "publisherId": "tfs",
+            "eventType": "workitem.commented",
+            "subscriber": null,
+            "resourceVersion": "1.0",
+            "eventDescription": "Any work item",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:33:15.887Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:33:15.887Z",
+            "publisherInputs": {
+                "areaPath": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "tfsSubscriptionId": "a1999153-487c-462a-8311-5f4910f21b1e",
+                "workItemType": ""
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/54acc374-db43-4d8a-a760-db07a8591320"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/54acc374-db43-4d8a-a760-db07a8591320/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "abb7ea11-8866-4c09-9ca7-eaf13a5cbd54",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/abb7ea11-8866-4c09-9ca7-eaf13a5cbd54",
+            "publisherId": "tfs",
+            "eventType": "workitem.created",
+            "subscriber": null,
+            "resourceVersion": "1.0",
+            "eventDescription": "Any work item",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:32:47.04Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:32:47.04Z",
+            "publisherInputs": {
+                "areaPath": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "tfsSubscriptionId": "33366275-2880-41c7-bea6-7f7112ada072",
+                "workItemType": ""
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/abb7ea11-8866-4c09-9ca7-eaf13a5cbd54"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/abb7ea11-8866-4c09-9ca7-eaf13a5cbd54/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        },
+        {
+            "id": "af1d9a10-9c54-4fe6-b4e4-cdbdf2993510",
+            "url": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/af1d9a10-9c54-4fe6-b4e4-cdbdf2993510",
+            "publisherId": "tfs",
+            "eventType": "workitem.updated",
+            "subscriber": null,
+            "resourceVersion": "1.0",
+            "eventDescription": "Any work item",
+            "consumerId": "webHooks",
+            "consumerActionId": "httpRequest",
+            "actionDescription": "To host fc1c1613.ngrok.io",
+            "createdBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "createdDate": "2017-09-27T06:32:59.9Z",
+            "modifiedBy": {
+                "id": "9f5af5d9-6a9c-6aec-ac8b-fb7690f3ba48",
+                "displayName": "pradeep kanukuntla",
+                "uniqueName": "pk455375@outlook.com"
+            },
+            "modifiedDate": "2017-09-27T06:32:59.9Z",
+            "publisherInputs": {
+                "areaPath": "",
+                "changedFields": "",
+                "projectId": "f5172329-2c9c-4e3c-bada-943c92bb54c3",
+                "tfsSubscriptionId": "37aac68f-b601-44be-8422-5f9f28499367",
+                "workItemType": ""
+            },
+            "consumerInputs": {
+                "url": "https://fc1c1613.ngrok.io/test/hooks"
+            },
+            "_links": {
+                "self": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/af1d9a10-9c54-4fe6-b4e4-cdbdf2993510"
+                },
+                "consumer": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks"
+                },
+                "actions": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/consumers/webHooks/actions"
+                },
+                "notifications": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/subscriptions/af1d9a10-9c54-4fe6-b4e4-cdbdf2993510/notifications"
+                },
+                "publisher": {
+                    "href": "https://pk455375outlook.visualstudio.com/_apis/hooks/publishers/tfs"
+                }
+            }
+        }
+    ]
+}
+
+=========================================================================================================
