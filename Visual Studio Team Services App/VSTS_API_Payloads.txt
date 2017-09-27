@@ -1,3 +1,15 @@
+VSTS
+-----
+Oauth 2.0 details
+--------------------
+https://docs.microsoft.com/en-us/vsts/integrate/get-started/authentication/oauth
+
+
+users details
+-----------------
+https://docs.microsoft.com/en-us/vsts/accounts/add-account-users-assign-access-levels
+
+=================================================================================================
 Get Projects
 ============
 GET https://pk455375outlook.visualstudio.com/DefaultCollection/_apis/projects?api-version=1.0
