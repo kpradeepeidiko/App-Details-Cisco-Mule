@@ -1,0 +1,41 @@
+import org.mule.message.ds.ByteArrayDataSource;
+import javax.activation.DataHandler;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfImportedPage;
+ClassLoader classloader = getClass().getClassLoader();	
+	File file = new File(classloader.getResource("JIRA-Admin-Instructions.pdf").getFile());
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	Document document = new Document(PageSize.A4);
+	PdfWriter writer = PdfWriter.getInstance(document, stream);
+	document.open();
+	PdfContentByte cb = writer.getDirectContent();
+	PdfReader reader = new PdfReader(new FileInputStream(file));
+	int n=reader.getNumberOfPages();
+		for(int i=1;i<=n;i++)
+{
+		PdfImportedPage page = writer.getImportedPage(reader, i); 	
+		document.newPage();
+		cb.addTemplate(page, 0, 0);
+		if(i==1)
+		{	
+		
+		document.add(new Paragraph(flowVars.pdfMessage+"\n ")); 
+		document.add( Chunk.NEWLINE );
+		}
+}		
+		document.close();
+                        	
+        String fileName='JIRA-Admin-Instructions.pdf'
+            String attachmentName='files'
+            
+            ByteArrayDataSource attachment = new ByteArrayDataSource(stream.toByteArray(), "application/pdf",fileName);
+
+            message.addOutboundAttachment(attachmentName, new DataHandler(attachment))
+
+            return payload;
