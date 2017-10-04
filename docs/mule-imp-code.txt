@@ -198,8 +198,11 @@ dwl scripts formats
 				
 <dw:set-payload
 				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
-				
-				
+=======================================================================================================
+Mule filters example
+--------------------
+https://dzone.com/articles/different-types-of-anypoint-filters-in-mulesoft				
+
 				
 ===================================================================================================
 Setting mime/type in transformation message
@@ -213,6 +216,23 @@ MimeType was not resolved '*/*' delegating to Java.
 health _check flow
 -----------------------
 token_response => message=No results
+=============================================================================================================
+Reading xml file using xpath
+--------------------------------
+MEL :
+-----
+#[xpath3('/messagebody/header/mesgid')]  (output = 001)
+
+Expl :
+------
+<messagebody>
+	<header>
+		<mesgid>001</mesgid>
+		<mesgName>pradeep</mesgName>
+	</header>
+</messagebody>
+
+
 
 ===================================================================================================================
 %dw 1.0

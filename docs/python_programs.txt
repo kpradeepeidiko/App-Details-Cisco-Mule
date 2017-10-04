@@ -94,3 +94,37 @@ Output :
 ---------
 Gcd  : 9
 ==============================================================================================
+Constructor(__init__) Example
+-------------------------------
+1) class MyClass:
+		i = 123
+		def __init__(self):
+			self.i = 354
+		
+	a = MyClass()
+	print("Inside Constructor :  {0}".format(a.i))
+	print("Inside Class : {0}".format(MyClass.i))
+
+
+	Output:
+	--------
+	Inside Constructor :  354
+	Inside Class : 123
+
+	
+2) class A:
+	def __init__(self):
+		self.str = "Hello"
+		
+	def myMethod(self,name):
+		print(self.str + " " + name + "!")
+		
+	a = A()
+	a.myMethod('pradeep')
+	
+	Output:
+	----------
+	Hello pradeep!
+
+
+=========================================================================================
