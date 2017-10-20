@@ -80,6 +80,16 @@ https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/au
 
 ======================================================
 
+Staging Cred
+---------------
+UserMail	 =   ciscosparkintegrations@gmail.com
+password	 =   CiscoEidiko@9
+clientId 	 =	 281078810714-qafh5sqdg57844jh5u58ikrfunopqtvf.apps.googleusercontent.com
+clientSecret =   blbZZsxVGbmgPWfo2lSz-bLp
+redirecrUri  = https://marketplace-intb.ciscospark.com/integrations/Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwNWY1MWQ2MTFiYzFkOTU0MjY3NWY1ZmQ3N2RkMWI0YTRhZDI5ZTEyZTc1YTc0ZGVhNjQ2ZDcwOTgzY2ZkZjcz
+
+=========================================================================
+
 dev
 --------------
 https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/calendar
