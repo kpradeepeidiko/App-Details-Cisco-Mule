@@ -1877,6 +1877,17 @@ AppName:         Cisco Spark Dev
 ClientId:        971699694203-nshfhghj1p6u2er5vrvk86gup2a4tdk4.apps.googleusercontent.com
 ClientSecret:    LoIYNAlPovodn9FBZuZgfNTh
 Redirecturl:     https://cisco-spark-integration-management-new-dev.cloudhub.io/
+======================================================================================
+Staging credentials
+--------------------
+UserMail:        ciscosparkintegrations@eidiko.com
+password:        CiscoEidiko@9
+AppName:         Cisco Spark Staging_GD
+ClientId:        281078810714-j79sv08cbq5c40ouae66h09hqqpt42gu.apps.googleusercontent.com
+ClientSecret:    LZTqVtaberS758V3c8--4dRn
+Redirecturl:    https://marketplace-intb.ciscospark.com/integrations/Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzNWJhMWNlYTVlNWMwNDdhNmYwNTc1ZjE1NjU0MWZiMmY1OGQ1NDczMDdkNmUyMWYzNDQ3NzBiNzdmOGMxNWFh
+
+
 ======================================================
 UserName : Cisco spark 
 ID : ciscosparkdemo@outlook.com 

@@ -201,7 +201,11 @@ dwl scripts formats
 =======================================================================================================
 Mule filters example
 --------------------
-https://dzone.com/articles/different-types-of-anypoint-filters-in-mulesoft				
+https://dzone.com/articles/different-types-of-anypoint-filters-in-mulesoft
+
+https://www.slideshare.net/Krishna_in/filters-in-mule		
+
+https://docs.mulesoft.com/mule-user-guide/v/3.4/using-filters		
 
 				
 ===================================================================================================
@@ -216,7 +220,13 @@ MimeType was not resolved '*/*' delegating to Java.
 health _check flow
 -----------------------
 token_response => message=No results
-=============================================================================================================
+============================================================================================
+
+File Component
+-----------------
+Set Path : C:\Users\db2admin.bandaru-PC\Downloads\New_Folder\New_Folder\Folder1\sam
+
+====================================================================================
 Reading xml file using xpath
 --------------------------------
 MEL :
