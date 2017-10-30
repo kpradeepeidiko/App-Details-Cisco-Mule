@@ -1,6 +1,5 @@
 Reverse of a number
 --------------------
-
 #!/usr/bin/python
 
 # Function definition is here
@@ -26,7 +25,6 @@ rev of a number : 753
 ==========================================================================================
 Factorial of a Number
 ----------------------
-
 #!/usr/bin/python
 
 # Function definition is here
@@ -52,7 +50,6 @@ And it's factorial is : 120
 =====================================================================================================
 Prime Numbers Between
 -----------------------
-
 #!/usr/bin/python
 
 # Function definition is here
@@ -71,10 +68,56 @@ Output :
 -----------
 2 3 5 7 11 13 17 19
 
-===========================================================================================================
+=======================================================================================================
+Power of a number
+-------------------
+#!/usr/bin/python
+
+def power(n, m):
+    p = 1
+    for i in range(0,m):
+        p = p * n
+    print "Power = %d" % p
+    
+    
+power(2, 3)
+
+
+Output:
+--------
+Power = 8
+
+========================================================================================
+Armstrong Number
+-------------------
+#!/usr/bin/python
+
+def armstrongNumber(num):
+    r = 0
+    f = num
+    while (num > 0):
+        d = num % 10
+        r = r + d * d * d
+        num = num / 10
+        
+    if (r == f):
+        print "Armstrong Number"
+    else:
+        print "Not Armstrong Number"
+     
+     
+armstrongNumber(158)
+
+
+
+Output:
+----------
+Not Armstrong Number
+
+
+=================================================================================
 GCD of Two Numbers
 ---------------------
-
 #!/usr/bin/python
 
 # Function definition is here
@@ -127,4 +170,32 @@ Constructor(__init__) Example
 	Hello pradeep!
 
 
+3) 	class Employee:
+		empCount = 0
+		def __init__(self, name, salary):
+			self.name = name
+			self.salary = salary
+			Employee.empCount += 1
+		
+		def displayCount(self):
+			print "Total Employee Count = %d" % Employee.empCount
+
+		def displayEmployee(self):
+			print "Name = ", self.name, ", Salary = ", self.salary
+
+	e = Employee('pradeep',25445)
+	e1 = Employee('asha',31445)
+	e.displayCount()
+	e.displayEmployee()
+	e1.displayEmployee()
+	
+	OutPut:
+	---------
+	Total Employee Count = 2
+	Name =  pradeep , Salary =  25445
+	Name =  asha , Salary =  31445
+
+		
+	
+	
 =========================================================================================

@@ -1,0 +1,14 @@
+Two way Delete process
+--------------------------
+<enricher target="#[flowVars['twoWayDeleteProcessResponse']]"
+					doc:name="Two Way Delete Process">
+					<flow-ref name="twoWayDeleteProcess" doc:name="twoWayDeleteProcess" />
+				</enricher>
+				
+==================================================================================
+Two way Add process
+--------------------
+<enricher target="#[flowVars['twoWayAddProcessResponse']]"
+							doc:name="Two Way Add Process">
+							<flow-ref name="twoWayAddProcess" doc:name="twoWayAddProcess" />
+						</enricher>
