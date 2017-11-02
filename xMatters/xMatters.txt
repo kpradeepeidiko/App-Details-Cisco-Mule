@@ -13,18 +13,14 @@ https://help.xmatters.com/OnDemand/xmodwelcome/integrationbuilder/create-inbound
 
 
 ==================================================
-current account details(expired)
+current account details
 -------------------------
-Domain url : https://esiintegrations.xmatters.com/xmatters/signOn.do?
-username : surendra.eidiko@gmail.com
+Domain url : https://eidiko.xmatters.com/xmatters/app.do
+username : kpradeep.eidiko@gmail.com
 password : Sarasu@10
 
 
-username : srisatya.gmr@gmail.com
-password : sarasu10
 
-kpradeep.eidiko@gmail.com
-Sarasu@10
 
 working
 ++++++++++++++++++++

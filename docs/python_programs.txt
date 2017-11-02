@@ -1,3 +1,21 @@
+Nice : https://www.programiz.com/python-programming
+
+
+
+Addition Of Two Numbers
+--------------------------
+#!/usr/bin/python
+
+a, b = 10, 12
+c = a + b
+print ("Addition of {0} and {1} is {2}".format(a, b, c)) (OR) print "Addition of %d and %d is %d" % (a, b, c)
+
+
+Output : 
+------------
+Addition of 10 and 12 is 22
+
+==================================================================
 Reverse of a number
 --------------------
 #!/usr/bin/python
@@ -46,6 +64,27 @@ Output :
 ----------
 Given number is :  5
 And it's factorial is : 120
+
+(OR)
+
+
+using Recursion
+----------------
+#!/usr/bin/python
+
+def Fact(num):
+    if num == 1:
+        return 1
+        
+    else:
+        return (num * Fact(num - 1))
+        
+num = 2
+print("the factorial of {0} is {1}".format(num, Fact(num))) 
+
+Output:
+-------
+the factorial of 5 is 120
 
 =====================================================================================================
 Prime Numbers Between
@@ -199,3 +238,44 @@ Constructor(__init__) Example
 	
 	
 =========================================================================================
+Fibonacci series with recursion
+----------------------------------
+#!/usr/bin/python
+
+def recur_fibo(n):
+   """Recursive function to
+   print Fibonacci sequence"""
+   if n <= 1:
+       return n
+   else:
+       return(recur_fibo(n-1) + recur_fibo(n-2))
+
+nterms = 10
+
+
+if nterms <= 0:
+   print("Plese enter a positive integer")
+else:
+   print("Fibonacci sequence:")
+   for i in range(nterms):
+       print(recur_fibo(i))
+	   
+	   
+Output:
+-------
+Fibonacci sequence:
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+===============================================================
+
+
+
+

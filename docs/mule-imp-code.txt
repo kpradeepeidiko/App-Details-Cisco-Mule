@@ -207,6 +207,14 @@ https://www.slideshare.net/Krishna_in/filters-in-mule
 
 https://docs.mulesoft.com/mule-user-guide/v/3.4/using-filters		
 
+To Enter In to Exception For Filters
+--------------------------------------
+<message-filter throwOnUnaccepted="true" doc:name="Expression_filter">
+			<expression-filter
+				expression="#[payload.toString().contains('name') &amp;&amp; payload.name == 'pradeep']"
+				doc:name="Expression" nullReturnsTrue="true" />
+		</message-filter>
+
 				
 ===================================================================================================
 Setting mime/type in transformation message
