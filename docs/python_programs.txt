@@ -1,7 +1,35 @@
-Nice : https://www.programiz.com/python-programming
+Imp Python Doc : https://www.programiz.com/python-programming
+
+Swapping techniques : https://www.programiz.com/python-programming/examples/swap-variables
+
+==================================================================================
+Display a Calendar
+---------------------
+#!/usr/bin/python
+
+import calendar
+
+yy = 2017
+mm = 11
+
+print(calendar.month(yy, mm))
+
+
+Output:
+--------
+
+   November 2017
+Mo Tu We Th Fr Sa Su
+       1  2  3  4  5
+ 6  7  8  9 10 11 12
+13 14 15 16 17 18 19
+20 21 22 23 24 25 26
+27 28 29 30
 
 
 
+
+==================================================================================
 Addition Of Two Numbers
 --------------------------
 #!/usr/bin/python
@@ -14,8 +42,38 @@ print ("Addition of {0} and {1} is {2}".format(a, b, c)) (OR) print "Addition of
 Output : 
 ------------
 Addition of 10 and 12 is 22
+========================================================================================
 
-==================================================================
+Power Of a Number
+-------------------
+#!/usr/bin/python
+
+
+base, power = 4, 3
+p = 1
+for i in range(0, power):
+    p = p * base
+    
+print "Power = %d" % p
+
+
+Output:
+------------
+Power = 64
+
+
+
+With Lambda Expression
+-------------------------
+power = lambda x,y: x ** y
+
+print "Power = %d" % power(2,3)
+
+Output:
+---------
+Power = 8
+
+===================================================================================================
 Reverse of a number
 --------------------
 #!/usr/bin/python
@@ -40,7 +98,7 @@ output :
 given number :  357
 rev of a number : 753
 
-==========================================================================================
+====================================================================================================
 Factorial of a Number
 ----------------------
 #!/usr/bin/python
@@ -126,7 +184,7 @@ Output:
 --------
 Power = 8
 
-========================================================================================
+========================================================================================================
 Armstrong Number
 -------------------
 #!/usr/bin/python
@@ -154,7 +212,7 @@ Output:
 Not Armstrong Number
 
 
-=================================================================================
+=====================================================================================================
 GCD of Two Numbers
 ---------------------
 #!/usr/bin/python
@@ -175,7 +233,7 @@ gcd(81, 9)
 Output :
 ---------
 Gcd  : 9
-==============================================================================================
+=====================================================================================================
 Constructor(__init__) Example
 -------------------------------
 1) class MyClass:
@@ -237,7 +295,7 @@ Constructor(__init__) Example
 		
 	
 	
-=========================================================================================
+================================================================================================
 Fibonacci series with recursion
 ----------------------------------
 #!/usr/bin/python
@@ -274,8 +332,68 @@ Fibonacci sequence:
 13
 21
 34
-===============================================================
+===============================================================================================
+Lambda Exmples
+-----------------
+a = lambda x, y: x + y
+print(a(10, 20))
+
+Output:
+-------
+30
 
 
 
+lambda expression with filter()
+----------------------------------
+in_list = [1,2,5,8,4,6,9,7,1]
 
+my_new_list = list(filter(lambda x: (x % 2 == 0), in_list))
+
+print(my_new_list)
+
+Output:
+--------
+[2, 8, 4, 6]
+
+
+lambda expression with map()
+-------------------------------
+my_list = [1, 5, 4, 6, 8, 11, 3, 12]
+
+new_list = list(map(lambda x: x * 2 , my_list))
+
+print(new_list)
+
+Output:
+-------
+[2, 10, 8, 12, 16, 22, 6, 24]
+
+=============================================================================================
+Year is Lesp year or not
+----------------------------
+#!/usr/bin/python
+
+year = 2017
+
+# To get year (integer input) from the user
+# year = int(input("Enter a year: "))
+
+if (year % 4) == 0:
+   if (year % 100) == 0:
+       if (year % 400) == 0:
+           print("{0} is a leap year".format(year))
+       else:
+           print("{0} is not a leap year".format(year))
+   else:
+       print("{0} is a leap year".format(year))
+else:
+   print("{0} is not a leap year".format(year))
+   
+   
+Output:
+-----------
+2017 is not a leap year
+ 
+ 
+===============================================================================================
