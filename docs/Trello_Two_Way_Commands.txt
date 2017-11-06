@@ -1,0 +1,71 @@
+Here is the list of actions I can perform for you. Note: fields italicized represent optional fields.
+
+List, Create and Update Board
+---------------------------------
+List all Boards: @Trello listboards 
+
+Create Board: @Trello createboard | name: <board name> 
+
+Rename Board: @Trello renameboard | board: <board name> | newboard: <new board name> 
+
+Add Member: @Trello addboardmember | board: <board name> | email: <email of member that you want to add> 
+
+List, Create and Update List
+-------------------------------
+List all Lists in Board: @Trello getlists | board: <board name> 
+
+Create List: @Trello createlist | board: <board name> | list: <list name> 
+
+Rename List: @Trello renamelist | board: <board name> | list: <list name> | newlist: <new list name>
+
+Move List: @Trello movelist | board: <board name> | list: <list name> | newboard: <new board name> 
+
+Close (Archive) List: @Trello archivelist | board: <board name> | list: <list name>
+
+Open (Unarchive) List: @Trello unarchivelist | board: <board name> | list: <list name> 
+
+List, Create and Update Card
+
+List all Cards: @Trello listcards | board: <board name> 
+
+Get Card Details: @Trello carddetail | board: <board name> | card: <card name> (or) carddetail | url: <card url>
+
+Create Card: @Trello createcard | board: <board name> | list: <list name> | card: <card name> | desc: <description> | duedate: <YYYY-MM-DD HH:MM time zone abbreviation> (or) <YYYY/MM/DD HH:MM time zone abbreviation> | label(s): <Color1, Color2,..> | boardmember: <user name of boardmember> 
+Rename Card: @Trello renamecard | board: <board name> | card: <card name> | newcard: <new card name>
+
+Edit (Replace) Card Description: @Trello editdesc | board: <board name> | card: <card name> | desc: <description>
+
+Move Card: @Trello movecard | board: <board name> | card: <card name> | list: <list name where you want to move the card>  
+
+Add Comment to Card: @Trello addcomment | board: <board name> | card: <card name> | comment: <comment>
+
+Add Label to Card: @Trello addlabel | board: <board name> | card: <card name> | label: <color>
+
+Add (or) Edit Due Date to Card: @Trello adddue | board: <board name> | card: <card name> | duedate: <YYYY-MM-DD HH:MM time zone abbreviation; (or) <YYYY/MM/DD HH:MM time zone abbreviation>
+
+Add Board Member to Card: @Trello addcardmember | board: <board name> | card: <card name> | boardmember: <user name of boardmember>
+
+Add Attachment to Card: @Trello attach | board: <board name> | card: <card name> In addition to typing the command, please upload your attachment in the Spark post.
+
+Remove Label from Card: @Trello removelabel | board: <board name> | card: <card name> | label: <color name>
+
+Remove Member from Card: @Trello removemember | board: <board name> | card: <card name> | boardmember: <user name of boardmember>
+
+Archive Card: @Trello archivecard | board: <board name> | card: <card name>
+
+Unarchive Card: @Trello unarchivecard | board: <board name> | card: <card name>
+
+Update Status (complete): @Trello complete | board: <board name> | card: <card name>
+
+Update Status (incomplete): @Trello incomplete | board: <board name> | card: <card name>
+
+
+Create and Update Checklist
+-----------------------------
+Create Checklist: @Trello createchecklist | board: <board name> | card: <card name> | checklist: <checklist name>
+
+Create Checklist Item: @Trello createcheckitem | board: <board name> | card: <card name> | checklist: <checklist name> | listitem: <checklist item name>
+
+Rename Checklist: @Trello renamechecklist | board: <board name> | card: <card name> | checklist: <checklist name> | newchecklist: <checklist item name>
+
+To receive Trello board updates in Spark or modify previously enabled notifications, please visit Cisco Spark Depot.
