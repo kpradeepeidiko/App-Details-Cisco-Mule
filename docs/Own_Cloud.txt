@@ -1,0 +1,29 @@
+https://marketplace.owncloud.com/enterprise-trial/success
+
+unm : kpradeep.eidiko
+pwd : Sarasu@10
+
+
+li key : 
+
+
+===================================================================
+OwnCloud : Oauth
+----------------
+https://github.com/owncloud/core/issues/10400
+
+===============================================================================================
+Did you check the documentation? Whats missing in it?
+-----------------------------------------------------------
+https://doc.owncloud.org/server/9.1/admin_manual/configuration_user/user_provisioning_api.html69
+https://doc.owncloud.org/server/9.1/developer_manual/core/ocs-share-api.html
+
+=================================================================================
+imp
+----
+https://doc.owncloud.org/server/8.2/admin_manual/configuration_files/external_storage/auth_mechanisms.html
+
+OwnCloud 10.0.3
+-----------------
+https://doc.owncloud.org/server/10.0/admin_manual/configuration/files/external_storage/auth_mechanisms.html
+

@@ -5,9 +5,15 @@ pagerduty API KEY   :  YNR83AqzAtufQgaqzkY8
 =====================================================
 For pagetduty use these credentials
 --------------------------------------
-domain url : https://kpindustries.pagerduty.com/sign_in
-username : pk455375@gmail.com
-pwd : pagerduty@10
+domain url : https://kcom-systems.pagerduty.com/incidents
+username : harish.eidiko@gmail.com	
+pwd : EidikoSarasu@10
+
+
+pagerduty support cred
+------------
+eidiko mail
+Kpm$12
 ========================================================
 Pagerduty Python API
 ----------------------------
@@ -317,7 +323,7 @@ RESPONSE
   "total": null,
   "more": false
 }
-======================================================================================================================================================
+=================================================================================================
 
 
 

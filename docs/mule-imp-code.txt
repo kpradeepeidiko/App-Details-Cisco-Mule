@@ -190,6 +190,11 @@ if ==> tt = 2016-10-10 (yyyy-MM-dd format)
 #[(new org.mule.el.datetime.DateTime(flowVars.tt)).format("MMM dd")] gives Oct 10
 #[(new org.mule.el.datetime.DateTime(flowVars.tt)).plusDays(-1).format("MMM dd")] gives Oct 9
 
+
+#[(new org.mule.el.datetime.DateTime(flowVars.myTime)).format("MMM dd yyyy hh:mm a")]: 
+For 2016-10-06T14:18:20.142Z 
+Output : Oct 06 2016 02:18 PM
+
 ========================================================================================================
 dwl scripts formats
 ----------------------

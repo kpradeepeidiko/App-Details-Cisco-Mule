@@ -1,0 +1,23 @@
+twitter4j doc
+----------------
+http://twitter4j.org/en/configuration.html
+====================================================================================================
+calls
+---------
+https://developer.twitter.com/en/docs/direct-messages/sending-and-receiving/api-reference/get-sent-message
+
+==================================================================================================
+
+public url
+----------------
+http://javapapers.com/core-java/post-to-twitter-using-java/
+===================================================================================================
+
+google-query
+--------------
+https://groups.google.com/forum/#!topic/twitter4j/pQ62xDeFmLg
+
+==========================================================================================
+imp posts
+-----------
+http://www.tothenew.com/blog/reply-to-a-user-tweet-using-twitter4j/
