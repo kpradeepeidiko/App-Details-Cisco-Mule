@@ -1,0 +1,1510 @@
+Pivotal_Tracker
+-------------------
+unm: pradeep.kanukutla@eidiko.com
+pwd: S*****@10
+
+
+
+======================================================================================
+Story Create With Task
+------------------------------
+{
+	"kind": "story_create_activity",
+	"guid": "2129370_4",
+	"project_version": 4,
+	"message": "pradeep kanukuntla added this bug",
+	"highlight": "added",
+	"changes": [{
+			"kind": "story",
+			"change_type": "create",
+			"id": 152952573,
+			"new_values": {
+				"id": 152952573,
+				"project_id": 2129370,
+				"name": "SampleStory",
+				"description": "My Story Description",
+				"story_type": "bug",
+				"current_state": "unstarted",
+				"requested_by_id": 3001266,
+				"owned_by_id": 3001266,
+				"owner_ids": [
+					3001266
+				],
+				"label_ids": [
+
+				],
+				"follower_ids": [
+
+				],
+				"created_at": 1510898201000,
+				"updated_at": 1510898201000,
+				"after_id": 152952428,
+				"blocked_story_ids": [
+
+				],
+				"labels": [
+
+				]
+			},
+			"name": "SampleStory",
+			"story_type": "bug"
+		},
+		{
+			"kind": "task",
+			"change_type": "create",
+			"id": 59264160,
+			"new_values": {
+				"id": 59264160,
+				"story_id": 152952573,
+				"description": "SampleTask",
+				"complete": false,
+				"position": 1,
+				"created_at": 1510898201000,
+				"updated_at": 1510898201000
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510898201000
+}
+================================================================================================
+Story updated (story name updated)
+--------------------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_5",
+	"project_version": 5,
+	"message": "pradeep kanukuntla edited this bug",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"name": "SampleStory",
+			"updated_at": 1510898201000
+		},
+		"new_values": {
+			"name": "SampleStory@1",
+			"updated_at": 1510898453000
+		},
+		"name": "SampleStory@1",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510898453000
+}
+=====================================================================================================
+Comment on story
+--------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_6",
+	"project_version": 6,
+	"message": "pradeep kanukuntla added comment: \"test comment\"",
+	"highlight": "added comment:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182602278,
+			"new_values": {
+				"id": 182602278,
+				"story_id": 152952573,
+				"text": "test comment",
+				"person_id": 3001266,
+				"created_at": 1510898649000,
+				"updated_at": 1510898649000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"follower_ids": [
+
+				],
+				"updated_at": 1510898453000
+			},
+			"new_values": {
+				"follower_ids": [
+					3001266
+				],
+				"updated_at": 1510898649000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510898649000
+}
+===============================================================================================
+Comment Update
+---------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_7",
+	"project_version": 7,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182602278,
+			"original_values": {
+				"text": "test comment",
+				"updated_at": 1510898649000
+			},
+			"new_values": {
+				"text": "test comment@1",
+				"updated_at": 1510899127000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510898649000
+			},
+			"new_values": {
+				"updated_at": 1510899127000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899127000
+}
+=====================================================================================
+Comment update Plus desktop Attachment
+--------------------------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_8",
+	"project_version": 8,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85520714,
+			"new_values": {
+				"id": 85520714,
+				"filename": "authors.txt",
+				"created_at": 1510899235000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85520714/download",
+				"content_type": "text/plain",
+				"uploaded": false,
+				"big_url": "#",
+				"thumbnail_url": "#"
+			}
+		},
+		{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182602278,
+			"original_values": {
+				"text": "test comment@1",
+				"updated_at": 1510899127000,
+				"file_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				]
+			},
+			"new_values": {
+				"text": "test comment@1 Sorry Added Attach",
+				"updated_at": 1510899238000,
+				"file_attachment_ids": [
+					85520714
+				],
+				"attachment_ids": [{
+					"id": 85520714,
+					"kind": "file_attachment"
+				}],
+				"file_attachments": [
+					"authors.txt"
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510899127000
+			},
+			"new_values": {
+				"updated_at": 1510899238000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899238000
+}
+===========================================================================================
+Attachment on comment
+--------------------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_39",
+	"project_version": 39,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85526875,
+			"new_values": {
+				"id": 85526875,
+				"filename": "authors.txt",
+				"created_at": 1510921838000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85526875/download",
+				"content_type": "text/plain",
+				"uploaded": true,
+				"big_url": "https://s3.amazonaws.com/prod.tracker2/resource/85526875/authors_big.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T123109Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=56bf4b6eeafd481024ca10550a44dcb7745efc62d17bf33f72d676fb2d697435",
+				"thumbnail_url": "https://s3.amazonaws.com/prod.tracker2/resource/85526875/authors_thumb.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T123109Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1fbcf0331d9a8b2b894ada1506eaaa203989ef095fbb671a4495bc712b727032"
+			}
+		},
+		{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182612832,
+			"original_values": {
+				"updated_at": 1510921801000,
+				"file_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				]
+			},
+			"new_values": {
+				"updated_at": 1510921869000,
+				"file_attachment_ids": [
+					85526875
+				],
+				"attachment_ids": [{
+					"id": 85526875,
+					"kind": "file_attachment"
+				}],
+				"file_attachments": [
+					"authors.txt"
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510921801000
+			},
+			"new_values": {
+				"updated_at": 1510921869000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510921869000
+}
+=======================================================================================
+Deleted a Task On Story
+------------------------------
+{
+	"kind": "task_delete_activity",
+	"guid": "2129370_10",
+	"project_version": 10,
+	"message": "pradeep kanukuntla deleted a task on this story",
+	"highlight": "deleted a task",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510899238000
+			},
+			"new_values": {
+				"updated_at": 1510899477000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		},
+		{
+			"kind": "task",
+			"change_type": "delete",
+			"id": 59264160
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899477000
+}
+=============================================================================================
+Changed Story Type
+-----------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_11",
+	"project_version": 11,
+	"message": "pradeep kanukuntla edited this feature",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"story_type": "bug",
+			"updated_at": 1510899477000
+		},
+		"new_values": {
+			"story_type": "feature",
+			"updated_at": 1510900739000
+		},
+		"name": "SampleStory@1",
+		"story_type": "feature"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510900739000
+}
+====================================================================================
+Story description updated
+-----------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_45",
+	"project_version": 45,
+	"message": "pradeep kanukuntla edited this chore",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"description": "My Story Description",
+			"updated_at": 1510927023000
+		},
+		"new_values": {
+			"description": "My Story Descriptionhhh",
+			"updated_at": 1510927161000
+		},
+		"name": "SampleStory@12",
+		"story_type": "chore"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510927161000
+}
+=====================================================================================
+Story Requester Change
+--------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_41",
+	"project_version": 41,
+	"message": "pradeep kanukuntla edited this chore",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"requested_by_id": 3001300,
+			"updated_at": 1510926655000
+		},
+		"new_values": {
+			"requested_by_id": 3001266,
+			"updated_at": 1510926733000
+		},
+		"name": "SampleStory@12",
+		"story_type": "chore"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510926733000
+}
+===========================================================================
+Story add Blocker
+------------------------
+{
+	"kind": "blocker_create_activity",
+	"guid": "2129370_42",
+	"project_version": 42,
+	"message": "pradeep kanukuntla added a blocker: \"hfdbfbgf\"",
+	"highlight": "added a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "create",
+			"id": 480067,
+			"new_values": {
+				"id": 480067,
+				"story_id": 152952573,
+				"person_id": 3001266,
+				"description": "hfdbfbgf",
+				"resolved": false,
+				"created_at": 1510926850000,
+				"updated_at": 1510926850000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926733000
+			},
+			"new_values": {
+				"updated_at": 1510926850000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510926850000
+}
+==========================================================================
+Deleted a Blocker
+--------------------
+{
+	"kind": "blocker_delete_activity",
+	"guid": "2129370_43",
+	"project_version": 43,
+	"message": "pradeep kanukuntla deleted a blocker: \"hfdbfbgf\"",
+	"highlight": "deleted a blocker",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926850000
+			},
+			"new_values": {
+				"updated_at": 1510926922000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		},
+		{
+			"kind": "blocker",
+			"change_type": "delete",
+			"id": 480067
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510926922000
+}
+==========================================================================
+Delete Comment
+----------------
+{
+	"kind": "comment_delete_activity",
+	"guid": "2129370_12",
+	"project_version": 12,
+	"message": "pradeep kanukuntla removed comment: \"test comment@1 Sorry Added Attach\"",
+	"highlight": "removed comment:",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510900739000
+			},
+			"new_values": {
+				"updated_at": 1510908781000
+			},
+			"name": "SampleStory@1",
+			"story_type": "feature"
+		},
+		{
+			"kind": "comment",
+			"change_type": "delete",
+			"id": 182602278
+		},
+		{
+			"kind": "file_attachment",
+			"change_type": "delete",
+			"id": 85520714
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510908781000
+}
+=======================================================================
+Story taskAdd
+------------------
+{
+	"kind": "task_create_activity",
+	"guid": "2129370_44",
+	"project_version": 44,
+	"message": "pradeep kanukuntla added task: \"testTask\"",
+	"highlight": "added task:",
+	"changes": [{
+			"kind": "task",
+			"change_type": "create",
+			"id": 59269581,
+			"new_values": {
+				"id": 59269581,
+				"story_id": 152952573,
+				"description": "testTask",
+				"complete": false,
+				"position": 1,
+				"created_at": 1510927023000,
+				"updated_at": 1510927023000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926922000
+			},
+			"new_values": {
+				"updated_at": 1510927023000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510927023000
+}
+===========================================================
+Story Status to Start
+--------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_20",
+	"project_version": 20,
+	"message": "pradeep kanukuntla started this bug",
+	"highlight": "started",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"current_state": "unstarted",
+			"updated_at": 1510909340000
+		},
+		"new_values": {
+			"current_state": "started",
+			"updated_at": 1510909393000
+		},
+		"name": "SampleStory@12",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510909393000
+}
+========================================================================================
+Story Finished
+-------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_21",
+	"project_version": 21,
+	"message": "pradeep kanukuntla finished this bug",
+	"highlight": "finished",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"current_state": "started",
+			"updated_at": 1510909393000
+		},
+		"new_values": {
+			"current_state": "finished",
+			"updated_at": 1510909625000
+		},
+		"name": "SampleStory@12",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510909625000
+}
+=========================================================================================
+Story Delivered
+-----------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_22",
+	"project_version": 22,
+	"message": "pradeep kanukuntla delivered this bug",
+	"highlight": "delivered",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"current_state": "finished",
+			"updated_at": 1510909625000
+		},
+		"new_values": {
+			"current_state": "delivered",
+			"updated_at": 1510909804000
+		},
+		"name": "SampleStory@12",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510909804000
+}
+==========================================================================================
+Story Accepted
+---------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_23",
+	"project_version": 23,
+	"message": "pradeep kanukuntla accepted this bug",
+	"highlight": "accepted",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952573,
+		"original_values": {
+			"current_state": "delivered",
+			"accepted_at": null,
+			"updated_at": 1510909804000,
+			"before_id": null,
+			"after_id": 152952428
+		},
+		"new_values": {
+			"current_state": "accepted",
+			"accepted_at": 1510909876000,
+			"updated_at": 1510909876000,
+			"before_id": 152952428,
+			"after_id": null
+		},
+		"name": "SampleStory@12",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510909876000
+}
+=============================================================================================
+Story Reject
+-------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_25",
+	"project_version": 25,
+	"message": "pradeep kanukuntla rejected this feature",
+	"highlight": "rejected",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952428,
+		"original_values": {
+			"current_state": "delivered",
+			"updated_at": 1510910014000
+		},
+		"new_values": {
+			"current_state": "rejected",
+			"updated_at": 1510910026000
+		},
+		"name": "Start using your new project **(double-click here)**",
+		"story_type": "feature"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952428,
+		"name": "Start using your new project **(double-click here)**",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/152952428"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510910026000
+}
+============================================================================
+Comment add + file from GD
+---------------------------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_31",
+	"project_version": 31,
+	"message": "pradeep kanukuntla added comment with attachment: \"hiðŸ˜œ\"",
+	"highlight": "added comment with attachment:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182608857,
+			"new_values": {
+				"id": 182608857,
+				"story_id": 152952573,
+				"text": "hiðŸ˜œ",
+				"person_id": 3001266,
+				"created_at": 1510913892000,
+				"updated_at": 1510913892000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+					386495
+				],
+				"attachment_ids": [{
+					"id": 386495,
+					"kind": "google_attachment"
+				}],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+					"TestingSample"
+				]
+			}
+		},
+		{
+			"kind": "google_attachment",
+			"change_type": "create",
+			"id": 386495,
+			"new_values": {
+				"id": 386495,
+				"comment_id": 182608857,
+				"person_id": 3001266,
+				"google_kind": "document",
+				"title": "TestingSample",
+				"google_id": "1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8",
+				"alternate_link": "https://docs.google.com/document/d/1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8/edit?usp=drive_web",
+				"resource_id": "1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8"
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510913784000
+			},
+			"new_values": {
+				"updated_at": 1510913892000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510913892000
+}
+===================================================================================
+Comment add + file from computer + file from GD
+-----------------------------------------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_29",
+	"project_version": 29,
+	"message": "pradeep kanukuntla added comment with attachments: \"hhh @pradeepðŸ‘?\"",
+	"highlight": "added comment with attachments:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182608476,
+			"new_values": {
+				"id": 182608476,
+				"story_id": 152952573,
+				"text": "hhh @pradeepðŸ‘?",
+				"person_id": 3001266,
+				"created_at": 1510913108000,
+				"updated_at": 1510913108000,
+				"file_attachment_ids": [
+					85524421
+				],
+				"google_attachment_ids": [
+					386494
+				],
+				"attachment_ids": [{
+						"id": 85524421,
+						"kind": "file_attachment"
+					},
+					{
+						"id": 386494,
+						"kind": "google_attachment"
+					}
+				],
+				"file_attachments": [
+					"authors.txt"
+				],
+				"google_attachments": [
+					"TestDocs"
+				]
+			}
+		},
+		{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85524421,
+			"new_values": {
+				"id": 85524421,
+				"filename": "authors.txt",
+				"created_at": 1510913067000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85524421/download",
+				"content_type": "text/plain",
+				"uploaded": true,
+				"big_url": "https://s3.amazonaws.com/prod.tracker2/resource/85524421/authors_big.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T100508Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aa135a2ccf9d3be0e6c41445f9149ff89cbac9bf32f06d8c6866d5dacd6e65c6",
+				"thumbnail_url": "https://s3.amazonaws.com/prod.tracker2/resource/85524421/authors_thumb.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T100508Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a15ec1462af79ba781cbb285fb27184eef929f6d6b44ed77a590cd69cef48d05"
+			}
+		},
+		{
+			"kind": "google_attachment",
+			"change_type": "create",
+			"id": 386494,
+			"new_values": {
+				"id": 386494,
+				"comment_id": 182608476,
+				"person_id": 3001266,
+				"google_kind": "document",
+				"title": "TestDocs",
+				"google_id": "1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M",
+				"alternate_link": "https://docs.google.com/document/d/1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M/edit?usp=drive_web",
+				"resource_id": "1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M"
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510913035000
+			},
+			"new_values": {
+				"updated_at": 1510913108000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510913108000
+}
+============================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sainad
+===========
+Comment
+----------
+{
+  "kind": "comment_create_activity",
+  "guid": "2129370_34",
+  "project_version": 34,
+  "message": "saiandh added comment: \"joined\"",
+  "highlight": "added comment:",
+  "changes": [
+    {
+      "kind": "comment",
+      "change_type": "create",
+      "id": 182609180,
+      "new_values": {
+        "id": 182609180,
+        "story_id": 152952573,
+        "text": "joined",
+        "person_id": 3001300,
+        "created_at": 1510914501000,
+        "updated_at": 1510914501000,
+        "file_attachment_ids": [
+
+        ],
+        "google_attachment_ids": [
+
+        ],
+        "attachment_ids": [
+
+        ],
+        "file_attachments": [
+
+        ],
+        "google_attachments": [
+
+        ]
+      }
+    },
+    {
+      "kind": "story",
+      "change_type": "update",
+      "id": 152952573,
+      "original_values": {
+        "follower_ids": [
+          3001266
+        ],
+        "updated_at": 1510914375000
+      },
+      "new_values": {
+        "follower_ids": [
+          3001266,
+          3001300
+        ],
+        "updated_at": 1510914501000
+      },
+      "name": "SampleStory@12",
+      "story_type": "bug"
+    }
+  ],
+  "primary_resources": [
+    {
+      "kind": "story",
+      "id": 152952573,
+      "name": "SampleStory@12",
+      "story_type": "bug",
+      "url": "https://www.pivotaltracker.com/story/show/152952573"
+    }
+  ],
+  "secondary_resources": [
+
+  ],
+  "project": {
+    "kind": "project",
+    "id": 2129370,
+    "name": "MyTestProject@1"
+  },
+  "performed_by": {
+    "kind": "person",
+    "id": 3001300,
+    "name": "saiandh",
+    "initials": "SA"
+  },
+  "occurred_at": 1510914501000
+}
+
+===========================================
+Story Finish
+---------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_35",
+	"project_version": 35,
+	"message": "saiandh finished this feature",
+	"highlight": "finished",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 152952428,
+		"original_values": {
+			"current_state": "started",
+			"updated_at": 1510913013000
+		},
+		"new_values": {
+			"current_state": "finished",
+			"updated_at": 1510914504000
+		},
+		"name": "Start using your new project **(double-click here)**",
+		"story_type": "feature"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952428,
+		"name": "Start using your new project **(double-click here)**",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/152952428"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001300,
+		"name": "saiandh",
+		"initials": "SA"
+	},
+	"occurred_at": 1510914504000
+}
