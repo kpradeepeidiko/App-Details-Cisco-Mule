@@ -89,7 +89,20 @@ TO GENERATE UNIQUE ID FOR EACH REQUEST :  #[java.util.UUID.randomUUID().toString
 	 06-27-2016 T04:32 PM
 
 	in Transformation--->MAP(createdDate = string,updatedDate = string)
-========================================================================================================================================
+
+====================================================================================================
+Compare Date code
+------------------
+flowVars['date']=flowVars['dueOn'].split('-')[2];
+flowVars['month']=flowVars['dueOn'].split('-')[1];
+flowVars['year']=flowVars['dueOn'].split('-')[0];
+if(flowVars['month']<13&&flowVars['date']<32&&flowVars['year'].length()==4)
+{
+flowVars['dueOn']=flowVars['year'].concat('-'+flowVars['month']+'-'+flowVars['date']);
+}
+else
+flowVars['dueOn']=flowVars['dueOn'].concat(' is not a valid date');
+==================================================================================================
 POST IN MULE
 ----------------------------------------------------------------------------
 1)HTTP

@@ -1123,6 +1123,202 @@ Story Reject
 	},
 	"occurred_at": 1510910026000
 }
+===============================================================================
+Story Delete
+---------------
+{
+	"kind": "story_delete_activity",
+	"guid": "2129370_48",
+	"project_version": 48,
+	"message": "pradeep kanukuntla deleted this bug",
+	"highlight": "deleted",
+	"changes": [{
+		"kind": "story",
+		"change_type": "delete",
+		"id": 153007101,
+		"name": "TestStoryEvent",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007101,
+		"name": "TestStoryEvent",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/153007101"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169464000
+}
+============================================================================
+update Estimate points
+---------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2129370_52",
+	"project_version": 52,
+	"message": "pradeep kanukuntla estimated this feature as 1 point",
+	"highlight": "estimated",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 153007267,
+		"original_values": {
+			"estimate": null,
+			"updated_at": 1511169613000
+		},
+		"new_values": {
+			"estimate": 1,
+			"updated_at": 1511169639000
+		},
+		"name": "SampleTestStory@12",
+		"story_type": "feature"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007267,
+		"name": "SampleTestStory@12",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153007267"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169639000
+}
+===============================================================================
+Resolve Blocker
+--------------------
+{
+	"kind": "blocker_update_activity",
+	"guid": "2129370_54",
+	"project_version": 54,
+	"message": "pradeep kanukuntla resolved a blocker: \"Test Blockers\"",
+	"highlight": "resolved a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "update",
+			"id": 482709,
+			"original_values": {
+				"resolved": false,
+				"updated_at": 1511169770000
+			},
+			"new_values": {
+				"resolved": true,
+				"updated_at": 1511169792000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153007267,
+			"original_values": {
+				"updated_at": 1511169770000
+			},
+			"new_values": {
+				"updated_at": 1511169792000
+			},
+			"name": "SampleTestStory@12",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007267,
+		"name": "SampleTestStory@12",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153007267"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169792000
+}
+===================================================================================
+Unblock Blocker
+--------------------
+{
+	"kind": "blocker_delete_activity",
+	"guid": "2129370_55",
+	"project_version": 55,
+	"message": "pradeep kanukuntla unblocked this story by deleting: \"Test Blockers\"",
+	"highlight": "unblocked this story by deleting",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153007267,
+			"original_values": {
+				"updated_at": 1511169792000
+			},
+			"new_values": {
+				"updated_at": 1511169887000
+			},
+			"name": "SampleTestStory@12",
+			"story_type": "feature"
+		},
+		{
+			"kind": "blocker",
+			"change_type": "delete",
+			"id": 482709
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007267,
+		"name": "SampleTestStory@12",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153007267"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169887000
+}
 ============================================================================
 Comment add + file from GD
 ---------------------------------------
