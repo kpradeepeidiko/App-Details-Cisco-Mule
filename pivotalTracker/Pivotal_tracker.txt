@@ -87,6 +87,74 @@ Story Create With Task
 	},
 	"occurred_at": 1510898201000
 }
+===============================================================================================
+Story Create With Estimate
+------------------------------
+{
+	"kind": "story_create_activity",
+	"guid": "2129370_79",
+	"project_version": 79,
+	"message": "pradeep kanukuntla added this feature",
+	"highlight": "added",
+	"changes": [{
+		"kind": "story",
+		"change_type": "create",
+		"id": 153044312,
+		"new_values": {
+			"id": 153044312,
+			"project_id": 2129370,
+			"name": "SampleTest",
+			"description": "hhh",
+			"story_type": "feature",
+			"current_state": "unstarted",
+			"estimate": 0,
+			"requested_by_id": 3001300,
+			"owned_by_id": 3001266,
+			"owner_ids": [
+				3001266
+			],
+			"label_ids": [
+
+			],
+			"follower_ids": [
+
+			],
+			"created_at": 1511248298000,
+			"updated_at": 1511248298000,
+			"after_id": 152952573,
+			"blocked_story_ids": [
+
+			],
+			"labels": [
+
+			]
+		},
+		"name": "SampleTest",
+		"story_type": "feature"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153044312,
+		"name": "SampleTest",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153044312"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511248298000
+}
 ================================================================================================
 Story updated (story name updated)
 --------------------------------------
@@ -716,6 +784,65 @@ Story add Blocker
 	"occurred_at": 1510926850000
 }
 ==========================================================================
+Blocker Update
+----------------
+{
+	"kind": "blocker_update_activity",
+	"guid": "2129370_81",
+	"project_version": 81,
+	"message": "pradeep kanukuntla edited a blocker: \"dddggr\"",
+	"highlight": "edited a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "update",
+			"id": 485636,
+			"original_values": {
+				"description": "ddd",
+				"updated_at": 1511248538000
+			},
+			"new_values": {
+				"description": "dddggr",
+				"updated_at": 1511248636000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153044312,
+			"original_values": {
+				"updated_at": 1511248538000
+			},
+			"new_values": {
+				"updated_at": 1511248636000
+			},
+			"name": "SampleTest",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153044312,
+		"name": "SampleTest",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153044312"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511248636000
+}
+===========================================================================
 Deleted a Blocker
 --------------------
 {
@@ -881,6 +1008,65 @@ Story taskAdd
 		"initials": "PK"
 	},
 	"occurred_at": 1510927023000
+}
+======================================================================
+Task Update
+--------------
+{
+	"kind": "task_update_activity",
+	"guid": "2129370_83",
+	"project_version": 83,
+	"message": "pradeep kanukuntla rewrote task: \"testTask\"",
+	"highlight": "rewrote task:",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153044312,
+			"original_values": {
+				"updated_at": 1511254531000
+			},
+			"new_values": {
+				"updated_at": 1511254550000
+			},
+			"name": "SampleTest",
+			"story_type": "feature"
+		},
+		{
+			"kind": "task",
+			"change_type": "update",
+			"id": 59306061,
+			"original_values": {
+				"description": "test",
+				"updated_at": 1511254531000
+			},
+			"new_values": {
+				"description": "testTask",
+				"updated_at": 1511254550000
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153044312,
+		"name": "SampleTest",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153044312"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511254550000
 }
 ===========================================================
 Story Status to Start
