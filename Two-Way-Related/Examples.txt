@@ -1,0 +1,39 @@
+{"trackingID":"ANYPOINT_b824446f-cd04-4046-ac0e-748de6a58228","statusCode":"403","statusMessage":"","id":null,"emails":[],"displayName":null,"avatar":null,"created":null,"additionalProperties":{}}
+
+
+
+buildRequiredFeildMissingForPostClient.dwl
+buildRequiredFeildMissingForPostClientToken.dwl
+
+<dw:transform-message doc:name="Build Post Spark Token Response">
+      		<dw:input-payload mimeType="application/java"/>
+      		<dw:set-payload resource="classpath:dwScripts/buildRequiredFeildMissingForPostClientToken.dwl"/>
+   		</dw:transform-message>
+		
+		
+		PivotalTracker
+		buildPostPivotalTrackerTokenResponseExample.dwl
+		
+		postMessage
+		
+		
+		flowVars['response']['hookResponse']
+
+		
+	flowVars['storyDetails'][0]['new_values']['description']
+	
+	buildGetEpicDetails.dwl
+	
+	<dw:set-payload resource="classpath:dwScripts/buildGetTaskDetails.dwl"/>
+		  
+		  
+		  <dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-variable variableName="taskDetails"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		
+		
+		flowVars['response']['hookResponse']['performed_by']['name']
+		
+		
+		blockerDetails    taskDetails

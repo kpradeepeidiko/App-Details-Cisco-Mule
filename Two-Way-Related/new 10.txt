@@ -1,0 +1,24 @@
+#[flowVars.command.roomType=='direct'&&flowVars.postMessage!=empty&&flowVars.eventType!='help'&&flowVars.eventType!='hi'&&flowVars.eventType!='hey'&&flowVars.eventType!='hai'&&flowVars.eventType!='hello']
+
+
+#[flowVars.command.roomType=='direct'&&flowVars.postMessage!=empty&&(flowVars.eventType=='help'||flowVars.eventType=='hi'||flowVars.eventType=='hey'||flowVars.eventType=='hai'||flowVars.eventType=='hello')]
+
+
+#[flowVars['deleteTaskResponse']['http_status'] == 200 || flowVars['deleteTaskResponse']['http_status'] == 201]
+
+
+#[flowVars['projectResponse']['response']['data']['followers']]
+flowVars['taskDetialsResponse']['response']['data']
+
+
+#[flowVars['renameTaskResponse']]
+
+#[flowVars['deleteTaskResponse']]
+
+
+
+tokenResponse
+
+#[flowVars.integrationTokenResponse.toString() != '{message=No results}']
+
+

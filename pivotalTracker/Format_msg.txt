@@ -1,0 +1,767 @@
+<flow name="postFormatMessageFlow">
+		<logger message="Msg_for initial #[message.payloadAs(java.lang.String)]"
+			level="INFO" doc:name="Logger" />
+		<dw:transform-message metadata:id="16db4717-7738-482e-a489-7aed77630932"
+			doc:name="Build Post Format Message Request">
+			<dw:input-payload doc:sample="sample_data\json.json" />
+			<dw:set-variable variableName="response"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl" />
+		</dw:transform-message>
+		<expression-component doc:name="Expression"><![CDATA[flowVars['fnm']=flowVars['response']['hookResponse']['performed_by']['name'].split(' ')[0];
+flowVars['lnm']=flowVars['response']['hookResponse']['performed_by']['name'].split(' ')[1];
+flowVars['fnm']=flowVars['fnm'].substring(0,1).toUpperCase().concat(flowVars['fnm'].substring(1, flowVars['fnm'].length()));
+flowVars['lnm']=flowVars['lnm'].substring(0,1).toUpperCase().concat(flowVars['lnm'].substring(1, flowVars['lnm'].length()))]]></expression-component>
+		<logger
+			message="Action_Performed_Name ==&gt; #[flowVars['fnm']] #[flowVars['lnm']]"
+			level="DEBUG" doc:name="Name" />
+		<dw:transform-message doc:name="Get ConfigJson Value">
+			<dw:set-payload resource="classpath:dwScripts/buildUserEventsResponse.dwl" />
+		</dw:transform-message>
+		<set-payload value="#[payload]" mimeType="application/json"
+			doc:name="Convert To Json" />
+		<dw:transform-message doc:name="Transform Message To Java">
+			<dw:set-variable variableName="userSelectedEvents"
+				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+		</dw:transform-message>
+		<logger
+			message="User_Selected_Events ==&gt; #[flowVars['userSelectedEvents']['notifications']]"
+			level="DEBUG" doc:name="Logger" />
+		<choice doc:name="Check Event Types">
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'story_create_activity']">
+				<logger level="INFO" doc:name="Story Create" message="Story Create" />
+				<dw:transform-message doc:name="Get Story Details">
+					<dw:set-payload resource="classpath:dwScripts/buildGetStoryDetials.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="storyDetails"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<choice doc:name="Check Story Details">
+					<when expression="#[flowVars['storyDetails'] != []]">
+						<choice doc:name="Check Description Content &amp; Estmate Value">
+							<when
+								expression="#[flowVars['storyDetails'][0]['new_values'].containsKey('description') &amp;&amp; !flowVars['storyDetails'][0]['new_values'].containsKey('estimate')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Story Type: '+flowVars['storyDetails'][0]['new_values']['story_type']+' \n - Status: '+flowVars['storyDetails'][0]['new_values']['current_state']+' \n - Description: '+flowVars['storyDetails'][0]['new_values']['description']+'   ']"
+									doc:name="Story Create Des != empty" />
+							</when>
+							<when
+								expression="#[!flowVars['storyDetails'][0]['new_values'].containsKey('description') &amp;&amp; flowVars['storyDetails'][0]['new_values'].containsKey('estimate')]">
+								<set-variable doc:name="Story Create Est != empty"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Story Type: '+flowVars['storyDetails'][0]['new_values']['story_type']+' \n - Status: '+flowVars['storyDetails'][0]['new_values']['current_state']+' \n - Estimation Points: '+flowVars['storyDetails'][0]['new_values']['estimate']+'   ']"
+									variableName="postMessage" />
+							</when>
+							<when
+								expression="#[flowVars['storyDetails'][0]['new_values'].containsKey('description') &amp;&amp; flowVars['storyDetails'][0]['new_values'].containsKey('estimate')]">
+								<set-variable doc:name="Story Create Des != empty &amp; Est != empty"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Story Type: '+flowVars['storyDetails'][0]['new_values']['story_type']+' \n - Status: '+flowVars['storyDetails'][0]['new_values']['current_state']+' \n - Description: '+flowVars['storyDetails'][0]['new_values']['description']+' \n - Estimation Points: '+flowVars['storyDetails'][0]['new_values']['estimate']+'   ']"
+									variableName="postMessage" />
+							</when>
+							<otherwise>
+								<set-variable doc:name="Story Create (Des == empty &amp; Est == empty)"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Story Type: '+flowVars['storyDetails'][0]['new_values']['story_type']+' \n - Status: '+flowVars['storyDetails'][0]['new_values']['current_state']+' ']"
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							doc:name="Story Create" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['storyAdd']"
+					doc:name="StoryCreate Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'story_update_activity']">
+				<logger level="INFO" doc:name="Story Updates" message="Story Updates" />
+				<choice doc:name="Check highlight">
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'started']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') status from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['current_state']+'** to **'+flowVars['response']['hookResponse']['changes'][0]['new_values']['current_state']+'** ']"
+							doc:name="started" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'finished']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') status from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['current_state']+'** to **'+flowVars['response']['hookResponse']['changes'][0]['new_values']['current_state']+'** ']"
+							doc:name="finished" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'delivered']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') status from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['current_state']+'** to **'+flowVars['response']['hookResponse']['changes'][0]['new_values']['current_state']+'** ']"
+							doc:name="delivered" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'accepted']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' **accepted** the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							doc:name="accepted" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'rejected']">
+						<set-variable variableName="postMessage"
+							value="#['In project ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' **rejected** the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							doc:name="rejected" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'edited']">
+						<logger message="edited" level="INFO" doc:name="edited" />
+						<choice doc:name="Check Actions">
+							<when
+								expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('name')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the name from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['name']+'**  to ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+									doc:name="Name" />
+							</when>
+							<when
+								expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('story_type')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') type from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['story_type']+'** to **'+flowVars['response']['hookResponse']['changes'][0]['new_values']['story_type']+'** ']"
+									doc:name="Story Type" />
+							</when>
+							<when
+								expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('description')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') description \n - New Description: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['description']+' \n - Old Description: '+flowVars['response']['hookResponse']['changes'][0]['original_values']['description']+' ']"
+									doc:name="Description" />
+							</when>
+							<when
+								expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('requested_by_id')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') requester ']"
+									doc:name="Requester_Id" />
+							</when>
+							<when
+								expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('counts')]">
+								<set-variable doc:name="Label"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the label on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['response']['hookResponse']['changes'][0]['name']+'']"
+									variableName="postMessage" />
+							</when>
+							<otherwise>
+								<set-variable doc:name="Set Empty Message" value=""
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'estimated']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') estimation points to **'+flowVars['response']['hookResponse']['changes'][0]['new_values']['estimate']+'** ']"
+							doc:name="Estimated" />
+					</when>
+					<otherwise>
+						<set-variable doc:name="Set Empty Message" value=""
+							variableName="postMessage" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['storyUpdates']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'comment_create_activity']">
+
+				<choice doc:name="Comment Create Scenarios">
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'added comment:']">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+'']"
+							doc:name="Only Comment Message" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'added comment with attachments:']">
+						<logger level="INFO" doc:name="Comment Plus Both Attachments"
+							message="Comment Plus Both Attachments" />
+						<dw:transform-message doc:name="For Computer Attach">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildGetDesktopAttachment.dwl" />
+						</dw:transform-message>
+						<dw:transform-message doc:name="Transform Message To Java">
+							<dw:set-variable variableName="computerAttach"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+						</dw:transform-message>
+						<dw:transform-message doc:name="For GD Attach">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildGetGoogleAttachment.dwl" />
+						</dw:transform-message>
+						<dw:transform-message doc:name="Transform Message To Java">
+							<dw:set-variable variableName="googleAttachment"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+						</dw:transform-message>
+						<logger
+							message="GD ==&gt; #[flowVars['googleAttachment']] +++++++++++ Desktop ==&gt; #[flowVars['computerAttach']]"
+							level="DEBUG" doc:name="Logger" />
+
+						<choice doc:name="Check GD And Computer Attach">
+							<when
+								expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] == []]">
+
+								<set-variable doc:name="GD != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with google attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+')']"
+									variableName="postMessage" />
+							</when>
+							<when
+								expression="#[flowVars['googleAttachment'] == [] &amp;&amp; flowVars['computerAttach'] != []]">
+								<set-variable doc:name="Computer != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with desktop attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+')']"
+									variableName="postMessage" />
+							</when>
+							<when
+								expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] != []]">
+								<set-variable doc:name="GD != [] &amp;&amp; computer != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with google and desktop attachments on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment1: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') \n - Attachment2: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']"
+									variableName="postMessage" />
+							</when>
+							<otherwise>
+
+								<set-variable doc:name="GD == [] &amp;&amp; computer == []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' ']"
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'added comment with attachment:']">
+						<logger level="INFO" doc:name="Comment Plus Any One Attachment"
+							message="Comment Plus Any One Attachment" />
+						<dw:transform-message doc:name="For Computer Attach">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildGetDesktopAttachment.dwl" />
+						</dw:transform-message>
+						<dw:transform-message doc:name="Transform Message To Java">
+							<dw:set-variable variableName="computerAttach"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+						</dw:transform-message>
+						<dw:transform-message doc:name="For GD Attach">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildGetGoogleAttachment.dwl" />
+						</dw:transform-message>
+						<dw:transform-message doc:name="Transform Message To Java">
+							<dw:set-variable variableName="googleAttachment"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+						</dw:transform-message>
+						<logger
+							message="GD ==&gt; #[flowVars['googleAttachment']] +++++++++++ Desktop ==&gt; #[flowVars['computerAttach']]"
+							level="DEBUG" doc:name="Logger" />
+
+						<choice doc:name="Check GD And Computer Attach">
+							<when
+								expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] == []]">
+
+								<set-variable doc:name="GD != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with google attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+')']"
+									variableName="postMessage" />
+							</when>
+							<when
+								expression="#[flowVars['googleAttachment'] == [] &amp;&amp; flowVars['computerAttach'] != []]">
+								<set-variable doc:name="Computer != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with desktop attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+')']"
+									variableName="postMessage" />
+							</when>
+							<when
+								expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] != []]">
+								<set-variable doc:name="GD != [] &amp;&amp; computer != []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with google and desktop attachments on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment1: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') \n - Attachment2: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']"
+									variableName="postMessage" />
+							</when>
+							<otherwise>
+
+								<set-variable doc:name="GD == [] &amp;&amp; computer == []"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' ']"
+									variableName="postMessage" />
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage" value=""
+							doc:name="Set Post Message Empty" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['commentAdd']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'comment_update_activity']">
+				<dw:transform-message doc:name="For Comments">
+					<dw:set-payload resource="classpath:dwScripts/buildGetCommentDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="comments"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<dw:transform-message doc:name="For Computer Attach">
+					<dw:set-payload resource="classpath:dwScripts/buildGetDesktopAttachment.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="computerAttach"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<dw:transform-message doc:name="For GD Attach">
+					<dw:set-payload resource="classpath:dwScripts/buildGetGoogleAttachment.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="googleAttachment"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+
+				<choice doc:name="Check GD And Computer Attach">
+					<when
+						expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] == []]">
+						<choice doc:name="Check If Comment Also Updated">
+							<when
+								expression="#[flowVars['comments'][0]['new_values'].containsKey('text')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment with google attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Updated Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+')']"
+									doc:name="Comment Plus GD Attach" />
+							</when>
+							<otherwise>
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment with google attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+')']"
+									doc:name="GD != []" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['googleAttachment'] == [] &amp;&amp; flowVars['computerAttach'] != []]">
+						<choice doc:name="Check If Comment Also Updated">
+							<when
+								expression="#[flowVars['comments'][0]['new_values'].containsKey('text')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment with desktop attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Updated Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+')']"
+									doc:name="Comment Plus Desktop Attach" />
+							</when>
+							<otherwise>
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment with desktop attachment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+')']"
+									doc:name="Computer != []" />
+							</otherwise>
+						</choice>
+					</when>
+					<when
+						expression="#[flowVars['googleAttachment'] != [] &amp;&amp; flowVars['computerAttach'] != []]">
+						<choice doc:name="Check If Comment Also Updated">
+							<when
+								expression="#[flowVars['comments'][0]['new_values'].containsKey('text')]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment with google and desktop attachments on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Updated Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment1: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') \n - Attachment2: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']"
+									doc:name="Comment Plus GD &amp; Desktop Attach" />
+							</when>
+							<otherwise>
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' commented with google and desktop attachments on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['text']+' \n - Attachment1: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') \n - Attachment2: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']"
+									doc:name="GD != [] &amp;&amp; computer != []" />
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+
+						<set-variable doc:name="GD == [] &amp;&amp; computer == []"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the comment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['comments'][0]['new_values']['text']+' ']"
+							variableName="postMessage" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['commentUpdates']"
+					doc:name="Set Value" />
+
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'comment_delete_activity']">
+				<expression-component doc:name="Get Deleted Comment"><![CDATA[flowVars['comment']=flowVars['response']['hookResponse']['message'].split('removed comment: ')[1]]]></expression-component>
+				<set-variable variableName="postMessage"
+					value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' deleted the comment on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Comment: '+flowVars['comment']+' ']"
+					doc:name="Comment Delete Message" />
+				<set-variable variableName="value" value="#['commentDelete']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'task_delete_activity']">
+				<set-variable variableName="postMessage"
+					value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' deleted a task on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+')  ']"
+					doc:name="Task Delete Message" />
+				<set-variable variableName="value" value="#['taskDelete']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'blocker_create_activity']">
+				<dw:transform-message doc:name="Get Blocker Details">
+					<dw:set-payload resource="classpath:dwScripts/buildGetBlockerDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="blockerPayload"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<choice doc:name="Check Blocker Details">
+					<when expression="#[flowVars['blockerPayload'] != []]">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' added a blocker to the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Blocker: '+flowVars['blockerPayload'][0]['new_values']['description']+' ']"
+							doc:name="Blocker Added" />
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' added a blocker to the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+')  ']"
+							doc:name="Added A Blocker" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['blockerAdd']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'blocker_delete_activity']">
+				<choice doc:name="Check Highlights For Blocker">
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'deleted a blocker']">
+						<expression-component doc:name="Get Blocker Details For Delete"><![CDATA[flowVars['blocker']=flowVars['response']['hookResponse']['message'].split('deleted a blocker: ')[1]]]></expression-component>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' deleted a blocker on the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Blocker: '+flowVars['blocker']+' ']"
+							doc:name="Blocker Delete" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'unblocked this story by deleting']">
+						<expression-component doc:name="Get Blocker Details For Unblock"><![CDATA[flowVars['blocker']=flowVars['response']['hookResponse']['message'].split('unblocked this story by deleting: ')[1]]]></expression-component>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' unblocked the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') by deleting \n - Blocker: '+flowVars['blocker']+' ']"
+							doc:name="Unblock By Deleting" />
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage" value=""
+							doc:name="Set Empty Message" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['blockerDelete']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'task_create_activity']">
+				<dw:transform-message doc:name="Task Add">
+					<dw:set-payload resource="classpath:dwScripts/buildGetTaskDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="taskDetails"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<choice doc:name="Choice">
+					<when expression="#[flowVars['taskDetails'] != []]">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created a task for the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Task Name: '+flowVars['taskDetails'][0]['new_values']['description']+' \n - Completed: '+flowVars['taskDetails'][0]['new_values']['complete']+' ']"
+							doc:name="Task Add " />
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created a task for the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							doc:name="Task Add" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['taskAdd']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'story_delete_activity']">
+				<set-variable variableName="postMessage"
+					value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' deleted the **'+flowVars['response']['hookResponse']['primary_resources'][0]['name']+'** ']"
+					doc:name="Story Delete" />
+				<set-variable variableName="value" value="#['storyDelete']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'blocker_update_activity']">
+				<choice doc:name="Blocker Updates">
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'resolved a blocker']">
+						<expression-component doc:name="Get Blocker Name"><![CDATA[flowVars['blocker']=flowVars['response']['hookResponse']['message'].split('resolved a blocker: ')[1]]]></expression-component>
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' resolved a blocker on the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Blocker: '+flowVars['blocker']+' ']"
+							doc:name="Resolve Blocker" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['highlight'] == 'edited a blocker']">
+						<dw:transform-message doc:name="Get Blocker Details">
+							<dw:set-payload resource="classpath:dwScripts/buildGetBlockerDetails.dwl" />
+						</dw:transform-message>
+						<dw:transform-message doc:name="Transform Message To Java">
+							<dw:set-variable variableName="blockerDetails"
+								resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+						</dw:transform-message>
+						<choice doc:name="Choice">
+							<when expression="#[flowVars['blockerDetails'] != []]">
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the blocker description on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - New Blocker Description: '+flowVars['blockerDetails'][0]['new_values']['description']+'  \n - Old Blocker Description: '+flowVars['blockerDetails'][0]['original_values']['description']+' ']"
+									doc:name="Updated The Blocker Description" />
+							</when>
+							<otherwise>
+								<set-variable variableName="postMessage"
+									value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the blocker description on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+									doc:name="Updated The Blocker Description" />
+							</otherwise>
+						</choice>
+					</when>
+					<otherwise>
+						<set-variable variableName="postMessage" value=""
+							doc:name="Set Empty Message" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['blockerUpdates']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'task_update_activity']">
+				<dw:transform-message doc:name="Get Task Details( Task Updates)">
+					<dw:set-payload resource="classpath:dwScripts/buildGetTaskDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="taskDetails"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+				<choice doc:name="Choice">
+					<when expression="#[flowVars['taskDetails'] != []]">
+						<set-variable variableName="postMessage"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the task description on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - New Task Description: '+flowVars['taskDetails'][0]['new_values']['description']+'  \n - Old Task Description: '+flowVars['taskDetails'][0]['original_values']['description']+'   ']"
+							doc:name="Task Update" />
+					</when>
+					<otherwise>
+						<set-variable doc:name="Task Update"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the task description on ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							variableName="postMessage" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['taskUpdates']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'epic_delete_activity']">
+				<set-variable variableName="postMessage"
+					value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' deleted the **'+flowVars['response']['hookResponse']['primary_resources'][0]['name']+'** ']"
+					doc:name="Epic Delete Message" />
+				<set-variable variableName="value" value="#['epicDelete']"
+					doc:name="Set Value" />
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'epic_create_activity']">
+				<logger message="Epic Create" level="INFO" doc:name="Epic Create" />
+				<dw:transform-message doc:name="For Epic Details">
+					<dw:set-payload resource="classpath:dwScripts/buildGetEpicDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+                    <dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl" variableName="epicDetails"/>
+				</dw:transform-message>
+				<dw:transform-message doc:name="For Comments">
+					<dw:set-payload resource="classpath:dwScripts/buildGetCommentDetails.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+                    <dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl" variableName="comments"/>
+				</dw:transform-message>
+				<dw:transform-message doc:name="For Computer Attach">
+					<dw:set-payload resource="classpath:dwScripts/buildGetDesktopAttachment.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+                    <dw:set-variable resource="classpath:dwScripts/fromPayloadToJava.dwl" variableName="computerAttach"/>
+				</dw:transform-message>
+				<dw:transform-message doc:name="For GD Attach">
+					<dw:set-payload resource="classpath:dwScripts/buildGetGoogleAttachment.dwl" />
+				</dw:transform-message>
+				<dw:transform-message doc:name="Transform Message To Java">
+					<dw:set-variable variableName="googleAttachment"
+						resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
+				</dw:transform-message>
+                <choice doc:name="Choice">
+                    <when expression="#[flowVars['computerAttach'] !=[] &amp;&amp; flowVars['googleAttachment'] == []]">
+                        <choice doc:name="Check Comment Field">
+                            <when expression="#[flowVars['comments'] != []]">
+                                <set-variable doc:name="Only Desktop Attach With Comnt" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']" variableName="postMessage"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="Only Desktop Attach With Comment" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Attachment: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') ']" variableName="postMessage"/>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <when expression="#[flowVars['computerAttach'] ==[] &amp;&amp; flowVars['googleAttachment'] != []]">
+                        <choice doc:name="Check Comment Field">
+                            <when expression="#[flowVars['comments'] != []]">
+                                <set-variable doc:name="Only GD Attach With Comnt" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') ']" variableName="postMessage"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="Only GD Attach With Out Comnt" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Attachment: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') ']" variableName="postMessage"/>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <when expression="#[flowVars['computerAttach'] !=[] &amp;&amp; flowVars['googleAttachment'] != []]">
+                        <choice doc:name="Check Comment Field">
+                            <when expression="#[flowVars['comments'] != []]">
+                                <set-variable doc:name="Both GD &amp; Desktop Attach With Comnt" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Comment: '+flowVars['comments'][0]['new_values']['text']+' \n - Attachment1: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') \n - Attachment2: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') ']" variableName="postMessage"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="Both GD &amp; Desktop Attach With Out Comnt" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Attachment1: ['+flowVars['computerAttach'][0]['new_values']['filename']+'](https://www.pivotaltracker.com/'+flowVars['computerAttach'][0]['new_values']['download_url']+') \n - Attachment2: ['+flowVars['googleAttachment'][0]['new_values']['title']+']('+flowVars['googleAttachment'][0]['new_values']['alternate_link']+') ']" variableName="postMessage"/>
+                            </otherwise>
+                        </choice>
+                    </when>
+                    <otherwise>
+                        <choice doc:name="Check Descrptn">
+                            <when expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('description')]">
+                                <set-variable doc:name="Epic With Descptn" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' \n - Description: '+flowVars['epicDetails'][0]['new_values']['description']+' ']" variableName="postMessage"/>
+                            </when>
+                            <otherwise>
+                                <set-variable doc:name="Epic WithOut Descptn" value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' created the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') \n - Label: '+flowVars['epicDetails'][0]['new_values']['label']+' ']" variableName="postMessage"/>
+                            </otherwise>
+                        </choice>
+                    </otherwise>
+                </choice>
+                <set-variable variableName="value" value="#['epicAdd']" doc:name="Set Value"/>
+			</when>
+			<when
+				expression="#[flowVars['response']['hookResponse']['kind'] == 'epic_update_activity']">
+				<choice doc:name="Check Epic &quot;Desptn&quot; &amp; &quot;Name&quot; ">
+					<when
+						expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('name')]">
+						<set-variable doc:name="Epic Name Updated"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the name from **'+flowVars['response']['hookResponse']['changes'][0]['original_values']['name']+'** to ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') ']"
+							variableName="postMessage" />
+					</when>
+					<when
+						expression="#[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('description')]">
+						<set-variable doc:name="Epic Description Updated"
+							value="#['In ['+flowVars['response']['hookResponse']['project']['name']+'](https://www.pivotaltracker.com/n/projects/'+flowVars['response']['hookResponse']['project']['id']+'), '+flowVars['fnm']+' '+flowVars['lnm']+' updated the ['+flowVars['response']['hookResponse']['primary_resources'][0]['name']+']('+flowVars['response']['hookResponse']['primary_resources'][0]['url']+') description \n - New Description: '+flowVars['response']['hookResponse']['changes'][0]['new_values']['description']+' \n - Old Description: '+flowVars['response']['hookResponse']['changes'][0]['original_values']['description']+' ']"
+							variableName="postMessage" />
+					</when>
+					<otherwise>
+						<set-variable doc:name="Set Empty Message" value=""
+							variableName="postMessage" />
+					</otherwise>
+				</choice>
+				<set-variable variableName="value" value="#['epicUpdates']"
+					doc:name="Set Values" />
+			</when>
+			<otherwise>
+				<logger level="INFO" doc:name="Default" message="Default Flow" />
+			</otherwise>
+		</choice>
+		<choice doc:name="Check &quot;postMessage&quot; &amp;&amp; &quot;Value&quot;">
+			<when
+				expression="#[flowVars['postMessage'] != empty &amp;&amp; flowVars['value'] != empty &amp;&amp; flowVars['userSelectedEvents']['notifications'] != []]">
+				<foreach collection="#[flowVars['userSelectedEvents']['notifications']]"
+					doc:name="Loop User Notifications">
+					<set-variable variableName="userSelected" value="#[payload]"
+						doc:name="User Selecte Event" />
+					<choice doc:name="Comapre &quot;Value&quot; &amp; &quot;User Selected&quot;">
+						<when
+							expression="#[flowVars['value'] == 'storyAdd' &amp;&amp; flowVars['userSelected'] == 'story_create']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="S A" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'storyUpdates' &amp;&amp; flowVars['userSelected'] == 'story_updates']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="S U" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'storyDelete' &amp;&amp; flowVars['userSelected'] == 'story_delete']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="S D" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'commentAdd' &amp;&amp; flowVars['userSelected'] == 'comment_create']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="C A" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'commentUpdates' &amp;&amp; flowVars['userSelected'] == 'comment_updates']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="C U" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'commentDelete' &amp;&amp; flowVars['userSelected'] == 'comment_delete']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="C D" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'blockerAdd' &amp;&amp; flowVars['userSelected'] == 'blocker_create']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="B A" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'blockerUpdates' &amp;&amp; flowVars['userSelected'] == 'blocker_updates']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="B U" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'blockerDelete' &amp;&amp; flowVars['userSelected'] == 'blocker_delete']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="B D" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'taskAdd' &amp;&amp; flowVars['userSelected'] == 'task_create']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="T A" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'taskDelete' &amp;&amp; flowVars['userSelected'] == 'task_delete']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="T D" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'taskUpdates' &amp;&amp; flowVars['userSelected'] == 'task_updates']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="T U" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'epicAdd' &amp;&amp; flowVars['userSelected'] == 'epic_create']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="E A" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'epicUpdates' &amp;&amp; flowVars['userSelected'] == 'epic_updates']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="E U" />
+						</when>
+						<when
+							expression="#[flowVars['value'] == 'epicDelete' &amp;&amp; flowVars['userSelected'] == 'epic_delete']">
+							<set-variable variableName="flag" value="#['true']"
+								doc:name="E D" />
+						</when>
+						<otherwise>
+							<logger message="default" level="DEBUG" doc:name="Logger" />
+						</otherwise>
+					</choice>
+				</foreach>
+				<choice doc:name="check post message null">
+					<when
+						expression="#[flowVars['postMessage'] != empty &amp;&amp; flowVars['flag'] != empty &amp;&amp; flowVars['flag'] == 'true']">
+						<dw:transform-message doc:name="Build Post Format Message Response">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildPostFormatMessageResponse.dwl" />
+						</dw:transform-message>
+					</when>
+					<otherwise>
+						<dw:transform-message doc:name="Empty Message Response">
+							<dw:set-payload
+								resource="classpath:dwScripts/buildEmptyMessageFormatResponseExample.dwl" />
+						</dw:transform-message>
+					</otherwise>
+				</choice>
+			</when>
+			<otherwise>
+				<logger level="INFO" doc:name="Default" message="Defalut" />
+				<dw:transform-message doc:name="Empty Message Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildEmptyMessageFormatResponseExample.dwl" />
+				</dw:transform-message>
+			</otherwise>
+		</choice>
+
+
+		<catch-exception-strategy doc:name="Catch Exception Strategy"
+			enableNotifications="false" logException="false">
+			<set-variable variableName="exception" value="#[exception.message]"
+				doc:name="exception" />
+			<logger
+				message="exception in Format flow +++++ #[flowVars['exception']]+++++++++++++++"
+				level="INFO" doc:name="Logger" />
+			<dw:transform-message doc:name="Empty Message Response">
+				<dw:set-payload
+					resource="classpath:dwScripts/buildEmptyMessageFormatResponseExample.dwl" />
+			</dw:transform-message>
+
+		</catch-exception-strategy>
+	</flow>

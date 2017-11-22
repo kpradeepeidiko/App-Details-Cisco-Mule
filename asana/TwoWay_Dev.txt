@@ -1,0 +1,99 @@
+Two Way
+---------
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI",
+	"emails": [
+		"AsanaDev@sparkbot.io"
+	],
+	"displayName": "AsanaDev",
+	"avatar": "https://c74213ddaf67eb02dabb-04de5163e3f90393a9f7bb6f7f0967f1.ssl.cf1.rackcdn.com/V1~264e2e8aa1e040059766ef8de4917907~Kt5KvWW2RuKoDdzrhkoPZw==~80",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"created": "2017-11-16T06:59:55.609Z",
+	"type": "bot"
+}
+==================================================
+Memberships
+------------------
+Request
+---------
+{
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "memberships",
+	"event": "all"
+}
+
+Response
+------------
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svYzg3MjVmZGUtZjIwYS00MzFlLThhYjItNDVkNDkxMWE4OGVi",
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "memberships",
+	"event": "all",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI",
+	"appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+	"ownedBy": "creator",
+	"status": "active",
+	"created": "2017-11-22T08:55:06.007Z"
+}
+
+===============================================================================
+For Group
+-----------
+Request
+------------
+{
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "messages",
+	"event": "created",
+	"filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI"
+}
+
+Response
+-------------
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMGU5MGI0N2YtM2VjNC00OWUyLWFkMWEtM2RjODEyOWEwYmJj",
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "messages",
+	"event": "created",
+	"filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI",
+	"appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+	"ownedBy": "creator",
+	"status": "active",
+	"created": "2017-11-22T08:59:03.734Z"
+}
+==========================================================================================
+Direct
+----------
+Request
+---------
+{
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "messages",
+	"event": "created",
+	"filter": "roomType=direct"
+}
+
+Response
+-------------
+{
+	"id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svZjJiYTllN2YtZTVhMS00YjljLTg3MmEtZjEzM2U5YTY0YjM2",
+	"name": "Cisco Spark-Asana BOT",
+	"targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/25?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+	"resource": "messages",
+	"event": "created",
+	"filter": "roomType=direct",
+	"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+	"createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NDIwMWM3Yy03NjA0LTQwODgtYjdhNy1iZDU0YmQ5YTdkZmI",
+	"appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+	"ownedBy": "creator",
+	"status": "active",
+	"created": "2017-11-22T09:00:14.785Z"
+}

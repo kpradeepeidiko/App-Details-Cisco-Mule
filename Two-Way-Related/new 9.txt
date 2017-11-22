@@ -1,0 +1,46 @@
+#[flowVars['integrationTokenResponse'].containsKey('tokenFlowToken')]
+
+
+<enricher target="#[flowVars['integrationTokenResponse']]" doc:name="Message Enricher">
+            <flow-ref name="getTokenByChoiceCondition" doc:name="getTokenByChoiceCondition"/>
+        </enricher>
+		
+		
+		#[flowVars['integrationTokenResponse']['tokenFlowToken']]
+		
+		#[flowVars.tokenResponse.containsKey('tokenFlowToken')]
+		
+		%dw 1.0
+%output application/json skipNullOn="everywhere"
+---
+flowVars.userRequest mapObject ({
+	( singularize (lower ('$$'))) : $
+} when (["name","workspace","task"] contains ( singularize (lower '$$'))) otherwise {
+	( pluralize (lower ('$$'))) : $
+ when (["name","workspace","task"] contains ( pluralize (lower '$$'))) otherwise null })
+ 
+ 
+ 
+ #[payload.eventType=='carddetail'||payload.eventType=='carddetails'||payload.eventType=='cardsdetail'||payload.eventType=='cardsdetails']
+ 
+ 
+ {input={}, eventType=listworkspaces}
+ {input={workspacename=My Company}, eventType=listworkspaceteams}
+ 
+ #[payload['input']['workspacename']]
+ 
+ 
+ 
+ [
+  {
+    "id": 234282939179075,
+    "name": "Test WorkSpace"
+  }
+]
+
+flowVars['projectTasksResponse']['response']['data']
+
+
+{http_status=400, response={errors=[{message=Provided `organization` parameter is not a valid Organization. You provided a regular workspace. Check out https://asana.com/developers/api-reference/workspaces for the difference between workspaces and organizations., help=For more information on API status codes and how to handle them, read the docs on errors: https://asana.com/developers/documentation/getting-started/errors}]}}
+
+flowVars.teamsResponse.response.errors[0].message

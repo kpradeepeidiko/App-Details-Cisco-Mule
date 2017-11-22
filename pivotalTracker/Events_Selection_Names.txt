@@ -1,0 +1,44 @@
+'+flowVars['fnm']+' '+flowVars['lnm']+'  #[flowVars['response']['hookResponse']['changes'][0]['new_values'].containsKey('counts')]
+
+Epic
+--------
+epicAdd
+epicUpdates
+epicDelete
+
+Story
+-----------
+storyAdd
+storyUpdates
+storyDelete
+
+
+Blockers
+------------------
+blockerAdd
+blockerUpdates
+blockerDelete
+
+Task
+------
+taskAdd
+taskUpdates
+taskDelete
+
+
+Comment
+-------------
+commentAdd
+commentDelete
+commentUpdates
+
+%dw 1.0
+%output application/json
+---
+{
+	"formatMessage": [{
+		"markDown": flowVars['postMessage'],
+		"text": null,
+		"html": null
+	}]
+}

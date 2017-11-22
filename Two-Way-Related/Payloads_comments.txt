@@ -1,0 +1,65 @@
+String index out of range: -1 (java.lang.StringIndexOutOfBoundsException). 
+================================================================================
+File
+------
+{
+  "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MxOGZiZWJkMmQ4OWQ1Y2JiYTZlYzY3OGE0MzNhYWQ3YzYyZjMyYzBhZWU4NWU2MGEwMDE4ZDI5NjRlZmZjNmFi",
+  "userId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+  "roomType": "direct",
+  "sparkResponse": {
+    "text": "taskattach | project: Project_1 | task: Sample_API_Updated ",
+    "created": "2017-11-22T11:00:45.855Z",
+    "statusMessage": null,
+    "additionalProperties": {
+      
+    },
+    "files": [
+      "https://api.ciscospark.com/v1/contents/Y2lzY29zcGFyazovL3VzL0NPTlRFTlQvNjNmOWEyZjAtY2Y3NC0xMWU3LTg2OGYtYmQyYjk3MGEyMmMwLzA"
+    ],
+    "trackingID": "ANYPOINT_a310fb66-74e8-48b2-9f9b-2f0d091ee4c0",
+    "statusCode": "200",
+    "personEmail": "pradeep.kanukuntla@eidiko.com",
+    "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vMDUzNmU5NGMtZWI2YS0zYjNlLWJiZWItYzE5MzE5OGEyMDA3",
+    "personId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+    "id": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNjNmOWEyZjAtY2Y3NC0xMWU3LTg2OGYtYmQyYjk3MGEyMmMw"
+  }
+}
+===================================================================================
+I was unable to find a project called "'+flowVars.textVa.list.replace('<','<').replace('>','>')+'". Please ensure you are providing a correct value.
+============================================================================
+Spark Inbound ==> {content-type=image/png, l5d-success-class=1.0, connection=keep-alive, via=1.1 linkerd, date=Wed, 22 Nov 2017 13:28:59 GMT, http.status=200, cache-control=no-cache, content-length=12660, content-disposition=attachment; filename="539_2201.png", server=Redacted, strict-transport-security=max-age=63072000; includeSubDomains; preload, trackingid=ROUTER_5A157B9A-A8FA-01BB-51DD-AC12DF1651DD, http.reason=OK}
+
+
+attachment; filename="539_2201.png"
+
+<set-attachment attachmentName="file" value="#[payload]"
+					contentType="#[message.inboundProperties.'content-type']" doc:name="Attachment" />
+					
+=========================================================================================
+#['Hi <@personId:'+flowVars.userId+'|>, Project ['+flowVars['renoteProjectResponse']['response']['data']['name']+'](https://app.asana.com/0/'+flowVars['renoteProjectResponse']['response']['data']['id']+'/list) updated successfully ']
+=============================================================================================
+<scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy"><![CDATA[import org.mule.message.ds.ByteArrayDataSource;
+                import javax.activation.DataHandler;
+                
+                org.apache.log4j.Logger scriptLogger = org.apache.log4j.Logger.getLogger("org.mule.module.scripting.component.Scriptable");
+           		scriptLogger.setLevel(org.apache.log4j.Level.DEBUG);   
+                
+                scriptLogger.debug("Checking payload class: " + payload.getClass())
+                scriptLogger.debug("Checking content length:" + message.getInboundProperty("content-length"))
+
+                def baos = new ByteArrayOutputStream()
+                 def fis = new FileInputStream(payload) 
+                fis.eachByte {
+		   baos.write(it)
+		}
+				
+               String fileName=flowVars['fnm']
+                String attachmentName='files'
+                
+                ByteArrayDataSource attachment = new ByteArrayDataSource(baos.toByteArray(),flowVars['contentType'],fileName);
+
+                message.addOutboundAttachment(attachmentName, new DataHandler(attachment))
+
+                return payload;]]></scripting:script>
+        </scripting:component>

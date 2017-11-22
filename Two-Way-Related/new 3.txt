@@ -1,0 +1,129 @@
+Error Message
+----------------
+#['Hi <@personId:'+flowVars.userId+'|>, '+flowVars['']['response']['errors'][0]['message']+' ']
+
+============================================================================
+No match found
+--------------------
+#['Hi <@personId:'+flowVars.userId+'|>, There is no workspace with name `'+flowVars['workspaceName']+'`, Can you please provide a valid workspace name ']
+
+
+=================================================================
+When multiple found
+-------------------------
+%dw 1.0
+%output application/java
+---
+flowVars['singleTeam'] map ($.name) joinBy '\n - '
+
+
+%dw 1.0
+%output application/java
+---
+payload['data'] map ('\n - [' ++ $.name ++ '](https://app.asana.com/0/' ++ $.id ++ '/list)')
+================================================================================================
+taking req name
+-----------------
+%dw 1.0
+%output application/json skipNullOn="everywhere"
+---
+flowVars['usersResponse']['response']['data'] map (
+	$ when ($.name == flowVars['assignee']) otherwise null
+)
+
+============================================
+joining name
+-----------------
+%dw 1.0
+%output application/java
+---
+flowVars['usersResponse']['response']['data'] map ($.name) joinBy '\n - '
+=====================================================================================
+
+#[new java.util.ArrayList()]
+
+#[new java.lang.StringBuffer()]
+
+subTasksBuffer.append('\n - ['+payload['name']+']');
+subTasksBuffer.append('(https://app.asana.com/0/'+payload['id']+'/list)')
+
+===================================================================================
+Exception messages structure for bot:
+
+Wrong command:
+-----------------
+<username>, oops, I do not understand this command. Please refer to the list of commands by typing “@<botname> help.
+
+Missing mandatory field name, or no value for a correctly entered field name :
+-------------------------------------------------
+<username>, you are missing some of the required inputs for the command <command name>. This is how I understand it (fields italicized are optional):
+<put the full command structure….> ”
+
+#['Hi <@personId:'+flowVars.userId+'|>, You are missing some of the required inputs for the command `'+flowVars['eventType']+'`. This is how I understand it: \n - ${listteammembers}']
+
+
+
+
+Unsupported or misspelled field: 
+-------------------------------------
+<username>, <field name> is either not supported or misspelled for the command <command name>. This is how I understand it (fields italicized are optional):
+<put the full command structure….>
+
+
+Wrong values:
+----------------------
+<username>, I was unable to find a <field name> called “value given by user”. Please ensure you are providing a correct value.
+
+
+Non standard values provides for fields that have a restricted set of values allowed by the app:
+-------------------------------------------------------------------------------------
+<username>, the value provided for the field <field name> is not supported by <App name like Trello or JIRA>. Try again with a supported value.
+None
+=======================================================================================
+flowVars['fl'] = flowVars['stringBufferForFollowers'].toString();
+flowVars['ml'] = flowVars['stringBufferForMembers'].toString();
+if(flowVars['fl'].endsWith(', '))
+{
+	flowVars['followersList'] = flowVars['fl'].substring(0, flowVars['fl'].lastIndexOf(","));
+}
+else
+{
+	flowVars['followersList'] = flowVars['fl'];
+}
+
+if(flowVars['ml'].endsWith(', '))
+{
+	flowVars['membersList'] = flowVars['ml'].substring(0, flowVars['ml'].lastIndexOf(","));
+}
+else
+{
+	flowVars['membersList'] = flowVars['ml'];
+}
+
+==============================================================================
+<flow name="addAttachmentToTask" processingStrategy="synchronous">
+		<logger level="INFO" doc:name="Logger"
+			message="TheUrl iS #[flowVars.command.sparkResponse.files[0]]" />
+        <expression-component doc:name="Expression"><![CDATA[flowVars['filePath']=flowVars['command']['sparkResponse']['files'][0].split('v1')[1];]]></expression-component>
+        <http:request config-ref="HTTP_Spark_API" path="#[flowVars.filePath]" method="GET" doc:name="Spark API">
+            <http:request-builder>
+                <http:header headerName="Authorization" value="${bot.token}"/>
+            </http:request-builder>
+        </http:request>
+        <object-to-byte-array-transformer doc:name="Object to Byte Array"/>
+        <set-attachment attachmentName="name" value="#[message.inboundProperties.'content-disposition'.split('=')[1].replace('&quot;','')]" contentType="text/plain" doc:name="Attachment"/>
+        <set-attachment attachmentName="file" value="#[payload]" contentType="text/plain" doc:name="Attachment"/>
+        <http:request config-ref="HTTP_Operations_Request_Configuration" path="tasks/#[flowVars['taskId']]/attachments" method="POST" doc:name="POST Attach">
+            <http:request-builder>
+                <http:query-param paramName="token" value="#[flowVars.token]"/>
+                <http:query-param paramName="key" value="#[flowVars.keys]"/>
+                <http:uri-param paramName="cardsId" value="#[flowVars.cardsId[0]]"/>
+                <http:header headerName="Content-Type" value="multipart/form-data"/>
+
+
+            </http:request-builder>
+        </http:request>
+        <logger message="#[payload]" level="DEBUG" doc:name="Logger"/>
+        <exception-strategy ref="exceptionmessagesCatch_Exception_Strategy" doc:name="Reference Exception Strategy"/>
+
+	</flow>
