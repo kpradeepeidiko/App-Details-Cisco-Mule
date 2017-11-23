@@ -22,13 +22,13 @@ buildRequiredFeildMissingForPostClientToken.dwl
 		
 	flowVars['storyDetails'][0]['new_values']['description']
 	
-	buildGetEpicDetails.dwl
+	buildLabelHistoryExample.dwl
 	
-	<dw:set-payload resource="classpath:dwScripts/buildGetTaskDetails.dwl"/>
+	<dw:set-payload resource="classpath:dwScripts/buildLabelHistoryExample.dwl"/>
 		  
 		  
 		  <dw:transform-message doc:name="Transform Message To Java">
-			<dw:set-variable variableName="taskDetails"
+			<dw:set-variable variableName="labelDetails"
 				resource="classpath:dwScripts/fromPayloadToJava.dwl"></dw:set-variable>
 		</dw:transform-message>
 		

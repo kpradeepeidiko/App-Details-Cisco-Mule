@@ -302,5 +302,23 @@ when
 	{},
 	{}]
 }
+================================================================================================
+%dw 1.0
+%output application/json skipNullOn="everywhere"
+---
+{
+a:((payload.changes..original_values.labels)[0] map (null when (((payload.changes..new_values.labels)[0]) contains $) otherwise $)) when (sizeOf ((payload.changes..original_values.labels)[0]))> (sizeOf ((payload.changes..new_values.labels)[0])) otherwise (payload.changes..new_values.labels)[0] map (null when (((payload.changes..original_values.labels)[0]) contains $) otherwise $),
+event:"Deleted" when (sizeOf ((payload.changes..original_values.labels)[0]))> (sizeOf ((payload.changes..new_values.labels)[0])) otherwise "Created"
+}
+
+
+Response
+---------
+{
+    "a": [
+        "yellow"
+    ],
+    "event": "Deleted"
+}
 
 =========================================================

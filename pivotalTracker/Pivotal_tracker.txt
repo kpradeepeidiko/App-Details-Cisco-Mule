@@ -1068,7 +1068,66 @@ Task Update
 	},
 	"occurred_at": 1511254550000
 }
-===========================================================
+===================================================================================
+Task Complete
+----------------
+{
+	"kind": "task_update_activity",
+	"guid": "2130840_15",
+	"project_version": 15,
+	"message": "Rebecca Amato completed task: \"sample task\"",
+	"highlight": "completed task:",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153107440,
+			"original_values": {
+				"updated_at": 1511392819000
+			},
+			"new_values": {
+				"updated_at": 1511392821000
+			},
+			"name": "Icebox#2 Feature",
+			"story_type": "feature"
+		},
+		{
+			"kind": "task",
+			"change_type": "update",
+			"id": 59336185,
+			"original_values": {
+				"complete": false,
+				"updated_at": 1511392819000
+			},
+			"new_values": {
+				"complete": true,
+				"updated_at": 1511392821000
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153107440,
+		"name": "Icebox#2 Feature",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153107440"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2130840,
+		"name": "Test Project"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3003184,
+		"name": "Rebecca Amato",
+		"initials": "RA"
+	},
+	"occurred_at": 1511392821000
+}
+============================================================================================
 Story Status to Start
 --------------------------
 {
