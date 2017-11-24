@@ -1,0 +1,533 @@
+Comment on story
+--------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_6",
+	"project_version": 6,
+	"message": "pradeep kanukuntla added comment: \"test comment\"",
+	"highlight": "added comment:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182602278,
+			"new_values": {
+				"id": 182602278,
+				"story_id": 152952573,
+				"text": "test comment",
+				"person_id": 3001266,
+				"created_at": 1510898649000,
+				"updated_at": 1510898649000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"follower_ids": [
+
+				],
+				"updated_at": 1510898453000
+			},
+			"new_values": {
+				"follower_ids": [
+					3001266
+				],
+				"updated_at": 1510898649000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510898649000
+}
+===============================================================================================
+Comment Update
+---------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_7",
+	"project_version": 7,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182602278,
+			"original_values": {
+				"text": "test comment",
+				"updated_at": 1510898649000
+			},
+			"new_values": {
+				"text": "test comment@1",
+				"updated_at": 1510899127000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510898649000
+			},
+			"new_values": {
+				"updated_at": 1510899127000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899127000
+}
+=====================================================================================
+Comment update Plus desktop Attachment
+--------------------------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_8",
+	"project_version": 8,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85520714,
+			"new_values": {
+				"id": 85520714,
+				"filename": "authors.txt",
+				"created_at": 1510899235000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85520714/download",
+				"content_type": "text/plain",
+				"uploaded": false,
+				"big_url": "#",
+				"thumbnail_url": "#"
+			}
+		},
+		{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182602278,
+			"original_values": {
+				"text": "test comment@1",
+				"updated_at": 1510899127000,
+				"file_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				]
+			},
+			"new_values": {
+				"text": "test comment@1 Sorry Added Attach",
+				"updated_at": 1510899238000,
+				"file_attachment_ids": [
+					85520714
+				],
+				"attachment_ids": [{
+					"id": 85520714,
+					"kind": "file_attachment"
+				}],
+				"file_attachments": [
+					"authors.txt"
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510899127000
+			},
+			"new_values": {
+				"updated_at": 1510899238000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899238000
+}
+===========================================================================================
+Attachment on comment
+--------------------------
+{
+	"kind": "comment_update_activity",
+	"guid": "2129370_39",
+	"project_version": 39,
+	"message": "pradeep kanukuntla edited this comment",
+	"highlight": "edited",
+	"changes": [{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85526875,
+			"new_values": {
+				"id": 85526875,
+				"filename": "authors.txt",
+				"created_at": 1510921838000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85526875/download",
+				"content_type": "text/plain",
+				"uploaded": true,
+				"big_url": "https://s3.amazonaws.com/prod.tracker2/resource/85526875/authors_big.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T123109Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=56bf4b6eeafd481024ca10550a44dcb7745efc62d17bf33f72d676fb2d697435",
+				"thumbnail_url": "https://s3.amazonaws.com/prod.tracker2/resource/85526875/authors_thumb.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T123109Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=1fbcf0331d9a8b2b894ada1506eaaa203989ef095fbb671a4495bc712b727032"
+			}
+		},
+		{
+			"kind": "comment",
+			"change_type": "update",
+			"id": 182612832,
+			"original_values": {
+				"updated_at": 1510921801000,
+				"file_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				]
+			},
+			"new_values": {
+				"updated_at": 1510921869000,
+				"file_attachment_ids": [
+					85526875
+				],
+				"attachment_ids": [{
+					"id": 85526875,
+					"kind": "file_attachment"
+				}],
+				"file_attachments": [
+					"authors.txt"
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510921801000
+			},
+			"new_values": {
+				"updated_at": 1510921869000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510921869000
+}
+
+===========================================================================================
+Comment add + file from GD
+---------------------------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_31",
+	"project_version": 31,
+	"message": "pradeep kanukuntla added comment with attachment: \"hiðŸ˜œ\"",
+	"highlight": "added comment with attachment:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182608857,
+			"new_values": {
+				"id": 182608857,
+				"story_id": 152952573,
+				"text": "hiðŸ˜œ",
+				"person_id": 3001266,
+				"created_at": 1510913892000,
+				"updated_at": 1510913892000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+					386495
+				],
+				"attachment_ids": [{
+					"id": 386495,
+					"kind": "google_attachment"
+				}],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+					"TestingSample"
+				]
+			}
+		},
+		{
+			"kind": "google_attachment",
+			"change_type": "create",
+			"id": 386495,
+			"new_values": {
+				"id": 386495,
+				"comment_id": 182608857,
+				"person_id": 3001266,
+				"google_kind": "document",
+				"title": "TestingSample",
+				"google_id": "1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8",
+				"alternate_link": "https://docs.google.com/document/d/1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8/edit?usp=drive_web",
+				"resource_id": "1r8liW_E9ALPXKwM9xJNncOKnKx0z4EuJqesyY5hefC8"
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510913784000
+			},
+			"new_values": {
+				"updated_at": 1510913892000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510913892000
+}
+===================================================================================
+Comment add + file from computer + file from GD
+-----------------------------------------------------
+{
+	"kind": "comment_create_activity",
+	"guid": "2129370_29",
+	"project_version": 29,
+	"message": "pradeep kanukuntla added comment with attachments: \"hhh @pradeepðŸ‘?\"",
+	"highlight": "added comment with attachments:",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182608476,
+			"new_values": {
+				"id": 182608476,
+				"story_id": 152952573,
+				"text": "hhh @pradeepðŸ‘?",
+				"person_id": 3001266,
+				"created_at": 1510913108000,
+				"updated_at": 1510913108000,
+				"file_attachment_ids": [
+					85524421
+				],
+				"google_attachment_ids": [
+					386494
+				],
+				"attachment_ids": [{
+						"id": 85524421,
+						"kind": "file_attachment"
+					},
+					{
+						"id": 386494,
+						"kind": "google_attachment"
+					}
+				],
+				"file_attachments": [
+					"authors.txt"
+				],
+				"google_attachments": [
+					"TestDocs"
+				]
+			}
+		},
+		{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85524421,
+			"new_values": {
+				"id": 85524421,
+				"filename": "authors.txt",
+				"created_at": 1510913067000,
+				"uploader_id": 3001266,
+				"thumbnailable": false,
+				"size": 55,
+				"download_url": "/file_attachments/85524421/download",
+				"content_type": "text/plain",
+				"uploaded": true,
+				"big_url": "https://s3.amazonaws.com/prod.tracker2/resource/85524421/authors_big.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T100508Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=aa135a2ccf9d3be0e6c41445f9149ff89cbac9bf32f06d8c6866d5dacd6e65c6",
+				"thumbnail_url": "https://s3.amazonaws.com/prod.tracker2/resource/85524421/authors_thumb.txt?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171117%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171117T100508Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=a15ec1462af79ba781cbb285fb27184eef929f6d6b44ed77a590cd69cef48d05"
+			}
+		},
+		{
+			"kind": "google_attachment",
+			"change_type": "create",
+			"id": 386494,
+			"new_values": {
+				"id": 386494,
+				"comment_id": 182608476,
+				"person_id": 3001266,
+				"google_kind": "document",
+				"title": "TestDocs",
+				"google_id": "1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M",
+				"alternate_link": "https://docs.google.com/document/d/1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M/edit?usp=drive_web",
+				"resource_id": "1kJGbWOF0q7qU5YTIwwvTkqNlzjoE_U_86ZdUDdReQ-M"
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510913035000
+			},
+			"new_values": {
+				"updated_at": 1510913108000
+			},
+			"name": "SampleStory@12",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510913108000
+}
+====================================================================

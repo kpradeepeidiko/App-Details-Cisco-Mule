@@ -1,0 +1,228 @@
+Story taskAdd
+------------------
+{
+	"kind": "task_create_activity",
+	"guid": "2129370_44",
+	"project_version": 44,
+	"message": "pradeep kanukuntla added task: \"testTask\"",
+	"highlight": "added task:",
+	"changes": [{
+			"kind": "task",
+			"change_type": "create",
+			"id": 59269581,
+			"new_values": {
+				"id": 59269581,
+				"story_id": 152952573,
+				"description": "testTask",
+				"complete": false,
+				"position": 1,
+				"created_at": 1510927023000,
+				"updated_at": 1510927023000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926922000
+			},
+			"new_values": {
+				"updated_at": 1510927023000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510927023000
+}
+======================================================================
+Task Update
+--------------
+{
+	"kind": "task_update_activity",
+	"guid": "2129370_83",
+	"project_version": 83,
+	"message": "pradeep kanukuntla rewrote task: \"testTask\"",
+	"highlight": "rewrote task:",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153044312,
+			"original_values": {
+				"updated_at": 1511254531000
+			},
+			"new_values": {
+				"updated_at": 1511254550000
+			},
+			"name": "SampleTest",
+			"story_type": "feature"
+		},
+		{
+			"kind": "task",
+			"change_type": "update",
+			"id": 59306061,
+			"original_values": {
+				"description": "test",
+				"updated_at": 1511254531000
+			},
+			"new_values": {
+				"description": "testTask",
+				"updated_at": 1511254550000
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153044312,
+		"name": "SampleTest",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153044312"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511254550000
+}
+===================================================================================
+Task Complete
+----------------
+{
+	"kind": "task_update_activity",
+	"guid": "2130840_15",
+	"project_version": 15,
+	"message": "Rebecca Amato completed task: \"sample task\"",
+	"highlight": "completed task:",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153107440,
+			"original_values": {
+				"updated_at": 1511392819000
+			},
+			"new_values": {
+				"updated_at": 1511392821000
+			},
+			"name": "Icebox#2 Feature",
+			"story_type": "feature"
+		},
+		{
+			"kind": "task",
+			"change_type": "update",
+			"id": 59336185,
+			"original_values": {
+				"complete": false,
+				"updated_at": 1511392819000
+			},
+			"new_values": {
+				"complete": true,
+				"updated_at": 1511392821000
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153107440,
+		"name": "Icebox#2 Feature",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153107440"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2130840,
+		"name": "Test Project"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3003184,
+		"name": "Rebecca Amato",
+		"initials": "RA"
+	},
+	"occurred_at": 1511392821000
+}
+============================================================================================
+Deleted a Task On Story
+------------------------------
+{
+	"kind": "task_delete_activity",
+	"guid": "2129370_10",
+	"project_version": 10,
+	"message": "pradeep kanukuntla deleted a task on this story",
+	"highlight": "deleted a task",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510899238000
+			},
+			"new_values": {
+				"updated_at": 1510899477000
+			},
+			"name": "SampleStory@1",
+			"story_type": "bug"
+		},
+		{
+			"kind": "task",
+			"change_type": "delete",
+			"id": 59264160
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@1",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510899477000
+}

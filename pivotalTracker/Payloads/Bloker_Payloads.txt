@@ -1,0 +1,279 @@
+Story add Blocker
+------------------------
+{
+	"kind": "blocker_create_activity",
+	"guid": "2129370_42",
+	"project_version": 42,
+	"message": "pradeep kanukuntla added a blocker: \"hfdbfbgf\"",
+	"highlight": "added a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "create",
+			"id": 480067,
+			"new_values": {
+				"id": 480067,
+				"story_id": 152952573,
+				"person_id": 3001266,
+				"description": "hfdbfbgf",
+				"resolved": false,
+				"created_at": 1510926850000,
+				"updated_at": 1510926850000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926733000
+			},
+			"new_values": {
+				"updated_at": 1510926850000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510926850000
+}
+====================================================================================
+Blocker Update
+----------------
+{
+	"kind": "blocker_update_activity",
+	"guid": "2129370_81",
+	"project_version": 81,
+	"message": "pradeep kanukuntla edited a blocker: \"dddggr\"",
+	"highlight": "edited a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "update",
+			"id": 485636,
+			"original_values": {
+				"description": "ddd",
+				"updated_at": 1511248538000
+			},
+			"new_values": {
+				"description": "dddggr",
+				"updated_at": 1511248636000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153044312,
+			"original_values": {
+				"updated_at": 1511248538000
+			},
+			"new_values": {
+				"updated_at": 1511248636000
+			},
+			"name": "SampleTest",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153044312,
+		"name": "SampleTest",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153044312"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511248636000
+}
+===========================================================================
+Deleted a Blocker
+--------------------
+{
+	"kind": "blocker_delete_activity",
+	"guid": "2129370_43",
+	"project_version": 43,
+	"message": "pradeep kanukuntla deleted a blocker: \"hfdbfbgf\"",
+	"highlight": "deleted a blocker",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 152952573,
+			"original_values": {
+				"updated_at": 1510926850000
+			},
+			"new_values": {
+				"updated_at": 1510926922000
+			},
+			"name": "SampleStory@12",
+			"story_type": "chore"
+		},
+		{
+			"kind": "blocker",
+			"change_type": "delete",
+			"id": 480067
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 152952573,
+		"name": "SampleStory@12",
+		"story_type": "chore",
+		"url": "https://www.pivotaltracker.com/story/show/152952573"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1510926922000
+}
+====================================================================================
+Resolve Blocker
+--------------------
+{
+	"kind": "blocker_update_activity",
+	"guid": "2129370_54",
+	"project_version": 54,
+	"message": "pradeep kanukuntla resolved a blocker: \"Test Blockers\"",
+	"highlight": "resolved a blocker",
+	"changes": [{
+			"kind": "blocker",
+			"change_type": "update",
+			"id": 482709,
+			"original_values": {
+				"resolved": false,
+				"updated_at": 1511169770000
+			},
+			"new_values": {
+				"resolved": true,
+				"updated_at": 1511169792000
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153007267,
+			"original_values": {
+				"updated_at": 1511169770000
+			},
+			"new_values": {
+				"updated_at": 1511169792000
+			},
+			"name": "SampleTestStory@12",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007267,
+		"name": "SampleTestStory@12",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153007267"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169792000
+}
+===================================================================================
+Unblock Blocker
+--------------------
+{
+	"kind": "blocker_delete_activity",
+	"guid": "2129370_55",
+	"project_version": 55,
+	"message": "pradeep kanukuntla unblocked this story by deleting: \"Test Blockers\"",
+	"highlight": "unblocked this story by deleting",
+	"changes": [{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153007267,
+			"original_values": {
+				"updated_at": 1511169792000
+			},
+			"new_values": {
+				"updated_at": 1511169887000
+			},
+			"name": "SampleTestStory@12",
+			"story_type": "feature"
+		},
+		{
+			"kind": "blocker",
+			"change_type": "delete",
+			"id": 482709
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153007267,
+		"name": "SampleTestStory@12",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153007267"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511169887000
+}

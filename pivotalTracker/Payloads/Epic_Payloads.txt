@@ -1,0 +1,282 @@
+Added Epic with description
+------------------------------
+{
+	"kind": "epic_create_activity",
+	"guid": "2129370_91",
+	"project_version": 91,
+	"message": "pradeep kanukuntla added this epic",
+	"highlight": "added",
+	"changes": [{
+		"kind": "epic",
+		"change_type": "create",
+		"id": 3805710,
+		"new_values": {
+			"id": 3805710,
+			"project_id": 2129370,
+			"name": "MyNewEpic",
+			"label_id": 19428602,
+			"description": "dfgdfgfdgdf",
+			"follower_ids": [
+
+			],
+			"created_at": 1511271498000,
+			"updated_at": 1511271498000,
+			"past_done_story_estimates": 0,
+			"past_done_stories_count": 0,
+			"past_done_stories_no_point_count": 0,
+			"label": "mynewepic"
+		},
+		"name": "MyNewEpic"
+	}],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3805710,
+		"name": "MyNewEpic",
+		"url": "https://www.pivotaltracker.com/epic/show/3805710"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511271498000
+}
+==============================================================================
+Added Epic With attach(with comment) + followed
+-----------------------------------------------------
+{
+	"kind": "epic_create_activity",
+	"guid": "2129370_96",
+	"project_version": 96,
+	"message": "pradeep kanukuntla added this epic",
+	"highlight": "added",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182742991,
+			"new_values": {
+				"id": 182742991,
+				"epic_id": 3805717,
+				"text": "ggghhhh",
+				"person_id": 3001266,
+				"created_at": 1511271949000,
+				"updated_at": 1511271949000,
+				"file_attachment_ids": [
+					85592500
+				],
+				"google_attachment_ids": [
+
+				],
+				"attachment_ids": [{
+					"id": 85592500,
+					"kind": "file_attachment"
+				}],
+				"file_attachments": [
+					"pagerduty-1.png"
+				],
+				"google_attachments": [
+
+				]
+			}
+		},
+		{
+			"kind": "epic",
+			"change_type": "create",
+			"id": 3805717,
+			"new_values": {
+				"id": 3805717,
+				"project_id": 2129370,
+				"name": "TestEpic",
+				"label_id": 19428620,
+				"follower_ids": [
+					3001266
+				],
+				"created_at": 1511271948000,
+				"updated_at": 1511271949000,
+				"past_done_story_estimates": 0,
+				"past_done_stories_count": 0,
+				"past_done_stories_no_point_count": 0,
+				"label": "testepic"
+			},
+			"name": "TestEpic"
+		},
+		{
+			"kind": "file_attachment",
+			"change_type": "create",
+			"id": 85592500,
+			"new_values": {
+				"id": 85592500,
+				"filename": "pagerduty-1.png",
+				"created_at": 1511271906000,
+				"uploader_id": 3001266,
+				"thumbnailable": true,
+				"height": 639,
+				"width": 1085,
+				"size": 42031,
+				"download_url": "/file_attachments/85592500/download",
+				"content_type": "image/png",
+				"uploaded": true,
+				"big_url": "https://s3.amazonaws.com/prod.tracker2/resource/85592500/pagerduty-1_big.png?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171121%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171121T134549Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=373054d4de90bdfb54470d368e241328b7a8f58882f419e6ad9767d786cbd106",
+				"thumbnail_url": "https://s3.amazonaws.com/prod.tracker2/resource/85592500/pagerduty-1_thumb.png?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJJBSFJ4TCVKKGAIA%2F20171121%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171121T134549Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e0184763e913cc7fe1a8f0c4ca21f2d8b6c24f75f3fbd9a40895fbc9137e3316"
+			}
+		}
+	],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3805717,
+		"name": "TestEpic",
+		"url": "https://www.pivotaltracker.com/epic/show/3805717"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511271949000
+}
+==============================================================================
+Updated Epic Name
+--------------------
+{
+	"kind": "epic_update_activity",
+	"guid": "2129370_101",
+	"project_version": 101,
+	"message": "pradeep kanukuntla edited this epic",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "epic",
+		"change_type": "update",
+		"id": 3805717,
+		"original_values": {
+			"name": "TestEpic",
+			"updated_at": 1511272456000
+		},
+		"new_values": {
+			"name": "TestEpic@123",
+			"updated_at": 1511272556000
+		},
+		"name": "TestEpic@123"
+	}],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3805717,
+		"name": "TestEpic@123",
+		"url": "https://www.pivotaltracker.com/epic/show/3805717"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511272556000
+}
+===========================================================================
+Updated Epic Description
+-----------------------------
+{
+	"kind": "epic_update_activity",
+	"guid": "2129370_102",
+	"project_version": 102,
+	"message": "pradeep kanukuntla edited this epic",
+	"highlight": "edited",
+	"changes": [{
+		"kind": "epic",
+		"change_type": "update",
+		"id": 3805717,
+		"original_values": {
+			"description": null,
+			"updated_at": 1511272556000
+		},
+		"new_values": {
+			"description": "ghsdthdrthrthtyh",
+			"updated_at": 1511272662000
+		},
+		"name": "TestEpic@123"
+	}],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3805717,
+		"name": "TestEpic@123",
+		"url": "https://www.pivotaltracker.com/epic/show/3805717"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511272662000
+}
+============================================================================
+Delete Epic
+-----------------
+{
+	"kind": "epic_delete_activity",
+	"guid": "2129370_92",
+	"project_version": 92,
+	"message": "pradeep kanukuntla deleted this epic",
+	"highlight": "deleted",
+	"changes": [{
+		"kind": "epic",
+		"change_type": "delete",
+		"id": 3805710,
+		"name": "MyNewEpic"
+	}],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3805710,
+		"name": "MyNewEpic",
+		"url": "https://www.pivotaltracker.com/epic/show/3805710"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511271658000
+}
+==========================================================================

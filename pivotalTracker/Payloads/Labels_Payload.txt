@@ -1,0 +1,139 @@
+Label Added
+-------------
+ {
+ 	"kind": "story_update_activity",
+ 	"guid": "2129370_89",
+ 	"project_version": 89,
+ 	"message": "pradeep kanukuntla edited this feature",
+ 	"highlight": "edited",
+ 	"changes": [{
+ 			"kind": "label",
+ 			"change_type": "update",
+ 			"id": 19428592,
+ 			"original_values": {
+ 				"counts": {
+ 					"number_of_zero_point_stories_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 0,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"sum_of_story_estimates_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 0,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"number_of_stories_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 0,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"kind": "story_counts"
+ 				}
+ 			},
+ 			"new_values": {
+ 				"counts": {
+ 					"number_of_zero_point_stories_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 1,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"sum_of_story_estimates_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 0,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"number_of_stories_by_state": {
+ 						"accepted": 0,
+ 						"started": 0,
+ 						"finished": 0,
+ 						"unstarted": 1,
+ 						"planned": 0,
+ 						"delivered": 0,
+ 						"unscheduled": 0,
+ 						"rejected": 0,
+ 						"kind": "counts_by_story_state"
+ 					},
+ 					"kind": "story_counts"
+ 				}
+ 			},
+ 			"name": "dfgdfgdfgfd"
+ 		},
+ 		{
+ 			"kind": "story",
+ 			"change_type": "update",
+ 			"id": 153044312,
+ 			"original_values": {
+ 				"label_ids": [
+
+ 				],
+ 				"updated_at": 1511271169000,
+ 				"labels": [
+
+ 				]
+ 			},
+ 			"new_values": {
+ 				"label_ids": [
+ 					19428592
+ 				],
+ 				"updated_at": 1511271192000,
+ 				"labels": [
+ 					"dfgdfgdfgfd"
+ 				]
+ 			},
+ 			"name": "SampleTest",
+ 			"story_type": "feature"
+ 		}
+ 	],
+ 	"primary_resources": [{
+ 		"kind": "story",
+ 		"id": 153044312,
+ 		"name": "SampleTest",
+ 		"story_type": "feature",
+ 		"url": "https://www.pivotaltracker.com/story/show/153044312"
+ 	}],
+ 	"secondary_resources": [
+
+ 	],
+ 	"project": {
+ 		"kind": "project",
+ 		"id": 2129370,
+ 		"name": "MyTestProject@1"
+ 	},
+ 	"performed_by": {
+ 		"kind": "person",
+ 		"id": 3001266,
+ 		"name": "pradeep kanukuntla",
+ 		"initials": "PK"
+ 	},
+ 	"occurred_at": 1511271192000
+ }
