@@ -155,6 +155,101 @@ Story Create With Estimate
 	},
 	"occurred_at": 1511248298000
 }
+========================================================================================
+Story Create With Comment
+----------------------------
+{
+	"kind": "story_create_activity",
+	"guid": "2129370_135",
+	"project_version": 135,
+	"message": "pradeep kanukuntla added this bug",
+	"highlight": "added",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182902354,
+			"new_values": {
+				"id": 182902354,
+				"story_id": 153168335,
+				"text": "sdfasfasdf",
+				"person_id": 3001266,
+				"created_at": 1511774012000,
+				"updated_at": 1511774012000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+
+				]
+			}
+		},
+		{
+			"kind": "story",
+			"change_type": "create",
+			"id": 153168335,
+			"new_values": {
+				"id": 153168335,
+				"project_id": 2129370,
+				"name": "Alpha_Icebox",
+				"story_type": "bug",
+				"current_state": "unscheduled",
+				"requested_by_id": 3001300,
+				"owned_by_id": 3001266,
+				"owner_ids": [
+					3001266
+				],
+				"label_ids": [
+
+				],
+				"follower_ids": [
+					3001266
+				],
+				"created_at": 1511774012000,
+				"updated_at": 1511774012000,
+				"after_id": 153044312,
+				"blocked_story_ids": [
+
+				],
+				"labels": [
+
+				]
+			},
+			"name": "Alpha_Icebox",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153168335,
+		"name": "Alpha_Icebox",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/153168335"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511774013000
+}
 ================================================================================================
 Story updated (story name updated)
 --------------------------------------
@@ -727,3 +822,104 @@ update Estimate points
 	"occurred_at": 1511169639000
 }
 ===============================================================================
+Story Moved
+--------------
+{
+	"kind": "story_move_from_project_activity",
+	"guid": "2129370_137",
+	"project_version": 137,
+	"message": "pradeep kanukuntla moved 2 stories from this project to cisco-spark@pivotal",
+	"highlight": "moved",
+	"changes": [{
+			"kind": "story",
+			"change_type": "delete",
+			"id": 153044312,
+			"name": "SampleTest",
+			"story_type": "feature"
+		},
+		{
+			"kind": "story",
+			"change_type": "delete",
+			"id": 153168335,
+			"name": "Alpha_Icebox",
+			"story_type": "bug"
+		}
+	],
+	"primary_resources": [{
+			"kind": "story",
+			"id": 153044312,
+			"name": "SampleTest",
+			"story_type": "feature",
+			"url": "https://www.pivotaltracker.com/story/show/153044312"
+		},
+		{
+			"kind": "story",
+			"id": 153168335,
+			"name": "Alpha_Icebox",
+			"story_type": "bug",
+			"url": "https://www.pivotaltracker.com/story/show/153168335"
+		}
+	],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511775869000
+}
+================================================
+Story Moved And Schedule
+--------------------------
+{
+	"kind": "story_move_activity",
+	"guid": "2129370_140",
+	"project_version": 140,
+	"message": "pradeep kanukuntla moved and scheduled this story",
+	"highlight": "moved and scheduled",
+	"changes": [{
+		"kind": "story",
+		"change_type": "update",
+		"id": 153168335,
+		"original_values": {
+			"current_state": "unscheduled",
+			"updated_at": 1511776156000
+		},
+		"new_values": {
+			"current_state": "unstarted",
+			"updated_at": 1511776388000
+		},
+		"name": "Alpha_Icebox",
+		"story_type": "bug"
+	}],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153168335,
+		"name": "Alpha_Icebox",
+		"story_type": "bug",
+		"url": "https://www.pivotaltracker.com/story/show/153168335"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511776388000
+}

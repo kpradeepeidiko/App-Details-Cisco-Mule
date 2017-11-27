@@ -198,6 +198,89 @@ Updated Epic Name
 	"occurred_at": 1511272556000
 }
 ===========================================================================
+Epic Create with commnt & Descptn
+--------------------------------------
+{
+	"kind": "epic_create_activity",
+	"guid": "2129370_131",
+	"project_version": 131,
+	"message": "pradeep kanukuntla added this epic",
+	"highlight": "added",
+	"changes": [{
+			"kind": "comment",
+			"change_type": "create",
+			"id": 182901180,
+			"new_values": {
+				"id": 182901180,
+				"epic_id": 3810135,
+				"text": "fvsdfvsdfvfdv",
+				"person_id": 3001266,
+				"created_at": 1511772293000,
+				"updated_at": 1511772293000,
+				"file_attachment_ids": [
+
+				],
+				"google_attachment_ids": [
+
+				],
+				"attachment_ids": [
+
+				],
+				"file_attachments": [
+
+				],
+				"google_attachments": [
+
+				]
+			}
+		},
+		{
+			"kind": "epic",
+			"change_type": "create",
+			"id": 3810135,
+			"new_values": {
+				"id": 3810135,
+				"project_id": 2129370,
+				"name": "Test@123",
+				"label_id": 19444581,
+				"description": "The Description New",
+				"follower_ids": [
+					3001266
+				],
+				"created_at": 1511772292000,
+				"updated_at": 1511772293000,
+				"past_done_story_estimates": 0,
+				"past_done_stories_count": 0,
+				"past_done_stories_no_point_count": 0,
+				"label": "test@123"
+			},
+			"name": "Test@123"
+		}
+	],
+	"primary_resources": [{
+		"kind": "epic",
+		"id": 3810135,
+		"name": "Test@123",
+		"url": "https://www.pivotaltracker.com/epic/show/3810135"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2129370,
+		"name": "MyTestProject@1"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3001266,
+		"name": "pradeep kanukuntla",
+		"initials": "PK"
+	},
+	"occurred_at": 1511772293000
+}
+
+===========================================================================
 Updated Epic Description
 -----------------------------
 {
