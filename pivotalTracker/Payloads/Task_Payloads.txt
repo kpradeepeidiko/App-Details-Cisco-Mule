@@ -123,7 +123,7 @@ Task Complete
 	"kind": "task_update_activity",
 	"guid": "2130840_15",
 	"project_version": 15,
-	"message": "Rebecca Amato completed task: \"sample task\"",
+	"message": "pradeep kanukuntla completed task: \"sample task\"",
 	"highlight": "completed task:",
 	"changes": [{
 			"kind": "story",
@@ -170,7 +170,7 @@ Task Complete
 	"performed_by": {
 		"kind": "person",
 		"id": 3003184,
-		"name": "Rebecca Amato",
+		"name": "pradeep kanukuntla",
 		"initials": "RA"
 	},
 	"occurred_at": 1511392821000

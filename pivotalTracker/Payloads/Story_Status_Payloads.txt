@@ -1,0 +1,396 @@
+Story Estimation update with labels
+------------------------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2131184_97",
+	"project_version": 97,
+	"message": "kamal nagalla estimated this feature as 3 points",
+	"highlight": "estimated",
+	"changes": [{
+			"kind": "label",
+			"change_type": "update",
+			"id": 19442793,
+			"original_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 1,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 1,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"new_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 3,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 1,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"name": "betaepic"
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153192228,
+			"original_values": {
+				"estimate": 1,
+				"updated_at": 1511832167000
+			},
+			"new_values": {
+				"estimate": 3,
+				"updated_at": 1511832347000
+			},
+			"name": "GSE",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153192228,
+		"name": "GSE",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153192228"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2131184,
+		"name": "Mobile"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3003404,
+		"name": "kamal nagalla",
+		"initials": "KN"
+	},
+	"occurred_at": 1511832348000
+}
+=====================================================================================
+Story start updated with label
+------------------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2131184_98",
+	"project_version": 98,
+	"message": "kamal nagalla started this feature",
+	"highlight": "started",
+	"changes": [{
+			"kind": "label",
+			"change_type": "update",
+			"id": 19442793,
+			"original_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 3,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 1,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"new_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 3,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 1,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"name": "betaepic"
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153192228,
+			"original_values": {
+				"current_state": "unscheduled",
+				"owner_ids": [
+					3003760
+				],
+				"updated_at": 1511832347000
+			},
+			"new_values": {
+				"current_state": "started",
+				"owner_ids": [
+					3003760,
+					3003404
+				],
+				"updated_at": 1511833051000
+			},
+			"name": "GSE",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153192228,
+		"name": "GSE",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153192228"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2131184,
+		"name": "Mobile"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3003404,
+		"name": "kamal nagalla",
+		"initials": "KN"
+	},
+	"occurred_at": 1511833051000
+}
+======================================================================================
+Story Finished with labels
+-------------------------------
+{
+	"kind": "story_update_activity",
+	"guid": "2131184_99",
+	"project_version": 99,
+	"message": "kamal nagalla finished this feature",
+	"highlight": "finished",
+	"changes": [{
+			"kind": "label",
+			"change_type": "update",
+			"id": 19442793,
+			"original_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 3,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 1,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"new_values": {
+				"counts": {
+					"number_of_zero_point_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 0,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"sum_of_story_estimates_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 3,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"number_of_stories_by_state": {
+						"accepted": 0,
+						"started": 0,
+						"finished": 1,
+						"unstarted": 0,
+						"planned": 0,
+						"delivered": 0,
+						"unscheduled": 0,
+						"rejected": 0,
+						"kind": "counts_by_story_state"
+					},
+					"kind": "story_counts"
+				}
+			},
+			"name": "betaepic"
+		},
+		{
+			"kind": "story",
+			"change_type": "update",
+			"id": 153192228,
+			"original_values": {
+				"current_state": "started",
+				"updated_at": 1511833051000
+			},
+			"new_values": {
+				"current_state": "finished",
+				"updated_at": 1511833667000
+			},
+			"name": "GSE",
+			"story_type": "feature"
+		}
+	],
+	"primary_resources": [{
+		"kind": "story",
+		"id": 153192228,
+		"name": "GSE",
+		"story_type": "feature",
+		"url": "https://www.pivotaltracker.com/story/show/153192228"
+	}],
+	"secondary_resources": [
+
+	],
+	"project": {
+		"kind": "project",
+		"id": 2131184,
+		"name": "Mobile"
+	},
+	"performed_by": {
+		"kind": "person",
+		"id": 3003404,
+		"name": "kamal nagalla",
+		"initials": "KN"
+	},
+	"occurred_at": 1511833667000
+}
