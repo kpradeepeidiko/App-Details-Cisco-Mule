@@ -1,0 +1,175 @@
+Settings
+------------
+<choice doc:name="Check Webhook Url Generated">
+			<when expression="#[flowVars['webhook'] != empty]">
+				<dw:transform-message doc:name="Build Get Integration Settings Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildGetIntegrationSettingsResponse.dwl" />
+				</dw:transform-message>
+			</when>
+			<otherwise>
+				<dw:transform-message
+					doc:name="Build Get Integration Settings Failure Response">
+					<dw:set-payload
+						resource="classpath:dwScripts/buildPostSettingsFailureResponseExample.dwl" />
+				</dw:transform-message>
+
+			</otherwise>
+		</choice>
+============================================================================================
+API
+--------
+<apikit:config name="api-config" raml="api.raml" consoleEnabled="false" doc:name="Router"/>
+    
+    <api-platform-gw:api apiName="${pivotaltracker.mule.env.raml.title}" version="${pivotaltracker.mule.env.raml.version}" flowRef="api-main" create="true" doc:name="API Autodiscovery"/>  
+    <flow name="api-main">
+        <http:listener config-ref="api-httpListenerConfig" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="api-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    
+    <flow name="api-console">
+        <http:listener config-ref="api-httpListenerConfig" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="api-config" doc:name="APIkit Console"/>
+    </flow>
+	
+	
+	msgForm
+	-----------
+	<choice-exception-strategy doc:name="Choice Exception Strategy">
+            <catch-exception-strategy when="#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]" doc:name="Runtime Exception Strategy">
+                <logger message="In Runtime Exception Strategy   host=&quot;${core.services.host}&quot; port=&quot;${core.services.port}" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="date" value="#[function:now]" doc:name="Current Date"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.cause.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertRuntimeExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+            <catch-exception-strategy  doc:name="HTTP Validator Exception Strategy" enableNotifications="false" logException="false">
+            <logger message="In Runtime Exception Strategy" level="INFO" doc:name="Logger"/>
+                <set-variable variableName="date" value="#[function:now]" doc:name="Current Date"/>
+                <set-variable variableName="exceptionMessage" value="#[exception.message]" doc:name="Exception Message"/>
+                <dw:transform-message doc:name="Build Logging Input Message">
+                    <dw:set-variable resource="classpath:dwScripts/buildExceptionLoggingRequest.dwl" variableName="result"/>
+
+                </dw:transform-message>
+
+                <flow-ref name="coreServicesLoggingFlow" doc:name="coreServicesLoggingFlow"/>
+                <dw:transform-message doc:name="Build Alert Input Message">
+                    <dw:set-payload resource="classpath:dwScripts/buildAlertHttpValidatorExceptionRequest.dwl"/>
+
+                </dw:transform-message>
+                <flow-ref name="coreServicesAlertsFlow" doc:name="coreServicesAlertsFlow"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+	
+	
+	
+	
+	
+	<apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="500">
+            <apikit:exception value="java.lang.Exception" />
+            <set-variable variableName="exceptionDetails" value="#[exception]" doc:name="Store Exception"/>
+            <flow-ref name="coreServicesLoggingFlow" doc:name="Core Services Logging Flow Reference"/>
+            <dw:transform-message doc:name="Build Error">
+                <dw:set-payload resource="classpath:dwScripts/buildError500.dwl"/>
+            </dw:transform-message>        
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+	
+====================================================================================
+Core
+-------
+<flow name="coreServicesAlertsFlow">
+        <async doc:name="Async">
+            <logger message="ALerts Log " level="INFO" doc:name="Logger"/>
+            <dw:transform-message doc:name="Build Alert Request">
+                <dw:set-payload resource="classpath:dwScripts/buildCoreServicesAlertRequest.dwl"/>
+
+            </dw:transform-message>
+            <http:request config-ref="HTTP_Coreservices_Request_Configuration" path="/alerts" method="POST" doc:name="HTTP">
+			 <http:request-builder>
+                    <http:query-param paramName="client_id" value="${core.services.client.id}"/>
+                    <http:header headerName="client_secret" value="${core.services.client.secret}"/>
+
+                </http:request-builder>
+            </http:request>
+            <logger level="INFO" doc:name="Logger" message="#['Alert sent to Core Services']"/>
+        </async>
+        <catch-exception-strategy enableNotifications="false" logException="false" doc:name="Catch Exception Strategy">
+             <logger level="ERROR" doc:name="Logger" message="#['Error communicating with Core Services']"/>
+        </catch-exception-strategy>
+    </flow>
+    
+    <flow name="coreServicesLoggingFlow">
+        <async doc:name="Async">
+            <logger message="logger @ core logging #[flowVars.result]" level="INFO" doc:name="Logger"/>
+            <set-payload value=" #[flowVars.result]" mimeType="application/json" doc:name="Set Payload"/>
+
+            <http:request config-ref="HTTP_Coreservices_Request_Configuration" path="/logging" method="POST" doc:name="HTTP">
+				 <http:request-builder>
+                    <http:query-param paramName="client_id" value="${core.services.client.id}"/>
+                    <http:query-param paramName="client_secret" value="${core.services.client.secret}"/>
+
+                </http:request-builder>
+                <http:failure-status-code-validator values="400..599"/>
+            </http:request>
+             <logger level="ERROR" doc:name="Logger" message="#['Logs sent to Core Services']"/>
+        </async>
+        <catch-exception-strategy enableNotifications="false" logException="false" doc:name="Catch Exception Strategy">
+             <logger level="ERROR" doc:name="Logger" message="#['Error communicating with Core Services']"/>
+        </catch-exception-strategy>
+    </flow>
+    
+    <flow name="coreServicesTrackingFlow">
+        <async doc:name="Async">
+            <dw:transform-message doc:name="Build Tracking Request">
+                <dw:set-payload resource="classpath:dwScripts/buildCoreServicesTrackingRequest.dwl"/>
+            </dw:transform-message>
+            <http:request config-ref="HTTP_Coreservices_Request_Configuration" path="/tracking" method="POST" doc:name="HTTP">
+			 <http:request-builder>
+                    <http:query-param paramName="client_id" value="${core.services.client.id}"/>
+                    <http:query-param paramName="client_secret" value="${core.services.client.secret}"/>
+                </http:request-builder>
+            </http:request>
+            <logger level="INFO" doc:name="Logger" message="#['Tracking sent to Core Services']"/>
+        </async>
+        <catch-exception-strategy enableNotifications="false" logException="false" doc:name="Catch Exception Strategy">
+            <logger level="ERROR" doc:name="Logger" message="#['Error communicating with Core Services']"/>
+        </catch-exception-strategy>
+    </flow>
+	
