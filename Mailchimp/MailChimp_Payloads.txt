@@ -17,7 +17,6 @@ MailChimp Webhook Payloads
 	"data[new_id]": "51da8c3259",
 	"data[new_email]": "pani@gmail.com",
 	"data[old_email]": "ravi@gmail.com"
-
 }
 ===============================================================================
 {
@@ -34,7 +33,6 @@ MailChimp Webhook Payloads
 	"data[ip_opt]": "183.82 .99 .100",
 	"data[web_id]": "438597321",
 	"data[email_type]": "html"
-
 }
 ====================================================================================
  {
@@ -85,3 +83,46 @@ MailChimp Webhook Payloads
 	"data[list_id]": "a6b5da1054"
 }
 ===============================================================================
+{
+	data[email] = bellana.lokesh @eidiko.com, data[id] = c63eef6809, data[ip_opt] = 183.82 .99 .100, data[merges][LNAME] = Bellana, data[merges][EMAIL] = bellana.lokesh @eidiko.com, type = subscribe, data[web_id] = 67470969, data[merges][FNAME] = Lokesh, data[email_type] = html, fired_at = 2017 - 11 - 30 08: 00: 12, data[list_id] = 35 d4e21eb7
+}
+=====================================================================================
+{fired_at=2017-11-30 08:07:44, data[action]=unsub, data[id]=c63eef6809, data[ip_opt]=183.82.99.100, data[merges][EMAIL]=bellana.lokesh@eidiko.com, data[web_id]=67470969, data[merges][FNAME]=Lokesh, data[list_id]=35d4e21eb7, type=unsubscribe, data[email]=bellana.lokesh@eidiko.com, data[merges][LNAME]=Bellana, data[reason]=manual, data[email_type]=html}
+================================================================================================
+inbound = {content-type=application/x-www-form-urlencoded, http.scheme=http, host=c1e09a6a.ngrok.io, x-forwarded-for=104.196.195.134, accept=*/*, http.method=POST, http.relative.path=/att, user-agent=MailChimp.com, http.request.path=/att, http.uri.params=ParameterMap{[]}, x-forwarded-proto=https, http.query.string=, http.remote.address=/127.0.0.1:63133, http.request.uri=/att, http.version=HTTP/1.1, http.query.params=ParameterMap{[]}, content-length=354, http.listener.path=/att} 
+
+++++++ 
+Payload = {data[email]=bellana.lokesh@eidiko.com, data[id]=c63eef6809, data[ip_opt]=183.82.99.100, data[merges][LNAME]=Bellana, data[merges][EMAIL]=bellana.lokesh@eidiko.com, type=subscribe, data[web_id]=67470969, data[merges][FNAME]=Lokesh, data[email_type]=html, fired_at=2017-11-30 08:10:06, data[list_id]=35d4e21eb7}
+
+{
+  "data[email]": "bellana.lokesh@eidiko.com",
+  "data[id]": "c63eef6809",
+  "data[ip_opt]": "183.82.99.100",
+  "data[merges][LNAME]": "Bellana",
+  "data[merges][EMAIL]": "bellana.lokesh@eidiko.com",
+  "type": "subscribe",
+  "data[web_id]": "67470969",
+  "data[merges][FNAME]": "Lokesh",
+  "data[email_type]": "html",
+  "fired_at": "2017-11-30 08:10:06",
+  "data[list_id]": "35d4e21eb7"
+}
+
+================================================================================
+In exception ++++++++ Exception while executing: 
+{fired_at=2017-11-30 08:38:02, data[merges][BIRTHDAY]=03/08, data[web_id]=24152647, data[merges][LNAME]=sekhar, data[list_id]=fba0b85ff8, data[email]=shekharnaidu333@gmail.com, data[ip_opt]=183.82.99.100, data[merges][EMAIL]=shekharnaidu333@gmail.com, data[id]=60f465039c, data[merges][FNAME]=chandra, type=unsubscribe, data[action]=unsub, data[reason]=manual, data[email_type]=html}
+ ^
+Unexpected character 'f' at payload@[1:2] (line:column), expected '"'. uuid = 10f8f010-d596-11e7-98f3-06943b9a5680  Payload = {fired_at=2017-11-30 08:38:02, data[merges][BIRTHDAY]=03/08, data[web_id]=24152647, data[merges][LNAME]=sekhar, data[list_id]=fba0b85ff8, data[email]=shekharnaidu333@gmail.com, data[ip_opt]=183.82.99.100, data[merges][EMAIL]=shekharnaidu333@gmail.com, data[id]=60f465039c, data[merges][FNAME]=chandra, type=unsubscribe, data[action]=unsub, data[reason]=manual, data[email_type]=html}
+
+================================================================================
+14:13:29.643     11/30/2017     Worker-2     [cisco-spark-integration-management-webhook].getMessageformatFlow.1.2800     INFO
+In exception ++++++++ Exception while executing: 
+{data[reason]=, fired_at=2017-11-30 08:43:29, type=campaign, data[id]=8387d32495, data[subject]=?? Boletín de noticias de As Pontes, data[list_id]=756d630dbe, data[status]=sent}
+ ^
+Unexpected character 'd' at payload@[1:2] (line:column), expected '"'. uuid = c4dac750-b4d7-11e7-a82a-0a1b0808248a  Payload = {data[reason]=, fired_at=2017-11-30 08:43:29, type=campaign, data[id]=8387d32495, data[subject]=?? Boletín de noticias de As Pontes, data[list_id]=756d630dbe, data[status]=sent}
+======================================
+14:13:33.274     11/30/2017     Worker-2     [cisco-spark-integration-management-webhook].getMessageformatFlow.1.2800     INFO
+In exception ++++++++ Exception while executing: 
+{data[merges][LNAME]=kanukuntla, data[id]=9388592e5e, fired_at=2017-11-30 08:43:33, data[email]=kpradeep.eidiko@gmail.com, data[web_id]=200887237, data[list_id]=a25c9eb995, data[merges][EMAIL]=kpradeep.eidiko@gmail.com, type=subscribe, data[ip_opt]=183.82.99.100, data[email_type]=html, data[merges][FNAME]=pradeep}
+ ^
+Unexpected character 'd' at payload@[1:2] (line:column), expected '"'. uuid = 2e3e7580-d598-11e7-980b-0e3efbeab2e8  Payload = {data[merges][LNAME]=kanukuntla, data[id]=9388592e5e, fired_at=2017-11-30 08:43:33, data[email]=kpradeep.eidiko@gmail.com, data[web_id]=200887237, data[list_id]=a25c9eb995, data[merges][EMAIL]=kpradeep.eidiko@gmail.com, type=subscribe, data[ip_opt]=183.82.99.100, data[email_type]=html, data[merges][FNAME]=pradeep}

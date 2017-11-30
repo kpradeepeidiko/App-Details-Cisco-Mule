@@ -659,7 +659,7 @@ Story Reject
 	"primary_resources": [{
 		"kind": "story",
 		"id": 152952428,
-		"name": "Start using your new project **(double-click here)**",
+		"name": "SampleStory",
 		"story_type": "feature",
 		"url": "https://www.pivotaltracker.com/story/show/152952428"
 	}],
