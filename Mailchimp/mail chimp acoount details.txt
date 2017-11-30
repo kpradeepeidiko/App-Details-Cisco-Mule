@@ -21,3 +21,8 @@ redirect_uri: http://192.168.1.35/oauth/
 
 
 https://login.mailchimp.com/oauth2/authorize?response_type=code&client_id=356715380679&redirect_uri=http://192.168.1.35/oauth/
+
+
+==================================================================
+unm: pradeep.kanukuntla@eidiko.com
+pwd: Kpm$12

@@ -1,0 +1,87 @@
+MailChimp Webhook Payloads
+------------------------------
+{
+	"data[merges][EMAIL]": "ravi @gmail.com",
+	"data[merges][LNAME]": "varma",
+	"data[email]": "ravi @gmail.com",
+	"data[id]": "6 c76d348b9",
+	"fired_at": "2016 - 08 - 10 14: 44: 41",
+	"data[action]": "unsub",
+	"data[list_id]": "12 a3760ad3",
+	"type": "upemail",
+	"data[merges][INTERESTS]": "Group1,Group2",
+	"data[merges][FNAME]": "ravi",
+	"data[ip_opt]": "183.82 .99 .100",
+	"data[web_id]": "438597321",
+	"data[email_type]": "html",
+	"data[new_id]": "51da8c3259",
+	"data[new_email]": "pani@gmail.com",
+	"data[old_email]": "ravi@gmail.com"
+
+}
+===============================================================================
+{
+	"data[merges][EMAIL]": "ravi @gmail.com",
+	"data[merges][LNAME]": "varma",
+	"data[email]": "ravi @gmail.com",
+	"data[id]": "6 c76d348b9",
+	"fired_at": "2016 - 08 - 10 14: 44: 41",
+	"data[action]": "unsub",
+	"data[list_id]": "12 a3760ad3",
+	"type": "profile",
+	"data[merges][INTERESTS]": "Group1,Group2",
+	"data[merges][FNAME]": "ravi",
+	"data[ip_opt]": "183.82 .99 .100",
+	"data[web_id]": "438597321",
+	"data[email_type]": "html"
+
+}
+====================================================================================
+ {
+ 	"data[merges][EMAIL]": "ravi @gmail.com",
+ 	"data[merges][LNAME]": "varma",
+ 	"data[email]": "ravi @gmail.com",
+ 	"data[id]": "6 c76d348b9",
+ 	"fired_at": "2016 - 08 - 10 14: 44: 41",
+ 	"data[action]": "unsub",
+ 	"data[list_id]": "12 a3760ad3",
+ 	"type": "unsubscribe",
+ 	"data[merges][FNAME]": "ravi",
+ 	"data[ip_opt]": "183.82 .99 .100",
+ 	"data[web_id]": "438597321",
+ 	"data[email_type]": "html"
+ }
+ ==========================================================================
+ {
+	"data[merges][EMAIL]": "ravi @gmail.com",
+	"data[merges][LNAME]": "varma",
+	"data[email]": "ravi @gmail.com",
+	"data[id]": "6 c76d348b9",
+	"fired_at": "2016 - 08 - 10 14: 44: 41",
+	"data[list_id]": "12 a3760ad3",
+	"type": "subscribe",
+	"data[merges][FNAME]": "ravi",
+	"data[ip_opt]": "183.82 .99 .100",
+	"data[web_id]": "438597321",
+	"data[email_type]": "html"
+}
+=================================================================================
+{
+	"type": "cleaned",
+	"fired_at": "2009-03-26 22:01:00",
+	"data[list_id]": "a6b5da1054",
+	"data[campaign_id]": "4fjk2ma9xd",
+	"data[reason]": "hard",
+	"data[email]": "api+cleaned@mailchimp.com"
+}
+====================================================================================
+{
+	"type": "campaign",
+	"fired_at": "2009-03-26 21:31:21",
+	"data[id]": "5aa2102003",
+	"data[subject]": "Test Campaign Subject",
+	"data[status]": "sent",
+	"data[reason]": "",
+	"data[list_id]": "a6b5da1054"
+}
+===============================================================================
