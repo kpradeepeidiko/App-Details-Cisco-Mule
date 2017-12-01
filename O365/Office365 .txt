@@ -1,0 +1,38 @@
+{
+      "id": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0NmNTYxMjk0ZGUxYTgwZDE2OTdhM2UxMjUyNGEzZjZiZTUxNjBlOTA3NGY1NDY3NmY2MDkzZjJkMzdlMGM5ODJi",
+      "friendlyId": "office-365-outlook-calendar-cisco-systems",
+      "type": "integration",
+      "name": "Office 365 Outlook Calendar",
+      "logo": "https://3c2ba678857e073c9506-9b92ffc51ccdc874f7e956dfcfbdbfba.ssl.cf5.rackcdn.com/spark/images/office365calendar/office365calendar.png",
+      "tagLine": "Microsoft O365 Outlook Calendar lets you create and track appointments and meetings.",
+      "description": "Get all your event and meeting notifications right in your Cisco Spark spaces using the Office 365 Outlook Calendar integration for Cisco Spark. For example, managers can keep the entire team informed about what’s going on by connecting a specific calendar to Cisco Spark team spaces, such as the team’s vacation dates.\n* For each calendar, you can set-up notifications for event creation, event updates, meeting reminders and/or daily summary reminders.\n* You can set-up configurations for different Cisco Spark spaces. You can add, edit, or delete any configuration at anytime.\n* An O365 Outlook Calendar access-enabled account is required to use this integration.",
+      "screenshot1": "https://3c2ba678857e073c9506-9b92ffc51ccdc874f7e956dfcfbdbfba.ssl.cf5.rackcdn.com/spark/images/office365calendar/office365calendar_config.png",
+      "screenshot2": "https://3c2ba678857e073c9506-9b92ffc51ccdc874f7e956dfcfbdbfba.ssl.cf5.rackcdn.com/spark/images/office365calendar/office365calendar_app.png",
+      "screenshot3": "https://3c2ba678857e073c9506-9b92ffc51ccdc874f7e956dfcfbdbfba.ssl.cf5.rackcdn.com/spark/images/office365calendar/office365calendar_notifications.png",
+      "categories": [
+        "productivity"
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi82MDc4ZmJhNC00OWQ5LTQyOTEtOWY3Yi04MDExNmFhYjY5NzQ",
+      "contactEmail": "surender.molugu@eidiko.com",
+      "companyName": "Cisco Systems",
+      "redirectUrls": [
+        "http://localhost:3000/integration/auth",
+        "https://depot.ciscospark.com/integration/auth",
+        "https://marketplace-cfinta1.wbx2.com/integration/auth",
+        "https://marketplace-intb.ciscospark.com/integration/auth"
+      ],
+      "scopes": [
+        "spark:messages_write",
+        "spark:rooms_read",
+        "spark:people_read",
+        "spark:kms"
+      ],
+      "clientId": "Cf561294de1a80d1697a3e12524a3f6be5160e9074f54676f6093f2d37e0c982b",
+      "isFeatured": false,
+      "isNative": true,
+      "submissionDate": "2017-05-05T05:10:43.275Z",
+      "submissionStatus": "submitted",
+      "orgSubmissionStatus": "none",
+      "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8wOTE1MDY0Zi1hMDY0LTRlMzgtYTllOC1mNzMyZjBkNWMwY2U",
+      "created": "2016-10-27T12:16:28.916Z"
+    },

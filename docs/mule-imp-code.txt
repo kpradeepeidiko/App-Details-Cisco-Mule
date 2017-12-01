@@ -9,7 +9,7 @@ JSON Sample :
 ]
 
 db-->in variable(#[message.payload[0].Spark_Token])
-============================================================================================
+=====================================================================================
 components
 -------------------
 <expression-component doc:name="Expression"><![CDATA[flowVars.tu = flowVars.req.myUrl.split('duplicated task from ')[1]]]></expression-component>
@@ -30,7 +30,7 @@ components
 using tranformations on db value
 -------------------------------------
 obj-to-json-->trafrm Msg(input payload-json = output define Map)--> boj-to-json
-====================================================================================================
+===================================================================================
 to get http status = #[message.inboundProperties.'http.status']
 
 #[message.inboundProperties.'http.query.params'.guid]
@@ -54,7 +54,7 @@ http://localhost:8089/pradeep/{id}/schema/{print}
 #[message.inboundProperties.'http.uri.params'.id]
 #[message.inboundProperties.'http.uri.params'.print]
 
-===========================================================================================================================
+=============================================================================
 
 #[message.inboundProperties.'http.method' == 'GET']
 #[message.inboundProperties.'http.method' == 'POST']
@@ -62,18 +62,18 @@ http://localhost:8089/pradeep/{id}/schema/{print}
 
 #[payload != []]
 
-===========================================================================================
+===========================================================================
 
 #[flowVars.name = flowVars.name.toString().split("\\?")[0]]
 
 input: http://localhost:8089/pradeep/bitbucket?id=454554
 output : bitbucket
-===============================================================================================================================
+==============================================================
 TO GENERATE UNIQUE ID FOR EACH REQUEST :  #[java.util.UUID.randomUUID().toString()](52b1fd86-6e23-4379-862b-75d60ae5ee3f) (place it in session variable)
 
 <logger message="Variable set with #[sessionVars.messageID]" level="INFO"/>
  
-====================================================================================================================================
+===================================================================================
  DATE TIME IN MULE   :   #[new org.mule.el.datetime.DateTime(new Date());] (or)  #[server.dateTime.format('yyyy-MM-ddHH:mm:ss')]
  
  DATE RELATED IN DB     :   select CURRENT_TIMESTAMP (OUTPUT = 2016-07-11 03:36:04.0)  
@@ -90,7 +90,7 @@ TO GENERATE UNIQUE ID FOR EACH REQUEST :  #[java.util.UUID.randomUUID().toString
 
 	in Transformation--->MAP(createdDate = string,updatedDate = string)
 
-====================================================================================================
+===================================================================================
 Compare Date code
 ------------------
 flowVars['date']=flowVars['dueOn'].split('-')[2];
@@ -102,7 +102,7 @@ flowVars['dueOn']=flowVars['year'].concat('-'+flowVars['month']+'-'+flowVars['da
 }
 else
 flowVars['dueOn']=flowVars['dueOn'].concat(' is not a valid date');
-==================================================================================================
+================================================================================
 POST IN MULE
 ----------------------------------------------------------------------------
 1)HTTP
@@ -112,7 +112,7 @@ POST IN MULE
 
 3)HTTP :  <http:success-status-code-validator values="0..599"/>
 
-==========================================================================================================
+==================================================================================
 
 output as json using 'set payload'
 -----------------------------------------
@@ -170,7 +170,7 @@ catch 403 error
 		   	<set-payload value="{&quot;error&quot;: &quot;You are not a member of that team.&quot;}" mimeType="application/json" doc:name="errorMessage" />
  		</catch-exception-strategy>
  </choice-exception-strategy>
-=======================================================================================================
+==================================================================================
 
 
 Ternary operator
@@ -216,7 +216,7 @@ dwl scripts formats
 				
 <dw:set-payload
 				resource="classpath:dwScripts/buildPostAuthDetailsResponse.dwl" />
-=======================================================================================================
+======================================================================================
 Mule filters example
 --------------------
 https://dzone.com/articles/different-types-of-anypoint-filters-in-mulesoft
@@ -234,7 +234,7 @@ To Enter In to Exception For Filters
 		</message-filter>
 
 				
-===================================================================================================
+===================================================================================
 Setting mime/type in transformation message
 ----------------------------------------------
 MimeType was not resolved '*/*' delegating to Java.
@@ -242,7 +242,7 @@ MimeType was not resolved '*/*' delegating to Java.
 <dw:input-payload mimeType="application/json"/>
 <dw:input-payload mimeType="application/java"/>
 
-======================================================================================================
+=======================================================================================
 health _check flow
 -----------------------
 token_response => message=No results
@@ -286,7 +286,7 @@ when
 	"designation":"ASE",
 	"bookId":"kp"
 }
-=====================================================================================================
+=======================================================================================
 %dw 1.0
 %output application/json skipNullOn="everywhere"
 ---
@@ -302,7 +302,7 @@ when
 	{},
 	{}]
 }
-================================================================================================
+=======================================================================================
 %dw 1.0
 %output application/json skipNullOn="everywhere"
 ---
