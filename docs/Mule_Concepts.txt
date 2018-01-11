@@ -1,0 +1,3 @@
+Sub flow, Private flow
+=====================================
+https://support.mulesoft.com/s/article/Difference-between-private-flows-and-subflows
