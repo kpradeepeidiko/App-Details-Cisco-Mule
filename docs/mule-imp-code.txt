@@ -246,7 +246,7 @@ MimeType was not resolved '*/*' delegating to Java.
 health _check flow
 -----------------------
 token_response => message=No results
-============================================================================================
+=======================================================================================
 
 File Component
 -----------------
@@ -267,8 +267,21 @@ Expl :
 		<mesgName>pradeep</mesgName>
 	</header>
 </messagebody>
+=========================================================================================
+Exceptions:
+----------------
+1. Runtime Exception Strategy:
+++++++++++++++++++++++++++++++++	
+#[exception.causedBy(org.mule.api.expression.ExpressionRuntimeException)||exception.causedBy(org.mule.api.MuleRuntimeException)]
 
 
+2. HTTP Validator Exception Strategy
++++++++++++++++++++++++++++++++++++++
+#[exception.causedBy(org.mule.module.http.internal.request.ResponseValidatorException)]
+
+3. Time out Exception Strategy
++++++++++++++++++++++++++++++++
+#[exception.causedBy(java.util.concurrent.TimeoutException)]
 
 =========================================================================================
 %dw 1.0

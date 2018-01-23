@@ -1,0 +1,22 @@
+%dw 1.0
+%output application/java
+---
+flowVars.membershipDetails.membersShipDetail.items filter ($.isModerator == true) map {id:$.roomId}
+
+========================================================
+%dw 1.0
+%output application/json skipNullOn = "everywhere"
+---
+items: flowVars.rooms.sparkRoomSettings.items   map (
+  $  when (flowVars.memberships.id contains $.id)  otherwise 
+  	$
+   when ($.isLocked == "false" and $.type == "group") otherwise null) 
+   
+   
+==============================================================================
+%dw 1.0
+%output application/json skipNullOn = "everywhere"
+---
+items: flowVars.rooms.sparkRoomSettings.items   map (
+  	$
+   when ($.isLocked == "false" and $.type == "group") otherwise null) 
