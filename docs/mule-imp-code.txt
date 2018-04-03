@@ -284,12 +284,15 @@ Exceptions:
 #[exception.causedBy(java.util.concurrent.TimeoutException)]
 
 =========================================================================================
+https://docs.mulesoft.com/mule-user-guide/v/3.9/dataweave-examples
+
+
 %dw 1.0
 %output application/json
 ---
-payload mapObject {
+payload mapObject (
 	'$$': $ when '$$' != 'bookId' otherwise 'pradeep@123'
-}		
+)		
  
  
 when
