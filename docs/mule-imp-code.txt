@@ -315,6 +315,12 @@ when
 	{},
 	{}]
 }
+
+Map:
+------
+-->Takes input as array and returns array output.
+-->invoked with two parameters: "index" and the "value".
+-->Index is defined by default as $$ and the value as $.
 =======================================================================================
 %dw 1.0
 %output application/json skipNullOn="everywhere"

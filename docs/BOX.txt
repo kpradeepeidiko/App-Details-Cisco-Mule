@@ -1,3 +1,7 @@
+kpradeep.eidiko@gmail.com
+kpm12
+
+
 https://account.box.com/api/oauth2/authorize?response_type=code&client_id=gl0jwl7gmhca2tuo431i69khgc4prxek&redirect_uri=http://localhost:8088/afterAuthorize&state=security_token 
 
 
