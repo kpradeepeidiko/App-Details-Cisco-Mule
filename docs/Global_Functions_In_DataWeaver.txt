@@ -1,0 +1,128 @@
+Example_1(with Mule 3.8.4):
+---------------------------
+
+Youtube URL:
+-------------
+https://www.youtube.com/watch?v=e0yODfinPP8
+
+Input:
+------
+<Logger>
+	<LogDetails>
+		<LogLevel>Trace</LogLevel>
+		<LogCategory>One</LogCategory>
+	</LogDetails>
+	<LogDetails>
+		<LogLevel>Info</LogLevel>
+		<LogCategory>Two</LogCategory>
+	</LogDetails>
+</Logger>
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In Dataweaver:
+---------------
+%dw 1.0
+%output application/xml
+---
+    users: (payload.Logger.*LogDetails mapObject (value, key) -> {
+		(key) : value mapObject (innerValue, innerKey) -> {
+			(innerKey): upper innerValue when (innerKey as :string) == 'LogCategory' otherwise innerValue
+		}	
+	
+	})	
+	
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+Output:
+-------
+<users>
+	<LogDetails>
+		<LogLevel>Trace</LogLevel>
+		<LogCategory>ONE</LogCategory>
+	</LogDetails>
+	<LogDetails>
+		<LogLevel>Info</LogLevel>
+		<LogCategory>TWO</LogCategory>
+	</LogDetails>
+</users>
+=====================================================================================================
+1. Create a folder named "dw" (Path: src --> main --> resources)
+2. Create a file named "myDW.wev" (Path: src --> main --> resources --> dw)
+3. In "myDW" filw write following code
+	
+	%dw 1.0
+	%function convertToUpper (innerValue, innerKey, str)
+		upper innerValue when (innerKey as :string) == str otherwise innerValue
+	---
+	{
+		convertToUpper : convertToUpper
+	}
+
+4. Little Modification in DataWeaver
+	
+	%dw 1.0
+	%output application/xml
+	%var myLib = readUrl("classpath://dw/myDW.wev")
+	---
+    users: (payload.Logger.*LogDetails mapObject (value, key) -> {
+		(key) : value mapObject (innerValue, innerKey) -> {
+			(innerKey): myLib.convertToUpper(innerValue, innerKey, 'LogLevel')
+		}	
+	
+	})
+	
+================================================================================================================
+Example_2(Mule 3.8.0):
+--------------------------
+
+Youtube Link:
+-------------
+https://www.youtube.com/watch?v=JyFgQ_2W47U
+
+
+1. Under "Global Elements" section of canvas, create the configuration object.
+	
+	Following code will appear in XML:
+	----------------------------------
+	<configuration doc:name="Configuration">
+	
+	</configuration>
+	
+
+2. Write below code in Configuration XML:
+
+	<configuration doc:name="Configuration">
+		<expression-language>
+			<global-function>
+				def toConcString(payload){
+					return payload.firstName + " " + payload.lastName 
+				}
+			</global-function>
+		</expression-language>
+	</configuration>
+
+3. In Dataweaver:
+
+	%dw 1.0
+	%output application/json
+	---
+	{
+		"This is student details" : toConcString(payload)
+	}
+
+
+Input:
+------
+{
+	"firstName":"pradeep",
+	"lastName":"kanukuntla"
+}	
+
+output:
+-------
+{
+	"This is student details" : "pradeep kanukuntla"
+}
+
+=======================================================================================================================
