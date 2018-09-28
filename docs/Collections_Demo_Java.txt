@@ -1,0 +1,102 @@
+package com.test;
+
+import java.util.*;
+import com.test.model.*;
+public class Sample_Example {
+	
+	public static void main(String[] args){
+		
+		employeeSet();
+		sampleSet();
+	}
+	
+	public static void employeeSet()
+	{
+		Employee e1 = new Employee(1, "abc", 12000);
+		Employee e2 = new Employee(2, "xyz", 13000);
+		Employee e3 = new Employee(1, "abc", 12000);
+		
+		Set<Employee> setList = new HashSet<Employee>();
+		
+		setList.add(e1);
+		setList.add(e2);
+		setList.add(e3);
+		
+		Iterator<Employee> i = setList.iterator();
+		while(i.hasNext())
+		{
+			Employee emp = new Employee();
+			emp = i.next();
+			System.out.println("Employee_Details: " + " Id: " + emp.getEmpId() + "  Name: " + emp.getEmpName() + "  Salary: " + emp.getEmpSalary());
+			
+		}
+	}
+	
+	
+	public static void sampleSet()
+	{
+		Set<String> setList = new HashSet<String>();
+		
+		setList.add("pradeep");
+		setList.add("dhanush");
+		setList.add("pradeep");
+		
+		Iterator<String> i = setList.iterator();
+		while(i.hasNext())
+		{
+			String str = i.next();
+			System.out.println("Details: " + str);
+			
+		}
+	}
+
+}
+
+
+Output:
+-------
+Employee_Details:  Id: 1  Name: abc  Salary: 12000
+Employee_Details:  Id: 1  Name: abc  Salary: 12000
+Employee_Details:  Id: 2  Name: xyz  Salary: 13000
+
+Details: dhanush
+Details: pradeep
+
+=======================================================================================================================
+Map Demo
+--------
+package com.test;
+
+import java.util.*;
+
+import com.test.model.*;
+public class Sample_Example {
+	
+	public static void main(String[] args){
+		
+		sampleMapDemo();
+	}
+	
+	public static void sampleMapDemo(){
+		Map<String, Integer> items = new HashMap<>();
+		items.put("A", 10);
+		items.put("B", 20);
+		items.put("C", 30);
+		items.put("A", 40);
+
+		for (Map.Entry<String, Integer> entry : items.entrySet()) {
+			System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
+		}
+	}
+
+}
+
+Output:
+-------
+Item : A Count : 40
+Item : B Count : 20
+Item : C Count : 30
+
+===============================================================================================================================
+
+
