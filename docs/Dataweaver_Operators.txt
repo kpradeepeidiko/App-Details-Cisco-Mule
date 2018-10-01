@@ -1,0 +1,48 @@
+Mule Docs:
+---------
+https://docs.mulesoft.com/mule-runtime/3.8/dataweave-operators#reduce
+
+https://dzone.com/articles/dataweave-effective-use-of-reduce-operator-part-1
+
+
+=======================================================================================================
+Example_1:
+----------
+	%dw 1.0
+	%output application/json
+	---
+	users : ['pradeep', 'anil', 'rajesh'] map ((values, key) -> key ++ ": " ++ upper values)
+
+output:
+--------
+	{
+		"users": [
+			"0: PRADEEP",
+			"1: ANIL",
+			"2: RAJESH"
+		]
+	}
+============================================================================================================
+Example_2:
+----------
+
+	%dw 1.0
+	%output application/json
+	---
+	users : ['pradeep', 'anil', 'rajesh'] map (values, key) -> {(key) : upper values}
+	
+Output:
+-------
+	{
+		"users": [
+			{
+				"0": "PRADEEP"
+			},
+			{
+				"1": "ANIL"
+			},
+			{
+				"2": "RAJESH"
+			}
+		]
+	}
