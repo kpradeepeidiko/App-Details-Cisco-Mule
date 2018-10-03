@@ -1,0 +1,32 @@
+Mulesoft Editions Difference:
+-----------------------------
+https://www.whishworks.com/blog/mulesoft/mule-esb-community-vs-enterprise-edition
+
+
+==============================================================================================
+Inbound Properties:
+---------------------
+Request url: http://localhost:8081/test?name=pradeep&desig=software engineer
+
+
+{
+	content-type=application/xml, 
+	connection=keep-alive, 
+	http.scheme=http, 
+	host=localhost:8081, 
+	accept=*/*, 
+	http.method=GET, 
+	http.relative.path=/test, 
+	user-agent=PostmanRuntime/7.3.0, 
+	http.request.path=/test, 
+	http.uri.params=ParameterMap{[]}, 
+	http.query.string=name=pradeep&desig=software%20engineer, 
+	cache-control=no-cache, 
+	http.remote.address=/127.0.0.1:65156, 
+	http.request.uri=/test?name=pradeep, 
+	http.version=HTTP/1.1, 
+	http.query.params=ParameterMap{[name=[pradeep]]}, 
+	http.listener.path=/test, 
+	postman-token=07aecfdf-f259-45e9-bfad-02293e6865cf, 
+	accept-encoding=gzip, deflate
+}
