@@ -344,3 +344,50 @@ Response
 }
 
 =========================================================
+%dw 1.0
+%output application/json skipNullOn="everywhere"
+%input payload application/json
+%var user = {"firstName":"Marlin", "lastName":"Magnus", "Address Line1":"Address Line1"}
+---
+{
+	"Original_Value Size": (sizeOf (payload.Changes.original_values)),
+	"New_Value Size": (sizeOf (payload.Changes.new_values)),
+	"Event": "Deleted" when (sizeOf (payload.Changes.original_values)) > (sizeOf (payload.Changes.new_values)) otherwise "Created",
+	"Color": ((payload.Changes.original_values) map (null when ((payload.Changes.new_values) contains $) otherwise $)) 
+	when (sizeOf (payload.Changes.original_values)) > (sizeOf (payload.Changes.new_values)) 
+	otherwise ((payload.Changes.new_values) map (null when ((payload.Changes.original_values) contains $) otherwise $))	
+}
+
+
+input:
+--------
+{
+	"Changes": {
+		"original_values": [
+			"red",
+			"white",
+			"Orange",
+			"Yello"
+		],
+		"new_values": [
+			"red",
+			"white",
+			"Orange"
+		]
+	}
+}
+
+
+output:
+-------
+{
+    "Original Size": 4,
+    "New Size": 3,
+    "event": "Deleted",
+    "New Value": [
+        "Yello"
+    ]
+}
+
+--> what ever matched we are making it null
+==================================================================================
