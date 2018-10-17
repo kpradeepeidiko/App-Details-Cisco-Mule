@@ -346,8 +346,6 @@ Response
 =========================================================
 %dw 1.0
 %output application/json skipNullOn="everywhere"
-%input payload application/json
-%var user = {"firstName":"Marlin", "lastName":"Magnus", "Address Line1":"Address Line1"}
 ---
 {
 	"Original_Value Size": (sizeOf (payload.Changes.original_values)),
