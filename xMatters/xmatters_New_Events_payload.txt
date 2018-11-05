@@ -1,0 +1,149 @@
+Webhook Events Payloads:
+----------------------------
+https://help.xmatters.com/ondemand/xmodwelcome/integrationbuilder/scripting-reference.htm#Webhooks
+
+look "Scripting Features" --> Webhoooks
+
+
+=============================================================================================================
+Webhook Responses:
+------------------
+
+{"recipient":"janapatiprashanth","device":"Work Email","deliveryStatus":"Delivered","deviceId":306988,"eventType":"LIVE_NOTIFICATION_PROVIDER_DELIVERED","message":"Notification delivered","eventIdentifier":35700050,"date":"18-11-02 13:19:06.000","eventProperties":[]}
+=================================================
+{"status":"active","username":"eidikoxmatters","eventIdentifier":35700050,"date":"18-11-02 13:19:04.951","eventProperties":[]}
+==============================================
+{"status":"suspended","username":"eidikoxmatters","eventIdentifier":35700050,"date":"18-11-02 13:25:23.382","eventProperties":[]}
+================================================
+{"recipient":"janapatiprashanth","device":"Work Email","deliveryStatus":"Delivered","deviceId":306988,"eventType":"LIVE_NOTIFICATION_PROVIDER_DELIVERED","message":"Notification delivered","eventIdentifier":35700051,"date":"18-11-02 13:29:27.000","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+==================================================================
+{"status":"active","username":"eidikoxmatters","eventIdentifier":35700051,"date":"18-11-02 13:29:26.131","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+=========================================
+{"recipient":"janapatiprashanth","device":"Work Email","response":"tet","annotation":"null","eventIdentifier":35700051,"date":"18-11-02 13:32:03.112","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+==============================================================================
+{"status":"terminated_external","username":"eidikoxmatters","eventIdentifier":35700051,"date":"18-11-02 13:33:22.104","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+=============================================================================
+Comment Payload:
+--------------------
+{
+"hookResponse":{
+	"author": {
+		"id": "c78d30b5-3f95-462f-8ca0-ed646d26bd97",
+		"targetName": "prasanth9.eidiko",
+		"recipientType": "Person",
+		"firstName": "prasanth",
+		"lastName": "janapati"
+	},
+	"comment": "this is new comment from harish",
+	"event": {
+		"id": "e41b25b0-5513-425d-91d1-cdb2d4ad48a6",
+		"eventId": 32666061
+	},
+	"eventIdentifier": 32666061,
+	"date": "18-10-24 09:55:25.469",
+	"eventProperties": [{
+		"Status": "Unavailable"
+	}, {
+		"Service": ""
+	}, {
+		"Severity": "Critical"
+	}]
+}
+}
+========================================================================================================
+INFO  2018-11-02 18:32:02,068 [[ngrok].HTTP_Listener_Configuration.worker.01] org.mule.api.processor.LoggerMessageProcessor: {NullPayload}
+o
+
+INFO  2018-11-02 18:50:07,768 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"recipient":"janapatiprashanth","device":"Work Email","deliveryStatus":"Delivered","deviceId":306988,"eventType":"LIVE_NOTIFICATION_PROVIDER_DELIVERED","message":"Notification delivered","eventIdentifier":35700050,"date":"18-11-02 13:19:06.000","eventProperties":[]}
+
+INFO  2018-11-02 18:50:07,780 [[ngrok].HTTP_Listener_Configuration.worker.04] org.mule.api.processor.LoggerMessageProcessor: {"status":"active","username":"eidikoxmatters","eventIdentifier":35700050,"date":"18-11-02 13:19:04.951","eventProperties":[]}
+
+INFO  2018-11-02 18:55:30,539 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"status":"suspended","username":"eidikoxmatters","eventIdentifier":35700050,"date":"18-11-02 13:25:23.382","eventProperties":[]}
+
+INFO  2018-11-02 18:59:40,334 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"recipient":"janapatiprashanth","device":"Work Email","deliveryStatus":"Delivered","deviceId":306988,"eventType":"LIVE_NOTIFICATION_PROVIDER_DELIVERED","message":"Notification delivered","eventIdentifier":35700051,"date":"18-11-02 13:29:27.000","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+
+INFO  2018-11-02 18:59:40,341 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"status":"active","username":"eidikoxmatters","eventIdentifier":35700051,"date":"18-11-02 13:29:26.131","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+
+INFO  2018-11-02 19:02:24,240 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"recipient":"janapatiprashanth","device":"Work Email","response":"tet","annotation":"null","eventIdentifier":35700051,"date":"18-11-02 13:32:03.112","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+
+INFO  2018-11-02 19:03:29,598 [[ngrok].HTTP_Listener_Configuration.worker.03] org.mule.api.processor.LoggerMessageProcessor: {"status":"terminated_external","username":"eidikoxmatters","eventIdentifier":35700051,"date":"18-11-02 13:33:22.104","eventProperties":[{"Status":"Unavailable"},{"Service":"Corporate Website"},{"Severity":"High"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+=====================================================
+On 5 Nov 2018:
+--------------
+INFO  2018-11-05 11:31:10,255 [[transformation-examples].HTTP_Listener_Configuration.worker.01] org.mule.api.processor.LoggerMessageProcessor: XmattersPayload==> {"recipient":"pk4556238","device":"Work Email","deliveryStatus":"Delivered","deviceId":325844,"eventType":"LIVE_NOTIFICATION_PROVIDER_DELIVERED","message":"Notification delivered","eventIdentifier":35938124,"date":"18-11-05 06:00:29.000","eventProperties":[{"Status":"Unavailable"},{"Service":"Email Server"},{"Severity":"Critical"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+INFO  2018-11-05 11:31:10,269 [[transformation-examples].HTTP_Listener_Configuration.worker.02] org.mule.api.processor.LoggerMessageProcessor: XmattersPayload==> {"status":"active","username":"eidikoxmatters","eventIdentifier":35938124,"date":"18-11-05 06:00:28.093","eventProperties":[{"Status":"Unavailable"},{"Service":"Email Server"},{"Severity":"Critical"},{"Details":"The problem is being worked on and we will send additional updates shortly."}]}
+
+==========================================================================
+Escalation:
+---------------
+Response from webhook from xmatters site : https://help.xmatters.com/ondemand/xmodwelcome/integrationbuilder/scripting-reference.htm#Webhooks
+
+Example escalation payload:
+This example shows the body of a webhook that occurred when a peer escalation in the IT Helpdesk group was manually triggered by 
+Thomas Smith's response. The event escalated from Thomas Smith and Bruce Jennings to Mary McBride and the NOC group.
+{
+	"escalation": {
+		"id": "a46b65b9-5628-4795-befc-b79a71ed372b",
+		"eventId": 1138001,
+		"reason": "ACTIVE",
+		"group": {
+			"id": "a39fca68-1a44-427d-a5f9-2eac707f805e",
+			"targetName": "IT Helpdesk",
+			"recipientType": "GROUP"
+		},
+		"to": [{
+				"id": "c68bfa2f-4539-40a9-9e96-185b7ecde7ff",
+				"targetName": "mmcbride",
+				"recipientType": "PERSON"
+			},
+			{
+				"id": "98555e21-b7ff-479e-a264-3e96815fb03d",
+				"targetName": "NOC",
+				"recipientType": "GROUP"
+			}
+		],
+		"from": [{
+				"id": "fcda7719-a741-4668-9429-1723ef20e946",
+				"targetName": "tsmith",
+				"recipientType": "PERSON"
+			},
+			{
+				"id": "462b6196-1eb8-494f-a9b0-8061aba4f86f",
+				"targetName": "bjennings",
+				"recipientType": "PERSON"
+			}
+		],
+		"escalationType": "PEER",
+		"byUser": {
+			"id": "fcda7719-a741-4668-9429-1723ef20e946",
+			"targetName": "tsmith",
+			"recipientType": "PERSON"
+		}
+	},
+	"eventIdentifier": 1138001,
+	"date": "18-04-11 17:51:09.822",
+	"eventProperties": []
+}
+
+===================================================================================
+Targeted recipient failures webhooks:
+=======================================
+
+{
+	"targeted.triggerType": "INITIAL_EVENT",
+	"targeted.recipients": [{
+		"id": "d4bd11f6-5ef4-11e8-b747-8c85900cbd08",
+		"targetName": "mmcbride",
+		"recipientType": "PERSON"
+	}, {
+		"id": "d4bd33f7-5ef4-21e8-b747-8d85900bad04",
+		"targetName": "dev_ops",
+		"recipientType": "GROUP"
+	}],
+	"targeted.totalRecipients": 2,
+	"eventIdentifier": 1429017,
+	"date": "18-07-13 21:41:40.047",
+	"eventProperties": [
+
+	]
+}
