@@ -1,1 +1,0 @@
-https://cisco-spark-integration-runtime.cloudhub.io/console/
