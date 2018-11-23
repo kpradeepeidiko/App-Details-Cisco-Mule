@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMTkzNWJmNGEtZjEyYS00YmIwLThiMTYtNTU4YjVmZWJjNmFi",
+      "name": "TrelloDev webhook",
+      "targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/2?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4ODIwNTU1MzlhMzdhOWU5NjFlNzViNDFhODI5ZDExOGMzYzBhNjZlMmJlZTFiZmEwYzBjZGMxOTc3OTI0MzUw",
+      "resource": "messages",
+      "event": "created",
+      "filter": "mentionedPeople=Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lYjVmNDBhZC00NTAxLTRlODAtYWY1OC00ZmQ0YmE5Y2NmZDc",
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+      "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lYjVmNDBhZC00NTAxLTRlODAtYWY1OC00ZmQ0YmE5Y2NmZDc",
+      "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+      "ownedBy": "creator",
+      "status": "active",
+      "created": "2017-06-30T05:18:20.626Z"
+    },
+    {
+      "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svMjYxMzg5ZWYtNmIyNS00YzRlLThlNTktYTdlZGQ2ODI0ZGY0",
+      "name": "BotAddMessage",
+      "targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/2?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4ODIwNTU1MzlhMzdhOWU5NjFlNzViNDFhODI5ZDExOGMzYzBhNjZlMmJlZTFiZmEwYzBjZGMxOTc3OTI0MzUw",
+      "resource": "memberships",
+      "event": "created",
+      "filter": "personEmail=trelloDev@sparkbot.io",
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+      "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lYjVmNDBhZC00NTAxLTRlODAtYWY1OC00ZmQ0YmE5Y2NmZDc",
+      "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+      "ownedBy": "creator",
+      "status": "active",
+      "created": "2017-07-19T09:25:26.753Z"
+    },
+    {
+      "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svM2M0NjdiODctOWRmNy00OGY4LTgxNDEtOTM0Y2RlNjc5MDU0",
+      "name": "BotMessagesforDirectRooms",
+      "targetUrl": "https://cisco-spark-integration-twoway-webhook-dev.cloudhub.io/api/hooks/2?integrationId=Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0M4ODIwNTU1MzlhMzdhOWU5NjFlNzViNDFhODI5ZDExOGMzYzBhNjZlMmJlZTFiZmEwYzBjZGMxOTc3OTI0MzUw",
+      "resource": "messages",
+      "event": "created",
+      "filter": "roomType=direct",
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi9jb25zdW1lcg",
+      "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9lYjVmNDBhZC00NTAxLTRlODAtYWY1OC00ZmQ0YmE5Y2NmZDc",
+      "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzMmM4MDc3NDBjNmU3ZGYxMWRhZjE2ZjIyOGRmNjI4YmJjYTQ5YmE1MmZlY2JiMmM3ZDUxNWNiNGEwY2M5MWFh",
+      "ownedBy": "creator",
+      "status": "active",
+      "created": "2017-07-19T09:33:50.418Z"
+    }
+  ]
+}
