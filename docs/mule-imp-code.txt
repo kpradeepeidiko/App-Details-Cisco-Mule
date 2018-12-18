@@ -389,3 +389,8 @@ output:
 
 --> what ever matched we are making it null
 ==================================================================================
+"Deploy to cloud" not working:
+---------------------------------
+Thank you for contacting MuleSoft Support! Can you please try using xulrunner and see if this helps with this issue? Here are the instructions
+
+https://docs.mulesoft.com/studio/7.3/studio-xulrunner-wx-task
