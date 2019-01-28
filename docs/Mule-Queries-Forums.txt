@@ -1,0 +1,126 @@
+Forum Link: https://forums.mulesoft.com/questions/105740/mulesoft-4-using-tibco-esb.html
+
+Generating UUID:
+-----------------
+	1. To generate uuid in dataweave declare a global function like below
+		
+		<configuration doc:name="Configuration">
+			<expression-language>
+				<global-functions>
+					def toUUID() {
+						return java.util.UUID.randomUUID().toString()
+					}
+				</global-functions>
+			</expression-language>
+		</configuration>
+		
+	2. Then, make a call to this in dataweave
+	
+		%dw 1.0
+		%output application/json
+		---
+		"out" : toUUID()
+		
+	3. Result
+		{
+			"out": "4eb83082-2c07-4416-a66a-2043e6482ea7"
+		}
+
+In Cisco we have used:
+------------------------
+<set-variable variableName="instanceUuid" value="#[function:uuid]" doc:name="Generating Instance Uuid"/>
+
+================================================================================================================
+package sampleFiles;
+
+public class TestClass {
+	public int addTwoNumbers(int a, int b) {
+	  return a + b;
+	}
+}
+
+
+
+
+<configuration doc:name="Configuration">
+        <expression-language>
+        	<global-functions>
+        		def addition(a, b) 
+        		{
+        			import sampleFiles.TestClass;
+        			tc = new TestClass();
+					return tc.addTwoNumbers(a, b);
+				}
+				def add(a, b){
+					return a + b;
+				}
+        	</global-functions>
+        </expression-language>
+    </configuration>
+	
+	
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+					%output application/json
+					---
+					{
+						sum: addition((flowVars.a as :number), (flowVars.b as :number))
+					}
+			]]></dw:set-payload>
+        </dw:transform-message>
+
+==================================================================================================================
+Configuring the Circuit Breaker:
+----------------------------------
+	1. We’ll use DevKit  to implement a circuit breaker and start off by using Maven to create a Mule Module for the circuit breaker processors.
+	
+		mvn archetype:generate -DarchetypeGroupId=org.mule.tools.devkit -DarchetypeArtifactId=mule-devkit-archetype-generic -DarchetypeVersion=3.0.1 -DarchetypeRepository=http://repository.mulesoft.org/releases/ -DgroupId=com.acmesoft -DartifactId=circuit-breaker-module -Dversion=1.0-SNAPSHOT -DmuleVersion=3.2.0 -DmuleModuleName=CircuitBreaker -DmuleModulePackage=com.acmesoft.integration
+
+	2. Once that’s done  we  can define how the circuit breaker will be configured in a flow. Take a look at the following configuration:
+	
+		<circuitbreaker:config breakerName="testingBreaker" tripThreshold="5" tripTimeout="300000"/>
+
+		<flow name="testFlow">
+			<vm:inbound-endpoint path="vm.in"/>
+			<circuitbreaker:filter/>
+			<test:component throwException="true"/>
+			<vm:outbound-endpoint path="vm.out"/>
+			<default-exception-strategy>
+				<circuitbreaker:trip tripOnException="org.mule.tck.exceptions.FunctionalTestException"/>
+			</default-exception-strategy>
+		</flow>
+		
+=============================================================================================================
+Mocking Service:
+-----------------
+
+	Just add the Base URI in RAML at Root level to get mocking service ON,or Enabled.
+
+		baseUri: https://mulesoft.com/rest/v
+		
+======================================================================================================================
+Use .property values in DataWeaver:
+-------------------------------------
+
+In mule-app.property:
+------------------------
+testValue = kpradeep.eidiko
+
+
+
+%dw 1.0
+%output application/json
+---
+{
+  fromProperty: p('testValue')
+}
+
+
+Output:
+----------
+{
+  "fromProperty": "kpradeep.eidiko"
+}
+
+
+=========================================================================================================================
