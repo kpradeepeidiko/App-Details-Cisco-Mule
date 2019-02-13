@@ -394,3 +394,24 @@ output:
 Thank you for contacting MuleSoft Support! Can you please try using xulrunner and see if this helps with this issue? Here are the instructions
 
 https://docs.mulesoft.com/studio/7.3/studio-xulrunner-wx-task
+
+========================================================================================================
+{
+  "id": "Y2lzY29zcGFyazovL3VzL01FU1NBR0UvNGI4NzIxOTAtMmY3Zi0xMWU5LThiYTMtY2YwYjEwM2E0YjJj",
+  "roomId": "Y2lzY29zcGFyazovL3VzL1JPT00vZjllN2Q3M2QtMTE5YS0zM2Q3LTg1MTctZDM1Nzg0YzgyZjll",
+  "roomType": "direct",
+  "text": "SendMessage number: +13474155003|message: Hello, how can",
+  "personId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS8zZmE3MDkwYy04ZWZmLTQwYmYtYjZjZi1hYzI1M2Y2NWY5M2I",
+  "personEmail": "pradeep.kanukuntla@eidiko.com",
+  "created": "2019-02-13T11:05:38.601Z"
+}
+
+--> store above payload in messageResponse
+Code in expression Component:
+------------------------------
+flowVars.sample = flowVars.messageResponse.text.toString().replace('SendMessage','');
+flowVars.test = flowVars.sample.toString().split("\\|");
+flowVars.str1 = flowVars.test[0].toString().replace('number:','').trim();
+flowVars.str2 = flowVars.test[1].toString().replace('message:','').trim();
+
+
