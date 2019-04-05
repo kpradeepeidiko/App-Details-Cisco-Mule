@@ -329,6 +329,7 @@ Data weaver in depth:
 ----------------------
 https://mulesoft-leoujjawal.blogspot.com/2016/08/deep-into-dataweave.html
 
+https://docs.mulesoft.com/mule-runtime/3.7/dataweave-reference-documentation#output-directive
 
 ====================================================================================================================================
 %dw 1.0
