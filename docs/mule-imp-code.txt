@@ -421,4 +421,13 @@ flowVars.test = flowVars.sample.toString().split("\\|");
 flowVars.str1 = flowVars.test[0].toString().replace('number:','').trim();
 flowVars.str2 = flowVars.test[1].toString().replace('message:','').trim();
 
+=======================================================================================================================
+SOAP Web Service
+-----------------
+Web service Consumer- For Consume the web service
+
+CXF- For exposing Web service
+
+Soap Connect- Its a DevKit based feature. it allows users to quickly package multiple WSDL files or fetch them dynamically into a single reusable connector.
+
 
